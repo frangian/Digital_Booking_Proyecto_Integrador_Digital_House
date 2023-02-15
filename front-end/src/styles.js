@@ -55,10 +55,11 @@ export const menuTop = {
 export const menuBottom = {
     display: "flex",
     justifyContent: "end",
+    fontSize: "1.5rem"
 }
 
 export const socialNetworkLogo = {
-    width: "24px",
+    color: mainLightGray,
     margin: "0 10px",
     cursor: "pointer",
 }

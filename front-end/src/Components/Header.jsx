@@ -18,6 +18,7 @@ import { routes, socialNetworks } from './Utils/routes';
 import { useNavigate } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { navbar, logoContainer, btnNavbar, btnContainer, navbarContainer, menuTop, menuBottom, socialNetworkLogo } from '../styles.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const drawerWidth = "70%";
 
@@ -68,8 +69,10 @@ function Header(props) {
       </List>
       <Box sx={menuBottom}>
         {
-          socialNetworks.map(({id, path, img, title}) => (
-            <img style={socialNetworkLogo} src={img} alt={title} key={id} onClick={() => navigate(path)}/>
+          socialNetworks.map(({id, path, logo}) => (
+            <a href={path} key={id} target="e_blank">
+              <FontAwesomeIcon icon={logo} style={socialNetworkLogo}/>
+            </a>
           ))
         }
       </Box>
