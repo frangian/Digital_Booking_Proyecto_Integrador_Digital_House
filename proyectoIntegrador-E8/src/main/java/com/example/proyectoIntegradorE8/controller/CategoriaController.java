@@ -50,7 +50,7 @@ import java.util.Optional;
 
        @GetMapping
        public ResponseEntity<List<Categoria>> buscarCategoria() {
-            return ResponseEntity.ok(categoriaService.buscarTodos());
+            return ResponseEntity.ok(categoriaService.buscarTodas());
    }
 
        @GetMapping("/{id}")
