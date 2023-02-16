@@ -65,4 +65,25 @@ export const socialNetworkLogo = {
 }
 
 
+export const footerConatiner = {
+    display: "flex",
+    width: "100%",
+    backgroundColor: mainGreen,
+    height: "10vh",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "0 30px",
+    color: mainWhite,
+    position: "fixed",
+    left: "0",
+    bottom: "0"
+}
+
+export const footerLogo = {
+    margin: "0 20px",
+    cursor: "pointer",
+    color: mainWhite,
+    fontSize: "2rem"
+}
+
 

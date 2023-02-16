@@ -15,7 +15,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import { routes, socialNetworks } from './Utils/routes';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { navbar, logoContainer, btnNavbar, btnContainer, navbarContainer, menuTop, menuBottom, socialNetworkLogo } from '../styles.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -26,6 +26,7 @@ function Header(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -45,7 +46,7 @@ function Header(props) {
       </Box>
       <List sx={{ height: "67%" }}>
         {routes.map(({ id, path, title }) => {
-          if (id !== 1 && id !== routes.length) {
+          if (id !== 1 && id !== routes.length && location.pathname !== "/login") {
             return (
               <>
                 <ListItem key={id} disablePadding onClick={() => navigate(path)}>
@@ -56,13 +57,16 @@ function Header(props) {
                 <hr style={{ color: "#000" }}/>
               </>
             )
-          } else if (id === routes.length) {
+          } else if (id === routes.length && location.pathname !== "/register") {
             return (
-              <ListItem key={id} disablePadding onClick={() => navigate(path)}>
-                <ListItemButton sx={{ textAlign: 'right' }}>
-                  <ListItemText primary={title} />
-                </ListItemButton>
-              </ListItem>
+              <>
+                <ListItem key={id} disablePadding onClick={() => navigate(path)}>
+                  <ListItemButton sx={{ textAlign: 'right' }}>
+                    <ListItemText primary={title} />
+                  </ListItemButton>
+                </ListItem>
+                <hr style={{ color: "#000" }}/>
+              </>
             )
           }
         })}
