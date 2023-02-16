@@ -15,6 +15,8 @@ public class Categoria  {
     @Column
     private String url_imagen;
 
+    public Categoria() {
+    }
 
     public Long getId() {
         return id;
