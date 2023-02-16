@@ -1,0 +1,100 @@
+
+  .container{
+  padding: 0 2vw;
+}
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .card-grid-recomendaciones{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .card {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  .card > div {
+    margin-left: 1vw;
+    margin-bottom: 1vh;
+  }
+
+  .card img {
+    width: 100%;
+    max-height: 30vh;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .card-recomendaciones{
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  .card-recomendaciones img {
+    width: 47%;
+    border-radius: 10px;
+  }
+
+  .card-recomendaciones > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.4vw;
+  }
+  
+  .ver-mas-btn{
+    padding: 1vw;
+    border-radius:5px;
+    border: none;
+    background-color: rgba(29, 190, 180, 1);
+  }
+  
+  
+  
+  .card h2 {
+    margin: 10px 0;
+    font-size: 1.5rem;
+  }
+  
+  .card p {
+    margin: 0;
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  /* Para pantallas de tamaño igual o mayor a 768px (tablet) */
+  @media (max-width: 1023px) {
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card-grid-recomendaciones{
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  /* Para pantallas de tamaño menor a 768px (mobile) */
+@media (max-width: 767px) {
+  .card-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .card-grid-recomendaciones{
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
