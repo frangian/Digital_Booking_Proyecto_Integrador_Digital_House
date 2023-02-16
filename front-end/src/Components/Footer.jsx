@@ -1,27 +1,21 @@
 import React from 'react'
-import { Typography, Box } from '@mui/material';
+import '../styles.css'
 import { socialNetworks } from './Utils/routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { footerConatiner, footerLogo } from '../styles';
 
 const Footer = () => {
   return (
-    <footer style={footerConatiner}>
-      <Typography
-      variant="h6"
-      component="div"
-      >
-        ©2021 Digital Booking
-      </Typography>
-      <Box sx={{ display: {xs: "none", sm: "none", md: "block"} }}>
+    <footer>
+      <p>©2021 Digital Booking</p>
+      <div>
         {
-          socialNetworks.map(({id, logo, path}) => (
-            <a href={path} target="e_blank" key={id}>
-              <FontAwesomeIcon icon={logo} style={footerLogo}/>
-            </a>
+          socialNetworks.map(({ id, logo, path }) => (
+              <a href={path} key={id} target="e_blank">
+                  <FontAwesomeIcon icon={logo}/>
+              </a>
           ))
         }
-      </Box>
+      </div>
     </footer>
   )
 }

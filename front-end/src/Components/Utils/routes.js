@@ -7,8 +7,8 @@ import { faFacebook, faLinkedinIn, faInstagram, faTwitter } from '@fortawesome/f
 
 export const routes = [
     { id: 1, path: "/", Element: Home, title: "Home" },
-    { id: 2, path: "/login", Element: Login, title: "Iniciar sesión" },
-    { id: 3, path: "/register", Element: Register, title: "Crear cuenta" }, 
+    { id: 2, path: "/register", Element: Register, title: "Crear cuenta" }, 
+    { id: 3, path: "/login", Element: Login, title: "Iniciar sesión" },
 ]
 
 export const socialNetworks = [
