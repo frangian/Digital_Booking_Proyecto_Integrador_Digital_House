@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,100&display=swap');
+
+:root {
+    --main-green: #1DBEB4;
+    --main-dark-gray: #383B58;
+    --main-light-gray: #545776;
+    --main-white: #FFFFFF;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    background-color: var(--main-white);
+    height: 12vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--main-light-gray);
+    z-index: 20;
+}
+
+.logo-slogan {
+    display: flex;
+    align-items: end;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 1.8rem;
+    font-family: 'Roboto', sans-serif;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.logo-slogan h6 {
+    margin-left: 15px;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.btns {
+    width: 80%;
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+    align-items: center;
+}
+
+.btns button {
+    border: 1px solid var(--main-green);
+    height: 40px;
+    width: 207px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--main-green);
+    background-color: var(--main-white);
+}
+
+.btns button:hover {
+    background-color: var(--main-green);
+    color: var(--main-white);
+}
+
+.icon-button {
+    border: none;
+    margin-right: 20px;
+    background-color: var(--main-white);
+}
+
+.menu-icon {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.drawer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 70%;
+    height: 100vh;
+    background-color: var(--main-white);
+    text-align: end;
+    box-shadow: -200px 0px 0px 0px rgba(0,0,0,0.30);
+}
+
+.top-menu {
+    height: 30vh;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--main-white);
+    background-color: var(--main-green);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.top-menu h5 {
+    align-self: flex-end;
+}
+
+.mid-menu {
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mid-menu button {
+    width: 90%;
+    height: 15%;
+    border: none;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: end;
+    background-color: var(--main-white);
+}
+
+.mid-menu button:nth-child(2) {
+    border-top: 1px solid var(--main-dark-gray);
+}
+
+.bottom-menu a {
+    color: var(--main-light-gray);
+    padding: 10px;
+    font-size: 1.5rem;
+}
+
+footer {
+    width: 100%;
+    height: 10vh;
+    background-color: var(--main-green);
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--main-white);
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+footer div a {
+    color: var(--main-white);
+    margin: 20px;
+    font-size: 1.7rem;
+}
+
+@media (max-width: 862px) {
+    .logo-slogan h6 {
+        display: none;
+    }
+
+    .btns button {
+        width: 164px;
+    }
+}
+
+@media (max-width: 500px) {
+    .menu-icon {
+        display: block;
+    }
+
+    .btns {
+        display: none;
+    }
+
+    footer div {
+        display: none;
+    }
+}
