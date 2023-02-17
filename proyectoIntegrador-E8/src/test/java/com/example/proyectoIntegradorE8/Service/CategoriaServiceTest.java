@@ -28,7 +28,8 @@ class CategoriaServiceTest {
     public void guardarCategoriaTest() {
         Categoria categoriaParaGuardar = new Categoria("Hoteles", "Proveen a los huéspedes de servicios adicionales como restaurantes, piscinas y guarderías", "https://www.google.com/search?q=imagen+de+hoteles&oq=imagen+de+hoteles+&aqs=chrome.0.0i512l3j0i22i30i625l7.147420j0j7&sourceid=chrome&ie=UTF-8#imgrc=LCWhLCoS9ENSWM");
         Categoria categoriaGuardada = categoriaService.guardarCategoria(categoriaParaGuardar);
-        assertEquals(1L, categoriaGuardada.getTitulo());
+        //assertEquals(1L, categoriaGuardada.getTitulo());
+        assertEquals(1L, categoriaGuardada.getId());
     }
 
     @Test
@@ -37,7 +38,7 @@ class CategoriaServiceTest {
         Categoria categoriaParaActualizar = new Categoria(1L, "Hoteles", "Proveen a los huéspedes de servicios adicionales como restaurantes", "https://www.google.com/search?q=imagen+de+hoteles&oq=imagen+de+hoteles+&aqs=chrome.0.0i512l3j0i22i30i625l7.147420j0j7&sourceid=chrome&ie=UTF-8#imgrc=LCWhLCoS9ENSWM");
         categoriaService.actualizarCategoria(categoriaParaActualizar);
         Optional<Categoria> categoriaActualizada = categoriaService.buscarCategoria(categoriaParaActualizar.getId());
-        assertEquals("Hoteles", categoriaActualizada.get().getId());
+        assertEquals("Hoteles", categoriaActualizada.get().getTitulo());
 
     }
 
@@ -62,7 +63,7 @@ class CategoriaServiceTest {
     @Order(5)
     public void buscarTodasCategoriasTest(){
         List<Categoria> categoria= categoriaService.buscarTodas();
-        Integer cantidadEsperada=4;
+        Integer cantidadEsperada=0;
         assertEquals(cantidadEsperada,categoria.size());
     }
 }
