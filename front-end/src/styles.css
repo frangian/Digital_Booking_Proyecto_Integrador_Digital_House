@@ -142,7 +142,7 @@ header {
 
 footer {
     width: 100%;
-    height: 10vh;
+    height: 8vh;
     background-color: var(--main-green);
     position: fixed;
     bottom: 0;
@@ -174,8 +174,9 @@ footer div a {
 
 .register-container h2 {
     color: var(--main-green);
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: 900;
+    padding: 10px 0;
 }
 
 .register-container p {
@@ -189,15 +190,27 @@ footer div a {
     cursor: pointer;
 }
 
-#register-form {
+.form-main form {
     display: flex;
     flex-direction: column;
-    height: 45vh;
+    height: 50vh;
     justify-content: center;
     align-items: center;
+    margin: 20px 0;
+    text-align: left;
 }
 
-#register-form input {
+#login-form {
+    height: 30vh;
+    margin: 0;
+}
+
+#login-form div {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-main form input {
     width: 100%;
     height: 40px;
     background: #FFFFFF;
@@ -211,14 +224,18 @@ footer div a {
     font-weight: 700;
 }
 
-#register-form label {
+#login-form input {
+    width: 448px;
+}
+
+.form-main form label {
     color: var(--main-dark-gray);
     font-size: 0.8rem;
     font-weight: 700;
-    align-self: flex-start;
+    text-align: left;
 }
 
-#register-form input:focus {
+.form-main form input:focus {
     outline: 1px solid var(--main-green);
 }
 
@@ -248,9 +265,12 @@ footer div a {
     margin-bottom: 20px;
 }
 
+.register-container div {
+    width: 100%;
+}
+
 .register-container .password {
     position: relative;
-    width: 100%;
 }
 
 .register-container .password .icon-eye {
@@ -258,13 +278,41 @@ footer div a {
     right: 0;
     top: 0;
     cursor: pointer;
-    padding: 20px 10px;
+    padding: 40px 10px;
     opacity: 0.6;
+}
+
+#login-form .password .icon-eye {
+    padding: 37px 10px;
 }
 
 input[type="password"] {
     letter-spacing: 0.3rem;
     font-size: 1.5rem;
+}
+
+#mail {
+    text-decoration: underline;
+}
+
+div.error input {
+    background-color: #FFE1E1;
+    border: 1px solid #FF0000;
+}
+
+div.error input:focus {
+    border: 1px solid #FF0000;
+    outline: none;
+}
+
+div.error p {
+    color: #FF0000;
+    text-align: right;
+}
+
+.register-container .login-error {
+    color: #FF0000;
+    margin-bottom: 20px;
 }
 
 @media (max-width: 768px) {
@@ -276,9 +324,11 @@ input[type="password"] {
         width: 164px;
     }
 
+
     #register-form {
-        margin: 30px 0;
+        margin: 50px 0 70px;
         width: 346px;
+        height: 45vh;
     }
 
     #register-form fieldset {
@@ -295,11 +345,16 @@ input[type="password"] {
 
     .register-container .small-button {
         width: 100%;
+        margin: 5px 0;
     }
 
 }
 
 @media (max-width: 500px) {
+    header {
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 4px 5px rgba(0, 0, 0, 0.12), 0px 1px 10px rgba(0, 0, 0, 0.2);
+    }
+
     .menu-icon {
         display: block;
     }
@@ -311,11 +366,35 @@ input[type="password"] {
     footer div {
         display: none;
     }
+
+    #register-form {
+        margin: 45px 0 70px;
+    }
+
+    #login-form input {
+        width: 100%;
+    }
+
+    .register-container .small-button {
+        margin: 5px 0;
+    }
 }
 
 @media (max-width: 400px) {
     #register-form {
-        margin: 30px 0;
+        margin: 50px 0 70px;
+        width: 80vw;
+    }
+
+    #login-form {
+        width: 80vw;
+    }
+
+    #login-form div input {
+        width: 100%;
+    }
+
+    .login-error {
         width: 80vw;
     }
 }
