@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEyeSlash, faEye } from '@fortawesome/free-regular-svg-icons'
 import { ContextGlobal } from './Utils/globalContext'
-import { validarMail, validarPassword, confirmarPassword, campoRequerido, normalizarInput } from './Utils/validaciones'
+import { validarMail, validarPassword, confirmarPassword, campoRequerido, normalizarMail, normalizarNombre } from './Utils/validaciones'
 import '../styles.css'
 
 const RegisterForm = () => {
@@ -86,7 +86,7 @@ const RegisterForm = () => {
                         onChange={(e) => {
                             e.target.parentElement.classList.remove("error");
                             setErrorNombre("");
-                            setUser({...user, nombre: normalizarInput(e.target.value)})
+                            setUser({...user, nombre: normalizarNombre(e.target.value)})
                         }}
                         />
                         <p>{errorNombre}</p>
@@ -97,7 +97,7 @@ const RegisterForm = () => {
                         onChange={(e) => {
                             e.target.parentElement.classList.remove("error");
                             setErrorApellido("");
-                            setUser({...user, apellido: normalizarInput(e.target.value)})
+                            setUser({...user, apellido: normalizarNombre(e.target.value)})
                         }}
                         />
                         <p>{errorApellido}</p>
@@ -109,7 +109,7 @@ const RegisterForm = () => {
                     onChange={(e) => {
                         e.target.parentElement.classList.remove("error");
                         setErrorMail("");
-                        setUser({...user, mail: normalizarInput(e.target.value)})
+                        setUser({...user, mail: normalizarMail(e.target.value)})
                     }}
                     />
                     <p>{errorMail}</p>

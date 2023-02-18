@@ -1,20 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import '../styles.css'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { routes } from './Utils/routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faX } from '@fortawesome/free-solid-svg-icons'
 import Menu from './Menu';
+import { ContextGlobal } from './Utils/globalContext';
 
 const Header = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { state, dispatch } = useContext(ContextGlobal);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const cerrarSesion = () => {
+    dispatch({
+        type: "register",
+        payload: {
+            ...state,
+            logged: false
+        }
+    })
+    navigate("/login");
+}
 
   return (
     <header>
@@ -22,7 +35,7 @@ const Header = () => {
         <img src="/logo.png" alt="Logo Digital Booking"/>
         <h6>Sentite como en tu hogar</h6>
       </div>
-      <div className="btns">
+      <div className={`btns ${state.logged ? "oculto" : ""}`}>
         {
           routes.map(({ id, path, title }) => {
               if (id !== 1 && id !== routes.length && location.pathname !== "/register") {
@@ -40,6 +53,16 @@ const Header = () => {
               }
           })
         }
+      </div>
+      <div className={`logged-user ${state.logged ? "" : "oculto"}`} >
+        <div className='avatar'>
+          <p>{state.nombre[0]}{state.apellido[0]}</p>
+        </div>
+        <div className="saludo">
+          <p>Hola,</p>
+          <p className='nombres'>{state.nombre} {state.apellido}</p>
+        </div>
+        <FontAwesomeIcon icon={faX} className="x-icon" onClick={() => cerrarSesion()}/>
       </div>
       <button className='icon-button' onClick={handleDrawerToggle} style={mobileOpen ? {display: "none"} : {display: "block"}}>
         <FontAwesomeIcon icon={faBars} className="menu-icon"/>

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEyeSlash, faEye } from '@fortawesome/free-regular-svg-icons'
 import '../styles.css'
 import { ContextGlobal } from './Utils/globalContext'
-import { normalizarInput, campoRequerido } from './Utils/validaciones'
+import { normalizarMail } from './Utils/validaciones'
 
 const LoginForm = () => {
 
@@ -43,7 +43,7 @@ const LoginForm = () => {
                     <label htmlFor="mail">Correo electrónico</label>
                     <input type="text" name="mail" id="mail" 
                     onChange={(e) => {
-                        setUser({...user, mail: normalizarInput(e.target.value)})
+                        setUser({...user, mail: normalizarMail(e.target.value)})
                     }}
                     />
                 </div>

@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,100&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Roboto:ital,wght@0,100;0,300;1,100&display=swap');
 :root {
     --main-green: #1DBEB4;
     --main-dark-gray: #383B58;
@@ -70,6 +69,38 @@ header {
     color: var(--main-white);
 }
 
+.logged-user {
+    position: relative;
+    width: 80%;
+    display: flex;
+    justify-content: end;
+    gap: 20px;
+    align-items: center;
+    margin-right: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: var(--main-light-gray);
+}
+
+.logged-user .avatar {
+    background-color: var(--main-dark-gray);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.2rem;
+    color: var(--main-white);
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.logged-user .nombres {
+    color: var(--main-green);
+}
+
+.logged-user .x-icon {
+    align-self: flex-start;
+    cursor: pointer;
+    color: var(--main-dark-gray);
+}
+
 .icon-button {
     border: none;
     margin-right: 20px;
@@ -112,7 +143,7 @@ header {
 }
 
 .mid-menu {
-    height: 65vh;
+    height: 62vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -132,6 +163,35 @@ header {
 
 .mid-menu button:nth-child(2) {
     border-top: 1px solid var(--main-dark-gray);
+}
+
+.cerrar-sesion {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    height: 62vh;
+}
+
+.cerrar-sesion p {
+    border-bottom: 1px solid var(--main-light-gray);
+    width: 90%;
+    padding-right: 5px;
+    padding-bottom: 10px;
+}
+
+.cerrar-sesion span {
+    color: var(--main-green);
+    cursor: pointer;
+}
+
+.bottom-menu {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .bottom-menu a {
@@ -315,6 +375,10 @@ div.error p {
     margin-bottom: 20px;
 }
 
+.oculto {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .logo-slogan h6 {
         display: none;
@@ -323,7 +387,6 @@ div.error p {
     .btns button {
         width: 164px;
     }
-
 
     #register-form {
         margin: 50px 0 70px;
@@ -363,12 +426,24 @@ div.error p {
         display: none;
     }
 
+    .logged-user {
+        display: none;
+    }
+
     footer div {
         display: none;
     }
 
     #register-form {
         margin: 45px 0 70px;
+    }
+
+    #login-form {
+        width: 80vw;
+    }
+
+    #login-form div input {
+        width: 100%;
     }
 
     #login-form input {

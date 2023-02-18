@@ -24,6 +24,11 @@ export const campoRequerido = (text) => {
     } else return true;
 }
 
-export const normalizarInput = (input) => {
-    return input.toLowerCase().trim();
+export const normalizarMail = (mail) => {
+    return mail.toLowerCase().trim();
+}
+
+export const normalizarNombre = (nombre) => {
+    const nombreNormalizado = nombre.charAt(0).toUpperCase() + nombre.slice(1)
+    return nombreNormalizado.trim();
 }
