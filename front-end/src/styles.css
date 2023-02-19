@@ -69,7 +69,7 @@ header {
     color: var(--main-white);
 }
 
-.logged-user {
+.header-logged-user {
     position: relative;
     width: 80%;
     display: flex;
@@ -82,7 +82,7 @@ header {
     color: var(--main-light-gray);
 }
 
-.logged-user .avatar {
+.header-logged-user .avatar {
     background-color: var(--main-dark-gray);
     font-family: 'Quicksand', sans-serif;
     font-size: 1.2rem;
@@ -91,11 +91,11 @@ header {
     border-radius: 50%;
 }
 
-.logged-user .nombres {
+.header-logged-user .nombres {
     color: var(--main-green);
 }
 
-.logged-user .x-icon {
+.header-logged-user .x-icon {
     align-self: flex-start;
     cursor: pointer;
     color: var(--main-dark-gray);
@@ -140,6 +140,28 @@ header {
 
 .top-menu h5 {
     align-self: flex-end;
+}
+
+.menu-logged-user {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.menu-logged-user .avatar {
+    background-color: var(--main-white);
+    color: var(--main-dark-gray);
+    border-radius: 50%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.menu-logged-user .saludo p {
+    color: var(--main-white);
+}
+
+.menu-logged-user .saludo .nombres {
+    color: var(--main-dark-gray);
 }
 
 .mid-menu {
@@ -416,6 +438,18 @@ div.error p {
 @media (max-width: 500px) {
     header {
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 4px 5px rgba(0, 0, 0, 0.12), 0px 1px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .header-logged-user {
+        display: none;
+    }
+
+    .top-menu .menu-logged-user {
+        display: flex;
+    }
+
+    .top-menu .oculto {
+        display: none;
     }
 
     .menu-icon {

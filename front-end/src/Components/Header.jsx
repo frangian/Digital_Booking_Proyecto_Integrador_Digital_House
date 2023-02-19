@@ -54,7 +54,7 @@ const Header = () => {
           })
         }
       </div>
-      <div className={`logged-user ${state.logged ? "" : "oculto"}`} >
+      <div className={`header-logged-user ${state.logged ? "" : "oculto"}`} >
         <div className='avatar'>
           <p>{state.nombre[0]}{state.apellido[0]}</p>
         </div>

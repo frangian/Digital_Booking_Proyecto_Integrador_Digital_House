@@ -27,7 +27,16 @@ const Menu = ({ open, openClose }) => {
         <div style={open ? {display: "block"} : {display: "none"}} className="menu">
             <div className="top-menu">
                 <FontAwesomeIcon icon={faX} onClick={() => openClose()} style={{ cursor: "pointer" }}/>
-                <h5>MENÚ</h5>
+                <h5 className={`${state.logged ? "oculto" : ""}`}>MENÚ</h5>
+                <div className={`menu-logged-user ${state.logged ? "" : "oculto"}`}>
+                    <div className='avatar'>
+                        <p>{state.nombre[0]}{state.apellido[0]}</p>
+                    </div>
+                    <div className="saludo">
+                        <p>Hola,</p>
+                        <p className='nombres'>{state.nombre} {state.apellido}</p>
+                    </div>
+                </div>
             </div>
             <div className={`mid-menu ${state.logged ? "oculto" : ""}`}>
             {

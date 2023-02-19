@@ -10,13 +10,12 @@ const RegisterForm = () => {
 
     const navigate = useNavigate();
     const [eye, setEye] = useState(false);
-    const [confirmPass, setConfirmPass] = useState("");
     const [errorNombre, setErrorNombre] = useState("");
     const [errorApellido, setErrorApellido] = useState("");
     const [errorMail, setErrorMail] = useState("");
     const [errorPass, setErrorPass] = useState("");
     const [errorConfirmPass, setErrorConfirmPass] = useState("");
-    const [user, setUser] = useState({nombre: "", apellido: "", mail: "", pass: ""})
+    const [user, setUser] = useState({nombre: "", apellido: "", mail: "", pass: "", confirmPass: ""})
     const { state, dispatch } = useContext(ContextGlobal);
 
     const resetErrors = () => {
@@ -53,9 +52,10 @@ const RegisterForm = () => {
             envio = false;
             setErrorPass("Minimo 6 caracteres");
         }
-        if (!campoRequerido(confirmPass)) {
+        if (!campoRequerido(user.confirmPass)) {
+            envio = false;
             setErrorConfirmPass("Este campo es obligatorio");
-        } else if (!confirmarPassword(user.pass, confirmPass)) {
+        } else if (!confirmarPassword(user.pass, user.confirmPass)) {
             envio = false;
             setErrorConfirmPass("Las contraseñas no coinciden");
         }
@@ -136,7 +136,7 @@ const RegisterForm = () => {
                     onChange={(e) => {
                         e.target.parentElement.classList.remove("error")
                         setErrorConfirmPass("");
-                        setConfirmPass(e.target.value)
+                        setUser({...user, confirmPass: e.target.value})
                     }}
                     />
                     <p>{errorConfirmPass}</p>
