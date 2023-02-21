@@ -9,15 +9,22 @@
   }
 
   
-  /********************* SECCION RECOMENDACIONES *************************/
-  .card-grid {
+  /********************* SECCION CATEGORIAS *************************/
+  
+    .categorias-container {
+      padding: 1vh 3vw 0.5vh;
+    }
+
+    .categorias-container h2{
+      color: rgba(56, 59, 88, 1);
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+  
+    .card-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 20px;
-    }
-
-    .categorias-container {
-      padding: 1vh 3vw 0.5vh;
     }
 
     .card {
@@ -41,6 +48,18 @@
       border-radius: 10px 10px 0 0;
     }
 
+    .card h3 {
+      margin: 10px 0;
+      font-size: 1.5rem;
+      color: rgba(56, 59, 88, 1);
+    }
+    
+    .card p {
+      margin: 0;
+      font-size: 1rem;
+      color: #666;
+    }
+
   /********************* SECCION RECOMENDADOS *************************/
   
 
@@ -49,13 +68,17 @@
     padding: 1vw 3vw;
   }
 
+  .recomendaciones-container h2{
+    color: rgba(56, 59, 88, 1);
+      font-weight: 700;
+      font-size: 1.5rem;
+  }
+
   .card-grid-recomendaciones{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
-  
-  
 
   .card-recomendaciones{
     display: flex;
@@ -65,7 +88,6 @@
     overflow: hidden;
     margin: 0;
     padding: 0;
-    height: 30vh;
     width: 100%;
   }
 
@@ -104,7 +126,7 @@
   }
 
   .info-container p, .info-container h2{
-    margin: 0;
+    margin: 0.5vw;
     color: rgba(56, 59, 88, 1);
   }
 
@@ -112,8 +134,6 @@
     color: rgba(29, 190, 180, 1);
     font-weight: 600;
   }
-
-  
 
   .categoria-container, .ubicacion-container{
     display: flex;
@@ -143,17 +163,6 @@
   
   
   
-  .card h2 {
-    margin: 10px 0;
-    font-size: 1.5rem;
-  }
-  
-  .card p {
-    margin: 0;
-    font-size: 1rem;
-    color: #666;
-  }
-  
   /* Para pantallas de tamaño igual o mayor a 768px (tablet) */
   @media (max-width: 1023px) {
     .card-grid {
@@ -162,6 +171,22 @@
 
     .card-grid-recomendaciones{
       grid-template-columns: repeat(1, 1fr);
+    }
+
+    .info-container{
+      padding: 2vw;
+    }
+
+    .info-container h3{
+      font-size:1rem;
+    }
+  
+    .info-container p{
+      font-size:0.9rem;
+    }
+  
+    .ver-mas-btn{
+      padding: 2vw;
     }
   }
 
@@ -173,5 +198,37 @@
 
   .card-grid-recomendaciones{
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  .recomendaciones-container {
+    background-color: #383B58;
+  }
+
+  .recomendaciones-container h2{
+      color: white;
+  }
+
+  .card-grid-recomendaciones{
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .card-recomendaciones{
+    flex-direction: column;
+    height: auto;
+    background-color: white;
+  }
+
+  .image-container{
+    height: 50%;
+  }
+
+  .info-container{
+    padding:2vh;
+    width: auto;
+    height: 50%;
+  }
+
+  .ver-mas-btn{
+    padding: 1.3vh;
   }
 }
