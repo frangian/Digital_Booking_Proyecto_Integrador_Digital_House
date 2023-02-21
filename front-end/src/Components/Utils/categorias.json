@@ -1,0 +1,25 @@
+{
+    "categorias": [
+      {
+        "nombre": "Hoteles",
+        "imagen": "/images/hotel.jpg",
+        "cantidad": 807.105
+      },
+      {
+        "nombre": "Hostels",
+        "imagen": "/images/hostel.jpg",
+        "cantidad": 807.105
+      },
+      {
+        "nombre": "Departamentos",
+        "imagen": "/images/departamento.jpg",
+        "cantidad": 807.105
+      },
+      {
+        "nombre": "Bed & Breakfast",
+        "imagen": "/images/departamento.jpg",
+        "cantidad": 807.105
+      }
+    ]
+  }
+  

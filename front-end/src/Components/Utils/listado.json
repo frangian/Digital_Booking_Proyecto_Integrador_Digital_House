@@ -1,0 +1,68 @@
+{
+    "products": [
+      {
+        "id": 1,
+        "img": "/images/hotel2.jpg",
+        "category": "Hotel",
+        "title": "Hermitage Hotel",
+        "location": "Cancún",
+        "description": "En el corazón de San Telmo, disfruta de un albergue inspirado en las pasiones de Buenos Aires. con 2 impresionantes piscinas, una en la terraza y otra al aire libre; habitaciones privadas (algu..."
+      },
+      {
+        "id": 2,
+        "img": "/images/hotel3.jpg",
+        "category": "Hotel",
+        "title": "Hermitage Hotel",
+        "location": "Banff",
+        "description": "En el corazón de San Telmo, disfruta de un albergue inspirado en las pasiones de Buenos Aires. con 2 impresionantes piscinas, una en la terraza y otra al aire libre; habitaciones privadas (algu..."
+      },
+      {
+        "id": 3,
+        "img": "/images/hotelGeneral.jpg",
+        "category": "Hotel",
+        "title": "Hermitage Hotel",
+        "location": "Madrid",
+        "description": "En el corazón de San Telmo, disfruta de un albergue inspirado en las pasiones de Buenos Aires. con 2 impresionantes piscinas, una en la terraza y otra al aire libre; habitaciones privadas (algu..."
+      },
+      {
+        "id": 4,
+        "img": "/images/hotel2.jpg",
+        "category": "Hotel",
+        "title": "Hermitage Hotel",
+        "location": "Cancún",
+        "description": "En el corazón de San Telmo, disfruta de un albergue inspirado en las pasiones de Buenos Aires. con 2 impresionantes piscinas, una en la terraza y otra al aire libre; habitaciones privadas (algu..."
+      },
+      {
+        "id": 5,
+        "img": "/images/hotel3.jpg",
+        "category": "Hotel",
+        "title": "Hermitage Hotel",
+        "location": "Whistler",
+        "description": "En el corazón de San Telmo, disfruta de un albergue inspirado en las pasiones de Buenos Aires. con 2 impresionantes piscinas, una en la terraza y otra al aire libre; habitaciones privadas (algu..."
+      },
+      {
+        "id": 6,
+        "img": "/images/hotelGeneral.jpg",
+        "category": "Hotel",
+        "title": "Hermitage Hotel",
+        "location": "Ciudad de México",
+        "description": "En el corazón de San Telmo, disfruta de un albergue inspirado en las pasiones de Buenos Aires. con 2 impresionantes piscinas, una en la terraza y otra al aire libre; habitaciones privadas (algu..."
+      },
+      {
+        "id": 7,
+        "img": "/images/hotel2.jpg",
+        "category": "Hotel",
+        "title": "Hermitage Hotel",
+        "location": "Puerto Vallarta",
+        "description": "En el corazón de San Telmo, disfruta de un albergue inspirado en las pasiones de Buenos Aires. con 2 impresionantes piscinas, una en la terraza y otra al aire libre; habitaciones privadas (algu..."
+      },
+      {
+        "id": 8,
+        "img": "/images/hotel3.jpg",
+        "category": "Hotel",
+        "title": "Hermitage Hotel",
+        "location": "San Martín de los Andes",
+        "description": "En el corazón de San Telmo, disfruta de un albergue inspirado en las pasiones de Buenos Aires. con 2 impresionantes piscinas, una en la terraza y otra al aire libre; habitaciones privadas (algu..."
+      }
+    ]
+  }
