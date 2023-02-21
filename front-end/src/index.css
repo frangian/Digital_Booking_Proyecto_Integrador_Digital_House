@@ -31,7 +31,13 @@
   }
 
   #btn-buscar{
-    padding: 1vw 5vw;
+    padding: 10px 100px;
+    margin-bottom: 10px;
+  }
+
+  .blanco{
+    color: white;
+    filter: drop-shadow(1px 0px 1px black);
   }
   
   /********************* SECCION CATEGORIAS *************************/
@@ -117,8 +123,16 @@
   }
 
   .image-container{
+    position: relative;
     width: 100%;
     height: 100%;
+  }
+
+  .fa-heart{
+    position: absolute;
+    top: 5%;
+    right: 4%;
+    color: white;
   }
 
   .card-recomendaciones img {
@@ -213,6 +227,30 @@
     .ver-mas-btn{
       padding: 2vw;
     }
+
+    .buscador-container{
+      padding: 4vh 3vh;
+    }
+  
+    .buscador-container h2{
+     text-align: center;
+     font-size: 1.8rem;
+    }  
+
+    .form-buscador{
+      display: flex;
+      align-items: center;
+      justify-content:space-between;
+    }
+
+    .form-buscador > *{ 
+      margin-left: 10px;
+    }
+
+    #btn-buscar{
+      padding: 19px 50px;
+    }
+    
   }
 
   /* Para pantallas de tamaño menor a 768px (mobile) */
@@ -256,4 +294,36 @@
   .ver-mas-btn{
     padding: 1.3vh;
   }
+
+  
+
+  /** Buscador **/ 
+
+  .buscador-container{
+    padding: 1vh 1vh;
+  }
+
+  .buscador-container h2{
+   text-align: center;
+   font-size: 1.5rem;
+   font-weight:700;
+  }
+  .form-buscador{
+    flex-direction: column;
+    align-items: normal;
+    width: 100%;
+  }
+  .form-buscador > *{ 
+    margin-left: 0;
+  }
+
+  #btn-buscar{
+    padding: 3vw 5vw;
+  }
+
+  .blanco{
+    color: white;
+    filter: drop-shadow(1px 0px 1px black);
+  }
+
 }

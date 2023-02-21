@@ -1,6 +1,7 @@
 import * as React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
 const CardRecomendaciones = ({ title, imagen, category, location, description }) => {
@@ -9,6 +10,7 @@ const CardRecomendaciones = ({ title, imagen, category, location, description })
     <div className="card-recomendaciones">
       <div className="image-container">
         <img src={imagen} alt={title} />
+        <FontAwesomeIcon icon={faHeart} className="fa-heart"/>
       </div>
       <div className="info-container">
         <div>

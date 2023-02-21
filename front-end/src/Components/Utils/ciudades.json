@@ -4,27 +4,32 @@
     {
         "id": "1",
         "value": "new-york",
-        "label": "New York"
+        "label": "New York",
+        "pais":"Estados Unidos"
     },
     {
         "id": "2",
         "value": "los-angeles",
-        "label": "Los Angeles"
+        "label": "Los Angeles",
+        "pais":"Estados Unidos"
     },
     {
         "id": "3",
         "value": "chicago",
-        "label": "Chicago"
+        "label": "Chicago",
+        "pais":"Estados Unidos"
     },
     {
         "id": "4",
         "value": "houston",
-        "label": "Houston"
+        "label": "Houston",
+        "pais":"Estados Unidos"
     },
     {
         "id": "5",
         "value": "miami",
-        "label": "Miami"
+        "label": "Miami",
+        "pais":"Estados Unidos"
     }
     ]
 }
