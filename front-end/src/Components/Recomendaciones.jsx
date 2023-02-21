@@ -10,7 +10,7 @@ const Recomendaciones = () => {
         <div className='card-grid-recomendaciones'>
       {data.products.map(product => (
               <Card
-                key={product.title}
+                key={product.id}
                 title={product.title}
                 imagen={product.img}
                 category={product.category}
