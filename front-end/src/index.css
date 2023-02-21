@@ -267,8 +267,8 @@
     background-color: #383B58;
   }
 
-  .recomendaciones-container h2{
-      color: white;
+  .info-container h3{
+      color: rgb(182, 176, 176);
   }
 
   .card-grid-recomendaciones{
@@ -289,6 +289,10 @@
     padding:2vh;
     width: auto;
     height: 50%;
+  }
+
+  .info-container h2{
+    color: rgba(56, 59, 88, 1);
   }
 
   .ver-mas-btn{
