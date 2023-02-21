@@ -4,7 +4,7 @@ import data from '../Components/Utils/categorias.json'
 
 const Categorias = () => {
   return (
-    <>
+    <div className="categorias-container">
         <h2>Buscar por tipo de alojamiento</h2>
         <div className='card-grid'>
       {data.categorias.map(categoria => (
@@ -17,7 +17,7 @@ const Categorias = () => {
             ))}
 
         </div>
-    </>
+    </div>
   )
 }
 

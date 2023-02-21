@@ -1,58 +1,58 @@
 {
     "products": [
       {
-        "img": "/images/hotelGeneral.jpg",
-        "category": "Hotel 4 estrellas",
-        "title": "Hotel Azul",
+        "img": "/images/hotel2.jpg",
+        "category": "Hotel",
+        "title": "Hermitage Hotel",
         "location": "Cancún",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada enim at eros interdum tincidunt."
       },
       {
-        "img": "/images/hotelGeneral.jpg",
-        "category": "Hotel 4 estrellas",
-        "title": "Hotel Sierra",
+        "img": "/images/hotel3.jpg",
+        "category": "Hotel",
+        "title": "Hermitage Hotel",
         "location": "Banff",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada enim at eros interdum tincidunt."
       },
       {
         "img": "/images/hotelGeneral.jpg",
-        "category": "Hotel 4 estrellas",
-        "title": "Hotel Centro",
+        "category": "Hotel",
+        "title": "Hermitage Hotel",
         "location": "Madrid",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada enim at eros interdum tincidunt."
       },
       {
-        "img": "/images/hotelGeneral.jpg",
-        "category": "Hotel 4 estrellas",
-        "title": "Hotel Costa",
+        "img": "/images/hotel2.jpg",
+        "category": "Hotel",
+        "title": "Hermitage Hotel",
         "location": "Cancún",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada enim at eros interdum tincidunt."
       },
       {
-        "img": "/images/hotelGeneral.jpg",
-        "category": "Hotel 4 estrellas",
-        "title": "Hotel Montaña",
+        "img": "/images/hotel3.jpg",
+        "category": "Hotel",
+        "title": "Hermitage Hotel",
         "location": "Whistler",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada enim at eros interdum tincidunt."
       },
       {
         "img": "/images/hotelGeneral.jpg",
-        "category": "Hotel 4 estrellas",
-        "title": "Hotel Centro Histórico",
+        "category": "Hotel",
+        "title": "Hermitage Hotel",
         "location": "Ciudad de México",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada enim at eros interdum tincidunt."
       },
       {
-        "img": "/images/hotelGeneral.jpg",
-        "category": "Hotel 4 estrellas",
-        "title": "Hotel del Mar",
+        "img": "/images/hotel2.jpg",
+        "category": "Hotel",
+        "title": "Hermitage Hotel",
         "location": "Puerto Vallarta",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada enim at eros interdum tincidunt."
       },
       {
-        "img": "/images/hotelGeneral.jpg",
-        "category": "Hotel 4 estrellas",
-        "title": "Hotel Valle",
+        "img": "/images/hotel3.jpg",
+        "category": "Hotel",
+        "title": "Hermitage Hotel",
         "location": "San Martín de los Andes",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada enim at eros interdum tincidunt."
       }

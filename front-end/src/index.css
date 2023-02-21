@@ -1,11 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,100&display=swap%27');
 
-  .container{
-  padding: 0 2vw;
-}
+  
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+    margin: 0;
+  }
+
+  
+  /********************* SECCION RECOMENDACIONES *************************/
   .card-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .categorias-container {
+      padding: 1vh 3vw 0.5vh;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+  
+    .card > div {
+      margin-left: 1vw;
+      margin-bottom: 1vh;
+    }
+  
+    .card img {
+      width: 100%;
+      max-height: 30vh;
+      border-radius: 10px 10px 0 0;
+    }
+
+  /********************* SECCION RECOMENDADOS *************************/
+  
+
+  .recomendaciones-container {
+    background-color: rgba(243, 241, 237, 1);
+    padding: 1vw 3vw;
   }
 
   .card-grid-recomendaciones{
@@ -14,26 +55,7 @@
     gap: 20px;
   }
   
-  .card {
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-  }
-
-  .card > div {
-    margin-left: 1vw;
-    margin-bottom: 1vh;
-  }
-
-  .card img {
-    width: 100%;
-    max-height: 30vh;
-    border-radius: 10px 10px 0 0;
-  }
+  
 
   .card-recomendaciones{
     display: flex;
@@ -43,24 +65,79 @@
     overflow: hidden;
     margin: 0;
     padding: 0;
+    height: 30vh;
+    width: 100%;
+  }
+
+  .image-container{
+    width: 100%;
+    height: 100%;
   }
 
   .card-recomendaciones img {
-    width: 47%;
     border-radius: 10px;
+    width: 100%;
+    height: 100%;
   }
 
-  .card-recomendaciones > div {
+  .info-container{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 0.4vw;
+    padding:1vw;
+    width: 100%;
+    height: auto;
+  }
+
+  .info-container h3{
+    color: rgba(56, 59, 88, 1);
+    opacity: 50%;
+    padding-right: 0.4vw;
+    margin: 0;
+    font-size:0.875rem;
+  }
+
+  .info-container p{
+    font-size:0.875rem;
+    font-weight:600;
+    line-height:1rem;
+  }
+
+  .info-container p, .info-container h2{
+    margin: 0;
+    color: rgba(56, 59, 88, 1);
+  }
+
+  .info-container span{
+    color: rgba(29, 190, 180, 1);
+    font-weight: 600;
+  }
+
+  
+
+  .categoria-container, .ubicacion-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .icono{
+    padding-right: 0.4vw;
+    margin: 0;
+  }
+
+  .icono-verde{
+    color: rgba(29, 190, 180, 1);
+    font-size: 0.8rem;
   }
   
+
   .ver-mas-btn{
-    padding: 1vw;
+    padding: 0.8vw;
     border-radius:5px;
     border: none;
+    color: white;
+    font-size:1rem;
     background-color: rgba(29, 190, 180, 1);
   }
   

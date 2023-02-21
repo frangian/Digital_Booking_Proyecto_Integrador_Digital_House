@@ -5,7 +5,7 @@ import data from '../Components/Utils/listado.json'
 const Recomendaciones = () => {
   return (
 
-    <div>
+    <div className="recomendaciones-container">
         <h2>Recomendaciones</h2>
         <div className='card-grid-recomendaciones'>
       {data.products.map(product => (
