@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEyeSlash, faEye } from '@fortawesome/free-regular-svg-icons'
 import { ContextGlobal } from './Utils/globalContext'
 import { validarMail, validarPassword, confirmarPassword, campoRequerido, normalizarMail, normalizarNombre } from './Utils/validaciones'
-import '../styles.css'
 
 const RegisterForm = () => {
 

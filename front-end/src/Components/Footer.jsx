@@ -1,5 +1,4 @@
 import React from 'react'
-import '../styles.css'
 import { socialNetworks } from './Utils/routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 

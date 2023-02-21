@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react'
-import '../styles.css'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { routes } from './Utils/routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

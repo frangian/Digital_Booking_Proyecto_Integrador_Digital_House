@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import '../styles.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from '@fortawesome/free-solid-svg-icons'
 import { socialNetworks, routes } from './Utils/routes'

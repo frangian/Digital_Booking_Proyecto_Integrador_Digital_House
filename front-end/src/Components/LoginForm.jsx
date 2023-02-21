@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEyeSlash, faEye } from '@fortawesome/free-regular-svg-icons'
-import '../styles.css'
 import { ContextGlobal } from './Utils/globalContext'
 import { normalizarMail } from './Utils/validaciones'
 
