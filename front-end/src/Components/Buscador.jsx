@@ -26,7 +26,7 @@ const Buscador = () => {
     <div className="buscador-container">
       <h2>Busca ofertas en hoteles, casas y mucho más</h2>
       <form action="" className="form-buscador">
-        <Box sx={{ minWidth: 120, width: 600, bgcolor: "white" }} >
+        <Box sx={{ minWidth: 120, width: "30vw", bgcolor: "white" }} >
           <FormControl fullWidth >
             <InputLabel id="demo-simple-select-label" ><FontAwesomeIcon icon={faMapMarkerAlt} className="icono" />¿A donde vamos?</InputLabel>
             <Select
@@ -56,8 +56,8 @@ const Buscador = () => {
             }}
             renderInput={(startProps, endProps) => (
               <React.Fragment>
-                <TextField {...startProps} sx={{width: 300, bgcolor: "white"}}/>
-                <TextField {...endProps} sx={{width: 300, bgcolor: "white"}}/>
+                <TextField {...startProps} sx={{width: "15vw", bgcolor: "white"}}/>
+                <TextField {...endProps} sx={{width: "15vw", bgcolor: "white"}}/>
               </React.Fragment>
             )}
           />
