@@ -425,7 +425,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5vh 10vw;
+  padding: 3vh 10vw 5vh;
   background-color: #545776;
   margin-top: 12vh;
 }
@@ -434,6 +434,7 @@ body {
   color: white;
   font-size: 2rem;
   font-weight: 700;
+  margin: 30px 0;
 }
 .form-buscador {
   display: flex;
@@ -510,6 +511,7 @@ body {
 .recomendaciones-container {
   background-color: rgba(243, 241, 237, 1);
   padding: 1vw 3vw;
+  margin-bottom: 80px;
 }
 
 .recomendaciones-container h2 {
@@ -592,12 +594,48 @@ body {
 .ubicacion-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  padding-left: 0.5vw;
 }
+
+.info-container-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.puntuacion-container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.puntuacion-container p{
+  font-weight: 700;
+}
+
+.square8 {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 2vw;
+  height: 2vw;
+  background-color: rgba(56, 59, 88, 1);
+  border-radius: 0.4vw;
+  margin-right: 8%;
+}
+
+#square8-number {
+  color: white;
+  font-size: 1.7vh;
+}
+
 
 .icono {
   padding-right: 0.4vw;
   margin: 0;
+}
+
+.extra{
+  margin: 5px 5px 5px 10px;
 }
 
 .icono-verde {
@@ -664,7 +702,19 @@ body {
   #btn-buscar {
     padding: 19px 50px;
   }
+
+  .square8 {
+    width: 4vw;
+    height: 4vw;
+    border-radius: 1vw;
+  }
+  
+  #square8-number {
+    font-size: 2vh;
+  }
 }
+
+
 
 /* Para pantallas de tamaño menor a 768px (mobile) */
 @media (max-width: 768px) {
@@ -709,6 +759,7 @@ body {
 
   .recomendaciones-container {
     background-color: #383b58;
+    margin-bottom: 65px;
   }
 
   .info-container h3 {
@@ -771,6 +822,16 @@ body {
     color: white;
     filter: drop-shadow(1px 0px 1px black);
   }
+
+  .square8 {
+    width: 6vw;
+    height: 6vw;
+  }
+
+  .extra{
+    display: none;
+  }
+  
 }
 
 @media (max-width: 500px) {
