@@ -33,7 +33,6 @@ const Buscador = () => {
             width: { sm: "100%", md: "100%", xl:600},
             marginBottom: "10px",
             borderRadius: "5px",
-            
           }}
         >
           <FormControl fullWidth>
@@ -41,7 +40,6 @@ const Buscador = () => {
               value={ciudad}
               onChange={handleChange}
               displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
             >
               <MenuItem value="" sx={{ display: "none" }}>
                 <FontAwesomeIcon icon={faMapMarkerAlt} className="icono" />{" "}
@@ -62,9 +60,9 @@ const Buscador = () => {
                 >
                   <FontAwesomeIcon
                     icon={faMapMarkerAlt}
-                    className="icono blanco"
+                    className="icono-select blanco"
                   />
-                  {ciudad.label} <br /> {ciudad.pais}
+                  {ciudad.label}, {ciudad.pais}
                 </MenuItem>
               ))}
             </Select>

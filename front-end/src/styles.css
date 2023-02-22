@@ -424,7 +424,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3vh 10vw 5vh;
+  padding: 3vh;
   background-color: #545776;
   margin-top: 12vh;
 }
@@ -435,11 +435,13 @@ body {
   font-weight: 700;
   margin: 30px 0;
 }
+
 .form-buscador {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 90%;
 }
+
 .form-buscador form-buscador-ciudad {
   color: white;
 }
@@ -452,6 +454,10 @@ body {
 .blanco {
   color: white;
   filter: drop-shadow(1px 0px 1px black);
+}
+
+.icono-select {
+  margin-right: 10px;
 }
 
 /********************* SECCION CATEGORIAS *************************/
@@ -713,8 +719,6 @@ body {
   }
 }
 
-
-
 /* Para pantallas de tamaño menor a 768px (mobile) */
 @media (max-width: 768px) {
   .logo-slogan h6 {
@@ -726,7 +730,7 @@ body {
   }
 
   #register-form {
-    margin: 50px 0 70px;
+    margin: 20px 0;
     width: 346px;
     height: 45vh;
   }
