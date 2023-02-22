@@ -416,7 +416,7 @@ div.error p {
 body {
   font-family: "Roboto", sans-serif;
   padding: 0;
-  margin: 12vh 0;
+  /* margin: 12vh 0; */
 }
 
 /********************* SECCION BUSCADOR **********************/
@@ -427,6 +427,7 @@ body {
   align-items: center;
   padding: 5vh 10vw;
   background-color: #545776;
+  margin-top: 12vh;
 }
 
 .buscador-container h2 {

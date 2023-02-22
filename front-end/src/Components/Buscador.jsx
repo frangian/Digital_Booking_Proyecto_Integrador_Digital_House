@@ -25,7 +25,7 @@ const Buscador = () => {
   return (
     <div className="buscador-container">
       <h2>Busca ofertas en hoteles, casas y mucho más</h2>
-      <form action="" className="form-buscador">
+      <form action="" className="form-buscador" onSubmit={(e) => {e.preventDefault()}}>
         <Box
           sx={{
             minWidth: 120,
