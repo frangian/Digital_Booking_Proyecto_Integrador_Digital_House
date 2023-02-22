@@ -141,7 +141,7 @@ const RegisterForm = () => {
                     <p>{errorConfirmPass}</p>
                 </div>
             </form>
-            <button type='submit' form='register-form' className='small-button'>Crear cuenta</button>
+            <button type='submit' form='register-form' className='small-button' id='submit-register'>Crear cuenta</button>
             <p>¿Ya tienes una cuenta? <span onClick={() => navigate("/login")}>Iniciar sesión</span></p>
         </div>
     )
