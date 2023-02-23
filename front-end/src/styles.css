@@ -438,13 +438,10 @@ body {
 
 .form-buscador {
   display: flex;
-  justify-content: space-between;
-  width: 90%;
+  justify-content: center;
+  width: 70%;
 }
 
-.form-buscador form-buscador-ciudad {
-  color: white;
-}
 
 #btn-buscar {
   padding: 10px 100px;
@@ -469,7 +466,8 @@ body {
 .categorias-container h2 {
   color: rgba(56, 59, 88, 1);
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 2.2rem;
+  padding: 10px;
 }
 
 .card-grid {
@@ -522,7 +520,8 @@ body {
 .recomendaciones-container h2 {
   color: rgba(56, 59, 88, 1);
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 2.2rem;
+  padding: 10px;
 }
 
 .card-grid-recomendaciones {
@@ -584,8 +583,13 @@ body {
   line-height: 1rem;
 }
 
-.info-container p,
 .info-container h2 {
+  font-size: 1.5vw;
+  padding: 0;
+  margin-left: 0.5vw;
+}
+
+.info-container p {
   margin: 0.5vw;
   color: rgba(56, 59, 88, 1);
 }
@@ -600,6 +604,11 @@ body {
   display: flex;
   flex-direction: row;
   padding-left: 0.5vw;
+}
+
+.ubicacion-container p{
+  margin-left: 0;
+  margin-top: 2px;
 }
 
 .info-container-header{
@@ -635,7 +644,7 @@ body {
 
 
 .icono {
-  padding-right: 0.4vw;
+  padding-right: 0.2vw;
   margin: 0;
 }
 
@@ -669,12 +678,20 @@ body {
     grid-template-columns: repeat(1, 1fr);
   }
 
+  .categorias-container h2 {
+    font-size: 1.8rem;
+  }
+
   .info-container {
     padding: 2vw;
   }
 
   .info-container h3 {
     font-size: 1rem;
+  }
+
+  .info-container h2 {
+    font-size: 3vw;
   }
 
   .info-container p {
@@ -695,13 +712,7 @@ body {
   }
 
   .form-buscador {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .form-buscador > * {
-    margin-left: 10px;
+    width: 90%;
   }
 
   #btn-buscar {
@@ -752,88 +763,7 @@ body {
     margin: 5px 0;
   }
 
-  .card-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  .card-grid-recomendaciones {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  .recomendaciones-container {
-    background-color: #383b58;
-    margin-bottom: 65px;
-  }
-
-  .info-container h3 {
-    color: rgb(182, 176, 176);
-  }
-
-  .card-grid-recomendaciones {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  .card-recomendaciones {
-    flex-direction: column;
-    height: auto;
-    background-color: white;
-  }
-
-  .image-container {
-    height: 50%;
-  }
-
-  .info-container {
-    padding: 2vh;
-    width: auto;
-    height: 50%;
-  }
-
-  .info-container h2 {
-    color: rgba(56, 59, 88, 1);
-  }
-
-  .ver-mas-btn {
-    padding: 1.3vh;
-  }
-
-  /** Buscador **/
-
-  .buscador-container {
-    padding: 1vh 1vh;
-  }
-
-  .buscador-container h2 {
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-  .form-buscador {
-    flex-direction: column;
-    align-items: normal;
-    width: 100%;
-  }
-  .form-buscador > * {
-    margin-left: 0;
-  }
-
-  #btn-buscar {
-    padding: 3vw 5vw;
-  }
-
-  .blanco {
-    color: white;
-    filter: drop-shadow(1px 0px 1px black);
-  }
-
-  .square8 {
-    width: 6vw;
-    height: 6vw;
-  }
-
-  .extra{
-    display: none;
-  }
+  
   
 }
 
@@ -889,6 +819,102 @@ body {
 
   .register-container .small-button {
     margin: 5px 0;
+  }
+
+  /****************************************************************************/
+
+  .card-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .card-grid-recomendaciones {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .categorias-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .recomendaciones-container {
+    background-color: #383b58;
+    margin-bottom: 65px;
+  }
+
+  .info-container h3 {
+    color: rgb(182, 176, 176);
+  }
+
+  .card-grid-recomendaciones {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .card-recomendaciones {
+    flex-direction: column;
+    height: auto;
+    background-color: white;
+  }
+
+  .recomendaciones-container h2 {
+    color: white;
+    font-size: 1.8rem;
+  }
+
+  .image-container {
+    height: 50%;
+  }
+
+  .info-container {
+    padding: 2vh;
+    width: auto;
+    height: 50%;
+  }
+
+  .info-container h2 {
+    color: rgba(56, 59, 88, 1);
+  }
+
+  .ver-mas-btn {
+    padding: 1.3vh;
+  }
+
+  
+
+  /** Buscador **/
+
+  .buscador-container {
+    padding: 1vh 1vh;
+  }
+
+  .buscador-container h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  .form-buscador {
+    flex-direction: column;
+    align-items: normal;
+    width: 100%;
+  }
+  .form-buscador > * {
+    margin-left: 0;
+  }
+
+  #btn-buscar {
+    padding: 3vw 5vw;
+  }
+
+  .blanco {
+    color: white;
+    filter: drop-shadow(1px 0px 1px black);
+  }
+
+  .square8 {
+    width: 6vw;
+    height: 6vw;
+  }
+
+  .extra{
+    display: none;
   }
 }
 

@@ -29,10 +29,11 @@ const Buscador = () => {
       <form action="" className="form-buscador" onSubmit={(e) => {e.preventDefault()}}>
         <Box
           sx={{
-            minWidth: 120,
             bgcolor: "white",
-            width: {  xs: "100%", sm: "100%", md: "65%", lg: "40%", xl: "40%"},
+            minWidth: 200,
+            width: {  xs: "100%", sm: 200, md: 400, lg: 500, xl: 500},
             marginBottom: "10px",
+            marginRight: "1vw",
             borderRadius: "5px",
           }}
         >
@@ -84,7 +85,7 @@ const Buscador = () => {
                 <TextField
                   {...startProps}
                   sx={{
-                    width: { xs: "100%", sm: "100%", md: "45%", lg: "45%", xl: "60%"},
+                    width: { xs: "100%", sm: 100, md: 150, lg: 150, xl: 200},
                     marginBottom: "10px",
                     bgcolor: "white",
                     borderRadius: "5px 0 0 5px",
@@ -93,8 +94,9 @@ const Buscador = () => {
                 <TextField
                   {...endProps}
                   sx={{
-                    width: { xs: "100%", sm: "100%", md: "45%", lg: "45%", xl: "60%"},
+                    width: { xs: "100%", sm: 100, md: 150, lg: 150, xl: 200},
                     marginBottom: "10px",
+                    marginRight: { xs: 0, sm: "1vw", md: "1vw", lg: "1vw", xl: "1vw"},
                     bgcolor: "white",
                     borderRadius: "0 5px 5px 0",
                   }}
