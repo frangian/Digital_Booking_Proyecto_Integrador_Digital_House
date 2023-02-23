@@ -51,7 +51,7 @@ const Buscador = () => {
                 '& .MuiOutlinedInput-notchedOutline': {
                   borderColor: 'transparent',
                 },
-                height: "40px",
+                height: "42px",
               }}
             >
               <MenuItem value="" sx={{ display: "none" }}>
