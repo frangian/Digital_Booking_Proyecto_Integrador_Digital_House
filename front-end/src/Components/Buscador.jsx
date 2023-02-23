@@ -1,9 +1,9 @@
-import * as React from "react";
+import React from "react";
+import { useState } from "react";
 import data from "../Components/Utils/ciudades.json";
 
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -15,8 +15,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Buscador = () => {
-  const [value, setValue] = React.useState([null, null]);
-  const [ciudad, setCiudad] = React.useState("");
+  const [value, setValue] = useState([null, null]);
+  const [ciudad, setCiudad] = useState("");
+  
 
   const handleChange = (event) => {
     setCiudad(event.target.value);
@@ -30,7 +31,7 @@ const Buscador = () => {
           sx={{
             minWidth: 120,
             bgcolor: "white",
-            width: { sm: "100%", md: "100%", xl:600},
+            width: {  xs: "100%", sm: "100%", md: "65%", lg: "40%", xl: "40%"},
             marginBottom: "10px",
             borderRadius: "5px",
           }}
@@ -83,7 +84,7 @@ const Buscador = () => {
                 <TextField
                   {...startProps}
                   sx={{
-                    width: { xs: "100%", sm: "100%", md: "100%", lg:"100%", xl:250},
+                    width: { xs: "100%", sm: "100%", md: "45%", lg: "45%", xl: "60%"},
                     marginBottom: "10px",
                     bgcolor: "white",
                     borderRadius: "5px 0 0 5px",
@@ -92,7 +93,7 @@ const Buscador = () => {
                 <TextField
                   {...endProps}
                   sx={{
-                    width: { xs: "100%", sm: "100%", md: "100%", lg:"100%", xl:250},
+                    width: { xs: "100%", sm: "100%", md: "45%", lg: "45%", xl: "60%"},
                     marginBottom: "10px",
                     bgcolor: "white",
                     borderRadius: "0 5px 5px 0",
@@ -102,6 +103,7 @@ const Buscador = () => {
             )}
           />
         </LocalizationProvider>
+        
         <button className="ver-mas-btn" id="btn-buscar">
           Buscar
         </button>
