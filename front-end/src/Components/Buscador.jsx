@@ -7,20 +7,25 @@ import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { LocalizationProvider } from "@mui/x-date-pickers-pro";
-import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
+
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
+import { DateRangePicker } from 'rsuite';
+
+
 const Buscador = () => {
-  const [value, setValue] = useState([null, null]);
   const [ciudad, setCiudad] = useState("");
+  const [dateRange, setDateRange] = useState([]);
   
 
   const handleChange = (event) => {
     setCiudad(event.target.value);
+  };
+
+  const handleDateChange = (value) => {
+    setDateRange(value);
   };
 
   return (
@@ -32,7 +37,7 @@ const Buscador = () => {
             bgcolor: "white",
             minWidth: 200,
             width: {  xs: "100%", sm: 200, md: 400, lg: 500, xl: 500},
-            marginBottom: "10px",
+            height: "41px",
             marginRight: "1vw",
             borderRadius: "5px",
           }}
@@ -42,6 +47,12 @@ const Buscador = () => {
               value={ciudad}
               onChange={handleChange}
               displayEmpty
+              sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'transparent',
+                },
+                height: "40px",
+              }}
             >
               <MenuItem value="" sx={{ display: "none" }}>
                 <FontAwesomeIcon icon={faMapMarkerAlt} className="icono" />{" "}
@@ -71,7 +82,15 @@ const Buscador = () => {
           </FormControl>
         </Box>
 
-        <LocalizationProvider
+        <DateRangePicker
+      value={dateRange}
+      onChange={handleDateChange}
+      placeholder="Check-in Check-out"
+      className="date-picker"
+      size="lg"
+    />
+
+        {/* <LocalizationProvider
           dateAdapter={AdapterDayjs}
           localeText={{ start: "Check-in", end: "Check-out" }}
         >
@@ -104,7 +123,7 @@ const Buscador = () => {
               </React.Fragment>
             )}
           />
-        </LocalizationProvider>
+        </LocalizationProvider> */}
         
         <button className="ver-mas-btn" id="btn-buscar">
           Buscar
