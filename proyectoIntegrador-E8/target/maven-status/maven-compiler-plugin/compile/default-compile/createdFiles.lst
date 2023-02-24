@@ -1,8 +1,0 @@
-com\example\proyectoIntegradorE8\exception\ResourceNotFoundException.class
-com\example\proyectoIntegradorE8\exception\BadRequestException.class
-com\example\proyectoIntegradorE8\ProyectoIntegradorE8Application.class
-com\example\proyectoIntegradorE8\repository\CategoriaRepository.class
-com\example\proyectoIntegradorE8\entity\Categoria.class
-com\example\proyectoIntegradorE8\service\CategoriaService.class
-com\example\proyectoIntegradorE8\controller\CategoriaController.class
-com\example\proyectoIntegradorE8\exception\GlobalException.class
