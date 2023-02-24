@@ -1,0 +1,242 @@
+[2023-02-17 10:09:43] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-17 10:09:51] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-17 10:11:15] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-17 10:11:19] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-17 10:11:24] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-17 10:12:52] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-17 10:12:55] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-17 13:39:52] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-17 13:39:57] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-17 13:44:41] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-17 13:44:41] [ INFO ] [CategoriaService:30] Se actualizó la categoría con id=1
+[2023-02-17 13:44:41] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-17 13:44:41] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-17 13:44:41] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-17 13:44:41] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=1
+[2023-02-17 13:44:41] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-17 13:44:41] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-17 13:44:53] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-17 13:44:53] [ INFO ] [CategoriaService:30] Se actualizó la categoría con id=1
+[2023-02-17 13:44:53] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-17 13:44:53] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-17 13:44:53] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-17 13:44:53] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=1
+[2023-02-17 13:44:53] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-17 13:44:53] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-17 14:36:03] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-17 14:43:55] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-17 14:43:55] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-17 14:43:55] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=1
+[2023-02-20 15:08:59] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-20 15:09:18] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=2
+[2023-02-20 15:09:18] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=2
+[2023-02-20 15:09:18] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=2
+[2023-02-20 15:15:46] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-20 15:16:07] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=3
+[2023-02-20 15:16:07] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=3
+[2023-02-20 15:16:07] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=3
+[2023-02-20 16:03:16] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-20 16:03:22] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=4
+[2023-02-20 16:04:08] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=4
+[2023-02-20 16:04:58] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-20 16:04:58] [ INFO ] [CategoriaService:30] Se actualizó la categoría con id=1
+[2023-02-20 16:04:58] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:04:58] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:04:58] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:04:58] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 16:06:36] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-20 16:06:36] [ INFO ] [CategoriaService:30] Se actualizó la categoría con id=1
+[2023-02-20 16:06:36] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:06:36] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:06:36] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:06:36] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 16:07:19] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-20 16:07:19] [ INFO ] [CategoriaService:30] Se actualizó la categoría con id=1
+[2023-02-20 16:07:19] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:07:19] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:07:19] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:07:19] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 16:08:59] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=4
+[2023-02-20 16:08:59] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=4
+[2023-02-20 16:08:59] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=4
+[2023-02-20 16:09:38] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=5
+[2023-02-20 16:09:38] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=5
+[2023-02-20 16:09:38] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=5
+[2023-02-20 16:09:41] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=6
+[2023-02-20 16:09:41] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=6
+[2023-02-20 16:09:41] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=6
+[2023-02-20 16:09:45] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=7
+[2023-02-20 16:09:45] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=7
+[2023-02-20 16:09:45] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=7
+[2023-02-20 16:09:47] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=8
+[2023-02-20 16:09:47] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=8
+[2023-02-20 16:09:47] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=8
+[2023-02-20 16:09:50] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=9
+[2023-02-20 16:09:50] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=9
+[2023-02-20 16:09:50] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=9
+[2023-02-20 16:09:53] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=10
+[2023-02-20 16:09:53] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=10
+[2023-02-20 16:09:53] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=10
+[2023-02-20 16:11:47] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-20 16:12:10] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:12:10] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:12:10] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=1
+[2023-02-20 16:12:39] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-20 16:12:39] [ INFO ] [CategoriaService:30] Se actualizó la categoría con id=1
+[2023-02-20 16:12:39] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:12:39] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:12:39] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:12:39] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 16:14:57] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-20 16:14:57] [ INFO ] [CategoriaService:30] Se actualizó la categoría con id=1
+[2023-02-20 16:14:57] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:14:57] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:14:57] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:14:57] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 16:20:46] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=4
+[2023-02-20 16:20:50] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:21:00] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=2
+[2023-02-20 16:21:07] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=2
+[2023-02-20 16:21:07] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=2
+[2023-02-20 16:21:08] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=2
+[2023-02-20 16:21:27] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=3
+[2023-02-20 16:21:27] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=3
+[2023-02-20 16:21:27] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=3
+[2023-02-20 16:21:39] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=52
+[2023-02-20 16:21:39] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=52
+[2023-02-20 16:21:39] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=52
+[2023-02-20 16:21:42] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=53
+[2023-02-20 16:21:42] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=53
+[2023-02-20 16:21:42] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=53
+[2023-02-20 16:21:59] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-20 16:22:12] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=54
+[2023-02-20 16:22:12] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=54
+[2023-02-20 16:22:12] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=54
+[2023-02-20 16:22:42] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-20 16:22:48] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=55
+[2023-02-20 16:22:48] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=55
+[2023-02-20 16:22:48] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=55
+[2023-02-20 16:23:32] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-20 16:23:44] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:24:00] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:24:00] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:24:00] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=1
+[2023-02-20 16:24:03] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:26:05] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-20 16:26:17] [ INFO ] [CategoriaService:30] Se actualizó la categoría con id=1
+[2023-02-20 16:26:17] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:26:45] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-20 16:26:45] [ INFO ] [CategoriaService:30] Se actualizó la categoría con id=1
+[2023-02-20 16:26:45] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:26:45] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:26:45] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:26:45] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=1
+[2023-02-20 16:26:45] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:26:45] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 16:27:59] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-20 16:28:00] [ INFO ] [CategoriaService:30] Se actualizó la categoría con id=1
+[2023-02-20 16:28:00] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:28:00] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:28:00] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:28:00] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=1
+[2023-02-20 16:28:00] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:28:00] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 16:28:26] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-20 16:28:27] [ INFO ] [CategoriaService:30] Se actualizó la categoría con id=1
+[2023-02-20 16:28:27] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:28:27] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:28:27] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:28:27] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 16:38:56] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-20 16:39:04] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:39:29] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:39:29] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-20 16:39:29] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=1
+[2023-02-20 16:39:37] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-20 16:39:49] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=2
+[2023-02-20 16:39:49] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=2
+[2023-02-20 16:39:49] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=2
+[2023-02-20 16:40:10] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-20 16:41:02] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-20 16:47:45] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 16:47:45] [ INFO ] [CategoriaService:30] Se actualizó la categoría con id=4
+[2023-02-20 16:47:45] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=4
+[2023-02-20 16:50:08] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 16:50:08] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=4
+[2023-02-20 16:51:20] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 16:51:20] [ INFO ] [CategoriaService:30] Se actualizó la categoría con id=4
+[2023-02-20 16:51:20] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=4
+[2023-02-20 16:51:31] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 16:51:31] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=4
+[2023-02-20 17:01:44] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 17:01:44] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-20 17:01:44] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 17:04:16] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 17:04:17] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-20 17:04:17] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 17:04:17] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=6
+[2023-02-20 17:04:17] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=6
+[2023-02-20 17:06:34] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 17:06:34] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=5
+[2023-02-20 17:06:34] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=5
+[2023-02-20 17:06:34] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=5
+[2023-02-20 17:06:49] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-20 17:06:49] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 17:06:50] [ INFO ] [CategoriaService:30] Se actualizó la categoría con id=7
+[2023-02-20 17:06:50] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=7
+[2023-02-20 17:06:50] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 17:06:50] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=7
+[2023-02-20 17:06:50] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 17:06:50] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-20 17:06:50] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 17:06:50] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=8
+[2023-02-20 17:06:50] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=8
+[2023-02-20 17:06:50] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 17:06:50] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=7
+[2023-02-20 17:06:50] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=7
+[2023-02-20 17:06:50] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=7
+[2023-02-20 17:07:29] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=3
+[2023-02-20 17:07:29] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=3
+[2023-02-20 17:07:29] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=3
+[2023-02-20 17:07:32] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=4
+[2023-02-20 17:07:33] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=4
+[2023-02-20 17:07:33] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=4
+[2023-02-20 17:07:52] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-20 17:07:52] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 17:07:52] [ INFO ] [CategoriaService:30] Se actualizó la categoría con id=9
+[2023-02-20 17:07:52] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=9
+[2023-02-20 17:07:52] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 17:07:52] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=9
+[2023-02-20 17:07:52] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 17:07:52] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Hoteles
+[2023-02-20 17:07:52] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 17:07:52] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=10
+[2023-02-20 17:07:52] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=10
+[2023-02-20 17:07:52] [ INFO ] [CategoriaService:52] Se inició una operación de listado de categorías
+[2023-02-20 17:07:52] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=9
+[2023-02-20 17:07:52] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=9
+[2023-02-20 17:07:52] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=9
+[2023-02-22 18:50:56] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-22 18:51:09] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=11
+[2023-02-22 18:51:09] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=11
+[2023-02-22 18:51:09] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=11
+[2023-02-22 18:51:18] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=11
+[2023-02-22 18:51:39] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-22 18:51:45] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=12
+[2023-02-22 18:51:45] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=12
+[2023-02-22 18:51:45] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=12
+[2023-02-22 18:55:43] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-22 18:55:48] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=13
+[2023-02-22 18:55:48] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=13
+[2023-02-22 18:55:48] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=13
+[2023-02-22 18:57:00] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-22 18:57:06] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-22 18:57:06] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-22 18:57:06] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=1
+[2023-02-23 17:33:37] [ INFO ] [CategoriaService:25] Se inició una operación de guardado de las categorías con título: Fran
+[2023-02-23 17:34:38] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-23 17:34:38] [ INFO ] [CategoriaService:30] Se actualizó la categoría con id=1
+[2023-02-23 17:35:14] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-23 17:36:12] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-23 17:36:12] [ INFO ] [CategoriaService:36] Se inició la búsqueda de la categoría con id=1
+[2023-02-23 17:36:12] [ WARN ] [CategoriaService:44] Se realizo una operación de eliminar categoría conid=1
