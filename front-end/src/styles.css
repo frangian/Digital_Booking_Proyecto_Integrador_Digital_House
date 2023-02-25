@@ -425,12 +425,12 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 3vh;
-  background-color: #545776;
+  background-color: var(--main-light-gray);
   margin-top: 12vh;
 }
 
 .buscador-container h2 {
-  color: white;
+  color: var(--main-white);
   font-size: 2rem;
   font-weight: 700;
   margin: 30px 0;
@@ -455,7 +455,7 @@ body {
 }
 
 .blanco {
-  color: white;
+  color: var(--main-white);
   filter: drop-shadow(1px 0px 1px black);
 }
 
@@ -470,7 +470,7 @@ body {
 }
 
 .categorias-container h2 {
-  color: rgba(56, 59, 88, 1);
+  color: var(--main-dark-gray);
   font-weight: 700;
   font-size: 2.2rem;
   padding: 10px;
@@ -506,25 +506,25 @@ body {
 .card h3 {
   margin: 10px 0;
   font-size: 1.5rem;
-  color: rgba(56, 59, 88, 1);
+  color: var(--main-dark-gray);
 }
 
 .card p {
   margin: 0;
   font-size: 1rem;
-  color: #666;
+  color: var(--main-light-gray);
 }
 
 /********************* SECCION RECOMENDADOS *************************/
 
 .recomendaciones-container {
-  background-color: rgba(243, 241, 237, 1);
+  background-color: var(--main-dark-white);
   padding: 1vw 3vw;
-  margin-bottom: 80px;
+  margin-bottom: 8vh;
 }
 
 .recomendaciones-container h2 {
-  color: rgba(56, 59, 88, 1);
+  color: var(--main-dark-gray);
   font-weight: 700;
   font-size: 2.2rem;
   padding: 10px;
@@ -557,7 +557,7 @@ body {
   position: absolute;
   top: 5%;
   right: 4%;
-  color: white;
+  color: var(--main-white);
 }
 
 .card-recomendaciones img {
@@ -576,7 +576,7 @@ body {
 }
 
 .info-container h3 {
-  color: rgba(56, 59, 88, 1);
+  color: var(--main-dark-gray);
   opacity: 50%;
   padding-right: 0.4vw;
   margin: 0;
@@ -597,19 +597,19 @@ body {
 
 .info-container p {
   margin: 0.5vw;
-  color: rgba(56, 59, 88, 1);
+  color: var(--main-dark-gray);
 }
 
 .info-container span {
-  color: rgba(29, 190, 180, 1);
+  color: var(--main-green);
   font-weight: 600;
 }
 
-.categoria-container,
-.ubicacion-container {
+.categoria-container{
   display: flex;
+  align-items: center;
   flex-direction: row;
-  padding-left: 0.5vw;
+  margin-left: 0.5vw;
 }
 
 .ubicacion-container p{
@@ -631,6 +631,7 @@ body {
 .puntuacion-container p{
   font-weight: 700;
 }
+/***********EXTRAS*********/
 
 .square8 {
   display: inline-flex;
@@ -638,13 +639,13 @@ body {
   align-items: center;
   width: 2vw;
   height: 2vw;
-  background-color: rgba(56, 59, 88, 1);
+  background-color: var(--main-dark-gray);
   border-radius: 0.4vw;
   margin-right: 8%;
 }
 
 #square8-number {
-  color: white;
+  color: var(--main-white);
   font-size: 1.7vh;
 }
 
@@ -653,13 +654,16 @@ body {
   padding-right: 0.2vw;
   margin: 0;
 }
+.ubicacion{
+  margin-right: 0.3vw;
+}
 
 .extra{
   margin: 5px 5px 5px 10px;
 }
 
 .icono-verde {
-  color: rgba(29, 190, 180, 1);
+  color: var(--main-green);
   font-size: 0.8rem;
 }
 
@@ -667,15 +671,16 @@ body {
   padding: 0.8vw;
   border-radius: 5px;
   border: none;
-  color: white;
+  color: var(--main-white);
   font-size: 1rem;
-  background-color: rgba(29, 190, 180, 1);
+  background-color: var(--main-green);
 }
 
 /* ------------------------------ Media queries ----------------------------- */
 
 /* Para pantallas de tamaño igual o mayor a 768px (tablet) */
 @media (max-width: 1023px) {
+  /***********CATEGORIAS************/
   .card-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -687,6 +692,8 @@ body {
   .categorias-container h2 {
     font-size: 1.8rem;
   }
+
+  /***********RECOMENDACIONES*************/
 
   .info-container {
     padding: 2vw;
@@ -708,6 +715,8 @@ body {
     padding: 2vw;
   }
 
+  /***********BUSCADOR*********/
+
   .buscador-container {
     padding: 4vh 3vh;
   }
@@ -720,6 +729,8 @@ body {
   .form-buscador {
     width: 90%;
   }
+
+  /***********EXTRAS*********/
 
   .square8 {
     width: 4vw;
@@ -764,9 +775,6 @@ body {
     width: 100%;
     margin: 5px 0;
   }
-
-  
-  
 }
 
 @media (max-width: 500px) {
@@ -823,7 +831,7 @@ body {
     margin: 5px 0;
   }
 
-  /****************************************************************************/
+  /**************CATEGORIAS*************/
 
   .card-grid {
     grid-template-columns: repeat(1, 1fr);
@@ -837,13 +845,15 @@ body {
     font-size: 1.5rem;
   }
 
+  /************RECOMENDACIONES****************/
+
   .recomendaciones-container {
-    background-color: #383b58;
+    background-color: var(--main-dark-gray);
     margin-bottom: 65px;
   }
 
   .info-container h3 {
-    color: rgb(182, 176, 176);
+    color: var(--main-dark-white);
   }
 
   .card-grid-recomendaciones {
@@ -853,11 +863,11 @@ body {
   .card-recomendaciones {
     flex-direction: column;
     height: auto;
-    background-color: white;
+    background-color: var(--main-white);
   }
 
   .recomendaciones-container h2 {
-    color: white;
+    color: var(--main-white);
     font-size: 1.8rem;
   }
 
@@ -881,10 +891,10 @@ body {
 
   
 
-  /** Buscador **/
+  /********** Buscador ************/
 
   .buscador-container {
-    height: 40vh;
+    height: auto;
     padding: 1vh 1vh;
   }
 
@@ -910,8 +920,10 @@ body {
     padding: 3vw 5vw;
   }
 
+  /************EXTRAS************/
+
   .blanco {
-    color: white;
+    color: var(--main-white);
     filter: drop-shadow(1px 0px 1px black);
   }
 
@@ -942,4 +954,15 @@ body {
   .login-error {
     width: 80vw;
   }
+
+  /**********BUSCADOR*********/
+  .buscador-container {
+    height: auto;
+  }
+  /***********CATEGORIAS*******/
+
+  .categorias-container h2 {
+    font-size: 1.3rem;
+  }
+  
 }

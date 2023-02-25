@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const Card = ({ nombre, imagen, cantidad }) => {
+const CardCategoria = ({ nombre, imagen, cantidad }) => {
   
   return (
     <div className="card">
@@ -13,4 +13,4 @@ const Card = ({ nombre, imagen, cantidad }) => {
   );
 };
 
-export default Card;
+export default CardCategoria;
