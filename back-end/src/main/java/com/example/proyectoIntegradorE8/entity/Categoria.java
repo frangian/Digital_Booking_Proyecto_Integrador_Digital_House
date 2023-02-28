@@ -12,8 +12,8 @@ public class Categoria  {
     private String titulo;
     @Column
     private String descripcion;
-    @Column
-    private String url_imagen;
+//    @Column
+//    private String url_imagen;
 
     public Categoria() {
     }
@@ -42,24 +42,23 @@ public class Categoria  {
         this.descripcion = descripcion;
     }
 
-    public String getUrl_imagen() {
-        return url_imagen;
-    }
+//    public String getUrl_imagen() {
+//        return url_imagen;
+//    }
+//
+//    public void setUrl_imagen(String url_imagen) {
+//        this.url_imagen = url_imagen;
+//    }
 
-    public void setUrl_imagen(String url_imagen) {
-        this.url_imagen = url_imagen;
-    }
 
-    public Categoria(Long id, String titulo, String descripcion, String url_imagen) {
+    public Categoria(Long id, String titulo, String descripcion) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.url_imagen = url_imagen;
     }
 
-    public Categoria(String titulo, String descripcion, String url_imagen) {
+    public Categoria(String titulo, String descripcion) {
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.url_imagen = url_imagen;
     }
 }
