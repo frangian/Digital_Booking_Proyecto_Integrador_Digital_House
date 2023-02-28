@@ -2,6 +2,7 @@ import Home from "../../Rutas/Home";
 import Login from "../../Rutas/Login";
 import Register from "../../Rutas/Register";
 import { faFacebook, faLinkedinIn, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
+import Producto from "../../Rutas/Producto";
 
 
 
