@@ -1,14 +1,42 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Card from '../Components/CardRecomendaciones';
-import data from '../Components/Utils/listado.json'
 
-const Recomendaciones = () => {
+const Recomendaciones = ({ categoriaSeleccionada, ciudadSeleccionada }) => {
+
+  const [productosRecomendados, setProductosRecomendados] = useState([]);
+
+  //Si hay una categoria seleccionada traigo por categoria los recomendados
+  useEffect(() => {
+    if (categoriaSeleccionada) {
+      fetch(`/api/recomendados?categoria=${categoriaSeleccionada}`)
+        .then((response) => response.json())
+        .then((data) => setProductosRecomendados(data));
+    }
+  }, [categoriaSeleccionada]);
+
+  //Si no hay categoria seleccionada traigo los recomendados al azar del back
+  useEffect(() => {
+    fetch('/api/recomendados')
+      .then((response) => response.json())
+      .then((data) => setProductosRecomendados(data));
+  }, []);
+
+  //si hay na ciudad seleccionada trae los de esa ciudad
+  useEffect(() => {
+    async function fetchRecomendados() {
+      const response = await fetch(`API_URL/recomendados?ciudad=${ciudadSeleccionada}`);
+      const data = await response.json();
+      setProductosRecomendados(data);
+    }
+    fetchRecomendados();
+  }, [ciudadSeleccionada]);
+
   return (
 
     <div className="recomendaciones-container">
         <h2>Recomendaciones</h2>
         <div className='card-grid-recomendaciones'>
-      {data.products.map(product => (
+      {productosRecomendados.map(product => (
               <Card
                 key={product.id}
                 title={product.title}

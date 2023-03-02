@@ -1,25 +1,22 @@
-{
-    "categorias": [
-      {
-        "nombre": "Hoteles",
-        "imagen": "/images/hotel.jpg",
-        "cantidad": 807.105
-      },
-      {
-        "nombre": "Hostels",
-        "imagen": "/images/hostel.jpg",
-        "cantidad": 807.105
-      },
-      {
-        "nombre": "Departamentos",
-        "imagen": "/images/departamento.jpg",
-        "cantidad": 807.105
-      },
-      {
-        "nombre": "Bed & Breakfast",
-        "imagen": "/images/departamento.jpg",
-        "cantidad": 807.105
-      }
-    ]
-  }
-  
+[
+	{
+		"id" : 1,
+		"titulo" : "Hotel",
+		"descripcion" : "Te ofrecemos una larga variedad de hoteles para que puedas descansar y disfrutar tu estadia"
+	},
+	{
+		"id" : 2,
+		"titulo" : "Hostels",
+		"descripcion" : "Los hostels son lugares de aljamiento economico, normalmente situados en el centro de las ciudades, compuestos por habitaciones compartidas"
+	},
+	{
+		"id" : 3,
+		"titulo" : "Bed and Breakfast",
+		"descripcion" : "Una opcion comoda, nuestros bed and breakfasts vienen con desayuno incluido."
+	},
+	{
+		"id" : 4,
+		"titulo" : "Departamento",
+		"descripcion" : "Gran variedad de departamentos disponibles ubicados en los mejores lugares."
+	}
+]

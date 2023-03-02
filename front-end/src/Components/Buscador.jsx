@@ -1,8 +1,7 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from 'axios';
 import data from "../Components/Utils/ciudades.json";
-
-import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -15,18 +14,34 @@ import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { DateRangePicker } from 'rsuite';
 
 
-const Buscador = () => {
+const Buscador = ({ onCiudadSeleccionada }) => {
   const [ciudad, setCiudad] = useState("");
   const [dateRange, setDateRange] = useState([]);
+  const [ciudades, setCiudades] = useState([]);
   
 
   const handleChange = (event) => {
     setCiudad(event.target.value);
   };
 
+  const handleBuscarClick = () => {
+    onCiudadSeleccionada(ciudad);
+  };
+
   const handleDateChange = (value) => {
     setDateRange(value);
   };
+
+  /* ----------------------------------- COMPLETAR CON URL DE LA API PARA OBTENER LISTADO DE CIUDADES ---------------------------------- */
+  useEffect(() => {
+    axios.get('https://api.com/ciudades')
+      .then(response => {
+        setCiudades(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div className="buscador-container">
@@ -58,12 +73,12 @@ const Buscador = () => {
                 <FontAwesomeIcon icon={faMapMarkerAlt} className="icono" />{" "}
                 <span>¿A donde vamos?</span>
               </MenuItem>
-              {data.cities.map((ciudad, index) => (
+              {ciudades.map((ciudad, index) => (
                 <MenuItem
                   key={ciudad.id}
-                  value={ciudad.label}
+                  value={ciudad.lel}
                   sx={
-                    index !== data.cities.length - 1
+                    index !== ciudades.length - 1
                       ? {
                           borderBottom: 1,
                           borderColor: "rgba(29, 190, 180, 1)",
@@ -88,44 +103,8 @@ const Buscador = () => {
       placeholder="Check-in Check-out"
       className="date-picker"
       size="lg"
-    />
-
-        {/* <LocalizationProvider
-          dateAdapter={AdapterDayjs}
-          localeText={{ start: "Check-in", end: "Check-out" }}
-        >
-          <DateRangePicker
-            value={value}
-            onChange={(newValue) => {
-              setValue(newValue);
-            }}
-            renderInput={(startProps, endProps) => (
-              <React.Fragment >
-                <TextField
-                  {...startProps}
-                  sx={{
-                    width: { xs: "100%", sm: 100, md: 150, lg: 150, xl: 200},
-                    marginBottom: "10px",
-                    bgcolor: "white",
-                    borderRadius: "5px 0 0 5px",
-                  }}
-                />
-                <TextField
-                  {...endProps}
-                  sx={{
-                    width: { xs: "100%", sm: 100, md: 150, lg: 150, xl: 200},
-                    marginBottom: "10px",
-                    marginRight: { xs: 0, sm: "1vw", md: "1vw", lg: "1vw", xl: "1vw"},
-                    bgcolor: "white",
-                    borderRadius: "0 5px 5px 0",
-                  }}
-                />
-              </React.Fragment>
-            )}
-          />
-        </LocalizationProvider> */}
-        
-        <button className="ver-mas-btn" id="btn-buscar">
+    />        
+        <button className="ver-mas-btn" id="btn-buscar" onClick={handleBuscarClick}>
           Buscar
         </button>
       </form>
