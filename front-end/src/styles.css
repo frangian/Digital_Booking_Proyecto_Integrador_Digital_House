@@ -244,12 +244,17 @@ footer {
   font-family: "Roboto", sans-serif;
   font-size: 1.2rem;
   font-weight: 500;
+  z-index: 10;
 }
 
 footer div a {
   color: var(--main-white);
   margin: 20px;
   font-size: 1.7rem;
+}
+
+footer div a:hover {
+  color: var(--main-white);
 }
 
 /* ---------------------------------- Forms --------------------------------- */
@@ -407,10 +412,6 @@ div.error p {
 .register-container .login-error {
   color: #ff0000;
   margin-bottom: 20px;
-}
-
-.oculto {
-  display: none;
 }
 
 /*******************************************************************************************************************/
@@ -824,6 +825,144 @@ body {
   letter-spacing: 0.1rem;
 }
 
+/* ---------------------------- Carousel desktop ---------------------------- */
+
+.desktop-carousel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.desktop-carousel .carousel-container {
+  background-color: var(--main-white);
+  width: 50vw;
+  height: 70vh;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-image {
+  width: 100%;
+  height: 80%;
+  position: relative;
+}
+
+.main-image .icon {
+  position: absolute;
+  color: var(--main-white);
+  cursor: pointer;
+} 
+
+.icon-x {
+  top: 3%;
+  right: 3%;
+}
+
+.left-arrow, .right-arrow {
+  background-color: var(--main-green);
+  border-radius: 50%;
+  padding: 8px 16px;
+  font-size: 1.2rem;
+  top: 50%;
+}
+
+.left-arrow {
+  left: 1%;
+}
+
+.right-arrow {
+  right: 1%;
+}
+
+.main-image img {
+  border-radius: 6px 6px 0 0;
+  width: 100%;
+  height: 100%;
+}
+
+.all-images-container {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  color: var(--main-dark-gray);
+  font-weight: 700;
+}
+
+.all-images {
+  display: grid;
+  width: 98%;
+  gap: 10px;
+}
+
+.carousel-bottom-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.carousel-bottom-img:hover {
+  outline: 2px solid var(--main-green);
+}
+
+.carousel-bottom-img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+}
+
+/* ------------------------- Mobile/tablet carousel ------------------------- */
+
+.mobile-carousel {
+  display: none;
+  width: 100%;
+  height: 50vh;
+  position: relative;
+}
+
+.mobile-carousel img {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: 1s;
+}
+
+.mobile-carousel img.loaded {
+  opacity: 1;
+}
+
+/* .rtds-single-slide-styles div {
+  padding: 0 !important;
+} */
+
+.slider {
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-carousel p {
+  position: absolute;
+  bottom: 3%;
+  right: 3%;
+  color: var(--main-white);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
 /* -------------------------- Descripcion producto -------------------------- */
 
 .descripcion {
@@ -850,7 +989,9 @@ body {
 }
 
 .iconos-servicios-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   padding: 20px 20px;
   flex-wrap: wrap;
 }
@@ -858,7 +999,6 @@ body {
 .servicio {
   display: flex;
   align-items: flex-end;
-  width: 25%;
   padding: 20px 0;
 }
 
@@ -889,9 +1029,10 @@ body {
 }
 
 .custom-calendar.rmdp-wrapper {
-  width: 900px;
-  height: 40vh;
+  width: 60vw;
+  height: 100%;
   z-index: 0 !important;
+  margin: 20px 0;
 }
 
 .custom-calendar.rmdp-wrapper .rmdp-top-class .rmdp-calendar {
@@ -941,12 +1082,16 @@ body {
   color: black
 }
 
+.custom-calendar.mobile.rmdp-wrapper {
+  display: none;
+}
+
 .submit-container {
   color: var(--main-dark-gray);
   background-color: var(--main-white);
   box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.75);
   border-radius: 5px;
-  width: 450px;
+  width: 30%;
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -975,7 +1120,7 @@ body {
 }
 
 .map p {
-  padding: 20px;
+  padding: 20px 30px;
   font-size: 1rem;
   font-weight: 600;
 }
@@ -988,8 +1133,8 @@ body {
 }
 
 .map-container iframe {
-  width: 98%;
-  height: 600px;
+  width: 95vw;
+  height: 60vh;
 }
 
 /* --------------------------- Info extra producto -------------------------- */
@@ -1003,12 +1148,13 @@ body {
 .info-extra {
   padding: 20px;
   display: flex;
+  flex-wrap: wrap;
   width: 90%;
   justify-content: space-between;
 }
 
 .info-extra section {
-  width: 25%;
+  width: 300px;
 }
 
 .info-extra section ul {
@@ -1017,6 +1163,19 @@ body {
 
 .info-extra section ul li {
   padding: 10px 0;
+}
+
+.oculto {
+  display: none;
+}
+
+.noselect {
+  -webkit-touch-callout: none; 
+  -webkit-user-select: none; 
+  -khtml-user-select: none; 
+  -moz-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none;                              
 }
 
 /* ------------------------------ Media queries ----------------------------- */
@@ -1086,6 +1245,29 @@ body {
   }
 }
 
+@media (max-width: 900px) {
+  .fechas-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .custom-calendar.rmdp-wrapper {
+    width: 93vw;
+    height: 40vh;
+    z-index: 0 !important;
+    margin: 20px 0;
+  }
+
+  .submit-container {
+    width: 100%;
+  }
+
+  .desktop-carousel .carousel-container {
+    width: 90vw;
+  }
+}
+
 /* Para pantallas de tamaño menor a 768px (mobile) */
 @media (max-width: 768px) {
   .logo-slogan h6 {
@@ -1117,6 +1299,46 @@ body {
   .register-container .small-button {
     width: 100%;
     margin: 5px 0;
+  }
+
+  .iconos-servicios-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+  }
+
+  .product-images, .desktop-carousel, .interacciones-mobile {
+    display: none;
+  }
+
+  .mobile-carousel {
+    display: block;
+  }
+  
+
+}
+
+@media (max-width: 550px) {
+
+  .custom-calendar.rmdp-wrapper {
+    display: none;
+  }
+
+  .custom-calendar.mobile.rmdp-wrapper {
+    display: block;
+    height: 100%;
+  }
+
+  .map-container iframe {
+    width: 90vw;
+    height: 40vh;
+  }
+
+  .interacciones {
+    display: none;
+  }
+
+  .interacciones-mobile {
+    display: block;
   }
 }
 

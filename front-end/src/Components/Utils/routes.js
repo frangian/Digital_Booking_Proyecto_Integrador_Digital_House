@@ -10,6 +10,7 @@ export const routes = [
     { id: 1, path: "/", Element: Home, title: "Home" },
     { id: 2, path: "/register", Element: Register, title: "Crear cuenta" }, 
     { id: 3, path: "/login", Element: Login, title: "Iniciar sesión" },
+    { id: 4, path: "/product/:id", Element: Producto, title: "Product detail" },
 ]
 
 export const socialNetworks = [
