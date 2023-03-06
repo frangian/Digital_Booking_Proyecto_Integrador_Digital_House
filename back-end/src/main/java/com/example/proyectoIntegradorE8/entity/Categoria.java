@@ -1,6 +1,10 @@
 package com.example.proyectoIntegradorE8.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table (name="categoria")
@@ -12,11 +16,25 @@ public class Categoria  {
     private String titulo;
     @Column
     private String descripcion;
-    @Column
-    private String url_imagen;
+
+//    @OneToMany(mappedBy = "imagen", cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    private Set<Imagen> imagen = new HashSet<>();
 
     public Categoria() {
     }
+
+    public Categoria(Long id, String titulo, String descripcion) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+    }
+
+    public Categoria(String titulo, String descripcion) {
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+    }
+
 
     public Long getId() {
         return id;
@@ -42,24 +60,4 @@ public class Categoria  {
         this.descripcion = descripcion;
     }
 
-    public String getUrl_imagen() {
-        return url_imagen;
-    }
-
-    public void setUrl_imagen(String url_imagen) {
-        this.url_imagen = url_imagen;
-    }
-
-    public Categoria(Long id, String titulo, String descripcion, String url_imagen) {
-        this.id = id;
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.url_imagen = url_imagen;
-    }
-
-    public Categoria(String titulo, String descripcion, String url_imagen) {
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.url_imagen = url_imagen;
-    }
 }

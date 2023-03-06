@@ -38,12 +38,11 @@ const CardRecomendaciones = ({
           </div>
         </div>
         <div className="extras-container">
-          <div className="ubicacion-container">
-            <FontAwesomeIcon icon={faMapMarkerAlt} className="icono" />
+            
             <p>
+              <FontAwesomeIcon icon={faMapMarkerAlt} className="icono ubicacion" />
               {location} <span>MOSTRAR EN EL MAPA</span>
             </p>
-          </div>
           <FontAwesomeIcon icon={faWifi} className="icono extra" />
           <FontAwesomeIcon icon={faPersonSwimming} className="icono extra" />
         </div>

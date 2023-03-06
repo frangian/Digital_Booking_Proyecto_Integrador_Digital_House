@@ -6,13 +6,9 @@ import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
-
-import { DateRangePicker } from 'rsuite';
-
+import { DateRangePicker } from "rsuite";
 
 const Buscador = ({ onCiudadSeleccionada }) => {
   const [ciudad, setCiudad] = useState("");
@@ -43,15 +39,25 @@ const Buscador = ({ onCiudadSeleccionada }) => {
       });
   }, []);
 
+  const disabledDate = (date) => {
+    return date < new Date();
+  };
+
   return (
     <div className="buscador-container">
       <h2>Busca ofertas en hoteles, casas y mucho más</h2>
-      <form action="" className="form-buscador" onSubmit={(e) => {e.preventDefault()}}>
+      <form
+        action=""
+        className="form-buscador"
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
         <Box
           sx={{
             bgcolor: "white",
             minWidth: 200,
-            width: {  xs: "100%", sm: 200, md: 400, lg: 500, xl: 500},
+            width: { xs: "100%", sm: 200, md: 400, lg: 500, xl: 500 },
             height: "41px",
             marginRight: "1vw",
             borderRadius: "5px",
@@ -63,8 +69,8 @@ const Buscador = ({ onCiudadSeleccionada }) => {
               onChange={handleChange}
               displayEmpty
               sx={{
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: 'transparent',
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "transparent",
                 },
                 height: "42px",
               }}
@@ -103,6 +109,7 @@ const Buscador = ({ onCiudadSeleccionada }) => {
       placeholder="Check-in Check-out"
       className="date-picker"
       size="lg"
+      disabledDate={disabledDate}
     />        
         <button className="ver-mas-btn" id="btn-buscar" onClick={handleBuscarClick}>
           Buscar
