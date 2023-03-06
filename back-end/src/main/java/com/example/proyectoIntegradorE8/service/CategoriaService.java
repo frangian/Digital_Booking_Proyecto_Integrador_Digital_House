@@ -41,8 +41,7 @@ public class CategoriaService {
         Optional<Categoria> categoriaAEliminar = buscarCategoria(id);
         if (categoriaAEliminar.isPresent()) {
             categoriaRepository.deleteById(id);
-            logger.warn("Se realizo una operación de eliminar categoría con" +
-                    "id=" + id);
+            logger.warn("Se realizo una operación de eliminar categoría con");
         }
         else{
             throw new ResourceNotFoundException("La categoría a eliminar no existe en la base de datos");
@@ -52,4 +51,9 @@ public class CategoriaService {
         logger.info("Se inició una operación de listado de categorías");
         return categoriaRepository.findAll();
     }
+
+//    public List<Categoria> randomHome (){
+//        logger.info("Se inició una operación de listado de 8 categorias random");
+//        return categoriaRepository.findAll();
+//    }
 }

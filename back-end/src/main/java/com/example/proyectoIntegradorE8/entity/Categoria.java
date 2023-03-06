@@ -15,6 +15,10 @@ public class Categoria  {
     @Column
     private String url_imagen;
 
+    @OneToOne (cascade = CascadeType.ALL)
+    @JoinColumn (name = "producto_id", referencedColumnName = "id")
+    private Producto producto;
+
     public Categoria() {
     }
 
@@ -61,5 +65,9 @@ public class Categoria  {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.url_imagen = url_imagen;
+    }
+
+    public Categoria(Long id) {
+        this.id = id;
     }
 }
