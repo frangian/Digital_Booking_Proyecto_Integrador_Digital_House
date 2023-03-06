@@ -13,8 +13,8 @@ public interface ProductoRepository extends JpaRepository <Producto, Long> {
 
   List<Producto> findByCiudadId (Long id);
 
-  @Query(value = "select producto from Producto p order by RAND() limit 8;")
+  @Query(nativeQuery = true,value = "SELECT * FROM Product ORDER BY RAND() LIMIT 8")
   List<Producto> findProductosRandom();
-
+//chequear
 
 }
