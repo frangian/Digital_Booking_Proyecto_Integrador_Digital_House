@@ -4,7 +4,9 @@ import com.example.proyectoIntegradorE8.entity.Imagenes;
 import com.example.proyectoIntegradorE8.repository.ImagenesRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ImagenesService {
 
     private static final Logger logger = Logger.getLogger(ImagenesService.class);

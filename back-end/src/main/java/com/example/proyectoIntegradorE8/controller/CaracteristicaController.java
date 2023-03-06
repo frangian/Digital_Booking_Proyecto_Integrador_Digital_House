@@ -1,9 +1,7 @@
 package com.example.proyectoIntegradorE8.controller;
 
 import com.example.proyectoIntegradorE8.entity.Caracteristica;
-import com.example.proyectoIntegradorE8.entity.Categoria;
 import com.example.proyectoIntegradorE8.service.CaractersiticaService;
-import com.example.proyectoIntegradorE8.service.CiudadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
