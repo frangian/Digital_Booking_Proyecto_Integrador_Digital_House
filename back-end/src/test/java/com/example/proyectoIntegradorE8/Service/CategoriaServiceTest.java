@@ -11,7 +11,6 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +26,7 @@ class CategoriaServiceTest {
     @Test
     @Order(1)
     public void guardarCategoriaTest() {
-        Categoria categoriaParaGuardar = new Categoria("Hoteles", "Proveen a los huéspedes de servicios adicionales como restaurantes, piscinas y guarderías", "https://www.google.com/search?q=imagen+de+hoteles&oq=imagen+de+hoteles+&aqs=chrome.0.0i512l3j0i22i30i625l7.147420j0j7&sourceid=chrome&ie=UTF-8#imgrc=LCWhLCoS9ENSWM");
+        Categoria categoriaParaGuardar = new Categoria("Hoteles", "Proveen a los huéspedes de servicios adicionales como restaurantes, piscinas y guarderías");
         Categoria categoriaGuardada = categoriaService.guardarCategoria(categoriaParaGuardar);
         //assertEquals(1L, categoriaGuardada.getTitulo());
         assertEquals("Hoteles", categoriaGuardada.getTitulo());
@@ -38,7 +37,7 @@ class CategoriaServiceTest {
     public void actualizarCategoriaTest() {
         List<Categoria> categoria= categoriaService.buscarTodas();
         Categoria ultimaCategoria = categoria.get(categoria.size()-1);
-        Categoria categoriaParaActualizar = new Categoria(ultimaCategoria.getId(), "Deptos", "Proveen a los huéspedes de servicios adicionales como restaurantes", "https://www.google.com/search?q=imagen+de+hoteles&oq=imagen+de+hoteles+&aqs=chrome.0.0i512l3j0i22i30i625l7.147420j0j7&sourceid=chrome&ie=UTF-8#imgrc=LCWhLCoS9ENSWM");
+        Categoria categoriaParaActualizar = new Categoria(ultimaCategoria.getId(), "Deptos", "Proveen a los huéspedes de servicios adicionales como restaurantes");
         categoriaService.actualizarCategoria(categoriaParaActualizar);
         Optional<Categoria> categoriaActualizada = categoriaService.buscarCategoria(categoriaParaActualizar.getId());
         assertEquals("Deptos", categoriaActualizada.get().getTitulo());
@@ -58,7 +57,7 @@ class CategoriaServiceTest {
     @Order(4)
     public void buscarTodasCategoriasTest() throws BadRequestException, ResourceNotFoundException {
         List<Categoria> categoria= categoriaService.buscarTodas();
-        Categoria categoriaParaGuardar = new Categoria("Hoteles", "Proveen a los huéspedes de servicios adicionales como restaurantes, piscinas y guarderías", "https://www.google.com/search?q=imagen+de+hoteles&oq=imagen+de+hoteles+&aqs=chrome.0.0i512l3j0i22i30i625l7.147420j0j7&sourceid=chrome&ie=UTF-8#imgrc=LCWhLCoS9ENSWM");
+        Categoria categoriaParaGuardar = new Categoria("Hoteles", "Proveen a los huéspedes de servicios adicionales como restaurantes, piscinas y guarderías");
         Categoria categoriaGuardada = categoriaService.guardarCategoria(categoriaParaGuardar);
         List<Categoria> categoria2 = categoriaService.buscarTodas();
         Integer cantidadEsperada = categoria.size()+1;

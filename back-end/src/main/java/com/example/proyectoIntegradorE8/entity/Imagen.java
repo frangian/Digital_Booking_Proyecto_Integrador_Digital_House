@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table (name = "imagen")
-public class Imagenes {
+public class Imagen {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
@@ -13,16 +13,24 @@ public class Imagenes {
     @Column
     private String url_imagen;
 
-    public Imagenes() {
+    @ManyToOne (cascade = CascadeType.ALL)
+    @JoinColumn (name = "categoria_id", referencedColumnName = "id")
+    private Categoria categoria;
+
+    @ManyToOne (cascade = CascadeType.ALL)
+    @JoinColumn (name = "producto_id", referencedColumnName = "id")
+        private Producto producto;
+
+    public Imagen() {
     }
 
-    public Imagenes(Long id, String titulo, String url_imagen) {
+    public Imagen(Long id, String titulo, String url_imagen) {
         this.id = id;
         this.titulo = titulo;
         this.url_imagen = url_imagen;
     }
 
-    public Imagenes(String titulo, String url_imagen) {
+    public Imagen(String titulo, String url_imagen) {
         this.titulo = titulo;
         this.url_imagen = url_imagen;
     }

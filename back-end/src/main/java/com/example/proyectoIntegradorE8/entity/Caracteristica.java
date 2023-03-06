@@ -11,6 +11,9 @@ public class Caracteristica {
     @Column
     private String titulo;
 
+    public Caracteristica() {
+    }
+
     public Caracteristica(Integer id, String titulo) {
         this.id = id;
         this.titulo = titulo;
@@ -18,9 +21,6 @@ public class Caracteristica {
 
     public Caracteristica(String titulo) {
         this.titulo = titulo;
-    }
-
-    public Caracteristica() {
     }
 
     public Integer getId() {

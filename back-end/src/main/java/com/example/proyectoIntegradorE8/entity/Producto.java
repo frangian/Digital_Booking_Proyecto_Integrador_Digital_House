@@ -10,15 +10,8 @@ public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Categoria_id", referencedColumnName = "id")
-    private Categoria categoria;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Ciudad_id", referencedColumnName = "id")
-    private Ciudad ciudad;
-
+    @Column
+    private String titulo;
     @Column
     private String descripcion_producto;
     @Column
@@ -34,18 +27,25 @@ public class Producto {
     @Column
     private Integer puntuacion;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Imagenes_id", referencedColumnName = "id")
-    private List<Imagenes> imagenes = new ArrayList<Imagenes>();
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Caracteristica_id", referencedColumnName = "id")
-    private List<Caracteristica> caracterisitcas = new ArrayList<Caracteristica>();
+    @JoinColumn(name = "categoria_id", referencedColumnName = "id")
+    private Categoria categoria;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ciudad_id", referencedColumnName = "id")
+    private Ciudad ciudad;
+
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "imagen_id", referencedColumnName = "id")
+//    private List<Imagen> imagenes = new ArrayList<Imagen>();
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "caracteristica_id", referencedColumnName = "id")
+//    private List<Caracteristica> caracterisitcas = new ArrayList<Caracteristica>();
 
     public Producto() {
     }
 
-    public Producto(Categoria categoria, Ciudad ciudad, String descripcion_producto, String descripcion_ubicacion, String url_ubicacion, String normas, String seguridad, String cancelacion, Integer puntuacion, List<Imagenes> imagenes, List<Caracteristica> caracterisitcas) {
-        this.categoria = categoria;
-        this.ciudad = ciudad;
+    public Producto(Long id, String titulo, String descripcion_producto, String descripcion_ubicacion, String url_ubicacion, String normas, String seguridad, String cancelacion, Integer puntuacion, Categoria categoria, Ciudad ciudad) {
+        this.id = id;
+        this.titulo = titulo;
         this.descripcion_producto = descripcion_producto;
         this.descripcion_ubicacion = descripcion_ubicacion;
         this.url_ubicacion = url_ubicacion;
@@ -53,14 +53,12 @@ public class Producto {
         this.seguridad = seguridad;
         this.cancelacion = cancelacion;
         this.puntuacion = puntuacion;
-        this.imagenes = imagenes;
-        this.caracterisitcas = caracterisitcas;
+        this.categoria = categoria;
+        this.ciudad = ciudad;
     }
 
-    public Producto(Long id, Categoria categoria, Ciudad ciudad, String descripcion_producto, String descripcion_ubicacion, String url_ubicacion, String normas, String seguridad, String cancelacion, Integer puntuacion, List<Imagenes> imagenes, List<Caracteristica> caracterisitcas) {
-        this.id = id;
-        this.categoria = categoria;
-        this.ciudad = ciudad;
+    public Producto(String titulo, String descripcion_producto, String descripcion_ubicacion, String url_ubicacion, String normas, String seguridad, String cancelacion, Integer puntuacion, Categoria categoria, Ciudad ciudad) {
+        this.titulo = titulo;
         this.descripcion_producto = descripcion_producto;
         this.descripcion_ubicacion = descripcion_ubicacion;
         this.url_ubicacion = url_ubicacion;
@@ -68,9 +66,8 @@ public class Producto {
         this.seguridad = seguridad;
         this.cancelacion = cancelacion;
         this.puntuacion = puntuacion;
-        this.imagenes = imagenes;
-        this.caracterisitcas = caracterisitcas;
-
+        this.categoria = categoria;
+        this.ciudad = ciudad;
     }
 
     public Long getId() {
@@ -79,6 +76,14 @@ public class Producto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public Categoria getCategoria() {
@@ -153,19 +158,6 @@ public class Producto {
         this.puntuacion = puntuacion;
     }
 
-    public List<Imagenes> getImagenes() {
-        return imagenes;
-    }
 
-    public void setImagenes(List<Imagenes> imagenes) {
-        this.imagenes = imagenes;
-    }
 
-    public List<Caracteristica> getCaracterisitcas() {
-        return caracterisitcas;
-    }
-
-    public void setCaracterisitcas(List<Caracteristica> caracterisitcas) {
-        this.caracterisitcas = caracterisitcas;
-    }
 }

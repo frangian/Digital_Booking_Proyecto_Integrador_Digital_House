@@ -15,6 +15,9 @@ public class Ciudad {
     @Column
     private String pais;
 
+    public Ciudad() {
+    }
+
     public Ciudad(Long id, String nombre, String provincia, String pais) {
         this.id = id;
         this.nombre = nombre;
@@ -26,9 +29,6 @@ public class Ciudad {
         this.nombre = nombre;
         this.provincia = provincia;
         this.pais = pais;
-    }
-
-    public Ciudad() {
     }
 
 

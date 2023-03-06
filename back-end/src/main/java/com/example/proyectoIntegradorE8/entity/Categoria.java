@@ -12,15 +12,21 @@ public class Categoria  {
     private String titulo;
     @Column
     private String descripcion;
-    @Column
-    private String url_imagen;
-
-    @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn (name = "producto_id", referencedColumnName = "id")
-    private Producto producto;
 
     public Categoria() {
     }
+
+    public Categoria(Long id, String titulo, String descripcion) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+    }
+
+    public Categoria(String titulo, String descripcion) {
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+    }
+
 
     public Long getId() {
         return id;
@@ -46,28 +52,4 @@ public class Categoria  {
         this.descripcion = descripcion;
     }
 
-    public String getUrl_imagen() {
-        return url_imagen;
-    }
-
-    public void setUrl_imagen(String url_imagen) {
-        this.url_imagen = url_imagen;
-    }
-
-    public Categoria(Long id, String titulo, String descripcion, String url_imagen) {
-        this.id = id;
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.url_imagen = url_imagen;
-    }
-
-    public Categoria(String titulo, String descripcion, String url_imagen) {
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.url_imagen = url_imagen;
-    }
-
-    public Categoria(Long id) {
-        this.id = id;
-    }
 }

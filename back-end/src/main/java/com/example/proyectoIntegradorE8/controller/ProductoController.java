@@ -34,7 +34,7 @@ public class ProductoController {
 
     // buscar por  producto por categoria
 
-    @GetMapping("/{producto}")
+    @GetMapping("/producto/{producto}")
     public ResponseEntity<List<Categoria>> productoPorCategoria(@PathVariable Long producto) {
         return ResponseEntity.ok(productoService.findByCategoria_id);
     }
