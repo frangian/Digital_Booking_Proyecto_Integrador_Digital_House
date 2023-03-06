@@ -26,7 +26,7 @@ public class Producto {
     private String cancelacion;
     @Column
     private Integer puntuacion;
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "categoria_id", referencedColumnName = "id")
     private Categoria categoria;
     @ManyToOne(cascade = CascadeType.ALL)

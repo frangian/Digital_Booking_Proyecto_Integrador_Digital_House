@@ -37,5 +37,15 @@ public class ProductoService {
         return productoRepository.findByCategoriaId(id);
     }
 
+    public List<Producto> productoPorCiudad (Long id){
+        logger.info("Busqueda de producto por ciudad id");
+        return productoRepository.findByCiudadId(id);
+    }
+
+    public List<Producto> productoRandom (){
+        logger.info("Me trae 8 productos random");
+        return productoRepository.findProductosRandom();
+    }
+
 
 }

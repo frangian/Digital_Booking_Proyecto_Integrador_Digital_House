@@ -30,10 +30,10 @@ public class CiudadService {
         return ciudadRepository.findAll();
     }
 
-    public List<Ciudad> productoXCiudad (Long id){
-        logger.info("Se inició la busqueda de producto por ciudad");
-        return ciudadRepository.findByCiudad(id);
-    }
+//    public List<Ciudad> productoXCiudad (Long id){
+//        logger.info("Se inició la busqueda de producto por ciudad");
+//        return ciudadRepository.findByCiudadId(id);
+//    }
 
 }
 

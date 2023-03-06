@@ -19,7 +19,7 @@ public class Imagen {
 
     @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "producto_id", referencedColumnName = "id")
-        private Producto producto;
+    private Producto producto;
 
     public Imagen() {
     }

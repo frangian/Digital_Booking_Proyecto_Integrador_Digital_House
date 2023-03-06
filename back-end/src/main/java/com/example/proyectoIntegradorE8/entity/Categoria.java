@@ -1,6 +1,10 @@
 package com.example.proyectoIntegradorE8.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table (name="categoria")
@@ -12,6 +16,10 @@ public class Categoria  {
     private String titulo;
     @Column
     private String descripcion;
+
+//    @OneToMany(mappedBy = "imagen", cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    private Set<Imagen> imagen = new HashSet<>();
 
     public Categoria() {
     }

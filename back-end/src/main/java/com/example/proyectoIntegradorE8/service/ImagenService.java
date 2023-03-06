@@ -1,6 +1,7 @@
 package com.example.proyectoIntegradorE8.service;
 
 import com.example.proyectoIntegradorE8.entity.Imagen;
+import com.example.proyectoIntegradorE8.entity.Producto;
 import com.example.proyectoIntegradorE8.repository.ImagenRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class ImagenService {
     public List<Imagen> listarImagenes (){
         logger.info("listando imagenes");
         return imagenRepository.findAll();
+    }
+
+    public List<Imagen> imagenesPorProducto (Long id){
+        logger.info("Busqueda de imagenes por producto id");
+        return imagenRepository.findByProductoId(id);
     }
 
 

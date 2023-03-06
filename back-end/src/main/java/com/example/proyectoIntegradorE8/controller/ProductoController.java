@@ -39,5 +39,14 @@ public class ProductoController {
         return ResponseEntity.ok(productoService.productoPorCategoria(categoria));
     }
 
+    @GetMapping("/ciudad/{ciudad}")
+    public ResponseEntity<List<Producto>> productoPorCiudad(@PathVariable Long ciudad) {
+        return ResponseEntity.ok(productoService.productoPorCiudad(ciudad));
+    }
+
+    @GetMapping("/random")
+    public ResponseEntity<List<Producto>> productoRandom(){
+        return ResponseEntity.ok(productoService.productoRandom());
+    }
 
 }
