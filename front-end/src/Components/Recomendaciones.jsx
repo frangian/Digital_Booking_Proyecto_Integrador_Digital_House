@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from "react-router-dom";
 import Card from '../Components/CardRecomendaciones';
 
 const Recomendaciones = ({ categoriaSeleccionada, ciudadSeleccionada }) => {
 
   const [productosRecomendados, setProductosRecomendados] = useState([]);
+
+  const navigate = useNavigate();
 
   //Si hay una categoria seleccionada traigo por categoria los recomendados
   useEffect(() => {
@@ -44,6 +47,7 @@ const Recomendaciones = ({ categoriaSeleccionada, ciudadSeleccionada }) => {
                 category={product.category}
                 location={product.location}
                 description={product.description}
+                onClick={() => {navigate(`/product/${product.id}`)}}
               />
             ))}
 
