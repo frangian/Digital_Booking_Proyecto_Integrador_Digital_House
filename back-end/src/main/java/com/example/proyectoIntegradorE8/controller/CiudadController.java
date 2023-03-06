@@ -31,8 +31,8 @@ public class CiudadController {
         return ResponseEntity.ok(ciudadService.listarTodas());
     }
 
-    @GetMapping("/{Ciudad}")
+    @GetMapping("/ciudad/{ciudad}")
     public ResponseEntity <List<Ciudad>> listarProdcutoXCiudad(@PathVariable Long ciudad) {
-        return ResponseEntity.ok(ciudadService.productoXCiudad); //chquear
+        return ResponseEntity.ok(ciudadService.productoXCiudad (ciudad));
     }
 }

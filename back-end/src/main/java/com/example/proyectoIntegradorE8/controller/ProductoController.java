@@ -34,14 +34,10 @@ public class ProductoController {
 
     // buscar por  producto por categoria
 
-    @GetMapping("/producto/{producto}")
-    public ResponseEntity<List<Categoria>> productoPorCategoria(@PathVariable Long producto) {
-        return ResponseEntity.ok(productoService.findByCategoria_id);
+    @GetMapping("/categoria/{categoria}")
+    public ResponseEntity<List<Producto>> productoPorCategoria(@PathVariable Long categoria) {
+        return ResponseEntity.ok(productoService.productoPorCategoria(categoria));
     }
-
-
-
-
 
 
 }

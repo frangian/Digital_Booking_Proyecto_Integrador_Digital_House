@@ -13,7 +13,8 @@ import java.util.List;
 @Service
 public class ProductoService {
     private static final Logger logger = Logger.getLogger(ProductoService.class);
-    public List<Categoria> findByCategoria_id;
+
+    public List<Categoria> findByCategoriaid;
     ProductoRepository productoRepository;
 
     @Autowired
@@ -31,10 +32,10 @@ public class ProductoService {
         return productoRepository.findAll();
     }
 
-//    public List<Producto> productoPorCategoria (Long id){
-//        logger.info("Se inició la búsqueda del producto");
-//        return productoRepository.findByCategoria_id(id);
-//    }
+    public List<Producto> productoPorCategoria (Long id){
+        logger.info("Se inició la búsqueda del producto");
+        return productoRepository.findByCategoriaId(id);
+    }
 
 
 }
