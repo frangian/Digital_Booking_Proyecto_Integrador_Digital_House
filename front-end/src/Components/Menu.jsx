@@ -40,13 +40,13 @@ const Menu = ({ open, openClose }) => {
             <div className={`mid-menu ${state.logged ? "oculto" : ""}`}>
             {
             routes.map(({ id, path, title }) => {
-                if (id !== 1 && id !== routes.length && location.pathname !== "/register") {
+                if (id === 2 && id !== routes.length && location.pathname !== "/register") {
                     return (
                     <button onClick={() => navigate(path)} key={id}>
                         {title}
                     </button>
                     )
-                } else if (id === routes.length && location.pathname !== "/login") {
+                } else if (id === 3 && location.pathname !== "/login") {
                     return (
                     <button onClick={() => navigate(path)} key={id}>
                         {title}
