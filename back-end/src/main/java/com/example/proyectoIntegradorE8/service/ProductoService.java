@@ -23,7 +23,7 @@ public class ProductoService {
     }
 
     public Producto crearProducto (Producto producto){
-        logger.info("El prodcuto fue creado con éxito.");
+        logger.info("El producto fue creado con éxito.");
         return productoRepository.save(producto);
     }
 
@@ -43,7 +43,7 @@ public class ProductoService {
     }
 
     public List<Producto> productoRandom (){
-        logger.info("Me trae 8 productos random");
+        logger.info("Mostrar 8 productos random");
         return productoRepository.findProductosRandom();
     }
 
