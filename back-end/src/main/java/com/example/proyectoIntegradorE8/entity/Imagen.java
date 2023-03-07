@@ -58,4 +58,20 @@ public class Imagen {
     public void setUrl_imagen(String url_imagen) {
         this.url_imagen = url_imagen;
     }
+
+//    public Categoria getCategoria() {
+//        return categoria;
+//    }
+//
+//    public void setCategoria(Categoria categoria) {
+//        this.categoria = categoria;
+//    }
+//
+//    public Producto getProducto() {
+//        return producto;
+//    }
+//
+//    public void setProducto(Producto producto) {
+//        this.producto = producto;
+//    }
 }

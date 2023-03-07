@@ -9,8 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
@@ -65,13 +64,28 @@ public class ProductoController {
 //        return ResponseEntity.ok(productoService.productoRandom());
 //    }
 
+//    @GetMapping("/random")
+//    public ResponseEntity<?> productosRandom(){
+//        try {
+//            return ResponseEntity.status(HttpStatus.OK).body(productoService.productosRandom());
+//        } catch (Exception e){
+//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+//        }
+//    }
+
     @GetMapping("/random")
-    public ResponseEntity<?> productosRandom(){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(productoService.productosRandom());
-        } catch (Exception e){
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    public List<Producto> getProductosRandom() {
+        // Obtener todos los productos desde la base de datos
+        List<Producto> productos = productoService.listarProductos();
+
+        // Seleccionar aleatoriamente 8 productos
+        Collections.shuffle(productos, new Random());
+        List<Producto> productosRandom = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            productosRandom.add(productos.get(i));
         }
+        // Devolver los 8 productos seleccionados
+        return productosRandom;
     }
 
 

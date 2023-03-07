@@ -12,8 +12,13 @@ public interface ProductoRepository extends JpaRepository <Producto, Long> {
 
   List<Producto> findByCiudadId (Long id);
 
-  @Query(value = "SELECT * FROM producto", nativeQuery = true)
+  @Query(value = "SELECT * FROM pi_basededatos_e8.producto", nativeQuery = true)
   List<Producto> findAllProductosRandom();
-//chequear
+
+
+
+  //chequear
+
+
 
 }
