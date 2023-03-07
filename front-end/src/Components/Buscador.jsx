@@ -14,6 +14,8 @@ const Buscador = ({ onCiudadSeleccionada }) => {
   const [ciudad, setCiudad] = useState("");
   const [dateRange, setDateRange] = useState([]);
   const [ciudades, setCiudades] = useState([]);
+  const [ciudadId, setCiudadId] = useState([]);
+  
   
 
   const handleChange = (event) => {
@@ -21,7 +23,7 @@ const Buscador = ({ onCiudadSeleccionada }) => {
   };
 
   const handleBuscarClick = () => {
-    onCiudadSeleccionada(ciudad);
+    onCiudadSeleccionada(ciudadId);
   };
 
   const handleDateChange = (value) => {
@@ -30,10 +32,10 @@ const Buscador = ({ onCiudadSeleccionada }) => {
 
   /* ----------------------------------- COMPLETAR CON URL DE LA API PARA OBTENER LISTADO DE CIUDADES ---------------------------------- */
   useEffect(() => {
-    axios.get('https://api.com/ciudades')
-      .then(response => {
-        setCiudades(response.data);
-      })
+    fetch('http://localhost:8080/ciudad')
+      .then(response => response.json()
+      .then((data) => setCiudades(data))
+      )
       .catch(error => {
         console.log(error);
       });
@@ -82,7 +84,7 @@ const Buscador = ({ onCiudadSeleccionada }) => {
               {ciudades.map((ciudad, index) => (
                 <MenuItem
                   key={ciudad.id}
-                  value={ciudad.lel}
+                  value={ciudad.nombre}
                   sx={
                     index !== ciudades.length - 1
                       ? {
@@ -91,12 +93,13 @@ const Buscador = ({ onCiudadSeleccionada }) => {
                         }
                       : { borderBottom: 0 }
                   }
+                  onClick={()=> setCiudadId(ciudad.id)}
                 >
                   <FontAwesomeIcon
                     icon={faMapMarkerAlt}
                     className="icono-select blanco"
                   />
-                  {ciudad.label}, {ciudad.pais}
+                  {ciudad.nombre}, {ciudad.pais}
                 </MenuItem>
               ))}
             </Select>

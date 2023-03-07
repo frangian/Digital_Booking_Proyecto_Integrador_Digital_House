@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '../Components/Card';
+import Card from '../Components/CardCategoria';
 import data from '../Components/Utils/categorias.json'
 import axios from 'axios';
 
@@ -17,10 +17,10 @@ const Categorias = ({ categories, actualizarCategoriaSeleccionada }) => {
       {categories.map(categoria => (
               <Card
                 key={categoria.id}
-                nombre={categoria.nombre}
+                nombre={categoria.titulo}
                 imagen={categoria.imagen}
-                cantidad={categoria.cantidad}
-                onClick={handleClick}
+                cantidad={categoria.descripcion}
+                handleClick={handleClick}
               />
             ))}
 

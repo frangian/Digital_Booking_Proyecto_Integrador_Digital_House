@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faChevronLeft, faStar } from '@fortawesome/free-solid-svg-icons'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
@@ -36,6 +36,13 @@ const Producto = () => {
         {id: 7, title: "Wifi"},
     ]
     const [like, setLike] = useState(false);
+
+    useEffect(() => {
+        const seccion = document.getElementById('mapa');
+        if (seccion) {
+          seccion.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, []);
 
     return (
         <div className='product-page'>
@@ -92,8 +99,8 @@ const Producto = () => {
             <Servicios servicios={servicios}/>
             <Calendario />
             <Map />
-            <div className="info-extra-container">
-                <h3>Qué tenés que saber</h3>
+            <div className="info-extra-container" >
+                <h3 id="mapa">Qué tenés que saber</h3>
                 <div className="info-extra">
                     <section className="info">
                         <h4>Normas de la casa</h4>

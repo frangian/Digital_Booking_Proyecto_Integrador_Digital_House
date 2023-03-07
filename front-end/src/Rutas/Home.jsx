@@ -11,7 +11,7 @@ const Home = () => {
   //Estado para almacenar la categoria clickeada
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null);
 
-  const [ciudadSeleccionada, setCiudadSeleccionada] = useState("");
+  const [ciudadSeleccionada, setCiudadSeleccionada] = useState(null);
 
   const handleCiudadSeleccionada = (ciudad) => {
     setCiudadSeleccionada(ciudad);
@@ -19,7 +19,7 @@ const Home = () => {
 
   // Obtener las categorías desde la API cuando se monta el componente
   useEffect(() => {
-    fetch("tu_api/categorias")
+    fetch("http://localhost:8080/categoria")
       .then((response) => response.json())
       .then((data) => setCategories(data));
   }, []);

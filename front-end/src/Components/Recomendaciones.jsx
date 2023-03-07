@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from "react-router-dom";
+
 import Card from '../Components/CardRecomendaciones';
 
 const Recomendaciones = ({ categoriaSeleccionada, ciudadSeleccionada }) => {
 
   const [productosRecomendados, setProductosRecomendados] = useState([]);
 
-  const navigate = useNavigate();
+  
 
   //Si hay una categoria seleccionada traigo por categoria los recomendados
   useEffect(() => {
     if (categoriaSeleccionada) {
-      fetch(`/api/recomendados?categoria=${categoriaSeleccionada}`)
+      fetch(`http://localhost:8080/producto/categoria/${categoriaSeleccionada}`)
         .then((response) => response.json())
         .then((data) => setProductosRecomendados(data));
     }
@@ -19,7 +19,7 @@ const Recomendaciones = ({ categoriaSeleccionada, ciudadSeleccionada }) => {
 
   //Si no hay categoria seleccionada traigo los recomendados al azar del back
   useEffect(() => {
-    fetch('/api/recomendados')
+    fetch('http://localhost:8080/producto')
       .then((response) => response.json())
       .then((data) => setProductosRecomendados(data));
   }, []);
@@ -27,11 +27,15 @@ const Recomendaciones = ({ categoriaSeleccionada, ciudadSeleccionada }) => {
   //si hay na ciudad seleccionada trae los de esa ciudad
   useEffect(() => {
     async function fetchRecomendados() {
-      const response = await fetch(`API_URL/recomendados?ciudad=${ciudadSeleccionada}`);
+      const response = await fetch(`http://localhost:8080/producto/ciudad/${ciudadSeleccionada}`);
       const data = await response.json();
+      console.log(ciudadSeleccionada);
       setProductosRecomendados(data);
     }
-    fetchRecomendados();
+    if(ciudadSeleccionada){
+      fetchRecomendados();
+    }
+    
   }, [ciudadSeleccionada]);
 
   return (
@@ -42,12 +46,13 @@ const Recomendaciones = ({ categoriaSeleccionada, ciudadSeleccionada }) => {
       {productosRecomendados.map(product => (
               <Card
                 key={product.id}
-                title={product.title}
+                id={product.id}
+                title={product.titulo}
                 imagen={product.img}
-                category={product.category}
-                location={product.location}
-                description={product.description}
-                onClick={() => {navigate(`/product/${product.id}`)}}
+                category={product.categoria_id}
+                location={product.descripcion_ubicacion}
+                description={product.descripcion_producto}
+                
               />
             ))}
 

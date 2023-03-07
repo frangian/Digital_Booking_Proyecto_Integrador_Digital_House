@@ -4,16 +4,21 @@ import { faPersonSwimming, faStar } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faWifi } from "@fortawesome/free-solid-svg-icons";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const CardRecomendaciones = ({
+  id,
   title,
   imagen,
   category,
   location,
   description,
 }) => {
+
+  const navigate = useNavigate();
+
   return (
-    <div className="card-recomendaciones">
+    <div className="card-recomendaciones" >
       <div className="image-container">
         <img src={imagen} alt={title} />
         <FontAwesomeIcon icon={faHeart} className="fa-heart" />
@@ -41,13 +46,13 @@ const CardRecomendaciones = ({
             
             <p>
               <FontAwesomeIcon icon={faMapMarkerAlt} className="icono ubicacion" />
-              {location} <span>MOSTRAR EN EL MAPA</span>
+              {location} <a href={`http://localhost:3000/product/${id}#mapa`}  >MOSTRAR EN EL MAPA</a>
             </p>
           <FontAwesomeIcon icon={faWifi} className="icono extra" />
           <FontAwesomeIcon icon={faPersonSwimming} className="icono extra" />
         </div>
         <p>{description}</p>
-        <button className="ver-mas-btn">ver más</button>
+        <button className="ver-mas-btn" onClick={() => {navigate(`/product/${id}`)}}>ver más</button>
       </div>
     </div>
   );
