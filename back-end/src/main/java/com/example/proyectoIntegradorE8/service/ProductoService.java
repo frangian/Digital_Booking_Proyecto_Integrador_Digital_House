@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -32,6 +33,10 @@ public class ProductoService {
         return productoRepository.findAll();
     }
 
+    public Optional<Producto> buscarProductoXid (Long id){ return productoRepository.findById(id);
+
+    };
+
     public List<Producto> productoPorCategoria (Long id){
         logger.info("Se inició la búsqueda del producto");
         return productoRepository.findByCategoriaId(id);
@@ -44,7 +49,7 @@ public class ProductoService {
 
     public List<Producto> productosRandom () throws Exception{
         try {
-            logger.info("Mostrar 8 productos random (ProductoService");
+            logger.info("Mostrar 8 productos random (ProductoService)");
             List<Producto> productosRandom = productoRepository.findAllProductosRandom();
             return productosRandom;
         } catch (Exception e){
