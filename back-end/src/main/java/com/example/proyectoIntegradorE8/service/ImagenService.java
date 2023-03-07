@@ -37,5 +37,10 @@ public class ImagenService {
         return imagenRepository.findByProductoId(id);
     }
 
+    public List<Imagen> imagenesPorCategoria (Long id){
+        logger.info("Busqueda de imagenes por producto id");
+        return imagenRepository.findByCategoriaId(id);
+    }
+
 
 }

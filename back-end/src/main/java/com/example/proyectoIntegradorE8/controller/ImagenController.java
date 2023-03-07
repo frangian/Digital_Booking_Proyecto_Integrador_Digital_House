@@ -35,4 +35,9 @@ public class ImagenController {
     public ResponseEntity<List<Imagen>> productoPorCiudad(@PathVariable Long producto) {
         return ResponseEntity.ok(imagenService.imagenesPorProducto(producto));
     }
+
+    @GetMapping("/categoria/{categoria}")
+    public ResponseEntity<List<Imagen>> imagenPorCategoria(@PathVariable Long categoria) {
+        return ResponseEntity.ok(imagenService.imagenesPorCategoria(categoria));
+    }
 }
