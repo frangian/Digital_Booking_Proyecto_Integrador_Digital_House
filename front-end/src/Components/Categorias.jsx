@@ -6,8 +6,8 @@ import axios from 'axios';
 const Categorias = ({ categories, actualizarCategoriaSeleccionada }) => {
   
   //manejo el click de la categoria y llamo a la funcion que setea la categoria seleccionada
-  const handleClick = () => {
-    actualizarCategoriaSeleccionada(categories.id);
+  const handleClick = (id) => {
+    actualizarCategoriaSeleccionada(id);
   };
 
   return (
@@ -20,7 +20,7 @@ const Categorias = ({ categories, actualizarCategoriaSeleccionada }) => {
                 nombre={categoria.titulo}
                 imagen={categoria.imagen}
                 cantidad={categoria.descripcion}
-                handleClick={handleClick}
+                handleClick={()=> handleClick(categoria.id)}
               />
             ))}
 
