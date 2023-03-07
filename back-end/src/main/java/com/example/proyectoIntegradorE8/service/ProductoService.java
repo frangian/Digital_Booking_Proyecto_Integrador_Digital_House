@@ -42,9 +42,15 @@ public class ProductoService {
         return productoRepository.findByCiudadId(id);
     }
 
-    public List<Producto> productoRandom (){
-        logger.info("Mostrar 8 productos random");
-        return productoRepository.findProductosRandom();
+    public List<Producto> productosRandom () throws Exception{
+        try {
+            logger.info("Mostrar 8 productos random (ProductoService");
+            List<Producto> productosRandom = productoRepository.findAllProductosRandom();
+            return productosRandom;
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+
     }
 
 
