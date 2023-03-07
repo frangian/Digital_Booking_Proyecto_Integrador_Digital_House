@@ -5,6 +5,7 @@ import com.example.proyectoIntegradorE8.entity.Ciudad;
 import com.example.proyectoIntegradorE8.repository.CaractersiticaRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +29,10 @@ public class CaractersiticaService {
     public List<Caracteristica> listarTodas(){
         logger.info("Se inició una operación de listado de categorías");
         return caractersiticaRepository.findAll();
+    }
+
+    public List<Caracteristica> caracteristicasXProducto (Integer id){
+         return caractersiticaRepository.findAllByProductoId(id);
     }
 
 }

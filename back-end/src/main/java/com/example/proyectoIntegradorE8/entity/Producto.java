@@ -3,7 +3,10 @@ package com.example.proyectoIntegradorE8.entity;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "producto")
 public class Producto {
@@ -32,13 +35,9 @@ public class Producto {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ciudad_id", referencedColumnName = "id")
     private Ciudad ciudad;
+    @OneToMany(mappedBy = "producto")
+    private Set<Imagen> imagenes;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "imagen_id", referencedColumnName = "id")
-//    private List<Imagen> imagenes = new ArrayList<Imagen>();
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "caracteristica_id", referencedColumnName = "id")
-//    private List<Caracteristica> caracterisitcas = new ArrayList<Caracteristica>();
 
     public Producto() {
     }
@@ -86,13 +85,13 @@ public class Producto {
         this.titulo = titulo;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
+//    public Categoria getCategoria() {
+//        return categoria;
+//    }
+//
+//    public void setCategoria(Categoria categoria) {
+//        this.categoria = categoria;
+//    }
 
     public Ciudad getCiudad() {
         return ciudad;
@@ -158,6 +157,11 @@ public class Producto {
         this.puntuacion = puntuacion;
     }
 
+    public Set<Imagen> getImagenes() {
+        return imagenes;
+    }
 
-
+    public void setImagenes(Set<Imagen> imagenes) {
+        this.imagenes = imagenes;
+    }
 }

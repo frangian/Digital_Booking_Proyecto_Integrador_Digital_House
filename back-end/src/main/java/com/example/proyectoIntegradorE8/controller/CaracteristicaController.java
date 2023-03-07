@@ -29,4 +29,10 @@ public class CaracteristicaController {
     public ResponseEntity<List<Caracteristica>> listarTodas() {
         return ResponseEntity.ok(caractersiticaService.listarTodas());
     }
+
+    @GetMapping("/producto/{producto}")
+    public ResponseEntity<List<Caracteristica>> caracteristicaXProducto(@PathVariable Integer producto){
+        return ResponseEntity.ok(caractersiticaService.caracteristicasXProducto(producto));
+    }
+
 }

@@ -1,9 +1,6 @@
 package com.example.proyectoIntegradorE8.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,10 +13,10 @@ public class Categoria  {
     private String titulo;
     @Column
     private String descripcion;
-
-//    @OneToMany(mappedBy = "imagen", cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    private Set<Imagen> imagen = new HashSet<>();
+    @OneToMany(mappedBy = "categoria")
+    private Set<Imagen> imagenes;
+    @OneToMany(mappedBy = "categoria")
+    private Set<Producto> productos;
 
     public Categoria() {
     }
@@ -60,4 +57,19 @@ public class Categoria  {
         this.descripcion = descripcion;
     }
 
+    public Set<Imagen> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(Set<Imagen> imagenes) {
+        this.imagenes = imagenes;
+    }
+
+    public Set<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(Set<Producto> productos) {
+        this.productos = productos;
+    }
 }
