@@ -5,7 +5,6 @@ import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.service.ProductoService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +37,7 @@ public class ProductoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Producto> buscarOdontologo(@PathVariable Long id) throws ResourceNotFoundException {
+    public ResponseEntity<Producto> buscarProducto(@PathVariable Long id) throws ResourceNotFoundException {
         Optional<Producto> resultado = productoService.buscarProductoXid(id);
         if (resultado.isPresent()) {
             logger.info("El producto con id: "+id+", fue encontrado en la BD");
@@ -58,20 +57,6 @@ public class ProductoController {
     public ResponseEntity<List<Producto>> productoPorCiudad(@PathVariable Long ciudad) {
         return ResponseEntity.ok(productoService.productoPorCiudad(ciudad));
     }
-
-//    @GetMapping("/random")
-//    public ResponseEntity<List<Producto>> productoRandom(){
-//        return ResponseEntity.ok(productoService.productoRandom());
-//    }
-
-//    @GetMapping("/random")
-//    public ResponseEntity<?> productosRandom(){
-//        try {
-//            return ResponseEntity.status(HttpStatus.OK).body(productoService.productosRandom());
-//        } catch (Exception e){
-//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-//        }
-//    }
 
     @GetMapping("/random")
     public List<Producto> getProductosRandom() {

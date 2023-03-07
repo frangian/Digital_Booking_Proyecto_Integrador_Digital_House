@@ -15,8 +15,6 @@ public class Categoria  {
     private String descripcion;
     @OneToMany(mappedBy = "categoria")
     private Set<Imagen> imagenes;
-    @OneToMany(mappedBy = "categoria")
-    private Set<Producto> productos;
 
     public Categoria() {
     }
@@ -65,11 +63,4 @@ public class Categoria  {
         this.imagenes = imagenes;
     }
 
-    public Set<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(Set<Producto> productos) {
-        this.productos = productos;
-    }
 }
