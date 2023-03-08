@@ -10,21 +10,20 @@ const ImgContainer = ({ imgList }) => {
         setOpenCarousel(false);
     }
 
-
     return (
         <div className='images-container'>
             <div className={`product-images ${!openCarousel ? "" : "oculto"}`}>
-                {imgList.map((imagen, i) => {
+                {imgList?.map((imagen, i) => {
                     if (i < 4) {
                         return (
                             <div className="imagenes">
-                                <img src={imagen} alt="" />
+                                <img src={imagen.url_imagen} alt="" />
                             </div>
                         )
                     } else if (i === 4) {
                         return (
                             <div className="imagenes">
-                                <img src={imagen} alt="" />
+                                <img src={imagen.url_imagen} alt="" />
                                 <p onClick={() => setOpenCarousel(true)}>Ver más</p>
                             </div>
                         )

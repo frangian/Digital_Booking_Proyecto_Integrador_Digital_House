@@ -1,11 +1,12 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { elegirServicio } from "./Utils/utils";
+import { elegirServicio } from './Utils/utils'
+import { ContextGlobal } from "./Utils/globalContext";
 
 const CardRecomendaciones = ({
   id,
@@ -17,6 +18,7 @@ const CardRecomendaciones = ({
 }) => {
   const navigate = useNavigate();
   const MAX_LENGTH = 200;
+  const { state, dispatch } = useContext(ContextGlobal);
 
   const [characteristics, setCharacteristics] = useState([]);
 
@@ -100,6 +102,13 @@ const CardRecomendaciones = ({
           className="ver-mas-btn"
           onClick={() => {
             navigate(`/product/${id}`);
+            dispatch({
+              type: "register",
+              payload: {
+                ...state,
+                map: false
+              }
+            })
           }}
         >
           ver más
