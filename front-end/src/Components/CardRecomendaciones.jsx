@@ -1,12 +1,11 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPersonSwimming, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { faWifi } from "@fortawesome/free-solid-svg-icons";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { elegirServicio } from './Utils/utils'
+import { elegirServicio } from "./Utils/utils";
 
 const CardRecomendaciones = ({
   id,
@@ -19,9 +18,10 @@ const CardRecomendaciones = ({
   const navigate = useNavigate();
   const MAX_LENGTH = 200;
 
-  const [showFullDescription, setShowFullDescription] = useState(false);
-
   const [characteristics, setCharacteristics] = useState([]);
+
+  //funcion de boton mas-menos
+  const [showFullDescription, setShowFullDescription] = useState(false);
 
   const shortDescription =
     description.length > MAX_LENGTH
@@ -79,13 +79,11 @@ const CardRecomendaciones = ({
             </a>
           </p>
 
-          
-            {characteristics.map((caracteristica) => (
-              <span key={caracteristica.id} className="icono-servicio">{elegirServicio(caracteristica.titulo, "#383b58")}</span>
-            ))}
-          
-          {/* <FontAwesomeIcon icon={faWifi} className="icono extra" />
-          <FontAwesomeIcon icon={faPersonSwimming} className="icono extra" /> */}
+          {characteristics.map((caracteristica) => (
+            <span key={caracteristica.id} className="icono-servicio">
+              {elegirServicio(caracteristica.titulo, "#383b58")}
+            </span>
+          ))}
         </div>
         <p>
           {showFullDescription ? description : shortDescription}

@@ -2,6 +2,7 @@ import React,{ useState, useEffect } from 'react'
 import Buscador from '../Components/Buscador'
 import Categorias from '../Components/Categorias'
 import Recomendaciones from '../Components/Recomendaciones'
+import axios from 'axios';
 
 
 const Home = () => {

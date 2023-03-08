@@ -1,7 +1,6 @@
 import React from 'react'
 import Card from '../Components/CardCategoria';
-import data from '../Components/Utils/categorias.json'
-import axios from 'axios';
+
 
 const Categorias = ({ categories, actualizarCategoriaSeleccionada }) => {
   
