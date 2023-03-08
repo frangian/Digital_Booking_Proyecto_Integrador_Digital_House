@@ -21,19 +21,19 @@ const ImgDesktopCarousel = ({ imgList, open, closer }) => {
             >
               <FontAwesomeIcon icon={faChevronRight}/>
             </div>
-            <img src={imgList[mainImg]} alt="" />
+            <img src={imgList[mainImg]?.url_imagen} alt="" />
           </div>
           <div className="all-images-container">
             <p>{mainImg + 1}/{imgList.length}</p>
             <div className="all-images"
-            style={{gridTemplateColumns: `repeat(${imgList.length}, 1fr)`}}
+            style={{gridTemplateColumns: `repeat(${imgList?.length}, 1fr)`}}
             >
-              {imgList.map((url, i) => (
+              {imgList?.map((url, i) => (
                 <div key={i} className="carousel-bottom-img"
                 style={i === mainImg ? {outline: "2px solid #000"} : {}}
                 onClick={() => setMainImg(i)}
                 >
-                  <img src={url} alt=""/>
+                  <img src={url.url_imagen} alt=""/>
                 </div>
               ))}
             </div>

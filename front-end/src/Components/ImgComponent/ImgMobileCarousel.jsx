@@ -36,7 +36,6 @@ const ImgMobileCarousel = ({ imgList }) => {
         selectNewImage(selectedIndex, imgList);
     }
 
-
     return (
         <div className='mobile-carousel'>
             <div className='interacciones-mobile'>
@@ -50,7 +49,7 @@ const ImgMobileCarousel = ({ imgList }) => {
                 </IconButton>
             </div>
             <div className="slider">
-                <img src={imgList[mainImg]} alt=""
+                <img src={imgList[mainImg]?.url_imagen} alt=""
                 className={`${load ? "loaded" : ""}`}
                 onClick={(e) => {
                     if (e.clientX < (window.innerWidth / 2) / 2) {

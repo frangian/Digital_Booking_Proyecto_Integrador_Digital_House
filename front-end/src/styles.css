@@ -815,17 +815,26 @@ body {
   gap: 10px;
   width: 95vw;
   margin: 10px auto 30px;
+  height: 60vh;
 }
 
 .imagenes {
   border-radius: 8px;
-  height: 100%;
+  height: 30vh;
+}
+
+.imagenes:nth-child(1) {
+  height: 61vh;
 }
 
 .imagenes img {
-  height: 100%;
+  height: 30vh;
   width: 100%;
   border-radius: 8px;
+}
+
+.imagenes:nth-child(1) img {
+  height: 61vh;
 }
 
 .imagenes:nth-child(1) {
@@ -877,7 +886,7 @@ body {
 
 .main-image {
   width: 100%;
-  height: 80%;
+  height: 75%;
   position: relative;
 }
 
@@ -926,9 +935,10 @@ body {
 }
 
 .all-images {
-  display: grid;
+  display: flex;
   width: 98%;
-  gap: 10px;
+  height: 100%;
+  justify-content: space-around;
 }
 
 .carousel-bottom-img {
@@ -937,6 +947,8 @@ body {
   align-items: center;
   cursor: pointer;
   border-radius: 6px;
+  width: 15%;
+  height: 80%;
 }
 
 .carousel-bottom-img:hover {
