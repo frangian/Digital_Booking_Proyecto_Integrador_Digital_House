@@ -19,7 +19,7 @@ const Recomendaciones = ({ categoriaSeleccionada, ciudadSeleccionada }) => {
 
   //Si no hay categoria seleccionada traigo los recomendados al azar del back
   useEffect(() => {
-    fetch('http://localhost:8080/producto')
+    fetch('http://localhost:8080/producto/random')
       .then((response) => response.json())
       .then((data) => setProductosRecomendados(data));
   }, []);
