@@ -7,6 +7,7 @@ import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { elegirServicio } from './Utils/utils'
 import { ContextGlobal } from "./Utils/globalContext";
+import axios from 'axios';
 
 const CardRecomendaciones = ({
   id,
@@ -35,10 +36,13 @@ const CardRecomendaciones = ({
   };
 
   useEffect(() => {
-    // Hacer una solicitud GET para obtener las características del producto
-    fetch(`http://localhost:8080/caracteristica/producto/${id}`)
-      .then((response) => response.json())
-      .then((data) => setCharacteristics(data));
+    axios.get(`http://localhost:8080/caracteristica/producto/${id}`)
+      .then((response) => {
+        setCharacteristics(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, [id]);
 
   return (

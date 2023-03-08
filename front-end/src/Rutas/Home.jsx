@@ -20,9 +20,13 @@ const Home = () => {
 
   // Obtener las categorías desde la API cuando se monta el componente
   useEffect(() => {
-    fetch("http://localhost:8080/categoria")
-      .then((response) => response.json())
-      .then((data) => setCategories(data));
+    axios.get('http://localhost:8080/categoria')
+      .then((response) => {
+        setCategories(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
 

@@ -31,10 +31,11 @@ const Buscador = ({ onCiudadSeleccionada }) => {
 
   /* ----------------------------------- COMPLETAR CON URL DE LA API PARA OBTENER LISTADO DE CIUDADES ---------------------------------- */
   useEffect(() => {
-    fetch('http://localhost:8080/ciudad')
-      .then(response => response.json()
-      .then((data) => setCiudades(data))
-      )
+    axios.get('http://localhost:8080/ciudad')
+      .then(response => {
+        const data = response.data;
+        setCiudades(data);
+      })
       .catch(error => {
         console.log(error);
       });
