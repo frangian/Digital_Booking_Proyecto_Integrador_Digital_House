@@ -59,6 +59,8 @@ public class Imagen {
         this.url_imagen = url_imagen;
     }
 
+    //esto queda comentado, no borrarlo por ahora por favor
+
 //    public Categoria getCategoria() {
 //        return categoria;
 //    }
@@ -74,4 +76,7 @@ public class Imagen {
 //    public void setProducto(Producto producto) {
 //        this.producto = producto;
 //    }
+    // -----------------------------------------------------
+
+
 }
