@@ -1,11 +1,12 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPersonSwimming, faStar } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faWifi } from "@fortawesome/free-solid-svg-icons";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { elegirServicio } from './Utils/utils'
 
 const CardRecomendaciones = ({
   id,
@@ -15,22 +16,31 @@ const CardRecomendaciones = ({
   location,
   description,
 }) => {
-
   const navigate = useNavigate();
   const MAX_LENGTH = 200;
 
   const [showFullDescription, setShowFullDescription] = useState(false);
 
-  const shortDescription = description.length > MAX_LENGTH
-    ? description.substring(0, MAX_LENGTH) + "..."
-    : description;
+  const [characteristics, setCharacteristics] = useState([]);
 
-    const handleToggleDescription = () => {
-      setShowFullDescription(!showFullDescription);
-    };
+  const shortDescription =
+    description.length > MAX_LENGTH
+      ? description.substring(0, MAX_LENGTH) + "..."
+      : description;
+
+  const handleToggleDescription = () => {
+    setShowFullDescription(!showFullDescription);
+  };
+
+  useEffect(() => {
+    // Hacer una solicitud GET para obtener las características del producto
+    fetch(`http://localhost:8080/caracteristica/producto/${id}`)
+      .then((response) => response.json())
+      .then((data) => setCharacteristics(data));
+  }, [id]);
 
   return (
-    <div className="card-recomendaciones" >
+    <div className="card-recomendaciones">
       <div className="image-container">
         <img src={imagen} alt={title} />
         <FontAwesomeIcon icon={faHeart} className="fa-heart" />
@@ -38,7 +48,7 @@ const CardRecomendaciones = ({
       <div className="info-container">
         <div className="info-container-header">
           <div>
-            <div className="categoria-container">
+            <div className="info-categoria-container">
               <h3>{category}</h3>
               <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
               <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
@@ -55,23 +65,47 @@ const CardRecomendaciones = ({
           </div>
         </div>
         <div className="extras-container">
-            
-            <p>
-              <FontAwesomeIcon icon={faMapMarkerAlt} className="icono ubicacion" />
-              {location} <a href={`http://localhost:3000/product/${id}#mapa`}  className="enlace-mapa">MOSTRAR EN EL MAPA</a>
-            </p>
-          <FontAwesomeIcon icon={faWifi} className="icono extra" />
-          <FontAwesomeIcon icon={faPersonSwimming} className="icono extra" />
+          <p>
+            <FontAwesomeIcon
+              icon={faMapMarkerAlt}
+              className="icono ubicacion"
+            />
+            {location}{" "}
+            <a
+              href={`http://localhost:3000/product/${id}#mapa`}
+              className="enlace-mapa"
+            >
+              MOSTRAR EN EL MAPA
+            </a>
+          </p>
+
+          
+            {characteristics.map((caracteristica) => (
+              <span key={caracteristica.id} className="icono-servicio">{elegirServicio(caracteristica.titulo, "#383b58")}</span>
+            ))}
+          
+          {/* <FontAwesomeIcon icon={faWifi} className="icono extra" />
+          <FontAwesomeIcon icon={faPersonSwimming} className="icono extra" /> */}
         </div>
         <p>
-        {showFullDescription ? description : shortDescription}
-        {description.length > MAX_LENGTH && (
-          <button onClick={handleToggleDescription} className="btn-vermas-vermenos">
-            {showFullDescription ? "menos..." : "más..."}
-          </button>
-        )}
-      </p>
-        <button className="ver-mas-btn" onClick={() => {navigate(`/product/${id}`)}}>ver más</button>
+          {showFullDescription ? description : shortDescription}
+          {description.length > MAX_LENGTH && (
+            <button
+              onClick={handleToggleDescription}
+              className="btn-vermas-vermenos"
+            >
+              {showFullDescription ? "menos..." : "más..."}
+            </button>
+          )}
+        </p>
+        <button
+          className="ver-mas-btn"
+          onClick={() => {
+            navigate(`/product/${id}`);
+          }}
+        >
+          ver más
+        </button>
       </div>
     </div>
   );

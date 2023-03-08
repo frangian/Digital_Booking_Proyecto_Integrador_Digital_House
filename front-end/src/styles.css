@@ -493,6 +493,7 @@ body {
   overflow: hidden;
   margin: 0;
   padding: 0;
+  cursor: pointer;
 }
 
 .card > div {
@@ -548,11 +549,12 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
+  height: 430px;
 }
 
 .image-container {
   position: relative;
-  width: 100%;
+  width: 50%;
   height: 100%;
 }
 
@@ -574,7 +576,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   padding: 1vw;
-  width: 100%;
+  width: 50%;
   height: auto;
 }
 
@@ -608,7 +610,12 @@ body {
   font-weight: 600;
 }
 
-.categoria-container{
+.info-container-header h2{
+  white-space: nowrap;
+  margin-top: 10px;
+}
+
+.info-categoria-container{
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -680,6 +687,10 @@ body {
 .icono-verde {
   color: var(--main-green);
   font-size: 0.8rem;
+}
+
+.icono-servicio{
+  margin-left: 0.5vw;
 }
 
 .ver-mas-btn {
