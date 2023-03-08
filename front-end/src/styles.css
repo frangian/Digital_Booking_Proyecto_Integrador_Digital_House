@@ -638,6 +638,15 @@ body {
 .puntuacion-container p{
   font-weight: 700;
 }
+
+.enlace-mapa{
+  color: var(--main-green)
+}
+
+.btn-vermas-vermenos{
+  padding-left: 10px;
+  color: var(--main-green)
+}
 /***********EXTRAS*********/
 
 .square8 {

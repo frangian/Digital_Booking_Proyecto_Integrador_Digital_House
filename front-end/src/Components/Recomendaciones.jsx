@@ -48,7 +48,7 @@ const Recomendaciones = ({ categoriaSeleccionada, ciudadSeleccionada }) => {
                 key={product.id}
                 id={product.id}
                 title={product.titulo}
-                imagen={product.img}
+                imagen={product.imagenes[0].url_imagen}
                 category={product.categoria.titulo}
                 location={product.descripcion_ubicacion}
                 description={product.descripcion_producto}

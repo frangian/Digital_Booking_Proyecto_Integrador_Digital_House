@@ -18,7 +18,7 @@ const Categorias = ({ categories, actualizarCategoriaSeleccionada }) => {
               <Card
                 key={categoria.id}
                 nombre={categoria.titulo}
-                imagen={categoria.imagen}
+                imagen={categoria.imagenes[0].url_imagen}
                 cantidad={categoria.descripcion}
                 handleClick={()=> handleClick(categoria.id)}
               />

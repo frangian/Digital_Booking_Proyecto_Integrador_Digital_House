@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPersonSwimming, faStar } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -16,6 +17,17 @@ const CardRecomendaciones = ({
 }) => {
 
   const navigate = useNavigate();
+  const MAX_LENGTH = 200;
+
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
+  const shortDescription = description.length > MAX_LENGTH
+    ? description.substring(0, MAX_LENGTH) + "..."
+    : description;
+
+    const handleToggleDescription = () => {
+      setShowFullDescription(!showFullDescription);
+    };
 
   return (
     <div className="card-recomendaciones" >
@@ -46,12 +58,19 @@ const CardRecomendaciones = ({
             
             <p>
               <FontAwesomeIcon icon={faMapMarkerAlt} className="icono ubicacion" />
-              {location} <a href={`http://localhost:3000/product/${id}#mapa`}  >MOSTRAR EN EL MAPA</a>
+              {location} <a href={`http://localhost:3000/product/${id}#mapa`}  className="enlace-mapa">MOSTRAR EN EL MAPA</a>
             </p>
           <FontAwesomeIcon icon={faWifi} className="icono extra" />
           <FontAwesomeIcon icon={faPersonSwimming} className="icono extra" />
         </div>
-        <p>{description}</p>
+        <p>
+        {showFullDescription ? description : shortDescription}
+        {description.length > MAX_LENGTH && (
+          <button onClick={handleToggleDescription} className="btn-vermas-vermenos">
+            {showFullDescription ? "menos..." : "más..."}
+          </button>
+        )}
+      </p>
         <button className="ver-mas-btn" onClick={() => {navigate(`/product/${id}`)}}>ver más</button>
       </div>
     </div>
