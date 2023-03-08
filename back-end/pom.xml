@@ -8,9 +8,9 @@
 		<version>3.0.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
+	<groupId>com.DH</groupId>
 	<artifactId>proyectoIntegrador-E8</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.2.3</version>
 	<name>proyectoIntegrador-E8</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
