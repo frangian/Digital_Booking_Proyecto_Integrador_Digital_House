@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from 'axios';
-import data from "../Components/Utils/ciudades.json";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -32,10 +31,11 @@ const Buscador = ({ onCiudadSeleccionada }) => {
 
   /* ----------------------------------- COMPLETAR CON URL DE LA API PARA OBTENER LISTADO DE CIUDADES ---------------------------------- */
   useEffect(() => {
-    fetch('http://localhost:8080/ciudad')
-      .then(response => response.json()
-      .then((data) => setCiudades(data))
-      )
+    axios.get('http://localhost:8080/ciudad')
+      .then(response => {
+        const data = response.data;
+        setCiudades(data);
+      })
       .catch(error => {
         console.log(error);
       });

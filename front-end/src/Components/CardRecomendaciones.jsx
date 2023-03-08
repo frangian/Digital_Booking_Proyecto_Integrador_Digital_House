@@ -1,13 +1,13 @@
 import * as React from "react";
 import { useState, useEffect, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPersonSwimming, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { faWifi } from "@fortawesome/free-solid-svg-icons";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { elegirServicio } from './Utils/utils'
 import { ContextGlobal } from "./Utils/globalContext";
+import axios from 'axios';
 
 const CardRecomendaciones = ({
   id,
@@ -21,9 +21,10 @@ const CardRecomendaciones = ({
   const MAX_LENGTH = 200;
   const { state, dispatch } = useContext(ContextGlobal);
 
-  const [showFullDescription, setShowFullDescription] = useState(false);
-
   const [characteristics, setCharacteristics] = useState([]);
+
+  //funcion de boton mas-menos
+  const [showFullDescription, setShowFullDescription] = useState(false);
 
   const shortDescription =
     description.length > MAX_LENGTH
@@ -35,10 +36,13 @@ const CardRecomendaciones = ({
   };
 
   useEffect(() => {
-    // Hacer una solicitud GET para obtener las características del producto
-    fetch(`http://localhost:8080/caracteristica/producto/${id}`)
-      .then((response) => response.json())
-      .then((data) => setCharacteristics(data));
+    axios.get(`http://localhost:8080/caracteristica/producto/${id}`)
+      .then((response) => {
+        setCharacteristics(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, [id]);
 
   return (
@@ -81,13 +85,11 @@ const CardRecomendaciones = ({
             </a>
           </p>
 
-          
-            {characteristics.map((caracteristica) => (
-              <span key={caracteristica.id} className="icono-servicio">{elegirServicio(caracteristica.titulo, "#383b58")}</span>
-            ))}
-          
-          {/* <FontAwesomeIcon icon={faWifi} className="icono extra" />
-          <FontAwesomeIcon icon={faPersonSwimming} className="icono extra" /> */}
+          {characteristics.map((caracteristica) => (
+            <span key={caracteristica.id} className="icono-servicio">
+              {elegirServicio(caracteristica.titulo, "#383b58")}
+            </span>
+          ))}
         </div>
         <p>
           {showFullDescription ? description : shortDescription}

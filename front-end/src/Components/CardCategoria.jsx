@@ -7,7 +7,7 @@ const CardCategoria = ({ nombre, imagen, cantidad, handleClick }) => {
       <img src={imagen} alt={nombre} />
       <div>
         <h3>{nombre}</h3>
-        <p>{cantidad} hoteles</p>
+        <p> 845.253 {nombre}</p>
       </div>
     </div>
   );
