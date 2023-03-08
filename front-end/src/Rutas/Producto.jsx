@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faChevronLeft, faStar } from '@fortawesome/free-solid-svg-icons'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
@@ -11,10 +11,12 @@ import Calendario from '../Components/Calendario';
 import Map from '../Components/Map';
 import ImgContainer from '../Components/ImgComponent/ImgContainer';
 import axios from 'axios'
+import { ContextGlobal } from '../Components/Utils/globalContext';
 
 const Producto = () => {
 
     const { id } = useParams();
+    const { state, dispatch } = useContext(ContextGlobal);
     const navigate = useNavigate();
     const [data, setData] = useState({});
     const [images, setImages] = useState([]);
@@ -27,8 +29,18 @@ const Producto = () => {
 
     useEffect(() => {
         const seccion = document.getElementById('mapa');
-        if (seccion) {
-          seccion.scrollIntoView({ behavior: 'smooth' });
+        console.log(state.map);
+        if (seccion && state.map === true) {
+          seccion.scrollIntoView({behavior: "smooth"});
+          dispatch({
+            type: "register",
+            payload: {
+                ...state,
+                map: false
+            }
+        })
+        } else {
+            window.scrollTo({top: 0})
         }
       }, []);
 
