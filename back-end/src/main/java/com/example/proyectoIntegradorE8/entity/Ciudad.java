@@ -3,7 +3,7 @@ package com.example.proyectoIntegradorE8.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "ciudad")
+@Table (name = "ciudad")
 public class Ciudad {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -30,7 +30,6 @@ public class Ciudad {
         this.provincia = provincia;
         this.pais = pais;
     }
-
 
     public Long getId() {
         return id;
