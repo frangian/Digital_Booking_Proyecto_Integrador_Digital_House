@@ -6,7 +6,6 @@ import com.example.proyectoIntegradorE8.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -23,19 +22,35 @@ public class ProductoService {
         this.productoRepository = productoRepository;
     }
 
-    public Producto crearProducto (Producto producto){
-        logger.info("El producto fue creado con éxito.");
-        return productoRepository.save(producto);
+    public Producto guardarProducto (Producto producto) throws Exception {
+        try {
+            logger.info("Se inició una operación de guardado del producto con titulo: "+
+                    producto.getTitulo());
+            return productoRepository.save(producto);
+        } catch (Exception e){
+            logger.info("No se pudo guardar el producto en la BBDD");
+            throw new Exception(e.getMessage());
+        }
     }
-
+    public Optional<Producto> buscarProductoXid (Long id){
+        logger.info("Se inició la búsqueda del producto con id = "+id);
+        return productoRepository.findById(id);
+    }
+    public void actualizarProducto (Producto producto) throws Exception {
+        try {
+            logger.info("Se inició una operación de actualizacion del producto con id: "+
+                    producto.getId());
+            productoRepository.save(producto);
+        } catch (Exception e){
+            logger.info("No se pudo actualizar el producto");
+            throw new Exception(e.getMessage());
+        }
+    }
     public List<Producto> listarProductos (){
         logger.info("Se inició una operación de listado de productos");
         return productoRepository.findAll();
     }
 
-    public Optional<Producto> buscarProductoXid (Long id){ return productoRepository.findById(id);
-
-    };
 
     public List<Producto> productoPorCategoria (Long id){
         logger.info("Se inició la búsqueda del producto");
