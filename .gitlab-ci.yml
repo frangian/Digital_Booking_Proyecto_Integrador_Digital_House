@@ -1,0 +1,22 @@
+
+
+stages:          
+  - build
+  - test
+  - deploy
+
+build:       
+  stage: build
+  script:
+    - echo "Compiling the code..."
+
+test:  
+  stage: test    
+  script:
+    - echo "Running unit tests... "
+
+deploy-job:      
+  stage: deploy 
+  script:
+    - echo "Deploying application..."
+    - echo "Application successfully deployed."
