@@ -15,7 +15,7 @@ import java.util.*;
 @RequestMapping("/producto")
 public class ProductoController {
 
-    private static final Logger logger = Logger.getLogger(ProductoService.class);
+    private static final Logger logger = Logger.getLogger(ProductoController.class);
 
     private ProductoService productoService;
 
@@ -24,10 +24,10 @@ public class ProductoController {
         this.productoService = productoService;
     }
 
-    //crear un producto
     @PostMapping
-    public ResponseEntity<Producto> crearProducto (@RequestBody Producto producto){
-        return ResponseEntity.ok(productoService.crearProducto(producto));
+    public ResponseEntity<String> guardarProducto (@RequestBody Producto producto) throws Exception {
+        productoService.guardarProducto(producto);
+        return ResponseEntity.ok("Se registró el producto: "+producto.getTitulo());
     }
 
     // listar productos
@@ -40,12 +40,12 @@ public class ProductoController {
     public ResponseEntity<Producto> buscarProducto(@PathVariable Long id) throws ResourceNotFoundException {
         Optional<Producto> resultado = productoService.buscarProductoXid(id);
         if (resultado.isPresent()) {
-            logger.info("El producto con id: "+id+", fue encontrado en la BD");
+            logger.info("Se encontro el producto con id: "+id+" en la BBDD exitosamente");
             return ResponseEntity.ok(resultado.get());
         } else {
             throw new ResourceNotFoundException("El producto con id: "+id+" no existe en la BD");
         }
-    };
+    }
 
     // buscar por  producto por categoria
     @GetMapping("/categoria/{categoria}")
