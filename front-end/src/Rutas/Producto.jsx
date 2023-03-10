@@ -29,7 +29,6 @@ const Producto = () => {
 
     useEffect(() => {
         const seccion = document.getElementById('mapa');
-        console.log(state.map);
         if (seccion && state.map === true) {
           seccion.scrollIntoView({behavior: "smooth"});
           dispatch({
