@@ -954,6 +954,7 @@ body {
   align-items: center;
   color: var(--main-dark-gray);
   font-weight: 700;
+  margin: 20px 0;
 }
 
 .all-images {
@@ -970,7 +971,7 @@ body {
   cursor: pointer;
   border-radius: 6px;
   width: 15%;
-  height: 80%;
+  height: 50%;
 }
 
 .carousel-bottom-img:hover {
