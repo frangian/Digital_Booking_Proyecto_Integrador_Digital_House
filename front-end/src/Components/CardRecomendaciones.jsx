@@ -18,13 +18,14 @@ const CardRecomendaciones = ({
   description,
 }) => {
   const navigate = useNavigate();
-  const MAX_LENGTH = 200;
+  const MAX_LENGTH = 100;
   const { state, dispatch } = useContext(ContextGlobal);
 
   const [characteristics, setCharacteristics] = useState([]);
 
   //funcion de boton mas-menos
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const [like, setLike] = useState(false);
 
   const shortDescription =
     description.length > MAX_LENGTH
@@ -34,6 +35,7 @@ const CardRecomendaciones = ({
   const handleToggleDescription = () => {
     setShowFullDescription(!showFullDescription);
   };
+
 
   useEffect(() => {
     axios.get(`http://localhost:8080/caracteristica/producto/${id}`)
@@ -49,7 +51,9 @@ const CardRecomendaciones = ({
     <div className="card-recomendaciones">
       <div className="image-container">
         <img src={imagen} alt={title} />
-        <FontAwesomeIcon icon={faHeart} className="fa-heart" />
+        <FontAwesomeIcon icon={faHeart} className={like ? "fa-heart heart-active grow-heart" : "fa-heart grow-heart"} onClick={() => setLike(!like)}/>
+
+
       </div>
       <div className="info-container">
         <div className="info-container-header">
