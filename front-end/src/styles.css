@@ -549,8 +549,9 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 430px;
+  height: 330px;
 }
+
 
 .image-container {
   position: relative;
@@ -563,6 +564,27 @@ body {
   top: 5%;
   right: 4%;
   color: var(--main-white);
+  height: 25px;
+  cursor: pointer;
+  border-radius: 100px;
+}
+
+.fa-heart:hover {
+  transform: scale(1.1);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.grow-heart {
+  transition: all 0.3s ease; /* agrega una transición suave al crecimiento */
+}
+
+.grow-heart:hover {
+  transform: scale(1.1); /* escala el icono al 110% del tamaño original */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* agrega sombra */
+}
+
+.heart-active{
+  color: red;
 }
 
 .card-recomendaciones img {
@@ -577,7 +599,7 @@ body {
   justify-content: space-between;
   padding: 1vw;
   width: 50%;
-  height: auto;
+  height: 100%;
 }
 
 .info-container h3 {
@@ -592,17 +614,17 @@ body {
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1rem;
+  margin: 0.5vw;
+  color: var(--main-dark-gray);
 }
 
 .info-container h2 {
-  font-size: 1.5vw;
+  font-size: 1vw;
+  font-weight: 700;
+  line-height: 1;
   padding: 0;
   margin-left: 0.5vw;
-}
-
-.info-container p {
-  margin: 0.5vw;
-  color: var(--main-dark-gray);
+  white-space: nowrap;
 }
 
 .info-container span {
@@ -610,10 +632,7 @@ body {
   font-weight: 600;
 }
 
-.info-container-header h2{
-  white-space: nowrap;
-  margin-top: 10px;
-}
+
 
 .info-categoria-container{
   display: flex;
@@ -633,6 +652,8 @@ body {
 }
 
 .info-container-header > div{
+  display: flex;
+  flex-direction: column;
   max-width: 70%;
 }
 
@@ -644,6 +665,7 @@ body {
 
 .puntuacion-container p{
   font-weight: 700;
+  font-size: 1rem;
 }
 
 .enlace-mapa{
@@ -873,92 +895,70 @@ body {
   align-items: center;
 }
 
-.desktop-carousel .carousel-container {
-  background-color: var(--main-white);
-  width: 50vw;
+.carousel-container {
+  width: 768px;
   height: 70vh;
+  background-color: var(--main-dark-white);
   border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.main-image {
-  width: 100%;
-  height: 75%;
   position: relative;
 }
 
-.main-image .icon {
+.icono-x-carousel {
   position: absolute;
-  color: var(--main-white);
-  cursor: pointer;
-} 
-
-.icon-x {
   top: 3%;
   right: 3%;
-}
-
-.left-arrow, .right-arrow {
-  background-color: var(--main-green);
-  border-radius: 50%;
-  padding: 8px 16px;
+  color: var(--main-white);
   font-size: 1.2rem;
-  top: 50%;
+  z-index: 100;
+  cursor: pointer;
 }
 
-.left-arrow {
-  left: 1%;
+.product-images-slider {
+  width: 100%;
+  height: 70%;
 }
 
-.right-arrow {
-  right: 1%;
+.product-images-slider .swiper-slide {
+  overflow: hidden;
+  position: relative;
 }
 
-.main-image img {
-  border-radius: 6px 6px 0 0;
+.product-images-slider .swiper-slide img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  border-radius: 6px 6px 0 0;
 }
 
-.all-images-container {
-  width: 100%;
+.product-images-slider .swiper-button-prev {
+  left: 30;
+  color: var(--main-green);
+}
+
+.product-images-slider .swiper-button-next {
+  right: 30;
+  color: var(--main-green);
+}
+
+.product-images-slider-thumbs {
+  width: 95%;
   height: 30%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  color: var(--main-dark-gray);
-  font-weight: 700;
-  margin: 20px 0;
-}
-
-.all-images {
-  display: flex;
-  width: 98%;
-  height: 100%;
   justify-content: space-around;
+  margin-top: 20px;
 }
 
-.carousel-bottom-img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.product-images-slider-thumbs .swiper-slide {
   cursor: pointer;
   border-radius: 6px;
-  width: 15%;
-  height: 50%;
-}
-
-.carousel-bottom-img:hover {
-  outline: 2px solid var(--main-green);
-}
-
-.carousel-bottom-img img {
-  width: 100%;
   height: 100%;
+}
+
+.product-images-slider-thumbs .swiper-slide img {
+  width: 100%;
+  height: 15vh;
   border-radius: 6px;
 }
 
@@ -1464,7 +1464,7 @@ body {
 
   .card-recomendaciones {
     flex-direction: column;
-    height: auto;
+    height: fit-content;
     background-color: var(--main-white);
   }
 
@@ -1475,6 +1475,11 @@ body {
 
   .image-container {
     height: 50%;
+    width: 100%;
+  }
+
+  .image-container img {
+    height: 300px;
   }
 
   .info-container {
@@ -1485,6 +1490,14 @@ body {
 
   .info-container h2 {
     color: rgba(56, 59, 88, 1);
+  }
+
+  .info-container > p{
+    margin-bottom: 10px;
+  }
+
+  .info-container > * { 
+    margin-bottom: 10px;
   }
 
   .ver-mas-btn {
