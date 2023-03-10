@@ -549,8 +549,9 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 430px;
+  height: 330px;
 }
+
 
 .image-container {
   position: relative;
@@ -563,6 +564,27 @@ body {
   top: 5%;
   right: 4%;
   color: var(--main-white);
+  height: 25px;
+  cursor: pointer;
+  border-radius: 100px;
+}
+
+.fa-heart:hover {
+  transform: scale(1.1);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.grow-heart {
+  transition: all 0.3s ease; /* agrega una transición suave al crecimiento */
+}
+
+.grow-heart:hover {
+  transform: scale(1.1); /* escala el icono al 110% del tamaño original */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* agrega sombra */
+}
+
+.heart-active{
+  color: red;
 }
 
 .card-recomendaciones img {
@@ -577,7 +599,7 @@ body {
   justify-content: space-between;
   padding: 1vw;
   width: 50%;
-  height: auto;
+  height: 100%;
 }
 
 .info-container h3 {
@@ -592,17 +614,17 @@ body {
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1rem;
+  margin: 0.5vw;
+  color: var(--main-dark-gray);
 }
 
 .info-container h2 {
-  font-size: 1.5vw;
+  font-size: 1vw;
+  font-weight: 700;
+  line-height: 1;
   padding: 0;
   margin-left: 0.5vw;
-}
-
-.info-container p {
-  margin: 0.5vw;
-  color: var(--main-dark-gray);
+  white-space: nowrap;
 }
 
 .info-container span {
@@ -610,10 +632,7 @@ body {
   font-weight: 600;
 }
 
-.info-container-header h2{
-  white-space: nowrap;
-  margin-top: 10px;
-}
+
 
 .info-categoria-container{
   display: flex;
@@ -633,6 +652,8 @@ body {
 }
 
 .info-container-header > div{
+  display: flex;
+  flex-direction: column;
   max-width: 70%;
 }
 
@@ -644,6 +665,7 @@ body {
 
 .puntuacion-container p{
   font-weight: 700;
+  font-size: 1rem;
 }
 
 .enlace-mapa{
@@ -1463,7 +1485,7 @@ body {
 
   .card-recomendaciones {
     flex-direction: column;
-    height: auto;
+    height: fit-content;
     background-color: var(--main-white);
   }
 
@@ -1474,6 +1496,11 @@ body {
 
   .image-container {
     height: 50%;
+    width: 100%;
+  }
+
+  .image-container img {
+    height: 300px;
   }
 
   .info-container {
@@ -1484,6 +1511,14 @@ body {
 
   .info-container h2 {
     color: rgba(56, 59, 88, 1);
+  }
+
+  .info-container > p{
+    margin-bottom: 10px;
+  }
+
+  .info-container > * { 
+    margin-bottom: 10px;
   }
 
   .ver-mas-btn {
