@@ -1,10 +1,7 @@
 package com.example.proyectoIntegradorE8.entity;
 
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,15 +26,19 @@ public class Producto {
     private String cancelacion;
     @Column
     private Integer puntuacion;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "categoria_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", referencedColumnName = "id", nullable = false)
     private Categoria categoria;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ciudad_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "ciudad_id", referencedColumnName = "id", nullable = false)
     private Ciudad ciudad;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "producto_x_caracteristica",
+            joinColumns = @JoinColumn(name = "producto_id"),
+            inverseJoinColumns = @JoinColumn(name = "caracteristica_id"))
+    private Set<Caracteristica> caracteristicas = new HashSet<>();
     @OneToMany(mappedBy = "producto")
-    private Set<Imagen> imagenes;
-
+    private Set<Imagen> imagenes = new HashSet<>();
 
     public Producto() {
     }
@@ -163,5 +164,13 @@ public class Producto {
 
     public void setImagenes(Set<Imagen> imagenes) {
         this.imagenes = imagenes;
+    }
+
+    public Set<Caracteristica> getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public void setCaracteristicas(Set<Caracteristica> caracteristicas) {
+        this.caracteristicas = caracteristicas;
     }
 }

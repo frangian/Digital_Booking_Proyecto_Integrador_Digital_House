@@ -1,5 +1,6 @@
 package com.example.proyectoIntegradorE8.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,12 +13,12 @@ public class Imagen {
     private String titulo;
     @Column
     private String url_imagen;
-
-    @ManyToOne (cascade = CascadeType.ALL)
+    @ManyToOne
+    @JsonIgnore
     @JoinColumn (name = "categoria_id", referencedColumnName = "id")
     private Categoria categoria;
-
-    @ManyToOne (cascade = CascadeType.ALL)
+    @ManyToOne
+    @JsonIgnore
     @JoinColumn (name = "producto_id", referencedColumnName = "id")
     private Producto producto;
 
@@ -59,24 +60,20 @@ public class Imagen {
         this.url_imagen = url_imagen;
     }
 
-    //esto queda comentado, no borrarlo por ahora por favor
+    public Categoria getCategoria() {
+        return categoria;
+    }
 
-//    public Categoria getCategoria() {
-//        return categoria;
-//    }
-//
-//    public void setCategoria(Categoria categoria) {
-//        this.categoria = categoria;
-//    }
-//
-//    public Producto getProducto() {
-//        return producto;
-//    }
-//
-//    public void setProducto(Producto producto) {
-//        this.producto = producto;
-//    }
-    // -----------------------------------------------------
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
 
 }

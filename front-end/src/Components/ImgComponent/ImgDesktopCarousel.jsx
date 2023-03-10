@@ -1,44 +1,57 @@
 import React, { useState } from 'react'
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Thumbs } from "swiper";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faX, faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { faX } from '@fortawesome/free-solid-svg-icons'
 
 const ImgDesktopCarousel = ({ imgList, open, closer }) => {
 
-  const [mainImg, setMainImg] = useState(0);
+  const [thumbsSwiper, setThumbsSwiper] = useState()
 
   return (
     <div className={`desktop-carousel ${open ? "" : "oculto"}`}>
-        <div className='carousel-container'>
-          <div className="main-image">
-            <FontAwesomeIcon icon={faX} className="icon icon-x" onClick={() => closer(false)}/>
-            <div className={`left-arrow noselect ${mainImg === 0 ? "oculto" : ""} icon`}
-            onClick={() => setMainImg(mainImg - 1)}
-            >
-              <FontAwesomeIcon icon={faChevronLeft}/>
-            </div>
-            <div className={`right-arrow noselect ${mainImg === imgList.length - 1 ? "oculto" : ""} icon`}
-            onClick={() => setMainImg(mainImg + 1)}
-            >
-              <FontAwesomeIcon icon={faChevronRight}/>
-            </div>
-            <img src={imgList[mainImg]?.url_imagen} alt="" />
-          </div>
-          <div className="all-images-container">
-            <p>{mainImg + 1}/{imgList.length}</p>
-            <div className="all-images"
-            style={{gridTemplateColumns: `repeat(${imgList?.length}, 1fr)`}}
-            >
-              {imgList?.map((url, i) => (
-                <div key={i} className="carousel-bottom-img"
-                style={i === mainImg ? {outline: "2px solid #000"} : {}}
-                onClick={() => setMainImg(i)}
-                >
-                  <img src={url.url_imagen} alt=""/>
+      <div className="carousel-container">
+        <FontAwesomeIcon icon={faX} onClick={() => closer()} className="icono-x-carousel"/>
+        <Swiper
+        loop={true}
+        spaceBetween={10}
+        navigation={true}
+        modules={[Navigation, Thumbs]}
+        grabCursor={true}
+        thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
+        className='product-images-slider'
+        >
+          {
+            imgList?.map((item) => (
+              <SwiperSlide key={item.id}>
+                <img src={item.url_imagen} alt={item.titulo} />
+              </SwiperSlide>
+            ))
+          }
+        </Swiper>
+        <Swiper
+        onSwiper={setThumbsSwiper}
+        loop={true}
+        spaceBetween={10}
+        slidesPerView={4}
+        modules={[Navigation, Thumbs]}
+        className='product-images-slider-thumbs'
+        >
+          {
+            imgList?.map((item) => (
+              <SwiperSlide key={item.id}>
+                <div>
+                  <img src={item.url_imagen} alt={item.titulo} />
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
+              </SwiperSlide>
+            ))
+          }
+        </Swiper>
+      </div>
     </div>
   )
 }
