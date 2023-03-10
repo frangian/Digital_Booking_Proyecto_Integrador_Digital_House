@@ -1,6 +1,9 @@
 package com.example.proyectoIntegradorE8.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table (name = "ciudad")
@@ -14,6 +17,9 @@ public class Ciudad {
     private String provincia;
     @Column
     private String pais;
+    @OneToMany(mappedBy = "ciudad")
+    @JsonIgnore
+    private Set<Producto> productos = new HashSet<>();
 
     public Ciudad() {
     }
@@ -61,5 +67,13 @@ public class Ciudad {
 
     public void setPais(String pais) {
         this.pais = pais;
+    }
+
+    public Set<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(Set<Producto> productos) {
+        this.productos = productos;
     }
 }

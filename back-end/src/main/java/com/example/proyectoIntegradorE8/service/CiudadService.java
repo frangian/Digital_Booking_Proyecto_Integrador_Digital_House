@@ -5,15 +5,14 @@ import com.example.proyectoIntegradorE8.repository.CiudadRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CiudadService {
-    private static final Logger logger = Logger.getLogger(CiudadService.class); //chquear
+    private static final Logger logger = Logger.getLogger(CiudadService.class);
 
-    CiudadRepository ciudadRepository;
+    private CiudadRepository ciudadRepository;
 
     @Autowired
     public CiudadService (CiudadRepository ciudadRepository){
@@ -44,9 +43,14 @@ public class CiudadService {
             throw new Exception(e.getMessage());
         }
     }
-    public List<Ciudad> listarTodas(){
-        logger.info("Se inició una operación de listado de ciudades");
-        return ciudadRepository.findAll();
+    public List<Ciudad> listarTodas() {
+        try {
+            logger.info("Se inició una operación de listado de ciudades");
+            return ciudadRepository.findAll();
+        } catch (Exception e) {
+            logger.error("Error al listar las ciudades", e);
+            throw e;
+        }
     }
 
 //    public List<Ciudad> productoXCiudad (Long id){
