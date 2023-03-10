@@ -29,6 +29,18 @@ const Buscador = ({ onCiudadSeleccionada }) => {
     setDateRange(value);
   };
 
+/* ----------------------------------- FILTRO POR CIUDAD Y FECHAS ---------------------------------- */
+  const buscarAlojamientos = async (ciudad, fechaEntrada, fechaSalida) => {
+    const endpoint = `http://localhost:8080/producto?ciudad=${ciudad}&fechaEntrada=${fechaEntrada}&fechaSalida=${fechaSalida}`;
+  
+    try {
+      const response = await axios.get(endpoint);
+      console.log(response.data); 
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   /* ----------------------------------- COMPLETAR CON URL DE LA API PARA OBTENER LISTADO DE CIUDADES ---------------------------------- */
   useEffect(() => {
     axios.get('http://localhost:8080/ciudad')
