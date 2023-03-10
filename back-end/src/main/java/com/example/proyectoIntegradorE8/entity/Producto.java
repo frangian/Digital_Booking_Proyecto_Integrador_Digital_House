@@ -32,13 +32,15 @@ public class Producto {
     @ManyToOne
     @JoinColumn(name = "ciudad_id", referencedColumnName = "id", nullable = false)
     private Ciudad ciudad;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "producto_x_caracteristica",
             joinColumns = @JoinColumn(name = "producto_id"),
             inverseJoinColumns = @JoinColumn(name = "caracteristica_id"))
     private Set<Caracteristica> caracteristicas = new HashSet<>();
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Imagen> imagenes = new HashSet<>();
+
+    //constructores & getters & setters
 
     public Producto() {
     }
@@ -172,5 +174,16 @@ public class Producto {
 
     public void setCaracteristicas(Set<Caracteristica> caracteristicas) {
         this.caracteristicas = caracteristicas;
+    }
+
+    //metodos para agregar imagenes cuando agreguemos productos:
+    public void agregarImagen(Imagen imagen) {
+        imagenes.add(imagen);
+        imagen.setProducto(this);
+    }
+
+    public void removerImagen(Imagen imagen) {
+        imagenes.remove(imagen);
+        imagen.setProducto(null);
     }
 }

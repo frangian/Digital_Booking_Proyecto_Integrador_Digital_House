@@ -25,12 +25,15 @@ public class ProductoController {
     }
 
     @PostMapping
-    public ResponseEntity<String> guardarProducto (@RequestBody Producto producto) throws Exception {
-        productoService.guardarProducto(producto);
-        return ResponseEntity.ok("Se registró el producto: "+producto.getTitulo());
+    public ResponseEntity<Producto> guardarProducto(@RequestBody Producto producto) throws Exception {
+        logger.info("guardando un producto...");
+
+        Producto productoGuardado = productoService.guardarProducto(producto);
+
+        logger.info("producto guardado en la BBDD exitosamente");
+        return ResponseEntity.ok(productoGuardado);
     }
 
-    // listar productos
     @GetMapping
     public ResponseEntity<List<Producto>> listarProductos() {
         return ResponseEntity.ok(productoService.listarProductos());

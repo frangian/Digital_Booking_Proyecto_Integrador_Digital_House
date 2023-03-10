@@ -22,6 +22,8 @@ public class Imagen {
     @JoinColumn (name = "producto_id", referencedColumnName = "id")
     private Producto producto;
 
+    //constructores & getters & setters
+
     public Imagen() {
     }
 
