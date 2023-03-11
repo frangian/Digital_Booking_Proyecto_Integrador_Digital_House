@@ -7,8 +7,8 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface CaractersiticaRepository extends JpaRepository <Caracteristica,Integer> {
+public interface CaractersiticaRepository extends JpaRepository <Caracteristica,Long> {
 
     @Query(value = "SELECT c.* FROM caracteristica c INNER JOIN producto_x_caracteristica pc ON c.id = pc.caracteristica_id WHERE pc.producto_id = :productoId", nativeQuery = true)
-    List<Caracteristica> findAllByProductoId(@Param("productoId") Integer productoId);
+    List<Caracteristica> findAllByProductoId(@Param("productoId") Long productoId);
 }

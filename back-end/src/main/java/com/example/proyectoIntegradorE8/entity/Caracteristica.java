@@ -10,7 +10,7 @@ import java.util.Set;
 public class Caracteristica {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @Column
     private String titulo;
     @ManyToMany(mappedBy = "caracteristicas")
@@ -20,7 +20,7 @@ public class Caracteristica {
     public Caracteristica() {
     }
 
-    public Caracteristica(Integer id, String titulo) {
+    public Caracteristica(Long id, String titulo) {
         this.id = id;
         this.titulo = titulo;
     }
@@ -29,11 +29,11 @@ public class Caracteristica {
         this.titulo = titulo;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
