@@ -1,5 +1,6 @@
 package com.example.proyectoIntegradorE8.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -39,6 +40,9 @@ public class Producto {
     private Set<Caracteristica> caracteristicas = new HashSet<>();
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Imagen> imagenes = new HashSet<>();
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonBackReference
+    private Set<Reserva> reservas = new HashSet<>();
 
     //constructores & getters & setters
 
@@ -176,14 +180,22 @@ public class Producto {
         this.caracteristicas = caracteristicas;
     }
 
+    public Set<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(Set<Reserva> reservas) {
+        this.reservas = reservas;
+    }
+
     //metodos para agregar imagenes cuando agreguemos productos:
     public void agregarImagen(Imagen imagen) {
         imagenes.add(imagen);
         imagen.setProducto(this);
     }
-
     public void removerImagen(Imagen imagen) {
         imagenes.remove(imagen);
         imagen.setProducto(null);
     }
+//------------------------------------------------------------------------
 }
