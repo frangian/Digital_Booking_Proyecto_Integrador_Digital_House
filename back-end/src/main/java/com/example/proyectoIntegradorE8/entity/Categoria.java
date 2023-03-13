@@ -30,7 +30,6 @@ public class Categoria  {
         this.descripcion = descripcion;
     }
 
-
     public Long getId() {
         return id;
     }
