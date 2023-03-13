@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 
-export const initialState = {nombre: "", apellido: "", mail: "", pass: "", logged: false, map: true};
+export const initialState = {nombre: "Juan", apellido: "Gomez", mail: "jgomez@gamil.com", pass: "", logged: false, map: true};
 
 export const ContextGlobal = createContext();
 

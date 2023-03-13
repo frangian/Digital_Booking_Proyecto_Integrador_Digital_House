@@ -1202,6 +1202,209 @@ body {
   padding: 10px 0;
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                Reservas Form                               */
+/* -------------------------------------------------------------------------- */
+
+
+.reserva-form-container {
+  width: 100%;
+  background-color: var(--main-dark-white);
+  display: flex;
+  padding: 20px 20px;
+}
+
+.reserva-form-container form {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.datos-reserva {
+  width: 89%;
+  margin-bottom: 20px;
+}
+
+.datos-reserva .datos-reserva-inputs {
+  background-color: var(--main-white);
+  border-radius: 6px;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.datos-reserva .datos-reserva-inputs div {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3px;
+}
+
+.datos-reserva .datos-reserva-inputs div input {
+  height: 40px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 10px;
+  font-weight: 700;
+}
+
+.datos-reserva .datos-reserva-inputs div label {
+  margin: 5px 2px;
+}
+
+.datos-reserva .datos-reserva-inputs div:last-child input {
+  box-shadow: 0px 1px 5px 0px #00000026;
+}
+
+.datos-reserva .datos-reserva-inputs div:last-child input:focus {
+  outline: none;
+}
+
+.datos-reserva .datos-reserva-inputs div .input-reserva:disabled {
+  background-color: rgb(225, 225, 225);
+}
+
+.calendar-container-reserva {
+  height: 40vh;
+  margin-bottom: 100px;
+}
+
+.llegada-card-container {
+  background-color: var(--main-white);
+  box-shadow: 0px 4px 4px 0px #00000040;
+  border-radius: 6px;
+  width: 89%;
+  display: flex;
+  flex-direction: column;
+  height: 20vh;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.llegada-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 95%;
+}
+
+.llegada-card-content h5 span {
+  border: 2px solid var(--main-light-gray);
+  border-radius: 50%;
+  padding: 0px 3px;
+  margin-right: 5px;
+}
+
+.llegada-card-content p {
+  font-weight: 700;
+}
+
+.basic-single {
+  width: 40%;
+}
+
+/* ------------------------------ Card reserva ------------------------------ */
+
+.card-reserva-container {
+  width: 30%;
+  margin: 50px 0;
+}
+
+.card-reserva {
+  width: 95%;
+  background-color: var(--main-white);
+  box-shadow: 0px 4px 4px 0px #00000040;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-reserva h3 {
+  padding: 20px;
+}
+
+
+.card-reserva img {
+  width: 100%;
+  height: 40vh;
+  margin-bottom: 20px;
+}
+
+.right-card-reserva {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-reserva div {
+  margin: 20px;
+}
+
+div.card-reserva-content {
+  width: 100%;
+  margin: 0;
+}
+
+.card-reserva .info-card-reserva h3 {
+  padding: 0;
+}
+
+.info-card-reserva .titulo-categoria-reserva {
+  font-weight: 700;
+  color: #b2b2b2;
+  text-transform: capitalize;
+  font-size: 1.2rem;
+}
+
+.info-card-reserva .estrellas-reserva {
+  margin: 0 0 20px;
+}
+
+.info-card-reserva .ubicacion-reserva {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.info-card-reserva .ubicacion-reserva span {
+  margin-right: 5px;
+}
+
+.checkin-checkout div {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto 0;
+  padding: 20px 0;
+  font-weight: 700;
+}
+
+.checkin {
+  border-top: 1px solid #b5b5b5;
+  border-bottom: 1px solid #b5b5b5;
+}
+
+.checkout {
+  border-bottom: 1px solid #b5b5b5;
+}
+
+.card-reserva .small-button {
+  color: var(--main-white);
+  background-color: var(--main-green);
+  align-self: center;
+  margin: 20px 0;
+  width: 90%;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   Extras                                   */
+/* -------------------------------------------------------------------------- */
+
 .oculto {
   display: none;
 }
@@ -1303,6 +1506,59 @@ body {
   .desktop-carousel .carousel-container {
     width: 90vw;
   }
+
+  .reserva-form-container {
+    flex-direction: column;
+  }
+
+  .datos-reserva, .llegada-container, .card-reserva-container {
+    width: 93vw;
+  }
+
+  .llegada-card-container, .card-reserva {
+    width: 100%;
+  }
+
+  .card-reserva img {
+    border-radius: 6px;
+    width: 100%;
+    height: 50vh;
+  }
+
+  .card-reserva div {
+    margin: 0;
+  }
+
+  .card-reserva-content {
+    display: flex;
+  }
+
+  .title-img-reserva {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+  }
+
+  .right-card-reserva {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-card-reserva, .checkin-checkout {
+    width: 90%;
+  }
+
+  .checkin-checkout {
+    padding: 20px 0;
+  }
+
+  .calendar-container-reserva {
+    margin-bottom: 120px;
+  }
+
 }
 
 /* Para pantallas de tamaño menor a 768px (mobile) */
