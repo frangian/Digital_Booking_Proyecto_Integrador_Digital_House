@@ -1,10 +1,8 @@
 package com.example.proyectoIntegradorE8.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,15 +27,24 @@ public class Producto {
     private String cancelacion;
     @Column
     private Integer puntuacion;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "categoria_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", referencedColumnName = "id", nullable = false)
     private Categoria categoria;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ciudad_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "ciudad_id", referencedColumnName = "id", nullable = false)
     private Ciudad ciudad;
-    @OneToMany(mappedBy = "producto")
-    private Set<Imagen> imagenes;
+    @ManyToMany
+    @JoinTable(name = "producto_x_caracteristica",
+            joinColumns = @JoinColumn(name = "producto_id"),
+            inverseJoinColumns = @JoinColumn(name = "caracteristica_id"))
+    private Set<Caracteristica> caracteristicas = new HashSet<>();
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Imagen> imagenes = new HashSet<>();
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonBackReference
+    private Set<Reserva> reservas = new HashSet<>();
 
+    //constructores & getters & setters
 
     public Producto() {
     }
@@ -164,4 +171,31 @@ public class Producto {
     public void setImagenes(Set<Imagen> imagenes) {
         this.imagenes = imagenes;
     }
+
+    public Set<Caracteristica> getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public void setCaracteristicas(Set<Caracteristica> caracteristicas) {
+        this.caracteristicas = caracteristicas;
+    }
+
+    public Set<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(Set<Reserva> reservas) {
+        this.reservas = reservas;
+    }
+
+    //metodos para agregar imagenes cuando agreguemos productos:
+    public void agregarImagen(Imagen imagen) {
+        imagenes.add(imagen);
+        imagen.setProducto(this);
+    }
+    public void removerImagen(Imagen imagen) {
+        imagenes.remove(imagen);
+        imagen.setProducto(null);
+    }
+//------------------------------------------------------------------------
 }

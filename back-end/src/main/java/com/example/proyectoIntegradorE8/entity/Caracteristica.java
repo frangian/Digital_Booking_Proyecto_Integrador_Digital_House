@@ -1,20 +1,26 @@
 package com.example.proyectoIntegradorE8.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table (name = "caracteristica")
 public class Caracteristica {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @Column
     private String titulo;
+    @ManyToMany(mappedBy = "caracteristicas")
+    @JsonIgnore
+    private Set<Producto> productos = new HashSet<>();
 
     public Caracteristica() {
     }
 
-    public Caracteristica(Integer id, String titulo) {
+    public Caracteristica(Long id, String titulo) {
         this.id = id;
         this.titulo = titulo;
     }
@@ -23,11 +29,11 @@ public class Caracteristica {
         this.titulo = titulo;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -37,5 +43,13 @@ public class Caracteristica {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public Set<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(Set<Producto> productos) {
+        this.productos = productos;
     }
 }
