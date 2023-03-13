@@ -58,5 +58,14 @@ public class ReservaService {
             throw new Exception("Ocurrio un error al eliminar la reserva");
         }
     }
+    public List<Reserva> reservaPorProducto (Long id) throws Exception {
+        try {
+            logger.info("Buscando todos las reservas para el producto con id: "+id);
+            return reservaRepository.findByProductoId(id);
+        } catch (Exception e){
+            logger.error("Error al buscar reservas por producto por su id. Exception: "+e.getMessage());
+            throw new Exception("Ocurrio un error al buscar las reservas asignadas al id: "+id+" del producto.");
+        }
+    }
 
 }

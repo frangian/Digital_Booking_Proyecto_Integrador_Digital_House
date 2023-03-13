@@ -76,5 +76,13 @@ public class ReservaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+    @GetMapping("/producto/{producto}")
+    public ResponseEntity<?> reservaPorProducto(@PathVariable Long producto) {
+        try {
+            return ResponseEntity.ok(reservaService.reservaPorProducto(producto));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 
 }
