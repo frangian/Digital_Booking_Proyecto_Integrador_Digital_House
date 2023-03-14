@@ -28,6 +28,7 @@ public class Producto {
     @Column
     private Integer puntuacion;
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "categoria_id", referencedColumnName = "id", nullable = false)
     private Categoria categoria;
     @ManyToOne
