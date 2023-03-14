@@ -1206,7 +1206,11 @@ body {
 /*                                Reservas Form                               */
 /* -------------------------------------------------------------------------- */
 
-.reservas-page {
+/* .reservas-page {
+  margin: 12vh 0 10vh;
+} */
+
+.reservas-page-container {
   margin: 12vh 0 10vh;
 }
 
@@ -1449,6 +1453,43 @@ div.card-reserva-content {
   align-self: center;
   margin: 20px 0;
   width: 90%;
+}
+
+
+/* --------------------------- Reserva confirmada --------------------------- */
+
+.reserva-correcta-container {
+  height: 100vh;
+  width: 100%;
+  background-color: var(--main-dark-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-reserva-confirmada {
+  background-color: var(--main-white);
+  border-radius: 6px;
+  height: 40%;
+  width: 40%;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.texto-reserva-confirmada {
+  text-align: center;
+}
+
+.texto-reserva-confirmada h3 {
+  color: var(--main-green);
+}
+
+.card-reserva-confirmada .small-button {
+  color: var(--main-white);
+  background-color: var(--main-green);
 }
 
 /* -------------------------------------------------------------------------- */

@@ -16,14 +16,14 @@ const ImgContainer = ({ imgList }) => {
                 {imgList?.map((imagen, i) => {
                     if (i < 4) {
                         return (
-                            <div className="imagenes">
-                                <img src={imagen.url_imagen} alt="" />
+                            <div className="imagenes" key={imagen.titulo}>
+                                <img src={imagen.url_imagen} alt={imagen.titulo} />
                             </div>
                         )
                     } else if (i === 4) {
                         return (
-                            <div className="imagenes">
-                                <img src={imagen.url_imagen} alt="" />
+                            <div className="imagenes" key={imagen.titulo}>
+                                <img src={imagen.url_imagen} alt={imagen.titulo} />
                                 <p onClick={() => setOpenCarousel(true)}>Ver más</p>
                             </div>
                         )

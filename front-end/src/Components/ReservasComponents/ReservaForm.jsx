@@ -6,7 +6,7 @@ import DatosReserva from './DatosReserva'
 import Llegada from './Llegada'
 import { getDaysArray } from '../Utils/utils'
 
-const ReservaForm = ({ tituloCategoria, tituloProducto, ubicacion, img, reservas }) => {
+const ReservaForm = ({ tituloCategoria, tituloProducto, ubicacion, img, reservas, productoId }) => {
 
     const { state, dispatch } = useContext(ContextGlobal);
     const [disabledDays, setDisabledDays] = useState([]);
@@ -35,7 +35,13 @@ const ReservaForm = ({ tituloCategoria, tituloProducto, ubicacion, img, reservas
     const handleSubmit = (e) => {
         e.preventDefault();
         let objPostReserva = {
-            horaComienzo: ""
+            horaComienzo: values.horaLlegada,
+            fechaInicial: values.checkIn,
+            fechaFinal: values.checkOut,
+            usuario: 1,
+            producto: {
+                id: productoId
+            }
         }
     }
 

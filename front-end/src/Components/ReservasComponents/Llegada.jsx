@@ -15,7 +15,7 @@ const Llegada = ({ values, changeHour }) => {
         <div className="llegada-card-content">
           <h5>
             <span><FontAwesomeIcon icon={faCheck} className="icon-check"/></span>
-            Tu habitación va a estar lista para el check-in entre las {horas[idValue].label} y las {horas[idValue + 1].label}
+            Tu habitación va a estar lista para el check-in entre las {horas[idValue].label} y las {idValue !== 23 ? horas[idValue + 1].label : horas[0].label}
           </h5>
           <p>Indicá tu horario estimado de llegada</p>
           <Select
@@ -26,9 +26,7 @@ const Llegada = ({ values, changeHour }) => {
             options={horas}
             onChange={(e) => {
               changeHour(e.value)
-              if (e.i === 23) {
-                setIdValue(-1)
-              } else setIdValue(e.i)
+              setIdValue(e.i)
             }}
           />
         </div>
