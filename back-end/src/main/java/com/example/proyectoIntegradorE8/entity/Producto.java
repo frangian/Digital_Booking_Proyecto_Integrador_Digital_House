@@ -1,11 +1,15 @@
 package com.example.proyectoIntegradorE8.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name = "producto")
 public class Producto {
     @Id
@@ -28,7 +32,7 @@ public class Producto {
     @Column
     private Integer puntuacion;
     @ManyToOne
-    @JsonBackReference
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "categoria_id", referencedColumnName = "id", nullable = false)
     private Categoria categoria;
     @ManyToOne

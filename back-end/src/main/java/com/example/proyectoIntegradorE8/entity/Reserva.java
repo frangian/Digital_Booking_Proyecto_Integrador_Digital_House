@@ -1,10 +1,14 @@
 package com.example.proyectoIntegradorE8.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name = "reserva")
 public class Reserva {
     @Id
@@ -19,6 +23,7 @@ public class Reserva {
     @Column (name = "fecha_final", nullable = false)
     private LocalDate fechaFinal;
     @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "producto_id", referencedColumnName = "id")
     private Producto producto;
     @Column (name = "usuario_id")
