@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Calendario from './Calendario';
-import { Calendar, DateObject } from "react-multi-date-picker"
+import { Calendar } from "react-multi-date-picker"
+import { getDaysArray } from '../Utils/utils';
 
-const CalendarContainer = ({ productId }) => {
+const CalendarContainer = ({ productId, reservas }) => {
 
     const Navigate = useNavigate();
+    const [disabledDays, setDisabledDays] = useState([]);
+
+    useEffect(() => {
+        let dayArr = [];
+        reservas?.forEach((reserva) => dayArr = dayArr.concat(getDaysArray(reserva.fechaInicial, reserva.fechaFinal)))
+        setDisabledDays(dayArr)
+    }, [reservas])
 
     return (
         <div className='calendario-container'>
@@ -18,6 +25,13 @@ const CalendarContainer = ({ productId }) => {
                 disableMonthPicker
                 disableYearPicker
                 className='custom-calendar'
+                mapDays={({ date }) => {
+                    let isDisabled = disabledDays.includes(date.format("YYYY/M/D"))
+                    if (isDisabled) return {
+                        disabled: true,
+                        style: { color: "#ccc" }
+                    }
+                }}  
                 />
                 <Calendar 
                 readOnly
@@ -26,6 +40,13 @@ const CalendarContainer = ({ productId }) => {
                 disableMonthPicker
                 disableYearPicker
                 className='custom-calendar mobile'
+                mapDays={({ date }) => {
+                    let isDisabled = disabledDays.includes(date.format("YYYY/M/D"))
+                    if (isDisabled) return {
+                        disabled: true,
+                        style: { color: "#ccc" }
+                    }
+                }}  
                 />
                 <div className="submit-container">
                     <p>Agregá tus fechas de viaje para obtener precios exactos</p>

@@ -27,6 +27,7 @@ const Producto = () => {
     const [ciudad, setCiudad] = useState({});
     const [categoria, setCategoria] = useState({});
     const [services, setServices] = useState([]);
+    const [reservas, setReservas] = useState([]);
     const [like, setLike] = useState(false);
 
     useEffect(() => {
@@ -59,6 +60,10 @@ const Producto = () => {
         .then(res => {
             setServices(res.data);
         })
+        axios.get(`http://localhost:8080/reserva/producto/${id}`)
+        .then(res => {
+            setReservas(res.data)
+        }) 
     }, [id])
 
     return (
@@ -101,7 +106,7 @@ const Producto = () => {
                 <p>{data?.descripcion_producto}</p>
             </div>
             <Servicios servicios={services}/>
-            <Calendario productId={id}/>
+            <Calendario productId={id} reservas={reservas}/>
             <Map url={data?.url_ubicacion} titulo={`${ciudad?.nombre}, ${ciudad?.pais}`}/>
             <PoliticasProducto 
             cancelacion={data?.cancelacion}

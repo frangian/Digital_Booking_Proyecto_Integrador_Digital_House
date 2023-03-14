@@ -15,6 +15,7 @@ const Reservas = () => {
     const [seguridad, setSeguridad] = useState([]);
     const [imagen, setImagen] = useState({})
     const [ciudad, setCiudad] = useState({});
+    const [reservas, setReservas] = useState([]);
 
     useEffect(() => {
         axios.get(`http://localhost:8080/producto/${id}`)
@@ -25,7 +26,11 @@ const Reservas = () => {
             setSeguridad(res.data.seguridad.split(","));
             setImagen(res.data.imagenes[0]);
             setCiudad(res.data.ciudad);
-        })   
+        }) 
+        axios.get(`http://localhost:8080/reserva/producto/${id}`)
+        .then(res => {
+            setReservas(res.data)
+        })  
     }, [id])
 
     return (
@@ -36,6 +41,7 @@ const Reservas = () => {
             tituloProducto={data?.titulo}
             ubicacion={`${ciudad?.nombre}, ${ciudad?.provincia}, ${ciudad?.pais}`}
             img={imagen?.url_imagen}
+            reservas={reservas}
             />
             <PoliticasProducto 
             cancelacion={data?.cancelacion}

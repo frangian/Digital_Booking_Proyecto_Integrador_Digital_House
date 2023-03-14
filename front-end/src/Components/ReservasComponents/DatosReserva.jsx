@@ -1,4 +1,5 @@
 import React from 'react'
+import AutocompleteCities from './AutocompleteCities'
 
 const DatosReserva = ({ values, changeCiudad }) => {
 
@@ -20,7 +21,7 @@ const DatosReserva = ({ values, changeCiudad }) => {
                 </div>
                 <div className='ciudad-reserva-input'>
                     <label htmlFor="ciudad-reserva">Ciudad</label>
-                    <input type="text" id="ciudad-reserva" value={values.ciudad} onChange={(e) => {changeCiudad(e.target.value)}}/>
+                    <AutocompleteCities ciudad={values.ciudad} changeCiudad={changeCiudad}/>
                 </div>
             </div>
         </div>
