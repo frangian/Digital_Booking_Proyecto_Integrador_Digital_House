@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: com.example.proyectoIntegradorE8.ProyectoIntegradorE8Applica
+ tion
+
