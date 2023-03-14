@@ -6,41 +6,24 @@ const Recomendaciones = ({ categoriaSeleccionada, ciudadSeleccionada }) => {
 
   const [productosRecomendados, setProductosRecomendados] = useState([]);
 
+  //Falta agregar consulta con fecha
+  useEffect(() => {
+    let url = 'http://localhost:8080/producto/random';
   
-
-  //Si hay una categoria seleccionada traigo por categoria los recomendados
-  useEffect(() => {
     if (categoriaSeleccionada) {
-      axios.get(`http://localhost:8080/producto/categoria/${categoriaSeleccionada}`)
-        .then(response => setProductosRecomendados(response.data))
-        .catch(error => console.log(error));
+      url = `http://localhost:8080/producto/categoria/${categoriaSeleccionada}`;
+    } else if (ciudadSeleccionada) {
+      url = `http://localhost:8080/producto/ciudad/${ciudadSeleccionada}`;
     }
-  }, [categoriaSeleccionada]);
-
-  //Si no hay categoria seleccionada traigo los recomendados al azar del back
-  useEffect(() => {
-    axios.get('http://localhost:8080/producto/random')
+  
+    axios.get(url)
       .then((response) => {
         setProductosRecomendados(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
-
-  //si hay na ciudad seleccionada trae los de esa ciudad
-  useEffect(() => {
-    if (ciudadSeleccionada) {
-      axios.get(`http://localhost:8080/producto/ciudad/${ciudadSeleccionada}`)
-        .then((response) => {
-          setProductosRecomendados(response.data);
-          console.log(ciudadSeleccionada);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, [ciudadSeleccionada]);
+  }, [categoriaSeleccionada, ciudadSeleccionada]);
 
   return (
 
@@ -53,7 +36,7 @@ const Recomendaciones = ({ categoriaSeleccionada, ciudadSeleccionada }) => {
                 id={product.id}
                 title={product.titulo}
                 imagen={product.imagenes[0].url_imagen}
-                category={product.categoria.titulo}
+                category={product.categoria}
                 location={product.descripcion_ubicacion}
                 description={product.descripcion_producto}
                 
