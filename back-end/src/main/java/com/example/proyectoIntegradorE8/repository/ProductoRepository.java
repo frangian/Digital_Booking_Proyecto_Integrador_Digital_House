@@ -13,7 +13,29 @@ public interface ProductoRepository extends JpaRepository <Producto, Long> {
 
   List<Producto> findByCiudadId (Long id);
 
-  @Query("SELECT p FROM Producto p WHERE NOT EXISTS (SELECT r FROM Reserva r WHERE r.producto = p AND ((r.fechaInicial >= :fechaInicio AND r.fechaInicial <= :fechaFin) OR (r.fechaFinal >= :fechaInicio AND r.fechaFinal <= :fechaFin) OR (r.fechaInicial < :fechaInicio AND r.fechaFinal > :fechaFin)))")
+  //No borrar por ahora:
+//  @Query("SELECT p FROM Producto p " +
+//          "WHERE p.ciudad.id = :ciudadId")
+//  List<Producto> findByCiudadId2(@Param("ciudadId") Long id);
+  //----------------------------------------------------------
+
+  @Query("SELECT p FROM Producto p " +
+            "WHERE NOT EXISTS " +
+              "(SELECT r FROM Reserva r " +
+                "WHERE r.producto = p " +
+                "AND ((r.fechaInicial >= :fechaInicio AND r.fechaInicial <= :fechaFin) " +
+                "OR (r.fechaFinal >= :fechaInicio AND r.fechaFinal <= :fechaFin) " +
+                "OR (r.fechaInicial < :fechaInicio AND r.fechaFinal > :fechaFin)))")
   List<Producto> findByProductoFechas(@Param("fechaInicio") LocalDate fechaInicial, @Param("fechaFin") LocalDate fechaFinal);
+
+  @Query("SELECT p FROM Producto p " +
+          "WHERE p.ciudad.id = :ciudadId " +
+          "AND NOT EXISTS " +
+          "(SELECT r FROM Reserva r " +
+          "WHERE r.producto = p " +
+          "AND ((r.fechaInicial >= :fechaInicio AND r.fechaInicial <= :fechaFin) " +
+          "OR (r.fechaFinal >= :fechaInicio AND r.fechaFinal <= :fechaFin) " +
+          "OR (r.fechaInicial < :fechaInicio AND r.fechaFinal > :fechaFin)))")
+  List<Producto> findByCiudadIdAndProductoFechas(@Param("ciudadId") Long ciudadId, @Param("fechaInicio") LocalDate fechaInicial, @Param("fechaFin") LocalDate fechaFinal);
 
 }

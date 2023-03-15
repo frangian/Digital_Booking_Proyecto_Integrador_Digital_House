@@ -86,7 +86,6 @@ public class ProductoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-
     @GetMapping("/ciudad/{ciudad}")
     public ResponseEntity<?> productoPorCiudad(@PathVariable Long ciudad) {
         try {
@@ -95,7 +94,6 @@ public class ProductoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-
     @GetMapping("/random")
     public ResponseEntity<?> getProductosRandom() {
         try {
@@ -116,8 +114,18 @@ public class ProductoController {
     @GetMapping("/disponibles/fecha")
     public ResponseEntity<?> getProductosDisponiblesFecha (@RequestParam LocalDate fechaInicial, @RequestParam LocalDate fechaFinal) throws Exception {
         try {
-            return ResponseEntity.ok(productoService.productosDisponiblesFecha(fechaInicial,fechaFinal));
+            return ResponseEntity.ok(productoService.findByProductoFechas(fechaInicial,fechaFinal));
         } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+    @GetMapping("/disponibles/fechaciudad")
+    public ResponseEntity<?> getProductosDisponiblesFechaCiudad (@RequestParam Long ciudadId, @RequestParam LocalDate fechaInicial, @RequestParam LocalDate fechaFinal) {
+        try {
+            logger.info("Controller: buscando productos por ciudad id y fechas");
+            return ResponseEntity.ok(productoService.findByCiudadIdAndProductoFechas(ciudadId,fechaInicial,fechaFinal));
+        } catch (Exception e){
+            logger.info(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
