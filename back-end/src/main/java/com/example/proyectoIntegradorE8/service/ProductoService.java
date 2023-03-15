@@ -103,11 +103,13 @@ public class ProductoService {
         throw new Exception("Ocurrio un error al buscar el producto por ciudad id");
         }
     }
-    public List<Producto> productosDisponiblesFecha (LocalDate fechaInicial, LocalDate fechaFinal) throws Exception {
+    public List<Producto> productosDisponiblesFecha ( LocalDate fechaInicial, LocalDate fechaFinal) throws Exception {
         try {
+            logger.info("Buscando todos los productos por fechas");
             return productoRepository.findByProductoFechas(fechaInicial,fechaFinal);
         } catch (Exception e) {
-            throw new Exception("Error al buscar productos disponibles: "+e.getMessage());
+            logger.error("Error al buscar productos disponibles. Exception: "+e.getMessage());
+            throw new Exception("Error al buscar productos disponibles. Exception: "+e.getMessage());
         }
     }
 

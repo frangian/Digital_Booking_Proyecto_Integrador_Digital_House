@@ -113,9 +113,13 @@ public class ProductoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-    @GetMapping("/disponibles")
+    @GetMapping("/disponibles/fecha")
     public ResponseEntity<?> getProductosDisponiblesFecha (@RequestParam LocalDate fechaInicial, @RequestParam LocalDate fechaFinal) throws Exception {
-        return ResponseEntity.ok(productoService.productosDisponiblesFecha(fechaInicial,fechaFinal));
+        try {
+            return ResponseEntity.ok(productoService.productosDisponiblesFecha(fechaInicial,fechaFinal));
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
 }
