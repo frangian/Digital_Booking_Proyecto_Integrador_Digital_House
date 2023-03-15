@@ -49,6 +49,7 @@ const Producto = () => {
     useEffect(() => {
         axios.get(`http://localhost:8080/producto/${id}`)
         .then(res => {
+            console.log(res.data);
             setData(res.data);
             setCategoria(res.data.categoria);
             setCiudad(res.data.ciudad);
