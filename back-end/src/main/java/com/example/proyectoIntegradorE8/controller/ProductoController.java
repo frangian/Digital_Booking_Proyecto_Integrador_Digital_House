@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
@@ -109,6 +110,14 @@ public class ProductoController {
             // Devolver los 8 productos seleccionados
             return ResponseEntity.ok(productosRandom);
         } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+    @GetMapping("/disponibles/fecha")
+    public ResponseEntity<?> getProductosDisponiblesFecha (@RequestParam LocalDate fechaInicial, @RequestParam LocalDate fechaFinal) throws Exception {
+        try {
+            return ResponseEntity.ok(productoService.productosDisponiblesFecha(fechaInicial,fechaFinal));
+        } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -100,6 +101,15 @@ public class ProductoService {
         } catch (Exception e){
         logger.error("Error al buscar el producto por ciudad id. Exception: "+e.getMessage());
         throw new Exception("Ocurrio un error al buscar el producto por ciudad id");
+        }
+    }
+    public List<Producto> productosDisponiblesFecha ( LocalDate fechaInicial, LocalDate fechaFinal) throws Exception {
+        try {
+            logger.info("Buscando todos los productos por fechas");
+            return productoRepository.findByProductoFechas(fechaInicial,fechaFinal);
+        } catch (Exception e) {
+            logger.error("Error al buscar productos disponibles. Exception: "+e.getMessage());
+            throw new Exception("Error al buscar productos disponibles. Exception: "+e.getMessage());
         }
     }
 
