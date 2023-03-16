@@ -1529,6 +1529,14 @@ div.card-reserva-content {
   background-color: var(--main-green);
 }
 
+.swal2-styled.swal2-confirm {
+  background-color: var(--main-green);
+} 
+
+.swal2-styled.swal2-confirm:focus {
+  box-shadow: none;
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                   Extras                                   */
 /* -------------------------------------------------------------------------- */
@@ -1734,8 +1742,11 @@ div.card-reserva-content {
   .mobile-carousel {
     display: block;
   }
-  
 
+  .card-reserva-confirmada {
+    width: 93%;
+  }
+  
 }
 
 @media (max-width: 550px) {

@@ -1,14 +1,23 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { ContextGlobal } from '../Utils/globalContext'
 import { Calendar, DateObject } from "react-multi-date-picker"
+import Swal from 'sweetalert2'
 import CardReserva from './CardReserva'
 import DatosReserva from './DatosReserva'
 import Llegada from './Llegada'
 import { getDaysArray } from '../Utils/utils'
 
-const ReservaForm = ({ tituloCategoria, tituloProducto, ubicacion, img, reservas, productoId }) => {
+const ReservaForm = ({ 
+    tituloCategoria, 
+    tituloProducto, 
+    ubicacion, 
+    img, 
+    reservas, 
+    productoId,
+    handleConfirmacion 
+}) => {
 
-    const { state, dispatch } = useContext(ContextGlobal);
+    const { state } = useContext(ContextGlobal);
     const [disabledDays, setDisabledDays] = useState([]);
     const [checks, setChecks] = useState([
         new DateObject().format("YYYY/M/D"),
@@ -19,9 +28,7 @@ const ReservaForm = ({ tituloCategoria, tituloProducto, ubicacion, img, reservas
         apellido: state.apellido, 
         mail: state.mail, 
         ciudad: "",
-        horaLlegada: "10:00:00",
-        checkIn: "",
-        checkOut: ""
+        horaLlegada: "",
     })
     
     const handleChangeCiudad = (value) => {
@@ -36,13 +43,22 @@ const ReservaForm = ({ tituloCategoria, tituloProducto, ubicacion, img, reservas
         e.preventDefault();
         let objPostReserva = {
             horaComienzo: values.horaLlegada,
-            fechaInicial: values.checkIn,
-            fechaFinal: values.checkOut,
+            fechaInicial: checks[0]?.day ? `${checks[0]?.year}-${checks[0]?.month}-${checks[0]?.day}` : "",
+            fechaFinal: checks[1]?.day ? `${checks[1]?.year}-${checks[1]?.month}-${checks[1]?.day}` : "",
             usuario: 1,
             producto: {
                 id: productoId
             }
         }
+
+        if (!objPostReserva.horaComienzo || !objPostReserva.fechaFinal || !objPostReserva.fechaInicial || !values.ciudad) {
+            mostrarAlerta()
+        } else {
+            console.log(objPostReserva, values.ciudad);
+            handleConfirmacion()
+        }
+
+        // handleConfirmacion()
     }
 
     useEffect(() => {
@@ -50,6 +66,14 @@ const ReservaForm = ({ tituloCategoria, tituloProducto, ubicacion, img, reservas
         reservas?.forEach((reserva) => dayArr = dayArr.concat(getDaysArray(reserva.fechaInicial, reserva.fechaFinal)))
         setDisabledDays(dayArr)
     }, [reservas])
+
+    const mostrarAlerta = () => {
+        Swal.fire({
+            icon: 'error',
+            title: 'La reserva no se realizo',
+            text: 'Asegurate de haber elegido un rango de fechas, un horario de llegada y una ciudad!',
+        })
+    }
 
     return (
         <div className="reservas-container">

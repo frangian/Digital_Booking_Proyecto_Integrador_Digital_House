@@ -3,7 +3,7 @@ import { createContext, useReducer } from "react";
 export const initialState = {
   nombre: "Juan",
   apellido: "Gomez", 
-  mail: "jgomez@gamil.com", 
+  mail: "jgomez@gmail.com", 
   pass: "", 
   logged: true, 
   map: true,
