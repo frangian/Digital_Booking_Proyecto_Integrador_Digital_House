@@ -14,8 +14,12 @@ const Home = () => {
 
   const [ciudadSeleccionada, setCiudadSeleccionada] = useState(null);
 
-  const handleCiudadSeleccionada = (ciudad) => {
+  const [dates, setDates] = useState(null);
+
+
+  const handleCiudadSeleccionada = (ciudad, selectedDates) => {
     setCiudadSeleccionada(ciudad);
+    setDates(selectedDates);
   };
 
   // Obtener las categorías desde la API cuando se monta el componente
@@ -36,7 +40,7 @@ const Home = () => {
     <div className="container">
       <Buscador onCiudadSeleccionada={handleCiudadSeleccionada} />
       <Categorias categories={categories} actualizarCategoriaSeleccionada={actualizarCategoriaSeleccionada}/>
-      <Recomendaciones categoriaSeleccionada={categoriaSeleccionada} ciudadSeleccionada={ciudadSeleccionada}/>
+      <Recomendaciones categoriaSeleccionada={categoriaSeleccionada} ciudadSeleccionada={ciudadSeleccionada} dates={dates}/>
     </div>
   )
 }
