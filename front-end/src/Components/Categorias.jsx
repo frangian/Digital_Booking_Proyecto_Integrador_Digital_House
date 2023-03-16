@@ -10,9 +10,12 @@ const Categorias = ({  actualizarCategoriaSeleccionada }) => {
    // Estado para almacenar las categorías
    const [categories, setCategories] = useState([]);
 
+   const [selectedCategorietId, setSelectedCategorieId] = useState(null);
+
   //manejo el click de la categoria y llamo a la funcion que setea la categoria seleccionada
   const handleClick = (id) => {
     actualizarCategoriaSeleccionada(id);
+    handleProductSelect(id);
   };
 
    // Obtener las categorías desde la API cuando se monta el componente
@@ -26,6 +29,11 @@ const Categorias = ({  actualizarCategoriaSeleccionada }) => {
         console.log(error);
       });
   }, []);
+
+  const handleProductSelect = (id) => {
+    setSelectedCategorieId(id);
+    
+    }
 
   return (
     <div className="categorias-container">
@@ -46,6 +54,7 @@ const Categorias = ({  actualizarCategoriaSeleccionada }) => {
               imagen={categoria.imagenes[0].url_imagen}
               cantidad={categoria.productos.length}
               handleClick={() => handleClick(categoria.id)}
+              isSelected={categoria.id === selectedCategorietId}
             />
           ))
         )}
