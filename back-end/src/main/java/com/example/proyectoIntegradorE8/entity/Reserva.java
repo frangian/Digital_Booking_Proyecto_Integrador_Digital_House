@@ -26,15 +26,16 @@ public class Reserva {
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "producto_id", referencedColumnName = "id")
     private Producto producto;
-    @Column (name = "usuario_id")
-    private Long usuario;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private Usuario usuario;
 
     //constructores & getters & setters
 
     public Reserva() {
     }
 
-    public Reserva(Long id, String codigoReserva, LocalTime horaComienzo, LocalDate fechaInicial, LocalDate fechaFinal, Producto producto, Long usuario) {
+    public Reserva(Long id, String codigoReserva, LocalTime horaComienzo, LocalDate fechaInicial, LocalDate fechaFinal, Producto producto, Usuario usuario) {
         this.id = id;
         this.codigoReserva = codigoReserva;
         this.horaComienzo = horaComienzo;
@@ -44,7 +45,7 @@ public class Reserva {
         this.usuario = usuario;
     }
 
-    public Reserva(String codigoReserva, LocalTime horaComienzo, LocalDate fechaInicial, LocalDate fechaFinal, Producto producto, Long usuario) {
+    public Reserva(String codigoReserva, LocalTime horaComienzo, LocalDate fechaInicial, LocalDate fechaFinal, Producto producto, Usuario usuario) {
         this.codigoReserva = codigoReserva;
         this.horaComienzo = horaComienzo;
         this.fechaInicial = fechaInicial;
@@ -101,11 +102,11 @@ public class Reserva {
         this.producto = producto;
     }
 
-    public Long getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Long usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 }
