@@ -63,6 +63,7 @@ const CardRecomendaciones = ({
       .get(`http://localhost:8080/caracteristica/producto/${id}`)
       .then((response) => {
         setCharacteristics(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
