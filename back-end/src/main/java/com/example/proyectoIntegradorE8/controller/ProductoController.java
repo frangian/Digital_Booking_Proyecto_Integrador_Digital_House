@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
@@ -85,7 +86,6 @@ public class ProductoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-
     @GetMapping("/ciudad/{ciudad}")
     public ResponseEntity<?> productoPorCiudad(@PathVariable Long ciudad) {
         try {
@@ -94,7 +94,6 @@ public class ProductoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-
     @GetMapping("/random")
     public ResponseEntity<?> getProductosRandom() {
         try {
@@ -109,6 +108,24 @@ public class ProductoController {
             // Devolver los 8 productos seleccionados
             return ResponseEntity.ok(productosRandom);
         } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+    @GetMapping("/disponibles/fecha")
+    public ResponseEntity<?> getProductosDisponiblesFecha (@RequestParam LocalDate fechaInicial, @RequestParam LocalDate fechaFinal) throws Exception {
+        try {
+            return ResponseEntity.ok(productoService.findByProductoFechas(fechaInicial,fechaFinal));
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+    @GetMapping("/disponibles/fechaciudad")
+    public ResponseEntity<?> getProductosDisponiblesFechaCiudad (@RequestParam Long ciudadId, @RequestParam LocalDate fechaInicial, @RequestParam LocalDate fechaFinal) {
+        try {
+            logger.info("Controller: buscando productos por ciudad id y fechas");
+            return ResponseEntity.ok(productoService.findByCiudadIdAndProductoFechas(ciudadId,fechaInicial,fechaFinal));
+        } catch (Exception e){
+            logger.info(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }

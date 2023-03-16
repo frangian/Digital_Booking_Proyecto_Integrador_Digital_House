@@ -5,9 +5,11 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { elegirServicio } from './Utils/utils'
+import { elegirServicio } from "./Utils/utils";
 import { ContextGlobal } from "./Utils/globalContext";
-import axios from 'axios';
+import axios from "axios";
+import { setFavInStorage, removeFavInStorage } from "./Utils/localStorage";
+import Modal from "./Modal";
 
 const CardRecomendaciones = ({
   id,
@@ -16,16 +18,18 @@ const CardRecomendaciones = ({
   category,
   location,
   description,
+  puntuacion,
 }) => {
   const navigate = useNavigate();
   const MAX_LENGTH = 100;
   const { state, dispatch } = useContext(ContextGlobal);
 
+  const [showModal, setShowModal] = useState(false);
   const [characteristics, setCharacteristics] = useState([]);
-
-  //funcion de boton mas-menos
-  const [showFullDescription, setShowFullDescription] = useState(false);
-  const [like, setLike] = useState(false);
+  const [favorite, setFavorite] = useState(() => {
+    const storedValue = localStorage.getItem(`favorite-${id}`);
+    return storedValue ? JSON.parse(storedValue) : false;
+  });
 
   const shortDescription =
     description.length > MAX_LENGTH
@@ -33,12 +37,30 @@ const CardRecomendaciones = ({
       : description;
 
   const handleToggleDescription = () => {
-    setShowFullDescription(!showFullDescription);
+    setShowModal(!showModal);
   };
 
+  const addFav = () => {
+    const favoritedProduct = setFavInStorage({
+      id,
+      title,
+      imagen,
+      category,
+      location,
+      description,
+    });
+    setFavorite(favoritedProduct);
+    localStorage.setItem(`favorite-${id}`, JSON.stringify(true));
+  };
+  const removeFav = () => {
+    removeFavInStorage(id);
+    setFavorite(false);
+    localStorage.setItem(`favorite-${id}`, JSON.stringify(false));
+  };
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/caracteristica/producto/${id}`)
+    axios
+      .get(`http://localhost:8080/caracteristica/producto/${id}`)
       .then((response) => {
         setCharacteristics(response.data);
       })
@@ -51,9 +73,15 @@ const CardRecomendaciones = ({
     <div className="card-recomendaciones">
       <div className="image-container">
         <img src={imagen} alt={title} />
-        <FontAwesomeIcon icon={faHeart} className={like ? "fa-heart heart-active grow-heart" : "fa-heart grow-heart"} onClick={() => setLike(!like)}/>
-
-
+        <FontAwesomeIcon
+          icon={faHeart}
+          className={
+            favorite
+              ? "fa-heart heart-active grow-heart"
+              : "fa-heart grow-heart"
+          }
+          onClick={favorite ? removeFav : addFav}
+        />
       </div>
       <div className="info-container">
         <div className="info-container-header">
@@ -69,7 +97,7 @@ const CardRecomendaciones = ({
           </div>
           <div className="puntuacion-container">
             <div className="square8">
-              <span id="square8-number">8</span>
+              <span id="square8-number">{puntuacion}</span>
             </div>
             <p>Muy bueno</p>
           </div>
@@ -96,13 +124,13 @@ const CardRecomendaciones = ({
           ))}
         </div>
         <p>
-          {showFullDescription ? description : shortDescription}
+          {shortDescription}
           {description.length > MAX_LENGTH && (
             <button
               onClick={handleToggleDescription}
               className="btn-vermas-vermenos"
             >
-              {showFullDescription ? "menos..." : "más..."}
+              más...
             </button>
           )}
         </p>
@@ -114,14 +142,20 @@ const CardRecomendaciones = ({
               type: "register",
               payload: {
                 ...state,
-                map: false
-              }
-            })
+                map: false,
+              },
+            });
           }}
         >
           ver más
         </button>
       </div>
+      {showModal && (
+        <Modal onClose={handleToggleDescription}>
+          <h2>{title}</h2>
+          <p>{description}</p>
+        </Modal>
+      )}
     </div>
   );
 };
