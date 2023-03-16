@@ -17,7 +17,7 @@ const ReservaForm = ({
     handleConfirmacion 
 }) => {
 
-    const { state, dispatch } = useContext(ContextGlobal);
+    const { state } = useContext(ContextGlobal);
     const [disabledDays, setDisabledDays] = useState([]);
     const [checks, setChecks] = useState([
         new DateObject().format("YYYY/M/D"),
