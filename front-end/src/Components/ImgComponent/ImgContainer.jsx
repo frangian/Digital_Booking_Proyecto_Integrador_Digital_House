@@ -12,7 +12,7 @@ const ImgContainer = ({ imgList }) => {
 
     return (
         <div className='images-container'>
-            <div className={`product-images ${!openCarousel ? "" : "oculto"}`}>
+            <div className={`product-images`}>
                 {imgList?.map((imagen, i) => {
                     if (i < 4) {
                         return (

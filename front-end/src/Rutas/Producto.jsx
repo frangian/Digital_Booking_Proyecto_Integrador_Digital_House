@@ -17,7 +17,6 @@ import PoliticasProducto from '../Components/PoliticasProducto';
 
 const Producto = () => {
 
-    const navigate = useNavigate();
     const { id } = useParams();
     const { state, dispatch } = useContext(ContextGlobal);
     const [data, setData] = useState({});
@@ -25,7 +24,6 @@ const Producto = () => {
     const [normas, setNormas] = useState([]);
     const [seguridad, setSeguridad] = useState([]);
     const [ciudad, setCiudad] = useState({});
-    const [categoria, setCategoria] = useState({});
     const [services, setServices] = useState([]);
     const [reservas, setReservas] = useState([]);
     const [like, setLike] = useState(false);
@@ -50,7 +48,6 @@ const Producto = () => {
         axios.get(`http://localhost:8080/producto/${id}`)
         .then(res => {
             setData(res.data);
-            setCategoria(res.data.categoria);
             setCiudad(res.data.ciudad);
             setImages(res.data.imagenes);
             setNormas(res.data.normas.split(","));
@@ -68,12 +65,12 @@ const Producto = () => {
 
     return (
         <div className='product-page'>
-            <ProductHeader tituloCategoria={categoria?.titulo} tituloProducto={data?.titulo}/>
+            <ProductHeader tituloCategoria={data?.categoria} tituloProducto={data?.titulo}/>
             <div className="top-location">
                 <div className="left-top-location">
                     <FontAwesomeIcon icon={faLocationDot} className="location-icon"/>
                     <p>
-                        {ciudad?.nombre}, {ciudad?.provincia}, {ciudad?.pais}
+                        {data.ciudad?.nombre}, {ciudad?.provincia}, {ciudad?.pais}
                         <br /> 
                         {data?.descripcion_ubicacion}
                     </p>

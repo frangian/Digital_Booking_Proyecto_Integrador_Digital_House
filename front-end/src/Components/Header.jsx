@@ -25,7 +25,7 @@ const Header = () => {
             logged: false
         }
     })
-    navigate("/login");
+    // navigate("/login");
 }
 
   return (

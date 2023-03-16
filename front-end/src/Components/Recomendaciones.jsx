@@ -12,7 +12,8 @@ const Recomendaciones = ({ categoriaSeleccionada, ciudadSeleccionada }) => {
   
     if (categoriaSeleccionada) {
       url = `http://localhost:8080/producto/categoria/${categoriaSeleccionada}`;
-    } else if (ciudadSeleccionada) {
+    }  
+    if (ciudadSeleccionada) {
       url = `http://localhost:8080/producto/ciudad/${ciudadSeleccionada}`;
     }
   

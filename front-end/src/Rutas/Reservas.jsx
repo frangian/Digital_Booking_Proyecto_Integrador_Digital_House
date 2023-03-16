@@ -10,18 +10,17 @@ const Reservas = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [data, setData] = useState({});
-    const [categoria, setCategoria] = useState({});
     const [normas, setNormas] = useState([]);
     const [seguridad, setSeguridad] = useState([]);
     const [imagen, setImagen] = useState({})
     const [ciudad, setCiudad] = useState({});
     const [reservas, setReservas] = useState([]);
+    const [confirmada, setConfirmada] = useState(false);
 
     useEffect(() => {
         axios.get(`http://localhost:8080/producto/${id}`)
         .then(res => {
             setData(res.data);
-            setCategoria(res.data.categoria);
             setNormas(res.data.normas.split(","));
             setSeguridad(res.data.seguridad.split(","));
             setImagen(res.data.imagenes[0]);
@@ -33,17 +32,22 @@ const Reservas = () => {
         })  
     }, [id])
 
+    const handleConfirmacion = () => {
+        setConfirmada(true);
+    }
+
     return (
         <div className='reservas-page'>
-            <div className="reservas-page-container">
-                <ProductHeader tituloCategoria={categoria?.titulo} tituloProducto={data?.titulo}/>
+            <div className={`reservas-page-container ${!confirmada ? "" : "oculto"}`}>
+                <ProductHeader tituloCategoria={data?.categoria} tituloProducto={data?.titulo}/>
                 <ReservaForm 
-                tituloCategoria={categoria?.titulo} 
+                tituloCategoria={data?.categoria} 
                 tituloProducto={data?.titulo}
                 ubicacion={`${ciudad?.nombre}, ${ciudad?.provincia}, ${ciudad?.pais}`}
                 img={imagen?.url_imagen}
                 reservas={reservas}
                 productoId={id}
+                handleConfirmacion={handleConfirmacion}
                 />
                 <PoliticasProducto 
                 cancelacion={data?.cancelacion}
@@ -51,14 +55,20 @@ const Reservas = () => {
                 seguridad={seguridad}
                 />
             </div>
-            <div className="reserva-correcta-container oculto">
+            <div className={`reserva-correcta-container ${confirmada ? "" : "oculto"}`}>
                 <div className="card-reserva-confirmada">
                     <img src="/vector.png" alt="Tick reserva"/>
                     <div className="texto-reserva-confirmada">
                         <h3>¡Muchas gracias!</h3>
                         <h5>Su reserva se ha realizado con éxito</h5>
                     </div>
-                    <button className='small-button' onClick={() => navigate("/")}>ok</button>
+                    <button className='small-button' 
+                    onClick={() => {
+                        navigate("/")
+                        setConfirmada(false);
+                    }}>
+                        ok
+                    </button>
                 </div>
             </div>
         </div>
