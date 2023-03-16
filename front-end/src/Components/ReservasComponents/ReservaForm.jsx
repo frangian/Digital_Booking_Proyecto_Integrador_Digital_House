@@ -51,10 +51,11 @@ const ReservaForm = ({
             }
         }
 
-        if (!objPostReserva.horaComienzo || !objPostReserva.fechaFinal || !objPostReserva.fechaInicial || values.ciudad) {
+        if (!objPostReserva.horaComienzo || !objPostReserva.fechaFinal || !objPostReserva.fechaInicial || !values.ciudad) {
             mostrarAlerta()
         } else {
             console.log(objPostReserva, values.ciudad);
+            handleConfirmacion()
         }
 
         // handleConfirmacion()
