@@ -3,6 +3,13 @@ package com.example.proyectoIntegradorE8.controller;
 import com.example.proyectoIntegradorE8.entity.Caracteristica;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.service.CaractersiticaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/caracteristica")
 @Log4j
+@Tag(name = "Caracteristica", description = "API metodos CRUD de las caracteristicas")
 public class CaracteristicaController {
     private CaractersiticaService caractersiticaService;
 
@@ -25,6 +33,15 @@ public class CaracteristicaController {
     }
 
     @PostMapping
+    @Operation(summary = "Agregar una caracteristica", description = "Este endpoint permite agregar una caracteristica a a la BBDD")
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(value = "{ \"titulo\": \"String\" }")))
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Caracteristica.class))),
+            @ApiResponse(responseCode = "400", description = "Peticion incorrecta", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)})
     public ResponseEntity<?> guardarCaracteristica (@RequestBody Caracteristica caracteristica){
         try {
             log.info("Se inicia el proceso para guardar una caracteristica en la BBDD");
@@ -36,6 +53,11 @@ public class CaracteristicaController {
         }
     }
     @GetMapping("/{id}")
+    @Operation(summary = "Buscar una caracteristica por ID", description = "Este endpoint permite buscar una caracteristica por ID de la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Caracteristica.class))),
+            @ApiResponse(responseCode = "404", description = "La caracteristica no existe en la BBDD", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> buscarCaracteristica (@PathVariable Long id) {
         try {
             Caracteristica caracteristicaBuscada = caractersiticaService.buscarCaracteristica(id);
@@ -45,6 +67,11 @@ public class CaracteristicaController {
         }
     }
     @PutMapping
+    @Operation(summary = "Actualizar una caracteristica", description = "Este endpoint permite actualizar una caracteristica ya existente en la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Caracteristica.class))),
+            @ApiResponse(responseCode = "404", description = "La caracteristica no existe en la BBDD", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> actualizarCaracteristica(@RequestBody Caracteristica caracteristica){
         try {
             caractersiticaService.buscarCaracteristica(caracteristica.getId());
@@ -57,6 +84,10 @@ public class CaracteristicaController {
         }
     }
     @GetMapping
+    @Operation(summary = "Listar todas las caracteristicas", description = "Este endpoint permite ver todas las caracteristicas registradas en la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Caracteristica.class))),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> listarCaracteristicas() {
         try {
             List<Caracteristica> caractersiticasGuardadas = caractersiticaService.listarCaracteristicas();
@@ -67,6 +98,11 @@ public class CaracteristicaController {
         }
     }
     @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar una caracteristica", description = "Este endpoint permite eliminar una caracteristica de la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(example = "Se elimino la caracteristica con ID: \"+id+\" de la BBDD exitosamente"))),
+            @ApiResponse(responseCode = "404", description = "La caracteristica no existe en la BBDD", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> eliminarCaracteristica (@PathVariable Long id) {
         try {
             caractersiticaService.buscarCaracteristica(id);
@@ -79,6 +115,10 @@ public class CaracteristicaController {
         }
     }
     @GetMapping("/producto/{producto}")
+    @Operation(summary = "Buscar las caracteristicas por producto ID", description = "Este endpoint permite buscar las caracteristicas por producto ID en la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Caracteristica.class))),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<List<Caracteristica>> caracteristicaXProducto(@PathVariable Long producto){
         return ResponseEntity.ok(caractersiticaService.caracteristicasXProducto(producto));
     }

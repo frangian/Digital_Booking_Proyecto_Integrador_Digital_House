@@ -1,7 +1,6 @@
 package com.example.proyectoIntegradorE8.controller;
 
 import com.example.proyectoIntegradorE8.entity.Imagen;
-import com.example.proyectoIntegradorE8.entity.Producto;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.service.ImagenService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -37,24 +36,9 @@ public class ImagenController {
             description = "Este endpoint permite agregar una imagen a a la BBDD"    )
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
             content = @Content(mediaType = "application/json",
-                    examples = @ExampleObject(value = "" +
-                            "{\"titulo\": \"String\", " +
-                            "\"descripcion_producto\": \"String\", " +
-                            "\"descripcion_ubicacion\": \"String\", " +
-                            "\"url_ubicacion\": \"String\", " +
-                            "\"normas\": \"String\", " +
-                            "\"seguridad\": \"String\", " +
-                            "\"cancelacion\": \"String\", " +
-                            "\"puntuacion\": 0, " +
-                            "\"categoria\": {\"id\": 0}, " +
-                            "\"ciudad\": {\"id\": 0}, " +
-                            "\"caracteristicas\": [ " +
-                            "{\"id\": 0}]," +
-                            "\"imagenes\": [ "+
-                            "{\"titulo\": \"String\", \"url_imagen\": \"String\"}]" +
-                            "}"                    )            )    )
+                    examples = @ExampleObject(value = "{\"titulo\": \"String\",\"url_imagen\": \"String\",\"producto_id\": 0}")))
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Imagen.class))),
             @ApiResponse(responseCode = "400", description = "Peticion incorrecta", content = @Content),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)})
     public ResponseEntity<?> guardarImagen (@RequestBody Imagen imagen) {
@@ -68,6 +52,11 @@ public class ImagenController {
         }
     }
     @GetMapping("/{id}")
+    @Operation(summary = "Buscar una imagen por ID", description = "Este endpoint permite buscar una imagen por ID de la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Imagen.class))),
+            @ApiResponse(responseCode = "404", description = "La imagen no existe en la BBDD", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> buscarImagen (@PathVariable Long id) {
         try {
             Imagen imagenBuscada = imagenService.buscarImagen(id);
@@ -77,6 +66,11 @@ public class ImagenController {
         }
     }
     @PutMapping
+    @Operation(summary = "Actualizar una imagen", description = "Este endpoint permite actualizar una imagen ya existente en la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Imagen.class))),
+            @ApiResponse(responseCode = "404", description = "La imagen no existe en la BBDD", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> actualizarImagen(@RequestBody Imagen imagen){
         try {
             imagenService.buscarImagen(imagen.getId());
@@ -89,6 +83,10 @@ public class ImagenController {
         }
     }
     @GetMapping
+    @Operation(summary = "Listar todas las imagenes", description = "Este endpoint permite ver todas las imagenes registradas en la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Imagen.class))),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> listarImagenes (){
         try {
             List<Imagen> imagenesGuardadas = imagenService.listarImagenes();
@@ -99,6 +97,11 @@ public class ImagenController {
         }
     }
     @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar una imagen", description = "Este endpoint permite eliminar una imagen de la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(example = "Se elimino la imagen con ID: \"+id+\" de la BBDD exitosamente"))),
+            @ApiResponse(responseCode = "404", description = "La imagen no existe en la BBDD", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> eliminarImagen (@PathVariable Long id) {
         try {
             imagenService.buscarImagen(id);
@@ -112,10 +115,20 @@ public class ImagenController {
     }
 
     @GetMapping("/producto/{producto}")
+    @Operation(summary = "Buscar una imagen por producto ID", description = "Este endpoint permite buscar una imagen por producto ID de la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Imagen.class))),
+            @ApiResponse(responseCode = "404", description = "El producto no existe en la BBDD", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<List<Imagen>> imagenesPorProducto(@PathVariable Long producto) {
         return ResponseEntity.ok(imagenService.imagenesPorProducto(producto));
     }
     @GetMapping("/categoria/{categoria}")
+    @Operation(summary = "Buscar una imagen por categoria ID", description = "Este endpoint permite buscar una imagen por categoria ID de la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Imagen.class))),
+            @ApiResponse(responseCode = "404", description = "La categoria no existe en la BBDD", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<List<Imagen>> imagenesPorCategoria(@PathVariable Long categoria) {
         return ResponseEntity.ok(imagenService.imagenesPorCategoria(categoria));
     }
