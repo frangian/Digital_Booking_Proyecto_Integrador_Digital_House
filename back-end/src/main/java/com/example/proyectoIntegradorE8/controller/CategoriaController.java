@@ -2,6 +2,13 @@ package com.example.proyectoIntegradorE8.controller;
 
 import com.example.proyectoIntegradorE8.entity.Categoria;
 import com.example.proyectoIntegradorE8.service.CategoriaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
@@ -14,6 +21,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/categoria")
+@Tag(name = "Categoria", description = "API metodos CRUD de las categorias")
 public class CategoriaController {
     private static final Logger logger = Logger.getLogger(CategoriaController.class);
     private CategoriaService categoriaService;
@@ -22,6 +30,15 @@ public class CategoriaController {
         this.categoriaService = categoriaService;
     }
     @PostMapping
+    @Operation(summary = "Agregar una categoria", description = "Este endpoint permite agregar una categoria a a la BBDD")
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(value = "{ \"titulo\": \"String\", \"descripcion\": \"String\" }")))
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Categoria.class))),
+            @ApiResponse(responseCode = "400", description = "Peticion incorrecta", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)})
     public ResponseEntity<?> guardarCategoria (@RequestBody Categoria categoria){
         try {
             logger.info("Se inicia el proceso para guardar una categoria en la BBDD");
@@ -33,6 +50,11 @@ public class CategoriaController {
         }
     }
     @GetMapping("/{id}")
+    @Operation(summary = "Buscar una categoria por ID", description = "Este endpoint permite buscar una categoria por ID de la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Categoria.class))),
+            @ApiResponse(responseCode = "404", description = "La categoria no existe en la BBDD", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> buscarCategoria(@PathVariable Long id) {
         try {
             Categoria categoriaBuscada = categoriaService.buscarCategoria(id);
@@ -42,6 +64,15 @@ public class CategoriaController {
         }
     }
    @PutMapping
+   @Operation(summary = "Actualizar una categoria", description = "Este endpoint permite actualizar una categoria ya existente en la BBDD")
+   @io.swagger.v3.oas.annotations.parameters.RequestBody(
+           content = @Content(
+                   mediaType = "application/json",
+                   examples = @ExampleObject(value = "{ \"id\": \"String\", \"titulo\": \"String\", \"descripcion\": \"String\" }")))
+   @ApiResponses(value = {
+           @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Categoria.class))),
+           @ApiResponse(responseCode = "404", description = "La categoria no existe en la BBDD", content = @Content),
+           @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
    public ResponseEntity<?> actualizarCategoria(@RequestBody Categoria categoria){
        try {
            categoriaService.buscarCategoria(categoria.getId());
@@ -54,6 +85,10 @@ public class CategoriaController {
        }
    }
    @GetMapping
+   @Operation(summary = "Listar todas las categorias", description = "Este endpoint permite ver todas las categorias registradas en la BBDD")
+   @ApiResponses(value = {
+           @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Categoria.class))),
+           @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
    public ResponseEntity<?> listarCategorias() {
        try {
            List<Categoria> categoriaGuardadas = categoriaService.listarCategorias();
@@ -64,6 +99,11 @@ public class CategoriaController {
        }
    }
     @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar una categoria", description = "Este endpoint permite eliminar una categoria de la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(example = "Se elimino la categoria con ID: \"+id+\" de la BBDD exitosamente"))),
+            @ApiResponse(responseCode = "404", description = "La categoria no existe en la BBDD", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> eliminarCategoria(@PathVariable Long id) {
         try {
             categoriaService.buscarCategoria(id);

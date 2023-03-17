@@ -76,4 +76,15 @@ public class Ciudad {
     public void setProductos(Set<Producto> productos) {
         this.productos = productos;
     }
+
+    @Override
+    public String toString() {
+        return "Ciudad{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", provincia='" + provincia + '\'' +
+                ", pais='" + pais + '\'' +
+                ", productos=" + productos +
+                '}';
+    }
 }
