@@ -14,10 +14,10 @@ public interface ProductoRepository extends JpaRepository <Producto, Long> {
   List<Producto> findByCiudadId (Long id);
 
   //No borrar por ahora:
-//  @Query("SELECT p FROM Producto p " +
-//          "WHERE p.ciudad.id = :ciudadId")
-//  List<Producto> findByCiudadId2(@Param("ciudadId") Long id);
-  //----------------------------------------------------------
+//  @Query(value="SELECT * FROM producto p " +
+//          "WHERE p.ciudad_id = :ciudadId", nativeQuery = true)
+//  List<Producto> findByCiudadId(@Param("ciudadId") Long id);
+//  //----------------------------------------------------------
 
   @Query("SELECT p FROM Producto p " +
             "WHERE NOT EXISTS " +

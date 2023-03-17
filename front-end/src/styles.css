@@ -447,10 +447,9 @@ body {
   height: 5vh;
 }
 
-.date-picker{
+.date-picker {
   width: 30%;
 }
-
 
 #btn-buscar {
   padding: 10px 10%;
@@ -494,6 +493,10 @@ body {
   margin: 0;
   padding: 0;
   cursor: pointer;
+}
+
+.card.selected {
+  border: 2px solid #ffcc00;
 }
 
 .card > div {
@@ -552,7 +555,6 @@ body {
   height: 330px;
 }
 
-
 .image-container {
   position: relative;
   width: 50%;
@@ -583,7 +585,7 @@ body {
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* agrega sombra */
 }
 
-.heart-active{
+.heart-active {
   color: red;
 }
 
@@ -632,48 +634,47 @@ body {
   font-weight: 600;
 }
 
-
-.info-categoria-container{
+.info-categoria-container {
   display: flex;
   align-items: center;
   flex-direction: row;
   margin-left: 0.5vw;
 }
 
-.ubicacion-container p{
+.ubicacion-container p {
   margin-left: 0;
   margin-top: 2px;
 }
 
-.info-container-header{
+.info-container-header {
   display: flex;
   justify-content: space-between;
 }
 
-.info-container-header > div{
+.info-container-header > div {
   display: flex;
   flex-direction: column;
   max-width: 70%;
 }
 
-.puntuacion-container{
+.puntuacion-container {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
 
-.puntuacion-container p{
+.puntuacion-container p {
   font-weight: 700;
   font-size: 1rem;
 }
 
-.enlace-mapa{
-  color: var(--main-green)
+.enlace-mapa {
+  color: var(--main-green);
 }
 
-.btn-vermas-vermenos{
+.btn-vermas-vermenos {
   padding-left: 10px;
-  color: var(--main-green)
+  color: var(--main-green);
 }
 /***********EXTRAS*********/
 
@@ -697,11 +698,11 @@ body {
   padding-right: 0.2vw;
   margin: 0;
 }
-.ubicacion{
+.ubicacion {
   margin-right: 0.3vw;
 }
 
-.extra{
+.extra {
   margin: 5px 5px 5px 10px;
 }
 
@@ -710,7 +711,7 @@ body {
   font-size: 0.8rem;
 }
 
-.icono-servicio{
+.icono-servicio {
   margin-left: 0.5vw;
 }
 
@@ -746,7 +747,7 @@ body {
   position: relative;
 }
 
-.modal-content p{
+.modal-content p {
   padding: 10px;
 }
 
@@ -1153,7 +1154,7 @@ body {
 
 .custom-calendar.rmdp-wrapper .rmdp-today span {
   background-color: transparent;
-  color: black
+  color: black;
 }
 
 .custom-calendar.mobile.rmdp-wrapper {
@@ -1163,7 +1164,7 @@ body {
 .submit-container {
   color: var(--main-dark-gray);
   background-color: var(--main-white);
-  box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.75);
   border-radius: 5px;
   width: 30%;
   display: flex;
@@ -1329,15 +1330,19 @@ body {
 
 /* ------------------------------ Autocomplete ------------------------------ */
 
-:where(.css-dev-only-do-not-override-ph9edi).ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+:where(.css-dev-only-do-not-override-ph9edi).ant-select-single:not(
+    .ant-select-customize-input
+  )
+  .ant-select-selector {
   height: 40px;
   width: 100%;
 }
 
-:where(.css-dev-only-do-not-override-ph9edi).ant-select-single .ant-select-selector .ant-select-selection-search {
+:where(.css-dev-only-do-not-override-ph9edi).ant-select-single
+  .ant-select-selector
+  .ant-select-selection-search {
   inset-inline-start: 0;
   inset-inline-end: 0;
-  
 }
 
 .ant-select.ant-select-auto-complete.css-dev-only-do-not-override-ph9edi.ant-select-single.ant-select-show-search {
@@ -1345,7 +1350,11 @@ body {
   padding: 0;
 }
 
-:where(.css-dev-only-do-not-override-ph9edi).ant-select-single:not(.ant-select-customize-input) .ant-select-selector .ant-select-selection-search-input {
+:where(.css-dev-only-do-not-override-ph9edi).ant-select-single:not(
+    .ant-select-customize-input
+  )
+  .ant-select-selector
+  .ant-select-selection-search-input {
   height: 40px;
   padding: 10px;
 }
@@ -1355,7 +1364,7 @@ input#rc_select_1 {
   width: 100%;
   padding: 10px;
   font-family: "Roboto", sans-serif;
-  font-weight: 700; 
+  font-weight: 700;
 }
 
 /* -------------------------- Calendario + llegada -------------------------- */
@@ -1419,7 +1428,6 @@ input#rc_select_1 {
 .card-reserva h3 {
   padding: 20px;
 }
-
 
 .card-reserva img {
   width: 100%;
@@ -1492,7 +1500,6 @@ div.card-reserva-content {
   width: 90%;
 }
 
-
 /* --------------------------- Reserva confirmada --------------------------- */
 
 .reserva-correcta-container {
@@ -1531,7 +1538,7 @@ div.card-reserva-content {
 
 .swal2-styled.swal2-confirm {
   background-color: var(--main-green);
-} 
+}
 
 .swal2-styled.swal2-confirm:focus {
   box-shadow: none;
@@ -1546,12 +1553,12 @@ div.card-reserva-content {
 }
 
 .noselect {
-  -webkit-touch-callout: none; 
-  -webkit-user-select: none; 
-  -khtml-user-select: none; 
-  -moz-user-select: none; 
-  -ms-user-select: none; 
-  user-select: none;                              
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* ------------------------------ Media queries ----------------------------- */
@@ -1615,7 +1622,7 @@ div.card-reserva-content {
     height: 4vw;
     border-radius: 1vw;
   }
-  
+
   #square8-number {
     font-size: 2vh;
   }
@@ -1647,11 +1654,14 @@ div.card-reserva-content {
     flex-direction: column;
   }
 
-  .datos-reserva, .llegada-container, .card-reserva-container {
+  .datos-reserva,
+  .llegada-container,
+  .card-reserva-container {
     width: 93vw;
   }
 
-  .llegada-card-container, .card-reserva {
+  .llegada-card-container,
+  .card-reserva {
     width: 100%;
   }
 
@@ -1683,7 +1693,8 @@ div.card-reserva-content {
     align-items: center;
   }
 
-  .info-card-reserva, .checkin-checkout {
+  .info-card-reserva,
+  .checkin-checkout {
     width: 90%;
   }
 
@@ -1694,7 +1705,6 @@ div.card-reserva-content {
   .calendar-container-reserva {
     margin-bottom: 120px;
   }
-
 }
 
 /* Para pantallas de tamaño menor a 768px (mobile) */
@@ -1735,7 +1745,9 @@ div.card-reserva-content {
     grid-template-rows: repeat(4, 1fr);
   }
 
-  .product-images, .desktop-carousel, .interacciones-mobile {
+  .product-images,
+  .desktop-carousel,
+  .interacciones-mobile {
     display: none;
   }
 
@@ -1746,11 +1758,9 @@ div.card-reserva-content {
   .card-reserva-confirmada {
     width: 93%;
   }
-  
 }
 
 @media (max-width: 550px) {
-
   .custom-calendar.rmdp-wrapper {
     display: none;
   }
@@ -1779,12 +1789,15 @@ div.card-reserva-content {
     flex-direction: column;
   }
 
-  .datos-reserva, .llegada-container, .card-reserva-container {
+  .datos-reserva,
+  .llegada-container,
+  .card-reserva-container {
     width: 93vw;
     margin: 0 auto;
   }
 
-  .llegada-card-container, .card-reserva {
+  .llegada-card-container,
+  .card-reserva {
     width: 100%;
   }
 
@@ -1829,7 +1842,8 @@ div.card-reserva-content {
     align-items: center;
   }
 
-  .info-card-reserva, .checkin-checkout {
+  .info-card-reserva,
+  .checkin-checkout {
     width: 90%;
   }
 
@@ -1955,11 +1969,11 @@ div.card-reserva-content {
     color: rgba(56, 59, 88, 1);
   }
 
-  .info-container > p{
+  .info-container > p {
     margin-bottom: 10px;
   }
 
-  .info-container > * { 
+  .info-container > * {
     margin-bottom: 10px;
   }
 
@@ -1978,7 +1992,7 @@ div.card-reserva-content {
     text-align: center;
     font-size: 1.8rem;
     font-weight: 700;
-    line-height:2.5rem ;
+    line-height: 2.5rem;
   }
   .form-buscador {
     flex-direction: column;
@@ -2008,14 +2022,14 @@ div.card-reserva-content {
     height: 6vw;
   }
 
-  .extra{
+  .extra {
     display: none;
   }
-  .modal-content h2{
+  .modal-content h2 {
     color: var(--main-dark-gray);
   }
 
-  .btn-vermas-vermenos{
+  .btn-vermas-vermenos {
     background-color: var(--main-white);
   }
 }
@@ -2047,9 +2061,8 @@ div.card-reserva-content {
   .categorias-container h2 {
     font-size: 1.3rem;
   }
-  
+
   .calendar-container-reserva {
     margin-bottom: 140px;
   }
-
 }
