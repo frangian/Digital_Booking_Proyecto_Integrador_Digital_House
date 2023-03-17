@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton';
 import ImgDesktopCarousel from './ImgDesktopCarousel'
 import ImgMobileCarousel from './ImgMobileCarousel';
 
-const ImgContainer = ({ imgList, isLoading }) => {
+const ImgContainer = ({ imgList, isLoading, shareObj, shareAcross }) => {
 
     const [openCarousel, setOpenCarousel] = useState(false);
 
@@ -42,6 +42,7 @@ const ImgContainer = ({ imgList, isLoading }) => {
             />
             <ImgMobileCarousel 
             imgList={imgList}
+            shareObj={shareObj} shareAcross={shareAcross}
             />
         </div>
     )

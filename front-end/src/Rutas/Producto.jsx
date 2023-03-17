@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faStar } from '@fortawesome/free-solid-svg-icons'
+import { faFacebook, faWhatsapp, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -14,8 +17,9 @@ import axios from 'axios'
 import { ContextGlobal } from '../Components/Utils/globalContext';
 import ProductHeader from '../Components/ProductHeader';
 import PoliticasProducto from '../Components/PoliticasProducto';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { FacebookShareButton, WhatsappShareButton, TwitterShareButton } from 'react-share'
 
 const Producto = () => {
 
@@ -29,6 +33,8 @@ const Producto = () => {
     const [reservas, setReservas] = useState([]);
     const [like, setLike] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [shareObj, setShareObj] = useState({title: "", text: "", url: ""});
+    const MySwal = withReactContent(Swal);
 
     useEffect(() => {
         const seccion = document.getElementById('mapa');
@@ -55,6 +61,12 @@ const Producto = () => {
             setNormas(res.data.normas.split(","));
             setSeguridad(res.data.seguridad.split(","));
             setIsLoading(true);
+            setShareObj({
+                ...shareObj,
+                title: `Digital Booking ${res.data.titulo}`,
+                text: `Reserva ${res.data.titulo} en Digital Booking`,
+                url: window.location.href
+            })
         })
         axios.get(`http://localhost:8080/caracteristica/producto/${id}`)
         .then(res => {
@@ -65,6 +77,39 @@ const Producto = () => {
             setReservas(res.data)
         }) 
     }, [id])
+
+    const shareCard = () => {
+        MySwal.fire({
+            title: <strong onClick={() => console.log(shareObj)}>Comparte este producto!</strong>,
+            html: <div className='share-card'>
+                <FacebookShareButton url={shareObj.url} quote={shareObj.text}>
+                    <FontAwesomeIcon icon={faFacebook} style={{ color: "#1877F2" }}/>
+                </FacebookShareButton>
+                <WhatsappShareButton url={shareObj.url} title={shareObj.text}>
+                    <FontAwesomeIcon icon={faWhatsapp} style={{ color: "#25D366" }}/>
+                </WhatsappShareButton>
+                <TwitterShareButton url={shareObj.url} title={shareObj.text}>
+                    <FontAwesomeIcon icon={faTwitter} style={{ color: "#1DA1F2" }}/>
+                </TwitterShareButton>
+            </div>,
+ 
+        })
+    }
+
+    const shareAcross = (obj) => {
+        if(window.innerWidth < 900) {
+            if (navigator.share) {
+                navigator.share(obj)
+                .then(() => console.log("Objeto compartido"))
+                .catch(err => console.log(err))
+            } else {
+                console.log("no soportado");
+            }
+        } else {
+            shareCard()
+        }
+        
+    }
 
     return (
         <div className='product-page'>
@@ -96,14 +141,14 @@ const Producto = () => {
                 <Skeleton className='top-location' height={"8vh"}/>
             }
             <div className='interacciones'>
-                <IconButton>
+                <IconButton onClick={() => shareAcross(shareObj)}>
                     <ShareOutlinedIcon />
                 </IconButton>
-                <IconButton onClick={() => setLike(!like)}>
+                <IconButton onClick={() => {setLike(!like)}}>
                     {like ? <FavoriteIcon sx={{color: "red"}}/> : <FavoriteBorderOutlinedIcon />}
                 </IconButton>
             </div>
-            <ImgContainer imgList={images} isLoading={isLoading}/>
+            <ImgContainer imgList={images} isLoading={isLoading} shareObj={shareObj} shareAcross={shareAcross}/>
             <div className="descripcion">
                 <h3>Alójate en el corazón de {data.ciudad?.nombre}</h3>
                 <p>{data?.descripcion_producto || <Skeleton width={"150px"}/>}</p>

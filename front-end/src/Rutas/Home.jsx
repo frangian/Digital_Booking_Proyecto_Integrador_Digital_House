@@ -27,6 +27,7 @@ const Home = () => {
     axios.get('http://localhost:8080/categoria')
       .then((response) => {
         setCategories(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);

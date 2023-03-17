@@ -4,7 +4,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { IconButton } from '@mui/material';
 
-const ImgMobileCarousel = ({ imgList }) => {
+const ImgMobileCarousel = ({ imgList, shareObj, shareAcross }) => {
 
     const [like, setLike] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -40,7 +40,9 @@ const ImgMobileCarousel = ({ imgList }) => {
         <div className='mobile-carousel'>
             <div className='interacciones-mobile'>
                 <IconButton 
-                sx={{color: "white", position: "absolute", top: "3%", zIndex: "1", left: "1%"}}>
+                sx={{color: "white", position: "absolute", top: "3%", zIndex: "1", left: "1%"}}
+                onClick={() => shareAcross(shareObj)}
+                >
                     <ShareOutlinedIcon />
                 </IconButton>
                 <IconButton onClick={() => setLike(!like)} 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import PoliticasProducto from '../Components/PoliticasProducto';
 import ProductHeader from '../Components/ProductHeader';
 import ReservaForm from '../Components/ReservasComponents/ReservaForm';
@@ -9,6 +9,7 @@ const Reservas = () => {
 
     const { id } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
     const [data, setData] = useState({});
     const [normas, setNormas] = useState([]);
     const [seguridad, setSeguridad] = useState([]);
