@@ -1,8 +1,9 @@
 import Home from "../../Rutas/Home";
 import Login from "../../Rutas/Login";
 import Register from "../../Rutas/Register";
-import { faFacebook, faLinkedinIn, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import Producto from "../../Rutas/Producto";
+import Reservas from "../../Rutas/Reservas"
+import { faFacebook, faLinkedinIn, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
 
 
 
@@ -11,6 +12,7 @@ export const routes = [
     { id: 2, path: "/register", Element: Register, title: "Crear cuenta" }, 
     { id: 3, path: "/login", Element: Login, title: "Iniciar sesión" },
     { id: 4, path: "/product/:id", Element: Producto, title: "Product detail" },
+    { id: 5, path: "/product/:id/reservas", Element: Reservas, title: "Reserva producto" },
 ]
 
 export const socialNetworks = [

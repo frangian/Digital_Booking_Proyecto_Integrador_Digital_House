@@ -3,6 +3,10 @@ package com.example.proyectoIntegradorE8.controller;
 import com.example.proyectoIntegradorE8.entity.Ciudad;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.service.CiudadService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +18,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/ciudad")
+@Tag(name = "Ciudad", description = "API metodos CRUD de las ciudades")
 public class CiudadController {
     private static final Logger logger = Logger.getLogger(CiudadController.class);
     private CiudadService ciudadService;
@@ -23,6 +28,11 @@ public class CiudadController {
     }
 
     @PostMapping
+    @Operation(summary = "Agregar una ciudad", description = "Este endpoint permite agregar una ciudad a a la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "Peticion incorrecta"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")})
     public ResponseEntity<?> guardarCiudad (@RequestBody Ciudad ciudad){
         try {
             logger.info("Se inicia el proceso para guardar una ciudad en la BBDD");
@@ -34,6 +44,11 @@ public class CiudadController {
         }
     }
     @GetMapping("/{id}")
+    @Operation(summary = "Buscar una ciudad por ID", description = "Este endpoint permite buscar una ciudad por ID de la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "La ciudad no existe en la BBDD"),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta")})
     public ResponseEntity<?> buscarCiudad (@PathVariable Long id) {
         try {
             Ciudad ciudadBuscada = ciudadService.buscarCiudad(id);
@@ -43,6 +58,11 @@ public class CiudadController {
         }
     }
     @PutMapping
+    @Operation(summary = "Actualizar una ciudad", description = "Este endpoint permite actualizar una ciudad ya existente en la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "La ciudad no existe en la BBDD"),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta")})
     public ResponseEntity<?> actualizarCiudad(@RequestBody Ciudad ciudad){
         try {
             ciudadService.buscarCiudad(ciudad.getId());
@@ -55,6 +75,10 @@ public class CiudadController {
         }
     }
     @GetMapping
+    @Operation(summary = "Listar todas las ciudades", description = "Este endpoint permite ver todas las ciudades registradas en la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta")})
     public ResponseEntity<?> listarTodas(){
         try {
             List<Ciudad> ciudadesGuardadas = ciudadService.listarTodas();
@@ -65,6 +89,11 @@ public class CiudadController {
         }
     }
     @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar una ciudad", description = "Este endpoint permite eliminar una ciudad de la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "La ciudad no existe en la BBDD"),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta")})
     public ResponseEntity<?> eliminarCiudad (@PathVariable Long id) {
         try {
             ciudadService.buscarCiudad(id);
