@@ -16,6 +16,7 @@ public class Reserva {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     @Column (name = "codigo_reserva", unique = true)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private String codigoReserva;
     @Column (name = "hora_comienzo", nullable = false)
     @Schema(type = "string", format = "time", pattern = "HH:mm:ss")

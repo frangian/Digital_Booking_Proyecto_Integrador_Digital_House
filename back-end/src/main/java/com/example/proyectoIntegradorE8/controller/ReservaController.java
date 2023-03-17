@@ -2,6 +2,7 @@ package com.example.proyectoIntegradorE8.controller;
 
 import com.example.proyectoIntegradorE8.entity.Reserva;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
+import com.example.proyectoIntegradorE8.service.ProductoService;
 import com.example.proyectoIntegradorE8.service.ReservaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,9 +26,11 @@ import java.util.List;
 public class ReservaController {
     private static final Logger logger = Logger.getLogger(ReservaController.class);
     private ReservaService reservaService;
+    private ProductoService productoService;
     @Autowired
-    public ReservaController(ReservaService reservaService) {
+    public ReservaController(ReservaService reservaService, ProductoService productoService) {
         this.reservaService = reservaService;
+        this.productoService = productoService;
     }
 
     @PostMapping
@@ -65,16 +68,15 @@ public class ReservaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bre.getMessage());
         }
     }
+    @GetMapping("/{id}")
     @Operation(
-            summary = "Agregar una reserva",
-            description = "Este endpoint permite agregar una reserva a a la BBDD"
+            summary = "Buscar una reserva por ID",
+            description = "Este endpoint permite buscar una reserva por ID en a la BBDD"
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "404", description = "La reserva no existe en la BBDD"),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta")})
-
-    @GetMapping("/{id}")
     public ResponseEntity<?> buscarReserva (@PathVariable Long id) {
         try {
             Reserva reservaBuscada = reservaService.buscarReserva(id);
@@ -89,11 +91,12 @@ public class ReservaController {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "404", description = "La reserva no existe en la BBDD"),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta")})
-
     public ResponseEntity<?> actualizarReserva(@RequestBody Reserva reserva){
         try {
-            reservaService.buscarReserva(reserva.getId());
-            reservaService.guardarReserva(reserva);
+            logger.info("entra al controlador");
+            productoService.buscarProducto(reserva.getProducto().getId());
+            reservaService.actualizarReserva(reserva);
+            logger.info("exito, devuelve la reserva actualizada");
             return ResponseEntity.ok(reserva);
         } catch (ResourceNotFoundException rnfe){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(rnfe.getMessage());
