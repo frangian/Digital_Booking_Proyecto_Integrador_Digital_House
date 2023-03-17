@@ -4,6 +4,9 @@ import com.example.proyectoIntegradorE8.entity.Ciudad;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.service.CiudadService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,11 +32,18 @@ public class CiudadController {
 
     @PostMapping
     @Operation(summary = "Agregar una ciudad", description = "Este endpoint permite agregar una ciudad a a la BBDD")
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            content = @Content(
+                    mediaType = "application/json",
+                    examples = @ExampleObject(value = "{ \"nombre\": \"String\", \"provincia\": \"String\",\"pais\": \"String\" }")
+            )
+    )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "400", description = "Peticion incorrecta"),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error")})
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Ciudad.class))),
+            @ApiResponse(responseCode = "400", description = "Peticion incorrecta", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)})
     public ResponseEntity<?> guardarCiudad (@RequestBody Ciudad ciudad){
+        System.out.println(ciudad.toString());
         try {
             logger.info("Se inicia el proceso para guardar una ciudad en la BBDD");
             Ciudad ciudadGuardada = ciudadService.guardarCiudad(ciudad);
@@ -46,9 +56,9 @@ public class CiudadController {
     @GetMapping("/{id}")
     @Operation(summary = "Buscar una ciudad por ID", description = "Este endpoint permite buscar una ciudad por ID de la BBDD")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "404", description = "La ciudad no existe en la BBDD"),
-            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta")})
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Ciudad.class))),
+            @ApiResponse(responseCode = "404", description = "La ciudad no existe en la BBDD", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> buscarCiudad (@PathVariable Long id) {
         try {
             Ciudad ciudadBuscada = ciudadService.buscarCiudad(id);
@@ -60,9 +70,9 @@ public class CiudadController {
     @PutMapping
     @Operation(summary = "Actualizar una ciudad", description = "Este endpoint permite actualizar una ciudad ya existente en la BBDD")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "404", description = "La ciudad no existe en la BBDD"),
-            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta")})
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Ciudad.class))),
+            @ApiResponse(responseCode = "404", description = "La ciudad no existe en la BBDD", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> actualizarCiudad(@RequestBody Ciudad ciudad){
         try {
             ciudadService.buscarCiudad(ciudad.getId());
@@ -77,8 +87,8 @@ public class CiudadController {
     @GetMapping
     @Operation(summary = "Listar todas las ciudades", description = "Este endpoint permite ver todas las ciudades registradas en la BBDD")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta")})
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Ciudad.class))),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> listarTodas(){
         try {
             List<Ciudad> ciudadesGuardadas = ciudadService.listarTodas();
@@ -91,9 +101,9 @@ public class CiudadController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar una ciudad", description = "Este endpoint permite eliminar una ciudad de la BBDD")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "404", description = "La ciudad no existe en la BBDD"),
-            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta")})
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(example = "Se elimino la ciudad con ID: \"+id+\" de la BBDD exitosamente"))),
+            @ApiResponse(responseCode = "404", description = "La ciudad no existe en la BBDD", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> eliminarCiudad (@PathVariable Long id) {
         try {
             ciudadService.buscarCiudad(id);

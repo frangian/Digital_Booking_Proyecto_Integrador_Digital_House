@@ -1,8 +1,16 @@
 package com.example.proyectoIntegradorE8.controller;
 
 import com.example.proyectoIntegradorE8.entity.Imagen;
+import com.example.proyectoIntegradorE8.entity.Producto;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.service.ImagenService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +22,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/imagen")
+@Tag(name = "Imagen", description = "API metodos CRUD de las imagenes")
 public class ImagenController {
     private static final Logger logger = Logger.getLogger(ImagenController.class);
     private ImagenService imagenService;
@@ -23,6 +32,31 @@ public class ImagenController {
     }
 
     @PostMapping
+    @Operation(
+            summary = "Agregar una imagen",
+            description = "Este endpoint permite agregar una imagen a a la BBDD"    )
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            content = @Content(mediaType = "application/json",
+                    examples = @ExampleObject(value = "" +
+                            "{\"titulo\": \"String\", " +
+                            "\"descripcion_producto\": \"String\", " +
+                            "\"descripcion_ubicacion\": \"String\", " +
+                            "\"url_ubicacion\": \"String\", " +
+                            "\"normas\": \"String\", " +
+                            "\"seguridad\": \"String\", " +
+                            "\"cancelacion\": \"String\", " +
+                            "\"puntuacion\": 0, " +
+                            "\"categoria\": {\"id\": 0}, " +
+                            "\"ciudad\": {\"id\": 0}, " +
+                            "\"caracteristicas\": [ " +
+                            "{\"id\": 0}]," +
+                            "\"imagenes\": [ "+
+                            "{\"titulo\": \"String\", \"url_imagen\": \"String\"}]" +
+                            "}"                    )            )    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
+            @ApiResponse(responseCode = "400", description = "Peticion incorrecta", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)})
     public ResponseEntity<?> guardarImagen (@RequestBody Imagen imagen) {
         try {
             logger.info("Se inicia el proceso para guardar una imagen en la BBDD");

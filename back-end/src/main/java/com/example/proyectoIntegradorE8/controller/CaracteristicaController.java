@@ -3,6 +3,7 @@ package com.example.proyectoIntegradorE8.controller;
 import com.example.proyectoIntegradorE8.entity.Caracteristica;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.service.CaractersiticaService;
+import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +15,8 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/caracteristica")
+@Log4j
 public class CaracteristicaController {
-    private static final Logger logger = Logger.getLogger(CaracteristicaController.class);
     private CaractersiticaService caractersiticaService;
 
     @Autowired
@@ -26,9 +27,9 @@ public class CaracteristicaController {
     @PostMapping
     public ResponseEntity<?> guardarCaracteristica (@RequestBody Caracteristica caracteristica){
         try {
-            logger.info("Se inicia el proceso para guardar una caracteristica en la BBDD");
+            log.info("Se inicia el proceso para guardar una caracteristica en la BBDD");
             Caracteristica caracteristicaGuardada = caractersiticaService.guardarCaracteristica(caracteristica);
-            logger.info("La caracteristica fue guardada "+caracteristica.getTitulo()+" en la BBDD exitosamente");
+            log.info("La caracteristica fue guardada "+caracteristica.getTitulo()+" en la BBDD exitosamente");
             return ResponseEntity.ok(caracteristicaGuardada);
         } catch (SQLException bre){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bre.getMessage());
@@ -59,7 +60,7 @@ public class CaracteristicaController {
     public ResponseEntity<?> listarCaracteristicas() {
         try {
             List<Caracteristica> caractersiticasGuardadas = caractersiticaService.listarCaracteristicas();
-            logger.info("Mostrando todas las caractersiticas registradas en la BBDD");
+            log.info("Mostrando todas las caractersiticas registradas en la BBDD");
             return ResponseEntity.ok(caractersiticasGuardadas);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
