@@ -1,6 +1,5 @@
 package com.example.proyectoIntegradorE8.service;
 
-import com.example.proyectoIntegradorE8.entity.Ciudad;
 import com.example.proyectoIntegradorE8.entity.Usuario;
 import com.example.proyectoIntegradorE8.exception.BadRequestException;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
@@ -10,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.ResourceAccessException;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,12 +25,18 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public Usuario guardarUsuario (Usuario usuario){
+    public Usuario guardarUsuario (Usuario usuario) throws SQLException {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-        log.info("El usuario fue guradado con éxito");
-        return usuarioRepository.save(usuario);
+        try{
+            log.info("El usuario fue guradado con éxito");
+            return usuarioRepository.save(usuario);
+        } catch (Exception e){
+            log.error("No se pudo guardar el usuario con id: " + usuario.getId()+" en la BBDD");
+            throw new SQLException("No se pudo guardar el usuario en la BBDD.", e);
+        }
     }
+
 
     public Usuario buscarUsuario (Long id) throws ResourceNotFoundException {
         log.info("buscando usuario...");
