@@ -1,13 +1,7 @@
 package com.example.proyectoIntegradorE8.entity;
 
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @Table(name = "usuario")
@@ -24,16 +18,22 @@ public class Usuario  {
     private String apellido;
 
     @Column
+    private String ciudad;
+
+    @Column
     private String email;
 
     @Column
     private String password;
 
-    @Column
+    @Column(name = "usuario_role")
     private UsuarioRole usuarioRole;
 
-    @Column
+    @Column(name = "locked_until")
     private Date lockedUntil;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reserva> reservas = new ArrayList<>();
 
     public Usuario(Long id, String nombre, String apellido, String email, String password, UsuarioRole usuarioRole, Date lockedUntil) {
         this.id = id;
