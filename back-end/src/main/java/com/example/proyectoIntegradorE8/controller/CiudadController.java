@@ -22,6 +22,10 @@ import java.util.List;
 public class CiudadController {
     private static final Logger logger = Logger.getLogger(CiudadController.class);
     private CiudadService ciudadService;
+    @Autowired
+    public CiudadController (CiudadService ciudadService){
+        this.ciudadService = ciudadService;
+    }
 
     @PostMapping
     @Operation(summary = "Agregar una ciudad", description = "Este endpoint permite agregar una ciudad a a la BBDD")
@@ -38,10 +42,6 @@ public class CiudadController {
         } catch (SQLException bre){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bre.getMessage());
         }
-    }
-    @Autowired
-    public CiudadController (CiudadService ciudadService){
-        this.ciudadService = ciudadService;
     }
     @GetMapping("/{id}")
     @Operation(summary = "Buscar una ciudad por ID", description = "Este endpoint permite buscar una ciudad por ID de la BBDD")
