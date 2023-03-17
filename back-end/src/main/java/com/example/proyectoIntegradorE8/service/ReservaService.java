@@ -40,6 +40,18 @@ public class ReservaService {
             throw new ResourceNotFoundException("La reserva con id: "+id+" no existe en la BBDD");
         }
     }
+    public void actualizarReserva(Reserva reserva) throws SQLException, ResourceNotFoundException {
+        logger.info("entra al service");
+        logger.info("busca la reserva en service");
+        Reserva reservaCompleta = buscarReserva(reserva.getId());
+        reservaCompleta.setHoraComienzo(reserva.getHoraComienzo());
+        reservaCompleta.setFechaInicial(reserva.getFechaInicial());
+        reservaCompleta.setFechaFinal(reserva.getFechaFinal());
+        reservaCompleta.setProducto(reserva.getProducto());
+        reservaCompleta.setUsuario(reserva.getUsuario());
+        logger.info("entra al repositorio");
+        reservaRepository.save(reservaCompleta);
+    }
     public List<Reserva> listarReserva() throws Exception {
         try {
             logger.info("Se inició una operación de listado de reservas");
