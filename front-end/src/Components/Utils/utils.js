@@ -58,3 +58,34 @@ export const getDaysArray = function (start, end) {
     }
     return arr;
 };
+
+export const makeId = (length) => {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+}
+
+export const normalizarFecha = (fecha) => {
+    let result = "";
+    let dia = fecha.day < 10 ? `0${fecha.day}` : `${fecha.day}`;
+    let mes = fecha.month < 10 ? `0${fecha.month}` : `${fecha.month}`;
+    result = `${fecha.year}-${mes}-${dia}`
+    return result;
+}
+
+export const deshabilitarSeleccionIntermedida = (selectedDates, disabledDates) => {
+    let bool = false;
+    selectedDates.forEach(day => {
+        if (disabledDates.includes(day.format("YYYY/M/D"))) {
+            console.log(day.format("YYYY/M/D"));
+            bool = true;
+        }
+    })
+    return bool;
+}

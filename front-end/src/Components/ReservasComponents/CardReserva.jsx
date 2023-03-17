@@ -1,6 +1,8 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faStar } from '@fortawesome/free-solid-svg-icons'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const CardReserva = ({ tituloCategoria, tituloProducto, ubicacion, img, checks }) => {
   return (
@@ -9,12 +11,12 @@ const CardReserva = ({ tituloCategoria, tituloProducto, ubicacion, img, checks }
         <h3>Detalle de la reserva</h3>
         <div className="card-reserva-content">
           <section className="title-img-reserva">
-            <img src={img} alt="Imagen producto" />
+            {img ? <img src={img} alt="Imagen producto" /> : <Skeleton height={"40vh"}/>}
           </section>
           <section className="right-card-reserva">
             <div className="info-card-reserva">
-              <p className='titulo-categoria-reserva'>{tituloCategoria}</p>
-              <h3>{tituloProducto}</h3>
+              <p className='titulo-categoria-reserva'>{tituloCategoria || <Skeleton />}</p>
+              <h3>{tituloProducto || <Skeleton />}</h3>
               <div className="estrellas-reserva">
                 <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
                 <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
@@ -24,7 +26,7 @@ const CardReserva = ({ tituloCategoria, tituloProducto, ubicacion, img, checks }
               </div>
               <p className="ubicacion-reserva">
                 <span><FontAwesomeIcon icon={faLocationDot} className="location-icon"/></span>
-                {ubicacion}
+                {ubicacion.includes("undefined") ? <Skeleton /> : ubicacion}
               </p>
             </div>
             <div className="checkin-checkout">

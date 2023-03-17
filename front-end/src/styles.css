@@ -2020,6 +2020,16 @@ div.card-reserva-content {
   }
 }
 
+@media (max-width: 450px) {
+  .custom-calendar.mobile.rmdp-wrapper {
+    height: 80%;
+  }
+
+  .calendar-container-reserva {
+    margin-bottom: 60px;
+  }
+}
+
 @media (max-width: 400px) {
   #register-form {
     margin: 50px 0 70px;
