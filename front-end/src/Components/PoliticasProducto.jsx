@@ -8,13 +8,13 @@ const PoliticasProducto = ({ normas, seguridad, cancelacion }) => {
             <section className="info">
                 <h4>Normas de la casa</h4>
                 <ul>
-                    {normas?.map(element => (<li>{element}</li>))}
+                    {normas?.map((element, i) => (<li key={i}>{element}</li>))}
                 </ul>
             </section>
             <section className="info">
                 <h4>Salud y seguridad</h4>
                 <ul>
-                    {seguridad?.map(element => (<li>{element}</li>))}
+                    {seguridad?.map((element, i) => (<li key={i}>{element}</li>))}
                 </ul>
             </section>
             <section className="info">

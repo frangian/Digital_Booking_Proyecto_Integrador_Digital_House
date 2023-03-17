@@ -12,8 +12,9 @@ import { DateRangePicker } from "rsuite";
 const Buscador = ({ onCiudadSeleccionada }) => {
   const [ciudad, setCiudad] = useState("");
   const [dateRange, setDateRange] = useState([]);
+  const [selectedDates, setSelectedDates] = useState(null);
   const [ciudades, setCiudades] = useState([]);
-  const [ciudadId, setCiudadId] = useState([]);
+  const [ciudadId, setCiudadId] = useState(null);
   
   
 
@@ -22,24 +23,16 @@ const Buscador = ({ onCiudadSeleccionada }) => {
   };
 
   const handleBuscarClick = () => {
-    onCiudadSeleccionada(ciudadId);
+    onCiudadSeleccionada(ciudadId, selectedDates);
   };
 
   const handleDateChange = (value) => {
     setDateRange(value);
+    const fechaInicial = value[0].toLocaleDateString('en-CA').split('/').reverse().join('-');
+    const fechaFinal = value[1].toLocaleDateString('en-CA').split('/').reverse().join('-');
+    setSelectedDates([fechaInicial, fechaFinal]);
   };
 
-/* ----------------------------------- FILTRO POR CIUDAD Y FECHAS ---------------------------------- */
-  const buscarAlojamientos = async (ciudad, fechaEntrada, fechaSalida) => {
-    const endpoint = `http://localhost:8080/producto?ciudad=${ciudad}&fechaEntrada=${fechaEntrada}&fechaSalida=${fechaSalida}`;
-  
-    try {
-      const response = await axios.get(endpoint);
-      console.log(response.data); 
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   /* ----------------------------------- COMPLETAR CON URL DE LA API PARA OBTENER LISTADO DE CIUDADES ---------------------------------- */
   useEffect(() => {

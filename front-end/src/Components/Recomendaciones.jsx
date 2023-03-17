@@ -1,68 +1,89 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios';
-import Card from '../Components/CardRecomendaciones';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Card from "../Components/CardRecomendaciones";
 
-const Recomendaciones = ({ categoriaSeleccionada, ciudadSeleccionada }) => {
-
+const Recomendaciones = ({
+  categoriaSeleccionada,
+  ciudadSeleccionada,
+  dates,
+}) => {
   const [productosRecomendados, setProductosRecomendados] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [url, setUrl] = useState("");
 
-  
-
-  //Si hay una categoria seleccionada traigo por categoria los recomendados
   useEffect(() => {
+    let url = "http://localhost:8080/producto/random";
+    let params = {};
+
     if (categoriaSeleccionada) {
-      axios.get(`http://localhost:8080/producto/categoria/${categoriaSeleccionada}`)
-        .then(response => setProductosRecomendados(response.data))
-        .catch(error => console.log(error));
+      url = `http://localhost:8080/producto/categoria/${categoriaSeleccionada}`;
     }
-  }, [categoriaSeleccionada]);
+    if (ciudadSeleccionada && dates && dates.length === 2) {
+      const checkIn = dates[0];
+      const checkOut = dates[1];
+      console.log("busco por ciudad y fechas");
+      url = `http://localhost:8080/producto/disponibles/fechaciudad`;
+      params = {
+        ciudadId: ciudadSeleccionada,
+        fechaInicial: checkIn,
+        fechaFinal: checkOut,
+      };
+    } else if (ciudadSeleccionada) {
+      url = `http://localhost:8080/producto/ciudad/${ciudadSeleccionada}`;
+    } else if (dates && dates.length === 2) {
+      const checkIn = dates[0];
+      const checkOut = dates[1];
+      console.log("busco por fecha");
+      url = `http://localhost:8080/producto/disponibles/fecha`;
+      params = {
+        fechaInicial: checkIn,
+        fechaFinal: checkOut,
+      };
+    }
 
-  //Si no hay categoria seleccionada traigo los recomendados al azar del back
-  useEffect(() => {
-    axios.get('http://localhost:8080/producto/random')
+    const urlParams = new URLSearchParams(params);
+    const finalUrl = url + "?" + urlParams.toString();
+
+    setUrl(finalUrl);
+    setIsLoading(true);
+
+    axios
+      .get(finalUrl)
       .then((response) => {
         setProductosRecomendados(response.data);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
-
-  //si hay na ciudad seleccionada trae los de esa ciudad
-  useEffect(() => {
-    if (ciudadSeleccionada) {
-      axios.get(`http://localhost:8080/producto/ciudad/${ciudadSeleccionada}`)
-        .then((response) => {
-          setProductosRecomendados(response.data);
-          console.log(ciudadSeleccionada);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, [ciudadSeleccionada]);
+  }, [categoriaSeleccionada, ciudadSeleccionada, dates]);
 
   return (
-
     <div className="recomendaciones-container">
-        <h2>Recomendaciones</h2>
-        <div className='card-grid-recomendaciones'>
-      {productosRecomendados.map(product => (
+      {isLoading ? (
+        <p>BUSCANDO ALOJAMIENTOS...</p>
+      ) : (
+        <>
+          {url && <code>{url}</code>}
+          <h2>Recomendaciones</h2>
+          <div className="card-grid-recomendaciones">
+            {productosRecomendados.map((product) => (
               <Card
                 key={product.id}
                 id={product.id}
                 title={product.titulo}
                 imagen={product.imagenes[0].url_imagen}
-                category={product.categoria.titulo}
+                category={product.categoria}
                 location={product.descripcion_ubicacion}
                 description={product.descripcion_producto}
-                
+                puntuacion={product.puntuacion}
               />
             ))}
-
-        </div>
+          </div>
+        </>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Recomendaciones
+export default Recomendaciones;
