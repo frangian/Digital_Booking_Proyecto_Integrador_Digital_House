@@ -25,3 +25,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     }
 }
+//loadUserByUsername:  busca un usuario en el repositorio a través del correo electrónico y devuelve los detalles del usuario en un objeto UserDetailsImpl.
+//Si el usuario no existe en la base de datos, se lanza una excepción de UsernameNotFoundException. Esto se hace con una expresión lambda que se pasa
+// como argumento a orElseThrow(). Si no se encuentra ningún usuario la excepción se lanza y se muestra un mensaje que incluye
+// el correo electrónico del usuario que no se pudo encontrar.
