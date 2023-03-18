@@ -3,6 +3,7 @@ package com.example.proyectoIntegradorE8.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -15,8 +16,10 @@ public class Reserva {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     @Column (name = "codigo_reserva", unique = true)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private String codigoReserva;
     @Column (name = "hora_comienzo", nullable = false)
+    @Schema(type = "string", format = "time", pattern = "HH:mm:ss")
     private LocalTime horaComienzo;
     @Column (name = "fecha_inicial", nullable = false)
     private LocalDate fechaInicial;
