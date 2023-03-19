@@ -94,6 +94,8 @@ public class ReservaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(rnfe.getMessage());
         } catch (SQLException sqle){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(sqle.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
     @GetMapping

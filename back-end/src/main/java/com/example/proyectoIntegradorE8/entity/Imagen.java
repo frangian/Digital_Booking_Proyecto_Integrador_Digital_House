@@ -2,8 +2,12 @@ package com.example.proyectoIntegradorE8.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 @Entity
+@Data
+@AllArgsConstructor
 @Table (name = "imagen")
 public class Imagen {
     @Id
@@ -22,60 +26,58 @@ public class Imagen {
     @JoinColumn (name = "producto_id", referencedColumnName = "id")
     private Producto producto;
 
-    //constructores & getters & setters
-
     public Imagen() {
     }
 
-    public Imagen(Long id, String titulo, String url_imagen) {
-        this.id = id;
-        this.titulo = titulo;
-        this.url_imagen = url_imagen;
-    }
-
-    public Imagen(String titulo, String url_imagen) {
-        this.titulo = titulo;
-        this.url_imagen = url_imagen;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getUrl_imagen() {
-        return url_imagen;
-    }
-
-    public void setUrl_imagen(String url_imagen) {
-        this.url_imagen = url_imagen;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
+//    public Imagen(Long id, String titulo, String url_imagen) {
+//        this.id = id;
+//        this.titulo = titulo;
+//        this.url_imagen = url_imagen;
+//    }
+//
+//    public Imagen(String titulo, String url_imagen) {
+//        this.titulo = titulo;
+//        this.url_imagen = url_imagen;
+//    }
+//
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//
+//    public String getTitulo() {
+//        return titulo;
+//    }
+//
+//    public void setTitulo(String titulo) {
+//        this.titulo = titulo;
+//    }
+//
+//    public String getUrl_imagen() {
+//        return url_imagen;
+//    }
+//
+//    public void setUrl_imagen(String url_imagen) {
+//        this.url_imagen = url_imagen;
+//    }
+//
+//    public Categoria getCategoria() {
+//        return categoria;
+//    }
+//
+//    public void setCategoria(Categoria categoria) {
+//        this.categoria = categoria;
+//    }
+//
+//    public Producto getProducto() {
+//        return producto;
+//    }
+//
+//    public void setProducto(Producto producto) {
+//        this.producto = producto;
+//    }
 
 }
