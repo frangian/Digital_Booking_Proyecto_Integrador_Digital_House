@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class TokenUtils {
 
-    private final static String ACCESS_TOKEN_SECRET = "uqwbodqbw242272odwqd";
+    private final static String ACCESS_TOKEN_SECRET = "cf3456Equipo8cjasjasjcamada3";
     private final static Long ACCESS_TOKEN_VALIDITY = 2_592_000L;
 
 //En resumen, el método "crearToken" de la clase "TokenUtils" genera un token JWT con la información del nombre y el correo electrónico,
@@ -24,11 +24,11 @@ public class TokenUtils {
         long expirationTime= ACCESS_TOKEN_VALIDITY * 1_000;
         Date expirationDate = new Date(System.currentTimeMillis() + expirationTime);
 
-        //esto va a viajar con el token
+        //esto va a viajar con el token, son datos adicionales como cadena de objetos.
         Map<String, Object> adicional = new HashMap<>();
-        adicional.put("nombre", nombre);
+        adicional.put("nombre", nombre); //el nombre del usuario
 
-        //se crea el token
+        //se crea el token que será enviado al cliente
         return Jwts.builder()
                 //para quien va dirigido
                 .setSubject(email)//establece el "sujeto" del token a la dirección de correo electrónico proporcionada que generalmente se usa para identificar al destinatario del token.
@@ -40,7 +40,7 @@ public class TokenUtils {
                 .compact(); //convierte el token JWT en una cadena compacta que se puede enviar a través de una solicitud HTTP.
     }
 
-
+ //     es necesario para que sprint reconozca y pueda pasar el proceso de autorización para un usuario que quiere accedes a un endpoint con un token, el token esta en formato plano.
     public static UsernamePasswordAuthenticationToken getAuthentication (String token){
 
         try {
@@ -50,9 +50,10 @@ public class TokenUtils {
                     .parseClaimsJws(token)
                     .getBody();
 
+// para extraer el correo que esta identificando a un usuario, se usa esto:
             String email = claims.getSubject();
             return new UsernamePasswordAuthenticationToken(email, null, Collections.emptyList());
-
+// si el usuario manda un token indorrecto/invalido/expirado,existe esta excepción y retorna nulo, y quiere decir que no se ha podido crear
         } catch (JwtException e){
             return null;
         }

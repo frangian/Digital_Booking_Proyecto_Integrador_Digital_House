@@ -29,32 +29,33 @@ public class Usuario  {
     @Column(name = "usuario_role")
     private UsuarioRole usuarioRole;
 
-    @Column(name = "locked_until")
-    private Date lockedUntil;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reserva> reservas = new ArrayList<>();
 
-    public Usuario(Long id, String nombre, String apellido, String email, String password, UsuarioRole usuarioRole, Date lockedUntil) {
+
+    public Usuario(Long id, String nombre, String apellido, String ciudad, String email, String password, UsuarioRole usuarioRole, List<Reserva> reservas) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.ciudad = ciudad;
         this.email = email;
         this.password = password;
         this.usuarioRole = usuarioRole;
-        this.lockedUntil = lockedUntil;
+        this.reservas = reservas;
     }
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String email, String password, UsuarioRole usuarioRole, Date lockedUntil) {
+    public Usuario(String nombre, String apellido, String ciudad, String email, String password, UsuarioRole usuarioRole, List<Reserva> reservas) {
         this.nombre = nombre;
         this.apellido = apellido;
+        this.ciudad = ciudad;
         this.email = email;
         this.password = password;
         this.usuarioRole = usuarioRole;
-        this.lockedUntil = lockedUntil;
+        this.reservas = reservas;
     }
 
     public Long getId() {
@@ -94,6 +95,21 @@ public class Usuario  {
         return password;
     }
 
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -107,13 +123,6 @@ public class Usuario  {
         this.usuarioRole = usuarioRole;
     }
 
-    public Date getLockedUntil() {
-        return lockedUntil;
-    }
-
-    public void setLockedUntil(Date lockedUntil) {
-        this.lockedUntil = lockedUntil;
-    }
 
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {

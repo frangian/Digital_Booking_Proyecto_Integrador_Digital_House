@@ -7,9 +7,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -21,8 +23,7 @@ public class WebSecurityConfig {
     private final JWTAuthorizationFilter jwtAuthorizationFilter;
 
     //BEAN: es una anotación de Spring que indica que el método anotado debe devolver un objeto que Spring debe administrar en su contenedor.
-    @Bean
-    //
+  @Bean
     SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
 //La configuración de seguridad en Spring se realiza a través de la clase WebSecurityConfigurerAdapter.
 // El método filterChain es parte de esta configuración y devuelve un objeto SecurityFilterChain,
@@ -36,16 +37,20 @@ public class WebSecurityConfig {
                 .csrf().disable()
                 //inicia la configuración de autorización para las solicitudes.
                 .authorizeHttpRequests()
-                //indica que cualquier solicitud debe ser autorizada.
-                .anyRequest()
-                // indica que la solicitud debe estar autenticada para ser autorizada.
-                .authenticated()
+                .requestMatchers("localhost:8080/producto/**").permitAll()
+                .requestMatchers("localhost:8080/categoria/**").permitAll()
+                .requestMatchers("localhost:8080/ciudad/**").permitAll()
+                .requestMatchers("localhost:8080/usuario/**").permitAll()
+//                //indica que cualquier solicitud debe ser autorizada.
+//                .anyRequest()
+////                // indica que la solicitud debe estar autenticada para ser autorizada.
+//                .authenticated()
                 .and()
                 //inicia la configuración de gestión de sesiones.
                 .sessionManagement()
                 // indica que no se creará ninguna sesión para las solicitudes, ya que la autenticación se realiza mediante JWT,
                 // lo que significa que no es necesario almacenar información de sesión en el servidor.
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+               .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 //se encarga de la autenticación de los usuarios mediante JWT.
                 .addFilter(jwtAuthenticationFilter)
@@ -68,7 +73,6 @@ public class WebSecurityConfig {
 //        return manager;
 //    }
 
-
     //Este @Bean define y configura un AuthenticationManager que se utilizará para autenticar a los usuarios en la aplicación.
     //El AuthenticationManager define un método authenticate que se utiliza para autenticar a un usuario.
     // El método authManager define este objeto y le proporciona dos argumentos:
@@ -81,15 +85,23 @@ public class WebSecurityConfig {
     @Bean
     AuthenticationManager authManager(HttpSecurity http, PasswordEncoder passwordEncoder) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
+                //para que tome efecto lo que se creo arriba
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder)
                 .and()
                 .build();
 
     }
+
+    //verifica que la contrasena que manda el cliente coincida con la de la base de datos, pero debe de estar previamente encriptada
     @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+//    //fabricar contrasena que va a estae encrpitada:
+//    public static void main (String [] args){
+//      System.out.println("pass: " + new BCryptPasswordEncoder().encode("camila"));
+//    }
 
 }

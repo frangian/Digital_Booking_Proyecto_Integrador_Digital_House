@@ -1,7 +1,5 @@
 package com.example.proyectoIntegradorE8.Security;
-import com.example.proyectoIntegradorE8.Security.AuthCredentials;
-import com.example.proyectoIntegradorE8.Security.TokenUtils;
-import com.example.proyectoIntegradorE8.Security.UserDetailsImpl;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -28,6 +26,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         AuthCredentials authCredentials = new AuthCredentials();
+
         try {
             authCredentials = new ObjectMapper().readValue(request.getReader(), AuthCredentials.class);
         } catch (IOException e) {
@@ -41,7 +40,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         return getAuthenticationManager().authenticate(usernamePAT);
     }
-
+// en el caso de que se complete bien la autenticación aneterior, hay que sobrescribir un metodo nuevo:
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response,
@@ -49,10 +48,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             Authentication authResult) throws IOException, ServletException {
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authResult.getPrincipal();
+        //creamos un token a partir de userDetails
         String token = TokenUtils.crearToken(userDetails.getNombre(), userDetails.getUsername());
 
+        //modificamos la respuesta para adjuntar el nuevo token
         response.addHeader("Authorization", "Bearer " + token);
-        response.getWriter().flush();
+        response.getWriter().flush(); //para confirmar esos cambios
 
         super.successfulAuthentication(request, response, chain, authResult);
     }
