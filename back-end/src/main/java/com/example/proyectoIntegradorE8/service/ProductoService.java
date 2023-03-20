@@ -3,34 +3,39 @@ package com.example.proyectoIntegradorE8.service;
 import com.example.proyectoIntegradorE8.entity.Imagen;
 import com.example.proyectoIntegradorE8.entity.Producto;
 import com.example.proyectoIntegradorE8.exception.BadRequestException;
-import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
+import com.example.proyectoIntegradorE8.repository.CaractersiticaRepository;
 import com.example.proyectoIntegradorE8.repository.ImagenRepository;
 import com.example.proyectoIntegradorE8.repository.ProductoRepository;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
-import java.sql.SQLException;
+import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
+@Log4j
 public class ProductoService {
     private static final Logger logger = Logger.getLogger(ProductoService.class);
     ProductoRepository productoRepository;
     ImagenRepository imagenRepository;
+    CaractersiticaRepository caracteristicaRepository;
 
     @Autowired
-    public ProductoService(ProductoRepository productoRepository, ImagenRepository imagenRepository) {
+    public ProductoService(ProductoRepository productoRepository, ImagenRepository imagenRepository, CaractersiticaRepository caracteristicaRepository) {
         this.productoRepository = productoRepository;
         this.imagenRepository = imagenRepository;
+        this.caracteristicaRepository = caracteristicaRepository;
     }
 
-    public Producto guardarProducto(Producto producto) throws SQLException {
+    public Producto guardarProducto(Producto producto) throws Exception {
         try {
             // Guardar primero el producto
-            logger.info("La informacion provista fue correcta, accediendo a ProductoRepository: "+producto.getId()+", "+producto.getTitulo());
+            logger.info("Ingresando al service de Producto");
             Producto productoGuardado = productoRepository.save(producto);
             // Guardar las imagenes luego
             Set<Imagen> imagenes = productoGuardado.getImagenes();
@@ -41,20 +46,31 @@ public class ProductoService {
             }
             // retornamos el producto con las imagenes guardadas
             return productoGuardado;
-        } catch (Exception e) {
-            logger.error("No se pudo guardar/actualizar el producto "+producto.getTitulo()+" en la BBDD. Exception: "+e.getMessage()+".");
-            throw new SQLException("No se pudo guardar/actualizar el producto en la BBDD. No pueden quedar campos solicitados vacios.");
+        } catch (DataAccessException e) {
+            logger.error("Error al acceder a la base de datos", e);
+            throw new Exception("Error al acceder a la base de datos. Mensaje:"+ e.getMessage());
+        } catch (Exception e){
+            logger.error("Error al actualizar el producto.", e);
+            throw new Exception("Error al actualizar el producto. Mensaje:"+ e.getMessage());
         }
     }
-    public Producto buscarProducto (Long id) throws ResourceNotFoundException {
-        logger.info("buscando producto...");
-        Optional<Producto> productoBuscado = productoRepository.findById(id);
-        if (productoBuscado.isPresent()) {
-            logger.info("Se encontro el producto con id: " + id + " en la BBDD exitosamente");
-            return productoBuscado.get();
-        } else {
-            logger.info("El producto con id: "+id+" no existe en la BBDD");
-            throw new ResourceNotFoundException("El producto con id: "+id+" no existe en la BBDD");
+    @Transactional
+    public Producto buscarProducto (Long id) throws Exception {
+        try {
+            logger.info("buscando producto...");
+            Producto productoBuscado = productoRepository.findById(id)
+                    .orElseThrow(() -> new EntityNotFoundException("El producto con id: " + id + " no existe en la BBDD"));
+            logger.info("Se encontró el producto con id: " + id + " en la BBDD exitosamente");
+            return productoBuscado;
+        } catch (EntityNotFoundException enfe) {
+            logger.error("No se pudo encontrar el producto con id: " + id, enfe);
+            throw new EntityNotFoundException("El producto con id: "+id+" no existe en la BBDD");
+        } catch (DataAccessException e) {
+            logger.error("Error al acceder a la base de datos", e);
+            throw new Exception("Error al acceder a la base de datos. Mensaje:"+ e.getMessage());
+        } catch (Exception e){
+            logger.error("Error al actualizar el producto.", e);
+            throw new Exception("Error al actualizar el producto. Mensaje:"+ e.getMessage());
         }
     }
     public List<Producto> listarProductos () throws Exception {
@@ -66,14 +82,20 @@ public class ProductoService {
             throw new BadRequestException("Ocurrio un error al listar todos los productos");
         }
     }
+    @Transactional
     public void actualizarProducto (Producto producto) throws Exception {
         try {
-            logger.info("Se inició una operación de actualizacion del producto con id: "+
-                    producto.getId());
+            logger.info("Actualizando el producto con id: " + producto.getId());
             productoRepository.save(producto);
+        } catch (NullPointerException npe){
+            log.error("El objeto producto es null o la lista de caracteristicas o imagenes es null.", npe);
+            throw new NullPointerException("El objeto producto es null o la lista de caracteristicas o imagenes es null. Mensaje:"+npe.getMessage());
+        } catch (DataAccessException e) {
+            logger.error("Error al acceder a la base de datos", e);
+            throw new Exception("Error al acceder a la base de datos. Mensaje:"+ e.getMessage());
         } catch (Exception e){
-            logger.info("No se pudo actualizar el producto");
-            throw new Exception(e.getMessage());
+            logger.error("Error al actualizar el producto.", e);
+            throw new Exception("Error al actualizar el producto. Mensaje:"+ e.getMessage());
         }
     }
     public void eliminarProducto (Long id) throws Exception {
@@ -81,8 +103,8 @@ public class ProductoService {
             productoRepository.deleteById(id);
             logger.warn("Se eliminó el producto con ID: "+id+" de la BBDD");
         } catch (Exception e){
-            logger.error("Error al eliminar el producto: Exception "+e.getMessage());
-            throw new Exception("Ocurrio un error al eliminar el producto");
+            logger.error("Error al eliminar el producto.", e);
+            throw new Exception("Error al eliminar el producto. Mensaje:"+ e.getMessage());
         }
     }
     public List<Producto> productoPorCategoria (Long id) throws Exception {
@@ -90,8 +112,8 @@ public class ProductoService {
             logger.info("Buscando todos los productos de la categoria con id: "+id);
             return productoRepository.findByCategoriaId(id);
         } catch (Exception e){
-            logger.error("Error al buscar el producto por categoria id. Exception: "+e.getMessage());
-            throw new Exception("Ocurrio un error al buscar el producto por categoria id");
+            logger.error("Error al buscar productos con categoria id.", e);
+            throw new Exception("Error al buscar productos con categoria id. Mensaje:"+ e.getMessage());
         }
     }
     public List<Producto> productoPorCiudad (Long id) throws Exception {

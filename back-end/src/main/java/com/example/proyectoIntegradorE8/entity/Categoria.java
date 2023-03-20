@@ -3,10 +3,17 @@ package com.example.proyectoIntegradorE8.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "titulo")
 @Table (name="categoria")
 public class Categoria  {
@@ -22,57 +29,62 @@ public class Categoria  {
     @OneToMany(mappedBy = "categoria")
     private Set<Imagen> imagenes = new HashSet<>();
 
-    public Categoria() {
-    }
-
     public Categoria(Long id, String titulo, String descripcion) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
     }
-
     public Categoria(String titulo, String descripcion) {
         this.titulo = titulo;
         this.descripcion = descripcion;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Set<Imagen> getImagenes() {
-        return imagenes;
-    }
-
-    public void setImagenes(Set<Imagen> imagenes) {
-        this.imagenes = imagenes;
-    }
-
-    public Set<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(Set<Producto> productos) {
-        this.productos = productos;
-    }
+//    public Categoria() {
+//    }
+//
+//    public Categoria(Long id, String titulo, String descripcion) {
+//        this.id = id;
+//        this.titulo = titulo;
+//        this.descripcion = descripcion;
+//    }
+//
+//
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//
+//    public String getTitulo() {
+//        return titulo;
+//    }
+//
+//    public void setTitulo(String titulo) {
+//        this.titulo = titulo;
+//    }
+//
+//    public String getDescripcion() {
+//        return descripcion;
+//    }
+//
+//    public void setDescripcion(String descripcion) {
+//        this.descripcion = descripcion;
+//    }
+//
+//    public Set<Imagen> getImagenes() {
+//        return imagenes;
+//    }
+//
+//    public void setImagenes(Set<Imagen> imagenes) {
+//        this.imagenes = imagenes;
+//    }
+//
+//    public Set<Producto> getProductos() {
+//        return productos;
+//    }
+//
+//    public void setProductos(Set<Producto> productos) {
+//        this.productos = productos;
+//    }
 }

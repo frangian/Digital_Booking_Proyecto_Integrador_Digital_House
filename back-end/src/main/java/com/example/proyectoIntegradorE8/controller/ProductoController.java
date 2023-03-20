@@ -10,23 +10,22 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import org.apache.log4j.Logger;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.log4j.Log4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/producto")
+@Log4j
 @Tag(name = "Producto", description = "API metodos CRUD de los productos")
 public class ProductoController {
-    private static final Logger logger = Logger.getLogger(ProductoController.class);
     private ProductoService productoService;
     @Autowired
     public ProductoController(ProductoService productoService) {
@@ -56,31 +55,33 @@ public class ProductoController {
                                 "{\"titulo\": \"String\", \"url_imagen\": \"String\"}]" +
                             "}"                    )            )    )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
-            @ApiResponse(responseCode = "400", description = "Peticion incorrecta", content = @Content),
+            @ApiResponse(responseCode = "201", description = "Created", content = @Content(schema = @Schema(implementation = Producto.class))),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)})
     public ResponseEntity<?> guardarProducto(@RequestBody Producto producto) {
         try {
-            logger.info("Se inicia el proceso para guardar un producto en la BBDD");
+            log.info("Se inicia el proceso para guardar un producto en la BBDD");
             Producto productoGuardado = productoService.guardarProducto(producto);
-            logger.info("El producto fue guardado "+producto.getTitulo()+"   en la BBDD exitosamente");
+            log.info("El producto fue guardado "+producto.getTitulo()+"   en la BBDD exitosamente");
             return ResponseEntity.ok(productoGuardado);
-        } catch (SQLException bre){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bre.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
     @GetMapping("/{id}")
     @Operation(summary = "Buscar un producto por ID", description = "Este endpoint permite buscar un producto por ID en la BBDD")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
-            @ApiResponse(responseCode = "404", description = "El producto no existe en la BBDD", content = @Content),
-            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
+            @ApiResponse(responseCode = "404", description = "Not Found: El producto no existe en la BBDD", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)})
     public ResponseEntity<?> buscarProducto(@PathVariable Long id) {
         try {
             Producto productoBuscado = productoService.buscarProducto(id);
             return ResponseEntity.ok(productoBuscado);
         } catch (ResourceNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
     @PutMapping
@@ -101,13 +102,12 @@ public class ProductoController {
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> actualizarProducto(@RequestBody @NotNull Producto producto){
         try {
-            productoService.buscarProducto(producto.getId());
-            productoService.guardarProducto(producto);
+            productoService.actualizarProducto(producto);
             return ResponseEntity.ok(producto);
-        } catch (ResourceNotFoundException rnfe){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(rnfe.getMessage());
-        } catch (SQLException sqle){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(sqle.getMessage());
+        } catch (EntityNotFoundException enfe){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(enfe.getMessage());
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
     @GetMapping
@@ -118,7 +118,7 @@ public class ProductoController {
     public ResponseEntity<?> listarProductos() {
         try {
             List<Producto> productosGuardados = productoService.listarProductos();
-            logger.info("Mostrando todas los productos registrados en la BBDD");
+            log.info("Mostrando todas los productos registrados en la BBDD");
             return ResponseEntity.ok(productosGuardados);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -127,7 +127,7 @@ public class ProductoController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar un producto", description = "Este endpoint permite eliminar un producto de la BBDD")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json", schema = @Schema(example = "Se elimino el producto con ID: \"+id+\" de la BBDD exitosamente"))),
+            @ApiResponse(responseCode = "204", description = "No Content", content = @Content(mediaType = "application/json", schema = @Schema(example = "Se elimino el producto con ID: \"+id+\" de la BBDD exitosamente"))),
             @ApiResponse(responseCode = "404", description = "El producto no existe en la BBDD", content = @Content),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> eliminarProductos (@PathVariable Long id) {
@@ -205,10 +205,10 @@ public class ProductoController {
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> getProductosDisponiblesFechaCiudad (@RequestParam Long ciudadId, @RequestParam LocalDate fechaInicial, @RequestParam LocalDate fechaFinal) {
         try {
-            logger.info("Controller: buscando productos por ciudad id y fechas");
+            log.info("Controller: buscando productos por ciudad id y fechas");
             return ResponseEntity.ok(productoService.findByCiudadIdAndProductoFechas(ciudadId,fechaInicial,fechaFinal));
         } catch (Exception e){
-            logger.info(e.getMessage());
+            log.info(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
