@@ -38,7 +38,7 @@ public class ProductoService {
             logger.info("Ingresando al service de Producto");
             Producto productoGuardado = productoRepository.save(producto);
             // Guardar las imagenes luego
-            Set<Imagen> imagenes = productoGuardado.getImagenes();
+            List<Imagen> imagenes = productoGuardado.getImagenes();
             logger.info("guardando imagenes: " + productoGuardado.getImagenes());
             for (Imagen imagen : imagenes) {
                 imagen.setProducto(productoGuardado);
