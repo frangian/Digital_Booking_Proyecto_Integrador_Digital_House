@@ -1,16 +1,23 @@
 package com.example.proyectoIntegradorE8.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name = "reserva")
 public class Reserva {
     @Id
@@ -30,15 +37,15 @@ public class Reserva {
     @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "producto_id", referencedColumnName = "id")
     private Producto producto;
-    @Column (name = "usuario_id")
-    private Long usuario;
+    @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private Usuario usuario;
 
-    public Reserva() {
-    }
-
-//    constructores & getters & setters
-
-//    public Reserva(Long id, String codigoReserva, LocalTime horaComienzo, LocalDate fechaInicial, LocalDate fechaFinal, Producto producto, Long usuario) {
+//    public Reserva() {
+//    }
+//
+//    public Reserva(Long id, String codigoReserva, LocalTime horaComienzo, LocalDate fechaInicial, LocalDate fechaFinal, Producto producto, Usuario usuario) {
 //        this.id = id;
 //        this.codigoReserva = codigoReserva;
 //        this.horaComienzo = horaComienzo;
@@ -48,7 +55,7 @@ public class Reserva {
 //        this.usuario = usuario;
 //    }
 //
-//    public Reserva(String codigoReserva, LocalTime horaComienzo, LocalDate fechaInicial, LocalDate fechaFinal, Producto producto, Long usuario) {
+//    public Reserva(String codigoReserva, LocalTime horaComienzo, LocalDate fechaInicial, LocalDate fechaFinal, Producto producto, Usuario usuario) {
 //        this.codigoReserva = codigoReserva;
 //        this.horaComienzo = horaComienzo;
 //        this.fechaInicial = fechaInicial;
@@ -105,12 +112,11 @@ public class Reserva {
 //        this.producto = producto;
 //    }
 //
-//    public Long getUsuario() {
+//    public Usuario getUsuario() {
 //        return usuario;
 //    }
 //
-//    public void setUsuario(Long usuario) {
+//    public void setUsuario(Usuario usuario) {
 //        this.usuario = usuario;
 //    }
-
 }

@@ -1,8 +1,10 @@
+import { CircularProgress } from '@mui/material';
 import React, { useState } from 'react'
+import Skeleton from 'react-loading-skeleton';
 import ImgDesktopCarousel from './ImgDesktopCarousel'
 import ImgMobileCarousel from './ImgMobileCarousel';
 
-const ImgContainer = ({ imgList }) => {
+const ImgContainer = ({ imgList, isLoading, shareObj, shareAcross }) => {
 
     const [openCarousel, setOpenCarousel] = useState(false);
 
@@ -13,7 +15,8 @@ const ImgContainer = ({ imgList }) => {
     return (
         <div className='images-container'>
             <div className={`product-images`}>
-                {imgList?.map((imagen, i) => {
+                {
+                isLoading ? (imgList?.map((imagen, i) => {
                     if (i < 4) {
                         return (
                             <div className="imagenes" key={imagen.titulo}>
@@ -28,7 +31,9 @@ const ImgContainer = ({ imgList }) => {
                             </div>
                         )
                     }
-                })}
+                })) :
+                <Skeleton className={`product-images`}/>
+                }
             </div>
             <ImgDesktopCarousel 
             imgList={imgList} 
@@ -37,6 +42,7 @@ const ImgContainer = ({ imgList }) => {
             />
             <ImgMobileCarousel 
             imgList={imgList}
+            shareObj={shareObj} shareAcross={shareAcross}
             />
         </div>
     )

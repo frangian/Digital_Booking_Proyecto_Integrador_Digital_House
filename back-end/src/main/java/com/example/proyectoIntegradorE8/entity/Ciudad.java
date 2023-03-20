@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Table (name = "ciudad")
 public class Ciudad {
     @Id
@@ -25,9 +27,9 @@ public class Ciudad {
     @JsonIgnore
     private Set<Producto> productos = new HashSet<>();
 
-    public Ciudad() {
-    }
-
+//    public Ciudad() {
+//    }
+//
 //    public Ciudad(Long id, String nombre, String provincia, String pais) {
 //        this.id = id;
 //        this.nombre = nombre;
@@ -91,5 +93,4 @@ public class Ciudad {
 //                ", productos=" + productos +
 //                '}';
 //    }
-
 }

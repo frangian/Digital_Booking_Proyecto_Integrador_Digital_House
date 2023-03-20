@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { ContextGlobal } from '../Utils/globalContext'
-import { Calendar, DateObject } from "react-multi-date-picker"
+import { Calendar, DateObject, getAllDatesInRange } from "react-multi-date-picker"
 import Swal from 'sweetalert2'
 import CardReserva from './CardReserva'
 import DatosReserva from './DatosReserva'
 import Llegada from './Llegada'
-import { getDaysArray } from '../Utils/utils'
+import { getDaysArray, makeId, normalizarFecha, deshabilitarSeleccionIntermedida } from '../Utils/utils'
+import axios from 'axios'
 
 const ReservaForm = ({ 
     tituloCategoria, 
@@ -19,10 +20,8 @@ const ReservaForm = ({
 
     const { state } = useContext(ContextGlobal);
     const [disabledDays, setDisabledDays] = useState([]);
-    const [checks, setChecks] = useState([
-        new DateObject().format("YYYY/M/D"),
-        new DateObject().format("YYYY/M/D"),
-    ])
+    const [checks, setChecks] = useState([]);
+    const [allDates, setAllDates] = useState([]);
     const [values, setValues] = useState({
         nombre: state.nombre, 
         apellido: state.apellido, 
@@ -43,8 +42,9 @@ const ReservaForm = ({
         e.preventDefault();
         let objPostReserva = {
             horaComienzo: values.horaLlegada,
-            fechaInicial: checks[0]?.day ? `${checks[0]?.year}-${checks[0]?.month}-${checks[0]?.day}` : "",
-            fechaFinal: checks[1]?.day ? `${checks[1]?.year}-${checks[1]?.month}-${checks[1]?.day}` : "",
+            codigoReserva: makeId(6),
+            fechaInicial: checks[0]?.day ? normalizarFecha(checks[0]) : "",
+            fechaFinal: checks[1]?.day ? normalizarFecha(checks[1]) : "",
             usuario: 1,
             producto: {
                 id: productoId
@@ -54,11 +54,19 @@ const ReservaForm = ({
         if (!objPostReserva.horaComienzo || !objPostReserva.fechaFinal || !objPostReserva.fechaInicial || !values.ciudad) {
             mostrarAlerta()
         } else {
-            console.log(objPostReserva, values.ciudad);
-            handleConfirmacion()
+            axios.post("http://localhost:8080/reserva", objPostReserva)
+            .then(res => {
+                handleConfirmacion()
+            })
+            .catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops',
+                    text: 'La reserva no pudo ser realizada intentalo de nuevo más tarde!',
+                })
+            })
         }
 
-        // handleConfirmacion()
     }
 
     useEffect(() => {
@@ -66,6 +74,13 @@ const ReservaForm = ({
         reservas?.forEach((reserva) => dayArr = dayArr.concat(getDaysArray(reserva.fechaInicial, reserva.fechaFinal)))
         setDisabledDays(dayArr)
     }, [reservas])
+
+    useEffect(() => {
+        if(deshabilitarSeleccionIntermedida(allDates, disabledDays)) {
+            setChecks([null, null]);
+            setAllDates([]);
+        }
+    }, [allDates])
 
     const mostrarAlerta = () => {
         Swal.fire({
@@ -83,8 +98,12 @@ const ReservaForm = ({
                     <div className="calendar-container-reserva">
                         <h3>Seleccioná tu fecha de reserva</h3>
                         <Calendar 
+                        value={checks}
                         minDate={new Date()}
-                        onChange={setChecks}
+                        onChange={dateObjects => {
+                            setChecks(dateObjects);
+                            setAllDates(getAllDatesInRange(dateObjects));
+                        }}
                         numberOfMonths={2}
                         disableMonthPicker
                         disableYearPicker
@@ -100,8 +119,12 @@ const ReservaForm = ({
                         }}              
                         />
                         <Calendar 
+                        value={checks}
                         minDate={new Date()}
-                        onChange={setChecks}
+                        onChange={dateObjects => {
+                            setChecks(dateObjects);
+                            setAllDates(getAllDatesInRange(dateObjects));
+                        }}
                         numberOfMonths={1}
                         disableMonthPicker
                         disableYearPicker

@@ -5,11 +5,14 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "titulo")
 @Table (name="categoria")
@@ -26,19 +29,24 @@ public class Categoria  {
     @OneToMany(mappedBy = "categoria")
     private Set<Imagen> imagenes = new HashSet<>();
 
-    public Categoria() {
+    public Categoria(Long id, String titulo, String descripcion) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
     }
-
+    public Categoria(String titulo, String descripcion) {
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+    }
+//    public Categoria() {
+//    }
+//
 //    public Categoria(Long id, String titulo, String descripcion) {
 //        this.id = id;
 //        this.titulo = titulo;
 //        this.descripcion = descripcion;
 //    }
 //
-//    public Categoria(String titulo, String descripcion) {
-//        this.titulo = titulo;
-//        this.descripcion = descripcion;
-//    }
 //
 //    public Long getId() {
 //        return id;
@@ -79,5 +87,4 @@ public class Categoria  {
 //    public void setProductos(Set<Producto> productos) {
 //        this.productos = productos;
 //    }
-
 }

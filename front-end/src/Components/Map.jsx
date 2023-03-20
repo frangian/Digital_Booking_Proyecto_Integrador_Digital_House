@@ -1,10 +1,11 @@
 import React from 'react'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 const Map = ({ url, titulo }) => {
   return (
     <div className='map'>
         <h3>¿Dónde vas a estar?</h3>
-        <p>{titulo}</p>  
+        <p>{titulo.includes("undefined") ? <Skeleton width={"150px"}/> : titulo}</p>  
         <div className="map-container">
         <iframe 
         src={url} 

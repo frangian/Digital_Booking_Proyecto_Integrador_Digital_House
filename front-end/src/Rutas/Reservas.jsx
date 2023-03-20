@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import PoliticasProducto from '../Components/PoliticasProducto';
 import ProductHeader from '../Components/ProductHeader';
 import ReservaForm from '../Components/ReservasComponents/ReservaForm';
@@ -9,6 +9,7 @@ const Reservas = () => {
 
     const { id } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
     const [data, setData] = useState({});
     const [normas, setNormas] = useState([]);
     const [seguridad, setSeguridad] = useState([]);
@@ -16,8 +17,10 @@ const Reservas = () => {
     const [ciudad, setCiudad] = useState({});
     const [reservas, setReservas] = useState([]);
     const [confirmada, setConfirmada] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        setIsLoading(false);
         axios.get(`http://localhost:8080/producto/${id}`)
         .then(res => {
             setData(res.data);
@@ -25,6 +28,7 @@ const Reservas = () => {
             setSeguridad(res.data.seguridad.split(","));
             setImagen(res.data.imagenes[0]);
             setCiudad(res.data.ciudad);
+            setIsLoading(true);
         }) 
         axios.get(`http://localhost:8080/reserva/producto/${id}`)
         .then(res => {
@@ -53,6 +57,7 @@ const Reservas = () => {
                 cancelacion={data?.cancelacion}
                 normas={normas}
                 seguridad={seguridad}
+                isLoading={isLoading}
                 />
             </div>
             <div className={`reserva-correcta-container ${confirmada ? "" : "oculto"}`}>

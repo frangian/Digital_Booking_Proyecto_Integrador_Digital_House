@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @Table (name = "imagen")
 public class Imagen {
@@ -26,9 +28,11 @@ public class Imagen {
     @JoinColumn (name = "producto_id", referencedColumnName = "id")
     private Producto producto;
 
-    public Imagen() {
-    }
+    //constructores & getters & setters
 
+//    public Imagen() {
+//    }
+//
 //    public Imagen(Long id, String titulo, String url_imagen) {
 //        this.id = id;
 //        this.titulo = titulo;
@@ -79,5 +83,5 @@ public class Imagen {
 //    public void setProducto(Producto producto) {
 //        this.producto = producto;
 //    }
-
+//
 }
