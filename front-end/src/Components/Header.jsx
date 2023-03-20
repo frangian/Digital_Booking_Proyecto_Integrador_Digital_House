@@ -55,11 +55,11 @@ const Header = () => {
       </div>
       <div className={`header-logged-user ${state.logged ? "" : "oculto"}`} >
         <div className='avatar'>
-          <p>{state.nombre[0]}{state.apellido[0]}</p>
+          <p>{"J"}{"G"}</p>
         </div>
         <div className="saludo">
           <p>Hola,</p>
-          <p className='nombres'>{state.nombre} {state.apellido}</p>
+          <p className='nombres'>{"Juan"} {"Gomez"}</p>
         </div>
         <FontAwesomeIcon icon={faX} className="x-icon" onClick={() => cerrarSesion()}/>
       </div>

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { ContextGlobal } from '../Utils/globalContext'
-import { Calendar, DateObject, getAllDatesInRange } from "react-multi-date-picker"
+import { Calendar, getAllDatesInRange } from "react-multi-date-picker"
 import Swal from 'sweetalert2'
 import CardReserva from './CardReserva'
 import DatosReserva from './DatosReserva'
 import Llegada from './Llegada'
-import { getDaysArray, makeId, normalizarFecha, deshabilitarSeleccionIntermedida } from '../Utils/utils'
+import { getDaysArray, normalizarFecha, deshabilitarSeleccionIntermedida } from '../Utils/utils'
 import axios from 'axios'
 
 const ReservaForm = ({ 

@@ -16,7 +16,7 @@ const LoginForm = () => {
     const handleSubmitLogin = (e) => {
         e.preventDefault();
         if (user.mail && user.pass) {
-            if (user.mail === state.mail && user.pass === state.pass) {
+            if (user.mail === state.user.mail && user.pass === state.user.pass) {
                 navigate("/");
                 dispatch({
                     type: "register",

@@ -29,11 +29,11 @@ const Menu = ({ open, openClose }) => {
                 <h5 className={`${state.logged ? "oculto" : ""}`}>MENÚ</h5>
                 <div className={`menu-logged-user ${state.logged ? "" : "oculto"}`}>
                     <div className='avatar'>
-                        <p>{state.nombre[0]}{state.apellido[0]}</p>
+                        <p>{"J"}{"G"}</p>
                     </div>
                     <div className="saludo">
                         <p>Hola,</p>
-                        <p className='nombres'>{state.nombre} {state.apellido}</p>
+                        <p className='nombres'>{state.user.nombre} {state.user.apellido}</p>
                     </div>
                 </div>
             </div>

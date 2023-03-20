@@ -33,6 +33,8 @@ public class WebSecurityConfig {
         jwtAuthenticationFilter.setFilterProcessesUrl("/login");
 
         return http
+                .cors()
+                .and()
                 //desactiva la protección CSRF, ya que la aplicación usará JSON Web Tokens (JWT) para la autenticación.
                 .csrf().disable()
                 //inicia la configuración de autorización para las solicitudes.

@@ -14,6 +14,14 @@ const CalendarContainer = ({ productId, reservas }) => {
         setDisabledDays(dayArr)
     }, [reservas])
 
+    const hanldeClickReserva = () => {
+        if(!localStorage.getItem("jwt")) {
+            Navigate("/login")
+        } else {
+            Navigate(`/product/${productId}/reservas`)
+        }
+    }
+
     return (
         <div className='calendario-container'>
             <h3>Fechas disponibles</h3>
@@ -51,7 +59,7 @@ const CalendarContainer = ({ productId, reservas }) => {
                 <div className="submit-container">
                     <p>Agregá tus fechas de viaje para obtener precios exactos</p>
                     <button className='small-button' 
-                    onClick={() => Navigate(`/product/${productId}/reservas`)}>
+                    onClick={() => hanldeClickReserva()}>
                         Iniciar reserva
                     </button>
                 </div>
