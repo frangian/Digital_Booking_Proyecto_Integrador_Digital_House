@@ -44,7 +44,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/imagen/**").permitAll()
                 .requestMatchers("/categoria/**").permitAll()
                 .requestMatchers("/ciudad/**").permitAll()
-                .requestMatchers("/usuario/**").permitAll()
+                .requestMatchers("/usuario/registro").permitAll()
                 .requestMatchers("/reserva/producto/**").permitAll()
 //                //indica que cualquier solicitud debe ser autorizada.
                 .anyRequest()
