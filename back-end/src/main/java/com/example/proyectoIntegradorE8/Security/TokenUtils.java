@@ -14,13 +14,13 @@ import java.util.Map;
 
 public class TokenUtils {
 
-    private final static String ACCESS_TOKEN_SECRET = "cf3456Equipo8cjasjasjcamada3";
+    private final static String ACCESS_TOKEN_SECRET = "4qhq8LrEBfYcaRHxhdb9zURb2rf8e7Ud";
     private final static Long ACCESS_TOKEN_VALIDITY = 2_592_000L;
 
 //En resumen, el método "crearToken" de la clase "TokenUtils" genera un token JWT con la información del nombre y el correo electrónico,
 // lo firma y lo devuelve como una cadena.
     public static String crearToken(String nombre, String email){
-        //converitr el tiempo a milisegundos
+        //convertir el tiempo a milisegundos
         long expirationTime= ACCESS_TOKEN_VALIDITY * 1_000;
         Date expirationDate = new Date(System.currentTimeMillis() + expirationTime);
 

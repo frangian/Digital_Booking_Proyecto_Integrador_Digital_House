@@ -23,8 +23,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     // Si la autenticación es exitosa, se llama al método successfulAuthentication. Este método recupera los detalles del usuario del objeto Authentication autenticado,
     // crea un token JWT mediante el método TokenUtils.createToken() y agrega el token a los header de la respuesta.
     // Finalmente, se llama a super.successfulAuthentication() para completar la cadena de filtros.
+
+    //TP, creando un objeto UsernamePasswordAuthenticationToken y llamando al administrador de autenticación para autenticar las credenciales del usuario.
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException { // recibe una solicitud de autenticación HTTP y devuelve un objeto de autenticación.
         AuthCredentials authCredentials = new AuthCredentials();
 
         try {
