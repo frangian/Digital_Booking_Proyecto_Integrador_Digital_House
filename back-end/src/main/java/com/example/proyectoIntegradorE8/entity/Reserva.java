@@ -1,5 +1,6 @@
 package com.example.proyectoIntegradorE8.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -30,6 +31,7 @@ public class Reserva {
     @JoinColumn(name = "producto_id", referencedColumnName = "id")
     private Producto producto;
     @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
 

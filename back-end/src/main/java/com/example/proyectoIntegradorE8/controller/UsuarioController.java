@@ -30,7 +30,7 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @PostMapping
+    @PostMapping("/registro")
     @Operation(
             summary = "Agregar usuario por ID",
             description = "Este endpoint permite agregar un usuario por ID en a la BBDD"

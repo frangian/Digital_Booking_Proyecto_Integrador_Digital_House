@@ -37,14 +37,17 @@ public class WebSecurityConfig {
                 .csrf().disable()
                 //inicia la configuración de autorización para las solicitudes.
                 .authorizeHttpRequests()
-                .requestMatchers("localhost:8080/producto/**").permitAll()
-                .requestMatchers("localhost:8080/categoria/**").permitAll()
-                .requestMatchers("localhost:8080/ciudad/**").permitAll()
-                .requestMatchers("localhost:8080/usuario/**").permitAll()
+                .requestMatchers("/producto/**").permitAll()
+                .requestMatchers("/caracteristica/**").permitAll()
+                .requestMatchers("/imagen/**").permitAll()
+                .requestMatchers("/categoria/**").permitAll()
+                .requestMatchers("/ciudad/**").permitAll()
+                .requestMatchers("/usuario/**").permitAll()
+                .requestMatchers("/reserva/producto/**").permitAll()
 //                //indica que cualquier solicitud debe ser autorizada.
-//                .anyRequest()
+                .anyRequest()
 ////                // indica que la solicitud debe estar autenticada para ser autorizada.
-//                .authenticated()
+                .authenticated()
                 .and()
                 //inicia la configuración de gestión de sesiones.
                 .sessionManagement()
