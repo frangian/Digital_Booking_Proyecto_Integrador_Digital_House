@@ -4,6 +4,7 @@ import com.example.proyectoIntegradorE8.entity.Reserva;
 import com.example.proyectoIntegradorE8.exception.BadRequestException;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.repository.ReservaRepository;
+import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Log4j
 public class ReservaService {
     private static final Logger logger = Logger.getLogger(ReservaService.class);
     private ReservaRepository reservaRepository;
