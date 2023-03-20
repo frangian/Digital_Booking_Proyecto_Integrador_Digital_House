@@ -68,7 +68,16 @@ public class UsuarioService {
         }
     }
 
-
-
+    public Usuario buscarUsuarioEmail(String email) throws ResourceNotFoundException {
+        log.info("buscando usuario...");
+        Optional<Usuario> usuarioBuscado = usuarioRepository.findOneByEmail(email);
+        if (usuarioBuscado.isPresent()) {
+            log.info("Se encontró el usuario con email:" + email + "en la BBDD exitosamente.");
+            return usuarioBuscado.get();
+        }else {
+            log.info("El usuario con id" + email + "no existe en la BBDD");
+            throw new ResourceNotFoundException("El usuario con id:" + email + "no existe en la BBDD");
+        }
+    }
 
 }

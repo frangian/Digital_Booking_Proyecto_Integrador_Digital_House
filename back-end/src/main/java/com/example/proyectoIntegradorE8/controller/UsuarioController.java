@@ -101,6 +101,24 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/email/{email}")
+    @Operation(
+            summary = "Buscar un usuario por ID",
+            description = "Este endpoint permite buscar un usuario por ID en a la BBDD"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "El usuario no existe en la BBDD"),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta")})
+    public ResponseEntity<?> buscarUsuarioEmail (@PathVariable String email) {
+        try {
+            Usuario usuarioBuscado = usuarioService.buscarUsuarioEmail(email);
+            return ResponseEntity.ok(usuarioBuscado);
+        } catch (ResourceNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
 }
 
 
