@@ -81,15 +81,9 @@ const RegisterForm = () => {
                         user: res.data
                     }
                 })
-                fetch("http://localhost:8080/login", {
-                    method: "POST",
-                    body: JSON.stringify(objLogin),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
+                axios.post("http://localhost:8080/login", objLogin)
                 .then(res => {
-                    console.log(res.headers)
+                    localStorage.setItem("jwt", res.headers.authorization.split(" ")[1])
                 })
             }).catch(err => {
                 setErrorMail("Este correo ya esta registrado")
