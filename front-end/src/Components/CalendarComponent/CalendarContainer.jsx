@@ -29,7 +29,7 @@ const CalendarContainer = ({ productId, reservas }) => {
                     let isDisabled = disabledDays.includes(date.format("YYYY/M/D"))
                     if (isDisabled) return {
                         disabled: true,
-                        style: { color: "#ccc" }
+                        style: { color: "#8798ad" }
                     }
                 }}  
                 />
@@ -44,7 +44,7 @@ const CalendarContainer = ({ productId, reservas }) => {
                     let isDisabled = disabledDays.includes(date.format("YYYY/M/D"))
                     if (isDisabled) return {
                         disabled: true,
-                        style: { color: "#ccc" }
+                        style: { color: "#8798ad" }
                     }
                 }}  
                 />
