@@ -49,10 +49,10 @@ public class Producto {
             inverseJoinColumns = @JoinColumn(name = "caracteristica_id"))
     private List<Caracteristica> caracteristicas = new ArrayList<>();
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Imagen> imagenes = new HashSet<>();
+    private List<Imagen> imagenes = new ArrayList<>();
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonBackReference
-    private Set<Reserva> reservas = new HashSet<>();
+    private List<Reserva> reservas = new ArrayList<>();
 
 //    public Producto() {
 //    }

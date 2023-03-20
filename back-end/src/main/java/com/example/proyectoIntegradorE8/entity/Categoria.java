@@ -7,7 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,9 +27,9 @@ public class Categoria  {
     @Column
     private String descripcion;
     @OneToMany(mappedBy = "categoria")
-    private Set<Producto> productos = new HashSet<>();
+    private List<Producto> productos = new ArrayList<>();
     @OneToMany(mappedBy = "categoria")
-    private Set<Imagen> imagenes = new HashSet<>();
+    private List<Imagen> imagenes = new ArrayList<>();
 
     public Categoria(Long id, String titulo, String descripcion) {
         this.id = id;
