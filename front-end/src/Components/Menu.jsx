@@ -22,6 +22,9 @@ const Menu = ({ open, openClose }) => {
             }
         })
         localStorage.removeItem("jwt");
+        if (location.pathname.includes("reservas")) {
+            navigate("/")
+        }
     }
 
     useEffect(() => {

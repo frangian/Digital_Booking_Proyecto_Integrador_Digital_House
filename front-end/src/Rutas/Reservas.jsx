@@ -20,20 +20,24 @@ const Reservas = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        setIsLoading(false);
-        axios.get(`http://localhost:8080/producto/${id}`)
-        .then(res => {
-            setData(res.data);
-            setNormas(res.data.normas.split(","));
-            setSeguridad(res.data.seguridad.split(","));
-            setImagen(res.data.imagenes[0]);
-            setCiudad(res.data.ciudad);
-            setIsLoading(true);
-        }) 
-        axios.get(`http://localhost:8080/reserva/producto/${id}`)
-        .then(res => {
-            setReservas(res.data)
-        })  
+        if(!localStorage.getItem("jwt")) {
+            navigate("/")
+        } else {
+            setIsLoading(false);
+            axios.get(`http://localhost:8080/producto/${id}`)
+            .then(res => {
+                setData(res.data);
+                setNormas(res.data.normas.split(","));
+                setSeguridad(res.data.seguridad.split(","));
+                setImagen(res.data.imagenes[0]);
+                setCiudad(res.data.ciudad);
+                setIsLoading(true);
+            }) 
+            axios.get(`http://localhost:8080/reserva/producto/${id}`)
+            .then(res => {
+                setReservas(res.data)
+            })  
+        }
     }, [id])
 
     const handleConfirmacion = () => {

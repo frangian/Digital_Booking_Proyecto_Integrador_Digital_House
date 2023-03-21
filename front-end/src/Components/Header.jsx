@@ -28,6 +28,9 @@ const Header = () => {
       }
     })
     localStorage.removeItem("jwt");
+    if (location.pathname.includes("reservas")) {
+      navigate("/")
+    }
   }
 
 useEffect(() => {
@@ -62,7 +65,7 @@ useEffect(() => {
 }, [])
 
   return (
-    <header>
+    <header onClick={() => { console.log(location); }}>
       <div className='logo-slogan' onClick={() => mobileOpen ? "" : navigate("/")}>
         <img src="/logo.png" alt="Logo Digital Booking"/>
         <h6 onMouseOver={() => console.log(state)}>Sentite como en tu hogar</h6>
