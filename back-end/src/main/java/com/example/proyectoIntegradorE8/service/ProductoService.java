@@ -73,15 +73,6 @@ public class ProductoService {
             throw new Exception("Error al actualizar el producto. Mensaje:"+ e.getMessage());
         }
     }
-    public List<Producto> listarProductos () throws Exception {
-        try {
-            logger.info("Se inició una operación de listado de productos");
-            return productoRepository.findAll();
-        } catch (Exception e) {
-            logger.error("Error al listar los productos: Exception "+e.getMessage());
-            throw new BadRequestException("Ocurrio un error al listar todos los productos");
-        }
-    }
     @Transactional
     public void actualizarProducto (Producto producto) throws Exception {
         try {
@@ -96,6 +87,15 @@ public class ProductoService {
         } catch (Exception e){
             logger.error("Error al actualizar el producto.", e);
             throw new Exception("Error al actualizar el producto. Mensaje:"+ e.getMessage());
+        }
+    }
+    public List<Producto> listarProductos () throws Exception {
+        try {
+            logger.info("Se inició una operación de listado de productos");
+            return productoRepository.findAll();
+        } catch (Exception e) {
+            logger.error("Error al listar los productos: Exception "+e.getMessage());
+            throw new BadRequestException("Ocurrio un error al listar todos los productos");
         }
     }
     public void eliminarProducto (Long id) throws Exception {
