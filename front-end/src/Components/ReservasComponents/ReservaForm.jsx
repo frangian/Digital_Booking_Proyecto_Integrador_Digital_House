@@ -179,7 +179,7 @@ const ReservaForm = ({
                     img={img}
                     checks={checks}
                 />
-        </div>
+            </div>
         </div>
     )
 }

@@ -16,10 +16,12 @@ const Menu = ({ open, openClose }) => {
         dispatch({
             type: "register",
             payload: {
-                ...state,
-                logged: false
+              ...state,
+              user: {nombre: "Juan", apellido: "Gomez"},
+              logged: false
             }
         })
+        localStorage.removeItem("jwt");
     }
 
     useEffect(() => {

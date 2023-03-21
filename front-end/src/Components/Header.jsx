@@ -28,7 +28,7 @@ const Header = () => {
       }
     })
     localStorage.removeItem("jwt");
-}
+  }
 
 useEffect(() => {
 

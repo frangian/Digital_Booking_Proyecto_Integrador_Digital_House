@@ -52,6 +52,8 @@ public class UsuarioService {
     }
     @Transactional
     public void actualizarUsuario (Usuario usuario) throws Exception {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         try {
             log.info("Actualizando el usuario con id: " + usuario.getId());
             usuarioRepository.save(usuario);
