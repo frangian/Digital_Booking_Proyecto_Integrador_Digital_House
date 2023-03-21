@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEyeSlash, faEye } from '@fortawesome/free-regular-svg-icons'
 import { ContextGlobal } from './Utils/globalContext'
 import { validarMail, validarPassword, confirmarPassword, campoRequerido, normalizarMail, normalizarNombre } from './Utils/validaciones'
+import axios from 'axios'
+
 
 const RegisterForm = () => {
 
@@ -59,24 +61,40 @@ const RegisterForm = () => {
             setErrorConfirmPass("Las contraseñas no coinciden");
         }
         if (envio) {
-            dispatch({
-                type: "register",
-                payload: {
-                    ...state,
-                    nombre: user.nombre,
-                    apellido: user.apellido,
-                    mail: user.mail,
-                    pass: user.pass,
-                    logged: true
-                }
+            let objRegister = {
+                nombre: user.nombre,
+                apellido: user.apellido,
+                email: user.mail,
+                password: user.pass
+            }
+            let objLogin = {
+                email: user.mail,
+                password: user.pass
+            }
+            axios.post("http://localhost:8080/usuario/registro", objRegister)
+            .then(res => {
+                console.log(res);
+                dispatch({
+                    type: "register",
+                    payload: {
+                        ...state, 
+                        user: res.data
+                    }
+                })
+                axios.post("http://localhost:8080/login", objLogin)
+                .then(res => {
+                    localStorage.setItem("jwt", res.headers.authorization.split(" ")[1])
+                })
+            }).catch(err => {
+                setErrorMail("Este correo ya esta registrado")
             })
-            navigate("/")
+            // navigate("/")
         }
     }
 
     return (
         <div className='register-container'>
-            <h2>Crear cuenta</h2>
+            <h2 onClick={() => console.log(state.user)}>Crear cuenta</h2>
             <form id='register-form' onSubmit={(e) => handleRegisterSubmit(e)}>
                 <fieldset>
                     <div className={`nombre ${errorNombre ? "error" : ""}`}>

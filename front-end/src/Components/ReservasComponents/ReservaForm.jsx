@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { ContextGlobal } from '../Utils/globalContext'
-import { Calendar, DateObject, getAllDatesInRange } from "react-multi-date-picker"
+import { Calendar, getAllDatesInRange } from "react-multi-date-picker"
 import Swal from 'sweetalert2'
 import CardReserva from './CardReserva'
 import DatosReserva from './DatosReserva'
 import Llegada from './Llegada'
-import { getDaysArray, makeId, normalizarFecha, deshabilitarSeleccionIntermedida } from '../Utils/utils'
+import { getDaysArray, normalizarFecha, deshabilitarSeleccionIntermedida } from '../Utils/utils'
 import axios from 'axios'
 
 const ReservaForm = ({ 
@@ -42,7 +42,6 @@ const ReservaForm = ({
         e.preventDefault();
         let objPostReserva = {
             horaComienzo: values.horaLlegada,
-            codigoReserva: makeId(6),
             fechaInicial: checks[0]?.day ? normalizarFecha(checks[0]) : "",
             fechaFinal: checks[1]?.day ? normalizarFecha(checks[1]) : "",
             usuario: 1,
@@ -114,7 +113,7 @@ const ReservaForm = ({
                             let isDisabled = disabledDays.includes(date.format("YYYY/M/D"))
                             if (isDisabled) return {
                                 disabled: true,
-                                style: { color: "#ccc" }
+                                style: { color: "#8798ad" }
                             }
                         }}              
                         />
@@ -134,7 +133,7 @@ const ReservaForm = ({
                             let isDisabled = disabledDays.includes(date.format("YYYY/M/D"))
                             if (isDisabled) return {
                                 disabled: true,
-                                style: { color: "#ccc" }
+                                style: { color: "#8798ad" }
                             }
                         }}   
                         />
