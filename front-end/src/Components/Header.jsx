@@ -1,10 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { routes } from './Utils/routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faX } from '@fortawesome/free-solid-svg-icons'
 import Menu from './Menu';
 import { ContextGlobal } from './Utils/globalContext';
+import axios from 'axios';
 
 const Header = () => {
 
@@ -19,22 +20,54 @@ const Header = () => {
 
   const cerrarSesion = () => {
     dispatch({
-        type: "register",
-        payload: {
-            ...state,
-            logged: false
-        }
+      type: "register",
+      payload: {
+        ...state,
+        user: {nombre: "Juan", apellido: "Gomez"},
+        logged: false
+      }
     })
-    // navigate("/login");
+    localStorage.removeItem("jwt");
 }
+
+useEffect(() => {
+
+  dispatch({
+    type: "register",
+    payload: {
+      ...state,
+      location: ""
+    }
+  })
+
+  let jwt = localStorage.getItem("jwt");
+  if (jwt) {
+    let partes = jwt.split('.');
+    let contenido = atob(partes[1]);
+    let datos = JSON.parse(contenido);
+    const headers = { 'Authorization': `Bearer ${jwt}` };
+    axios.get(`http://localhost:8080/usuario/email/${datos.sub}`, { headers })
+    .then(res => {
+        dispatch({
+          type: "register",
+          payload: {
+            ...state,
+            user: res.data,
+            logged: true
+          }
+        })
+        console.log(1);
+    })
+  }
+}, [])
 
   return (
     <header>
       <div className='logo-slogan' onClick={() => mobileOpen ? "" : navigate("/")}>
         <img src="/logo.png" alt="Logo Digital Booking"/>
-        <h6>Sentite como en tu hogar</h6>
+        <h6 onMouseOver={() => console.log(state)}>Sentite como en tu hogar</h6>
       </div>
-      <div className={`btns ${state.logged ? "oculto" : ""}`}>
+      <div className={`btns ${!state.logged ? "" : "oculto"}`}>
         {
           routes.map(({ id, path, title }) => {
               if (id === 2 && id !== routes.length && location.pathname !== "/register" ) {
@@ -53,13 +86,13 @@ const Header = () => {
           })
         }
       </div>
-      <div className={`header-logged-user ${state.logged ? "" : "oculto"}`} >
+      <div className={`header-logged-user ${!state.logged ? "oculto" : ""}`} >
         <div className='avatar'>
-          <p>{"J"}{"G"}</p>
+          <p>{state.user.nombre[0]}{state.user.apellido[0]}</p>
         </div>
         <div className="saludo">
           <p>Hola,</p>
-          <p className='nombres'>{"Juan"} {"Gomez"}</p>
+          <p className='nombres'>{state.user.nombre} {state.user.apellido}</p>
         </div>
         <FontAwesomeIcon icon={faX} className="x-icon" onClick={() => cerrarSesion()}/>
       </div>

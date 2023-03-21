@@ -392,6 +392,23 @@ input[type="password"] {
   text-decoration: underline;
 }
 
+.error-reserva-login {
+  background-color: rgba(255, 0, 0, 0.1);
+  width: 100%;
+  padding: 20px 0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  color: #B00020;
+  font-size: 2rem;
+}
+
+.error-reserva-login p {
+  color: #B00020;
+  font-size: 1.1rem;
+}
+
 /* ------------------------------ Errores Input ----------------------------- */
 
 div.error input {
@@ -1906,7 +1923,7 @@ div.card-reserva-content {
   }
 
   #login-form {
-    width: 80vw;
+    width: 100%;
   }
 
   #login-form div input {
@@ -1919,6 +1936,10 @@ div.card-reserva-content {
 
   .register-container .small-button {
     margin: 5px 0;
+  }
+
+  .error-reserva-login {
+    flex-direction: column;
   }
 
   /**************CATEGORIAS*************/
@@ -2061,16 +2082,12 @@ div.card-reserva-content {
     width: 80vw;
   }
 
-  #login-form {
-    width: 80vw;
-  }
-
   #login-form div input {
     width: 100%;
   }
 
   .login-error {
-    width: 80vw;
+    width: 100%;
   }
 
   /**********BUSCADOR*********/

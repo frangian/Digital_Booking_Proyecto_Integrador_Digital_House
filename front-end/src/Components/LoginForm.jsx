@@ -1,48 +1,76 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEyeSlash, faEye } from '@fortawesome/free-regular-svg-icons'
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
 import { ContextGlobal } from './Utils/globalContext'
 import { normalizarMail } from './Utils/validaciones'
+import Swal from 'sweetalert2'
+import axios from 'axios'
 
 const LoginForm = () => {
 
     const navigate = useNavigate();
     const [eye, setEye] = useState(false);
     const [error, setError] = useState("");
-    const [user, setUser] = useState({mail: "", pass: ""});
+    const [user, setUser] = useState({email: "", password: ""});
+    const [reserva, setReserva] = useState(false);
     const { state, dispatch } = useContext(ContextGlobal);
 
     const handleSubmitLogin = (e) => {
         e.preventDefault();
-        if (user.mail && user.pass) {
-            if (user.mail === state.user.mail && user.pass === state.user.pass) {
-                navigate("/");
-                dispatch({
-                    type: "register",
-                    payload: {
-                        ...state,
-                        logged: true
-                    }
+        if (user.email && user.password) {  
+                axios.post("http://localhost:8080/login", user)
+                .then(res => {
+                    localStorage.setItem("jwt", res.headers.authorization.split(" ")[1]);
+                    navigate("/");
+                    dispatch({
+                        type: "register",
+                        payload: {
+                          ...state,
+                          logged: true,
+                        }
+                      })
                 })
-            } else {
-                setError("Las credenciales ingresedas no coinciden");
-            }
+                .catch(err => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops',
+                        text: 'Lamentablemente no ha podido iniciar sesión. Por favor intente más tarde',
+                    })
+                })
         } else {
-            setError("Por favor ingrese un mail y una contraseña");
+            setError("Las credenciales ingresadas no coinciden");
         }
-        console.log(state);
     }
+
+    useEffect(() => {
+        setReserva(false);
+        if(state.location === "reserva") {
+            setReserva(true);
+            dispatch({
+                type: "register",
+                payload: {
+                  ...state,
+                  location: ""
+                }
+              })            
+        }
+    }, [])
 
     return (
         <div className='register-container'>
+            <div className={`error-reserva-login ${reserva ? "" : "oculto"}`}>
+                <FontAwesomeIcon icon={faExclamationCircle}/> 
+                <p>Para realizar una reserva necesitas estar logueado</p>
+            </div>
             <h2>Iniciar sesión</h2>
             <form id='login-form' onSubmit={(e) => handleSubmitLogin(e)}>
                 <div className='mail'>
                     <label htmlFor="mail">Correo electrónico</label>
                     <input type="text" name="mail" id="mail" 
                     onChange={(e) => {
-                        setUser({...user, mail: normalizarMail(e.target.value)})
+                        setUser({...user, email: normalizarMail(e.target.value)})
                     }}
                     />
                 </div>
@@ -55,7 +83,7 @@ const LoginForm = () => {
                     />
                     <input type={eye ? "text" : "password"} name="password" id="password" 
                     onChange={(e) => {
-                        setUser({...user, pass: e.target.value})
+                        setUser({...user, password: e.target.value})
                     }}
                     />
                 </div>

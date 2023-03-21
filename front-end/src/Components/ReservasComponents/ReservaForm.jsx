@@ -18,14 +18,15 @@ const ReservaForm = ({
     handleConfirmacion 
 }) => {
 
-    const { state } = useContext(ContextGlobal);
+    const { state, dispatch } = useContext(ContextGlobal);
     const [disabledDays, setDisabledDays] = useState([]);
     const [checks, setChecks] = useState([]);
     const [allDates, setAllDates] = useState([]);
     const [values, setValues] = useState({
-        nombre: state.nombre, 
-        apellido: state.apellido, 
-        mail: state.mail, 
+        usuarioId: "",
+        nombre: "", 
+        apellido: "", 
+        mail: "", 
         ciudad: "",
         horaLlegada: "",
     })
@@ -40,20 +41,25 @@ const ReservaForm = ({
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        let jwt = localStorage.getItem("jwt");
+        const headers = { 'Authorization': `Bearer ${jwt}` };
         let objPostReserva = {
             horaComienzo: values.horaLlegada,
             fechaInicial: checks[0]?.day ? normalizarFecha(checks[0]) : "",
             fechaFinal: checks[1]?.day ? normalizarFecha(checks[1]) : "",
-            usuario: 1,
+            usuario: {
+                id: values.usuarioId
+            },
             producto: {
                 id: productoId
             }
         }
 
-        if (!objPostReserva.horaComienzo || !objPostReserva.fechaFinal || !objPostReserva.fechaInicial || !values.ciudad) {
+        if (!objPostReserva.horaComienzo || !objPostReserva.fechaFinal || !objPostReserva.fechaInicial || !values.ciudad || !values.usuarioId) {
             mostrarAlerta()
+            console.log(objPostReserva);
         } else {
-            axios.post("http://localhost:8080/reserva", objPostReserva)
+            axios.post("http://localhost:8080/reserva", objPostReserva, { headers })
             .then(res => {
                 handleConfirmacion()
             })
@@ -80,6 +86,32 @@ const ReservaForm = ({
             setAllDates([]);
         }
     }, [allDates])
+
+    useEffect(() => {
+        let jwt = localStorage.getItem("jwt");
+        let partes = jwt.split('.');
+        let contenido = atob(partes[1]);
+        let datos = JSON.parse(contenido);
+        const headers = { 'Authorization': `Bearer ${jwt}` };
+        axios.get(`http://localhost:8080/usuario/email/${datos.sub}`, { headers })
+        .then(res => {
+            dispatch({
+                type: "register",
+                payload: {
+                  ...state,
+                  user: res.data,
+                }
+              })
+            setValues({
+                ...values,
+                usuarioId: res.data.id,
+                nombre: res.data.nombre, 
+                apellido: res.data.apellido, 
+                mail: res.data.email, 
+            })
+        })
+
+    }, [])
 
     const mostrarAlerta = () => {
         Swal.fire({

@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Calendar } from "react-multi-date-picker"
 import { getDaysArray } from '../Utils/utils';
+import { ContextGlobal } from '../Utils/globalContext';
 
 const CalendarContainer = ({ productId, reservas }) => {
 
     const Navigate = useNavigate();
     const [disabledDays, setDisabledDays] = useState([]);
+    const { state, dispatch } = useContext(ContextGlobal);
 
     useEffect(() => {
         let dayArr = [];
@@ -16,7 +18,14 @@ const CalendarContainer = ({ productId, reservas }) => {
 
     const hanldeClickReserva = () => {
         if(!localStorage.getItem("jwt")) {
-            Navigate("/login")
+            Navigate("/login");
+            dispatch({
+                type: "register",
+                payload: {
+                  ...state,
+                  location: "reserva"
+                }
+            })   
         } else {
             Navigate(`/product/${productId}/reservas`)
         }

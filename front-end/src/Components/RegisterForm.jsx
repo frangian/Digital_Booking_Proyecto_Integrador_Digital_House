@@ -84,6 +84,7 @@ const RegisterForm = () => {
                 axios.post("http://localhost:8080/login", objLogin)
                 .then(res => {
                     localStorage.setItem("jwt", res.headers.authorization.split(" ")[1])
+                    navigate("/")
                 })
             }).catch(err => {
                 setErrorMail("Este correo ya esta registrado")

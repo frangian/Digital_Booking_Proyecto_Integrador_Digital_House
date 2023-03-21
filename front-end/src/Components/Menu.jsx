@@ -1,9 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from '@fortawesome/free-solid-svg-icons'
 import { socialNetworks, routes } from './Utils/routes'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { ContextGlobal } from './Utils/globalContext'
+import axios from 'axios'
 
 const Menu = ({ open, openClose }) => {
 
@@ -19,8 +20,28 @@ const Menu = ({ open, openClose }) => {
                 logged: false
             }
         })
-        navigate("/login");
     }
+
+    useEffect(() => {
+        let jwt = localStorage.getItem("jwt");
+        if (jwt) {
+          let partes = jwt.split('.');
+          let contenido = atob(partes[1]);
+          let datos = JSON.parse(contenido);
+          const headers = { 'Authorization': `Bearer ${jwt}` };
+          axios.get(`http://localhost:8080/usuario/email/${datos.sub}`, { headers })
+          .then(res => {
+              dispatch({
+                type: "register",
+                payload: {
+                  ...state,
+                  user: res.data,
+                  logged: true
+                }
+              })
+          })
+        }
+      }, [])
 
     return (
         <div style={open ? {display: "block"} : {display: "none"}} className="menu">
@@ -29,7 +50,7 @@ const Menu = ({ open, openClose }) => {
                 <h5 className={`${state.logged ? "oculto" : ""}`}>MENÚ</h5>
                 <div className={`menu-logged-user ${state.logged ? "" : "oculto"}`}>
                     <div className='avatar'>
-                        <p>{"J"}{"G"}</p>
+                        <p>{state.user.nombre[0]}{state.user.apellido[0]}</p>
                     </div>
                     <div className="saludo">
                         <p>Hola,</p>
