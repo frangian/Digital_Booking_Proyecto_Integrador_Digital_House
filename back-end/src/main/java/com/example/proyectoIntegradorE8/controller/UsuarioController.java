@@ -1,13 +1,19 @@
 package com.example.proyectoIntegradorE8.controller;
 
+import com.example.proyectoIntegradorE8.entity.Producto;
 import com.example.proyectoIntegradorE8.entity.Usuario;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.log4j.Log4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,6 +72,33 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+    @PutMapping
+    @Operation(summary = "Actualizar un usuario", description = "Este endpoint permite actualizar un usuario ya existente en la BBDD")
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            content = @Content(mediaType = "application/json",
+                    examples = @ExampleObject(value = "" +
+                            "{\n" +
+                            "    \"id\": 0, \"titulo\": \"String\",\"descripcion_producto\": \"String\",\"descripcion_ubicacion\": \"String\",\n" +
+                            "    \"url_ubicacion\": \"String\", \"normas\": \"String\", \"seguridad\": \"String\", \"cancelacion\": \"String\",\n" +
+                            "    \"puntuacion\": 0, \"categoria\": { \"id\": 0 }, \"ciudad\": { \"id\": 0 }, \"caracteristicas\": [ { \"id\": 0 } ],\n" +
+                            "    \"imagenes\": [{\"id\": 0, \"titulo\": \"String\",\"url_imagen\": \"String\"}]}"
+                    )            )    )
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Usuario.class))),
+            @ApiResponse(responseCode = "404", description = "El usuario no existe en la BBDD", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
+    public ResponseEntity<?> actualizarUsuario(@RequestBody @NotNull Usuario usuario){
+        try {
+            usuarioService.actualizarUsuario(usuario);
+            return ResponseEntity.ok(usuario);
+        } catch (EntityNotFoundException enfe){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(enfe.getMessage());
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
 
     @GetMapping
     @Operation(summary = "Listar todos los usuarios",
