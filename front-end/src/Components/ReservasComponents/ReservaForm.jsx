@@ -55,6 +55,10 @@ const ReservaForm = ({
                 id: productoId
             }
         }
+        let objPutUsuario = {
+            id: values.usuarioId,
+            ciudad: values.ciudad
+        }
 
         if (!objPostReserva.horaComienzo || !objPostReserva.fechaFinal || !objPostReserva.fechaInicial || !values.ciudad || !values.usuarioId) {
             mostrarAlerta()
@@ -66,6 +70,15 @@ const ReservaForm = ({
                 handleConfirmacion()
                 setSendLoad(false);
             })
+            .catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops',
+                    text: 'La reserva no pudo ser realizada intentalo de nuevo más tarde!',
+                })
+            })
+            axios.put("http://localhost:8080/usuario", objPutUsuario, { headers })
+            .then(res => { console.log(res.data); })
             .catch(err => {
                 Swal.fire({
                     icon: 'error',
@@ -113,6 +126,7 @@ const ReservaForm = ({
                     nombre: res.data.nombre, 
                     apellido: res.data.apellido, 
                     mail: res.data.email, 
+                    ciudad: res.data.ciudad
                 })
             })
         }
@@ -133,7 +147,7 @@ const ReservaForm = ({
                 <form id='reserva-form' onSubmit={(e) => handleSubmit(e)}>
                     <DatosReserva values={values} changeCiudad={handleChangeCiudad}/>
                     <div className="calendar-container-reserva">
-                        <h3>Seleccioná tu fecha de reserva</h3>
+                        <h3 onClick={() => console.log(state.user)} >Seleccioná tu fecha de reserva</h3>
                         <Calendar 
                         value={checks}
                         minDate={new Date()}

@@ -25,7 +25,8 @@ const LoginForm = () => {
             setSendLoad(true);
             axios.post("http://localhost:8080/login", user)
             .then(res => {
-                localStorage.setItem("jwt", res.headers.authorization.split(" ")[1]);
+                let jwt = res.headers.authorization.split(" ")[1];
+                localStorage.setItem("jwt", jwt);
                 setSendLoad(false);
                 navigate("/");
                 dispatch({
@@ -34,7 +35,19 @@ const LoginForm = () => {
                         ...state,
                         logged: true,
                     }
-                })   
+                }) 
+                const headers = { 'Authorization': `Bearer ${jwt}` };
+                axios.get(`http://localhost:8080/usuario/email/${user.email}`, { headers })
+                .then(res => {
+                dispatch({
+                    type: "register",
+                    payload: {
+                      ...state,
+                      user: res.data,
+                      logged: true
+                    }
+                  })  
+                })
             })
             .catch(err => {
                 Swal.fire({
