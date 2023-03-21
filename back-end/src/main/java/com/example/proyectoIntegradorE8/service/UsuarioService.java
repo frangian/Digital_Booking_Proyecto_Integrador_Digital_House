@@ -52,13 +52,14 @@ public class UsuarioService {
     }
     @Transactional
     public void actualizarUsuario (Usuario usuario) throws Exception {
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         try {
             log.info("Actualizando el usuario con id: " + usuario.getId());
-            usuarioRepository.save(usuario);
+            Usuario usuarioExistente = usuarioRepository.findById(usuario.getId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con el ID: " + usuario.getId()));
+            usuarioExistente.setCiudad(usuario.getCiudad());
+            usuarioRepository.save(usuarioExistente);
         } catch (NullPointerException npe){
-            log.error("El objeto usuario es null o la lista de caracteristicas o imagenes es null.", npe);
+            log.error("El objeto usuario es null.", npe);
             throw new NullPointerException("El objeto usuario es null. Mensaje:"+npe.getMessage());
         } catch (DataAccessException e) {
             log.error("Error al acceder a la base de datos", e);
