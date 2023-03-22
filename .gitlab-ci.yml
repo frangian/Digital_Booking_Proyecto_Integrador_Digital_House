@@ -10,6 +10,9 @@ build:
     - echo "Building app..."
     - cd back-end/
     - mvn clean install
+    - ls
+    - cd target/
+    - ls    
     - echo "Finished building app."
   # artifacts:
   #   expire_in: 1 week
