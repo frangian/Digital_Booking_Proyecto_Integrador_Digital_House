@@ -15,6 +15,9 @@ const Home = () => {
   //Estado para almacenar las fechas seleccionadas
   const [dates, setDates] = useState(null);
 
+  const [isLoading, setIsLoading] = useState(true);
+
+
   
   const handleCiudadSeleccionada = (ciudad, selectedDates) => {
     setCiudadSeleccionada(ciudad);
@@ -23,11 +26,13 @@ const Home = () => {
 
   const actualizarCategoriaSeleccionada = (categoriaId) => setCategoriaSeleccionada(categoriaId);
 
+  const handleIsLoading = (isLoading) => setIsLoading(isLoading);
+
   return (
     <div className="container">
-      <Buscador onCiudadSeleccionada={handleCiudadSeleccionada} />
+      <Buscador onCiudadSeleccionada={handleCiudadSeleccionada} isLoading={isLoading} />
       <Categorias  actualizarCategoriaSeleccionada={actualizarCategoriaSeleccionada}/>
-      <Recomendaciones categoriaSeleccionada={categoriaSeleccionada} ciudadSeleccionada={ciudadSeleccionada} dates={dates}/>
+      <Recomendaciones categoriaSeleccionada={categoriaSeleccionada} ciudadSeleccionada={ciudadSeleccionada} dates={dates} isLoading={isLoading} onLoading={handleIsLoading}/>
     </div>
   )
 }
