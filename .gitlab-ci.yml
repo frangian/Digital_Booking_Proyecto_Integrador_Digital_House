@@ -30,14 +30,14 @@ build:
 
 deploy:
   stage: deploy
-  image: ubuntu:latest
+  # image: ubuntu:latest
   script:
-    - apt-get update && apt-get install -y openssh-client
-    - mkdir -p /root/.ssh
-    - touch /root/.ssh/known_hosts
+    # - apt-get update && apt-get install -y openssh-client
+    # - mkdir -p /root/.ssh
+    # - touch /root/.ssh/known_hosts
     - ls
     - chmod 400 group8-keys.pem
-    - ssh-keyscan 3.15.231.34 >> ~/.ssh/known_hosts
+    # - ssh-keyscan 3.15.231.34 >> ~/.ssh/known_hosts
     - scp -i group8-keys.pem back-end/target/proyectoIntegrador-E8-1.2.3.jar ubuntu@3.15.231.34:/home/ubuntu/
     - ssh -i group8-keys.pem ubuntu@3.15.231.34 'nohup java -jar ~/proyectoIntegrador-E8-1.2.3.jar > avisos.log &'
   rules:
