@@ -12,8 +12,8 @@ build:
     - mvn clean install
     - echo "Finished building app."
   artifacts:
-    - expire_in: 1 week
-    - paths:
+    expire_in: 1 week
+    paths:
       - target/consoleapp.jar
   rules:
     - changes:
