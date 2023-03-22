@@ -6,6 +6,7 @@ import { faBars, faX } from '@fortawesome/free-solid-svg-icons'
 import Menu from './Menu';
 import { ContextGlobal } from './Utils/globalContext';
 import axios from 'axios';
+import { API_URL } from './Utils/api';
 
 const Header = () => {
 
@@ -28,6 +29,9 @@ const Header = () => {
       }
     })
     localStorage.removeItem("jwt");
+    if (location.pathname.includes("reservas")) {
+      navigate("/")
+    }
   }
 
 useEffect(() => {
@@ -46,7 +50,7 @@ useEffect(() => {
     let contenido = atob(partes[1]);
     let datos = JSON.parse(contenido);
     const headers = { 'Authorization': `Bearer ${jwt}` };
-    axios.get(`http://localhost:8080/usuario/email/${datos.sub}`, { headers })
+    axios.get(`${API_URL}/usuario/email/${datos.sub}`, { headers })
     .then(res => {
         dispatch({
           type: "register",
@@ -62,7 +66,7 @@ useEffect(() => {
 }, [])
 
   return (
-    <header>
+    <header onClick={() => { console.log(location); }}>
       <div className='logo-slogan' onClick={() => mobileOpen ? "" : navigate("/")}>
         <img src="/logo.png" alt="Logo Digital Booking"/>
         <h6 onMouseOver={() => console.log(state)}>Sentite como en tu hogar</h6>

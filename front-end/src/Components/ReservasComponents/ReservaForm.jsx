@@ -7,6 +7,7 @@ import DatosReserva from './DatosReserva'
 import Llegada from './Llegada'
 import { getDaysArray, normalizarFecha, deshabilitarSeleccionIntermedida } from '../Utils/utils'
 import axios from 'axios'
+import { API_URL } from '../Utils/api'
 
 const ReservaForm = ({ 
     tituloCategoria, 
@@ -22,6 +23,7 @@ const ReservaForm = ({
     const [disabledDays, setDisabledDays] = useState([]);
     const [checks, setChecks] = useState([]);
     const [allDates, setAllDates] = useState([]);
+    const [sendLoad, setSendLoad] = useState(false);
     const [values, setValues] = useState({
         usuarioId: "",
         nombre: "", 
@@ -54,15 +56,30 @@ const ReservaForm = ({
                 id: productoId
             }
         }
+        let objPutUsuario = {
+            id: values.usuarioId,
+            ciudad: values.ciudad
+        }
 
         if (!objPostReserva.horaComienzo || !objPostReserva.fechaFinal || !objPostReserva.fechaInicial || !values.ciudad || !values.usuarioId) {
             mostrarAlerta()
             console.log(objPostReserva);
         } else {
-            axios.post("http://localhost:8080/reserva", objPostReserva, { headers })
+            setSendLoad(true);
+            axios.post(`${API_URL}/reserva`, objPostReserva, { headers })
             .then(res => {
                 handleConfirmacion()
+                setSendLoad(false);
             })
+            .catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops',
+                    text: 'La reserva no pudo ser realizada intentalo de nuevo más tarde!',
+                })
+            })
+            axios.put(`${API_URL}/usuario`, objPutUsuario, { headers })
+            .then(res => { console.log(res.data); })
             .catch(err => {
                 Swal.fire({
                     icon: 'error',
@@ -89,27 +106,31 @@ const ReservaForm = ({
 
     useEffect(() => {
         let jwt = localStorage.getItem("jwt");
-        let partes = jwt.split('.');
-        let contenido = atob(partes[1]);
-        let datos = JSON.parse(contenido);
-        const headers = { 'Authorization': `Bearer ${jwt}` };
-        axios.get(`http://localhost:8080/usuario/email/${datos.sub}`, { headers })
-        .then(res => {
-            dispatch({
-                type: "register",
-                payload: {
-                  ...state,
-                  user: res.data,
-                }
-              })
-            setValues({
-                ...values,
-                usuarioId: res.data.id,
-                nombre: res.data.nombre, 
-                apellido: res.data.apellido, 
-                mail: res.data.email, 
+        if(jwt) {
+            let partes = jwt.split('.');
+            let contenido = atob(partes[1]);
+            let datos = JSON.parse(contenido);
+            const headers = { 'Authorization': `Bearer ${jwt}` };
+            axios.get(`${API_URL}/usuario/email/${datos.sub}`, { headers })
+            .then(res => {
+                dispatch({
+                    type: "register",
+                    payload: {
+                      ...state,
+                      user: res.data,
+                      logged: true
+                    }
+                  })
+                setValues({
+                    ...values,
+                    usuarioId: res.data.id,
+                    nombre: res.data.nombre, 
+                    apellido: res.data.apellido, 
+                    mail: res.data.email, 
+                    ciudad: res.data.ciudad
+                })
             })
-        })
+        }
 
     }, [])
 
@@ -127,7 +148,7 @@ const ReservaForm = ({
                 <form id='reserva-form' onSubmit={(e) => handleSubmit(e)}>
                     <DatosReserva values={values} changeCiudad={handleChangeCiudad}/>
                     <div className="calendar-container-reserva">
-                        <h3>Seleccioná tu fecha de reserva</h3>
+                        <h3 onClick={() => console.log(state.user)} >Seleccioná tu fecha de reserva</h3>
                         <Calendar 
                         value={checks}
                         minDate={new Date()}
@@ -178,6 +199,7 @@ const ReservaForm = ({
                     ubicacion={ubicacion}
                     img={img}
                     checks={checks}
+                    sendLoad={sendLoad}
                 />
             </div>
         </div>

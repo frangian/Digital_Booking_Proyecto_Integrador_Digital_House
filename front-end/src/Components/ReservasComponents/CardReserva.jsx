@@ -3,8 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faStar } from '@fortawesome/free-solid-svg-icons'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { CircularProgress } from '@mui/material'
 
-const CardReserva = ({ tituloCategoria, tituloProducto, ubicacion, img, checks }) => {
+const CardReserva = ({ tituloCategoria, tituloProducto, ubicacion, img, checks, sendLoad }) => {
   return (
     <div className='card-reserva-container'>
       <div className="card-reserva">
@@ -32,17 +33,19 @@ const CardReserva = ({ tituloCategoria, tituloProducto, ubicacion, img, checks }
             <div className="checkin-checkout">
               <div className="checkin">
                 <p>Check in</p>
-                <p className="fecha">{checks[0]?.day ? `${checks[0]?.day}/${checks[0]?.month}/${checks[0]?.year}` : ""}</p>
+                <p className="fecha">{checks[0]?.day ? `${checks[0]?.day}/${checks[0]?.month}/${checks[0]?.year}` : " / / "}</p>
               </div>
               <div className="checkout">
                 <p>Check out</p>
                 <p className="fecha">
-                  {checks[1]?.day ? `${checks[1]?.day}/${checks[1]?.month}/${checks[1]?.year}` : ""}
+                  {checks[1]?.day ? `${checks[1]?.day}/${checks[1]?.month}/${checks[1]?.year}` : " / / "}
                 </p>
               </div>
             </div>
-            <button className='small-button' type='submit' form='reserva-form'>
-              Confirmar reserva
+            <button className='small-button' type='submit' form='reserva-form' disabled={sendLoad}>
+              {
+                sendLoad ? <CircularProgress sx={{ color: "#fff", marginTop: "5px"}} size="1.4rem"/> : "Confirmar reserva"
+              }
             </button>
           </section>
         </div>

@@ -5,7 +5,8 @@ import { faEyeSlash, faEye } from '@fortawesome/free-regular-svg-icons'
 import { ContextGlobal } from './Utils/globalContext'
 import { validarMail, validarPassword, confirmarPassword, campoRequerido, normalizarMail, normalizarNombre } from './Utils/validaciones'
 import axios from 'axios'
-
+import CircularProgress from '@mui/material/CircularProgress';
+import { API_URL } from './Utils/api'
 
 const RegisterForm = () => {
 
@@ -16,6 +17,7 @@ const RegisterForm = () => {
     const [errorMail, setErrorMail] = useState("");
     const [errorPass, setErrorPass] = useState("");
     const [errorConfirmPass, setErrorConfirmPass] = useState("");
+    const [sendLoad, setSendLoad] = useState(false);
     const [user, setUser] = useState({nombre: "", apellido: "", mail: "", pass: "", confirmPass: ""})
     const { state, dispatch } = useContext(ContextGlobal);
 
@@ -61,6 +63,7 @@ const RegisterForm = () => {
             setErrorConfirmPass("Las contraseñas no coinciden");
         }
         if (envio) {
+            setSendLoad(true);
             let objRegister = {
                 nombre: user.nombre,
                 apellido: user.apellido,
@@ -71,17 +74,19 @@ const RegisterForm = () => {
                 email: user.mail,
                 password: user.pass
             }
-            axios.post("http://localhost:8080/usuario/registro", objRegister)
+            axios.post(`${API_URL}/usuario/registro`, objRegister)
             .then(res => {
                 console.log(res);
+                setSendLoad(false);
                 dispatch({
                     type: "register",
                     payload: {
                         ...state, 
-                        user: res.data
+                        user: res.data,
+                        logged: true
                     }
                 })
-                axios.post("http://localhost:8080/login", objLogin)
+                axios.post(`${API_URL}/login`, objLogin)
                 .then(res => {
                     localStorage.setItem("jwt", res.headers.authorization.split(" ")[1])
                     navigate("/")
@@ -89,7 +94,6 @@ const RegisterForm = () => {
             }).catch(err => {
                 setErrorMail("Este correo ya esta registrado")
             })
-            // navigate("/")
         }
     }
 
@@ -160,7 +164,11 @@ const RegisterForm = () => {
                     <p>{errorConfirmPass}</p>
                 </div>
             </form>
-            <button type='submit' form='register-form' className='small-button' id='submit-register'>Crear cuenta</button>
+            <button type='submit' form='register-form' className='small-button' id='submit-register' disabled={sendLoad}>
+                {
+                    sendLoad ? <CircularProgress sx={{ color: "#fff", marginTop: "5px"}} size="1.4rem"/> : "Crear cuenta"
+                }
+            </button>
             <p>¿Ya tienes una cuenta? <span onClick={() => navigate("/login")}>Iniciar sesión</span></p>
         </div>
     )

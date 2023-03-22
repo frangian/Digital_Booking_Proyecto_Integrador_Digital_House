@@ -7,6 +7,8 @@ import { ContextGlobal } from './Utils/globalContext'
 import { normalizarMail } from './Utils/validaciones'
 import Swal from 'sweetalert2'
 import axios from 'axios'
+import CircularProgress from '@mui/material/CircularProgress';
+import { API_URL } from './Utils/api'
 
 const LoginForm = () => {
 
@@ -15,33 +17,50 @@ const LoginForm = () => {
     const [error, setError] = useState("");
     const [user, setUser] = useState({email: "", password: ""});
     const [reserva, setReserva] = useState(false);
+    const [sendLoad, setSendLoad] = useState(false);
     const { state, dispatch } = useContext(ContextGlobal);
 
     const handleSubmitLogin = (e) => {
         e.preventDefault();
         if (user.email && user.password) {  
-                axios.post("http://localhost:8080/login", user)
+            setSendLoad(true);
+            axios.post(`${API_URL}/login`, user)
+            .then(res => {
+                let jwt = res.headers.authorization.split(" ")[1];
+                localStorage.setItem("jwt", jwt);
+                setSendLoad(false);
+                navigate("/");
+                dispatch({
+                    type: "register",
+                    payload: {
+                        ...state,
+                        logged: true,
+                    }
+                }) 
+                const headers = { 'Authorization': `Bearer ${jwt}` };
+                axios.get(`${API_URL}/usuario/email/${user.email}`, { headers })
                 .then(res => {
-                    localStorage.setItem("jwt", res.headers.authorization.split(" ")[1]);
-                    navigate("/");
-                    dispatch({
-                        type: "register",
-                        payload: {
-                          ...state,
-                          logged: true,
-                        }
-                      })
+                dispatch({
+                    type: "register",
+                    payload: {
+                      ...state,
+                      user: res.data,
+                      logged: true
+                    }
+                  })  
                 })
-                .catch(err => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops',
-                        text: 'Lamentablemente no ha podido iniciar sesión. Por favor intente más tarde',
-                    })
+            })
+            .catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops',
+                    text: 'Lamentablemente no ha podido iniciar sesión. Por favor intente más tarde',
                 })
+            })
         } else {
             setError("Las credenciales ingresadas no coinciden");
         }
+        
     }
 
     useEffect(() => {
@@ -64,7 +83,7 @@ const LoginForm = () => {
                 <FontAwesomeIcon icon={faExclamationCircle}/> 
                 <p>Para realizar una reserva necesitas estar logueado</p>
             </div>
-            <h2>Iniciar sesión</h2>
+            <h2 onClick={() => sendLoad ? setSendLoad(false) : setSendLoad(true)}>Iniciar sesión</h2>
             <form id='login-form' onSubmit={(e) => handleSubmitLogin(e)}>
                 <div className='mail'>
                     <label htmlFor="mail">Correo electrónico</label>
@@ -89,7 +108,11 @@ const LoginForm = () => {
                 </div>
             </form>
             <p className='login-error'>{error}</p>
-            <button type='submit' form='login-form' className='small-button'>Ingresar</button>
+            <button type='submit' form='login-form' className='small-button' disabled={sendLoad}>
+                {
+                    sendLoad ? <CircularProgress sx={{ color: "#fff", marginTop: "5px"}} size="1.4rem"/> : "Ingresar"
+                }
+            </button>
             <p>¿Aún no tenes cuenta? <span onClick={() => navigate("/register")}>Registrate</span></p>
         </div>
     )

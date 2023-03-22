@@ -4,12 +4,12 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import PoliticasProducto from '../Components/PoliticasProducto';
 import ProductHeader from '../Components/ProductHeader';
 import ReservaForm from '../Components/ReservasComponents/ReservaForm';
+import { API_URL } from '../Components/Utils/api';
 
 const Reservas = () => {
 
     const { id } = useParams();
     const navigate = useNavigate();
-    const location = useLocation();
     const [data, setData] = useState({});
     const [normas, setNormas] = useState([]);
     const [seguridad, setSeguridad] = useState([]);
@@ -20,20 +20,24 @@ const Reservas = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        setIsLoading(false);
-        axios.get(`http://localhost:8080/producto/${id}`)
-        .then(res => {
-            setData(res.data);
-            setNormas(res.data.normas.split(","));
-            setSeguridad(res.data.seguridad.split(","));
-            setImagen(res.data.imagenes[0]);
-            setCiudad(res.data.ciudad);
-            setIsLoading(true);
-        }) 
-        axios.get(`http://localhost:8080/reserva/producto/${id}`)
-        .then(res => {
-            setReservas(res.data)
-        })  
+        if(!localStorage.getItem("jwt")) {
+            navigate("/")
+        } else {
+            setIsLoading(false);
+            axios.get(`${API_URL}/producto/${id}`)
+            .then(res => {
+                setData(res.data);
+                setNormas(res.data.normas.split(","));
+                setSeguridad(res.data.seguridad.split(","));
+                setImagen(res.data.imagenes[0]);
+                setCiudad(res.data.ciudad);
+                setIsLoading(true);
+            }) 
+            axios.get(`${API_URL}/reserva/producto/${id}`)
+            .then(res => {
+                setReservas(res.data)
+            })  
+        }
     }, [id])
 
     const handleConfirmacion = () => {
