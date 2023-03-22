@@ -30,16 +30,22 @@ build:
 
 deploy:
   stage: deploy
-  # image: ubuntu:latest
+  image: alpine:latest
   script:
+    - apk update
+    - apk add bash
+    - bash -c ls
+    - bash -c chmod 400 group8-keys.pem
+    - bash -c scp -i group8-keys.pem back-end/target/proyectoIntegrador-E8-1.2.3.jar ubuntu@3.15.231.34:/home/ubuntu/
+    - bash -c ssh -i group8-keys.pem ubuntu@3.15.231.34 'nohup java -jar ~/proyectoIntegrador-E8-1.2.3.jar > avisos.log &'
     # - apt-get update && apt-get install -y openssh-client
     # - mkdir -p /root/.ssh
     # - touch /root/.ssh/known_hosts
-    - ls
-    - chmod 400 group8-keys.pem
+    # - ls
+    # - chmod 400 group8-keys.pem
     # - ssh-keyscan 3.15.231.34 >> ~/.ssh/known_hosts
-    - scp -i group8-keys.pem back-end/target/proyectoIntegrador-E8-1.2.3.jar ubuntu@3.15.231.34:/home/ubuntu/
-    - ssh -i group8-keys.pem ubuntu@3.15.231.34 'nohup java -jar ~/proyectoIntegrador-E8-1.2.3.jar > avisos.log &'
+    # - scp -i group8-keys.pem back-end/target/proyectoIntegrador-E8-1.2.3.jar ubuntu@3.15.231.34:/home/ubuntu/
+    # - ssh -i group8-keys.pem ubuntu@3.15.231.34 'nohup java -jar ~/proyectoIntegrador-E8-1.2.3.jar > avisos.log &'
   rules:
     - changes:
         - back-end/**/*
