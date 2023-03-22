@@ -1,12 +1,10 @@
 package com.example.proyectoIntegradorE8.Security;
 
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,14 +13,13 @@ import java.util.Map;
 public class TokenUtils {
 
     private final static String ACCESS_TOKEN_SECRET = "4qhq8LrEBfYcaRHxhdb9zURb2rf8e7Ud";
-    private final static Long ACCESS_TOKEN_VALIDITY = 2_592_000L;
+    private final static Long ACCESS_TOKEN_VALIDITY = 2_592_000L; // 2.592.000 segundos, que equivalen a 30 dias.
 
 //En resumen, el método "crearToken" de la clase "TokenUtils" genera un token JWT con la información del nombre y el correo electrónico,
 // lo firma y lo devuelve como una cadena.
     public static String crearToken(String nombre, String email){
-        //convertir el tiempo a milisegundos
-        long expirationTime= ACCESS_TOKEN_VALIDITY * 1_000;
-        Date expirationDate = new Date(System.currentTimeMillis() + expirationTime);
+        long expirationTime= ACCESS_TOKEN_VALIDITY * 1_000; //convertir el tiempo a milisegundos, para poder sumarlos abajo, con la funcion System.currentTimeMillis()
+        Date expirationDate = new Date(System.currentTimeMillis() + expirationTime); //System.currentTimeMillis() es una función en Java que devuelve el tiempo actual en milisegundos desde el 1 de enero de 1970, 00:00:00 UTC.
 
         //esto va a viajar con el token, son datos adicionales como cadena de objetos.
         Map<String, Object> adicional = new HashMap<>();
@@ -42,7 +39,6 @@ public class TokenUtils {
 
  //     es necesario para que sprint reconozca y pueda pasar el proceso de autorización para un usuario que quiere accedes a un endpoint con un token, el token esta en formato plano.
     public static UsernamePasswordAuthenticationToken getAuthentication (String token){
-
         try {
             Claims claims = Jwts.parserBuilder()
                     .setSigningKey(ACCESS_TOKEN_SECRET.getBytes())
@@ -57,7 +53,7 @@ public class TokenUtils {
         } catch (JwtException e){
             return null;
         }
-        }
+    }
 
 }
 // El método toma una cadena de token JWT como argumento y devuelve un objeto de tipo "UsernamePasswordAuthenticationToken".

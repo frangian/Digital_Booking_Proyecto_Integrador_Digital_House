@@ -1,5 +1,6 @@
 package com.example.proyectoIntegradorE8.Security;
 
+import com.example.proyectoIntegradorE8.entity.Usuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -9,7 +10,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
 import java.io.IOException;
 import java.util.Collections;
 
@@ -49,12 +49,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) authResult.getPrincipal();
+        Usuario userDetails = (Usuario) authResult.getPrincipal();
         //creamos un token a partir de userDetails
         String token = TokenUtils.crearToken(userDetails.getNombre(), userDetails.getUsername());
         //modificamos la respuesta para adjuntar el nuevo token
         response.addHeader("Authorization", "Bearer " + token);
-        response.getWriter().flush(); //para confirmar esos cambios
+        response.getWriter()
+//                .printf(token) //esta linea serviria en caso de querer enviar el token en el body de la respuesta
+                .flush(); //para confirmar esos cambios
 
         super.successfulAuthentication(request, response, chain, authResult);
     }
