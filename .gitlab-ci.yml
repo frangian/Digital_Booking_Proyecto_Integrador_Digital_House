@@ -14,7 +14,7 @@ build:
   artifacts:
     expire_in: 1 week
     paths:
-      - target/consoleapp.jar
+      - ./target/consoleapp.jar
   rules:
     - changes:
       - back-end/**/*
