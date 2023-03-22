@@ -34,9 +34,10 @@ deploy:
   script:
     - apt-get update && apt-get install -y openssh-client
     - ls
-    - chmod 400 $KEY
-    - scp -i $KEY $JAR $EC2_USER@$EC2_IP_ADDRESS:/home/ubuntu/
-    - ssh -i $KEY ubuntu@3.15.231.34 'nohup java -jar ~/proyectoIntegrador-E8-1.2.3.jar > avisos.log &'
+    - chmod 400 group8-keys.pem
+    - ssh-keyscan 3.15.231.34 >> ~/.ssh/known_hosts
+    - scp -i group8-keys.pem $JAR ubuntu@3.15.231.34:/home/ubuntu/
+    - ssh -i group8-keys.pem ubuntu@3.15.231.34 'nohup java -jar ~/proyectoIntegrador-E8-1.2.3.jar > avisos.log &'
   rules:
     - changes:
         - back-end/**/*
