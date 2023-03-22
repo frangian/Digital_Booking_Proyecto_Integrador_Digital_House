@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { horas } from '../Utils/utils';
 import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

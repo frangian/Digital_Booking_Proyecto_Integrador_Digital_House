@@ -5,6 +5,7 @@ import { socialNetworks, routes } from './Utils/routes'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { ContextGlobal } from './Utils/globalContext'
 import axios from 'axios'
+import { API_URL } from './Utils/api'
 
 const Menu = ({ open, openClose }) => {
 
@@ -34,7 +35,7 @@ const Menu = ({ open, openClose }) => {
           let contenido = atob(partes[1]);
           let datos = JSON.parse(contenido);
           const headers = { 'Authorization': `Bearer ${jwt}` };
-          axios.get(`http://localhost:8080/usuario/email/${datos.sub}`, { headers })
+          axios.get(`${API_URL}/usuario/email/${datos.sub}`, { headers })
           .then(res => {
               dispatch({
                 type: "register",

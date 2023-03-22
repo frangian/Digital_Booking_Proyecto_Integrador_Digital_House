@@ -6,6 +6,7 @@ import { ContextGlobal } from './Utils/globalContext'
 import { validarMail, validarPassword, confirmarPassword, campoRequerido, normalizarMail, normalizarNombre } from './Utils/validaciones'
 import axios from 'axios'
 import CircularProgress from '@mui/material/CircularProgress';
+import { API_URL } from './Utils/api'
 
 const RegisterForm = () => {
 
@@ -73,7 +74,7 @@ const RegisterForm = () => {
                 email: user.mail,
                 password: user.pass
             }
-            axios.post("http://localhost:8080/usuario/registro", objRegister)
+            axios.post(`${API_URL}/usuario/registro`, objRegister)
             .then(res => {
                 console.log(res);
                 setSendLoad(false);
@@ -85,7 +86,7 @@ const RegisterForm = () => {
                         logged: true
                     }
                 })
-                axios.post("http://localhost:8080/login", objLogin)
+                axios.post(`${API_URL}/login`, objLogin)
                 .then(res => {
                     localStorage.setItem("jwt", res.headers.authorization.split(" ")[1])
                     navigate("/")

@@ -7,6 +7,7 @@ import DatosReserva from './DatosReserva'
 import Llegada from './Llegada'
 import { getDaysArray, normalizarFecha, deshabilitarSeleccionIntermedida } from '../Utils/utils'
 import axios from 'axios'
+import { API_URL } from '../Utils/api'
 
 const ReservaForm = ({ 
     tituloCategoria, 
@@ -65,7 +66,7 @@ const ReservaForm = ({
             console.log(objPostReserva);
         } else {
             setSendLoad(true);
-            axios.post("http://localhost:8080/reserva", objPostReserva, { headers })
+            axios.post(`${API_URL}/reserva`, objPostReserva, { headers })
             .then(res => {
                 handleConfirmacion()
                 setSendLoad(false);
@@ -77,7 +78,7 @@ const ReservaForm = ({
                     text: 'La reserva no pudo ser realizada intentalo de nuevo más tarde!',
                 })
             })
-            axios.put("http://localhost:8080/usuario", objPutUsuario, { headers })
+            axios.put(`${API_URL}/usuario`, objPutUsuario, { headers })
             .then(res => { console.log(res.data); })
             .catch(err => {
                 Swal.fire({
@@ -110,7 +111,7 @@ const ReservaForm = ({
             let contenido = atob(partes[1]);
             let datos = JSON.parse(contenido);
             const headers = { 'Authorization': `Bearer ${jwt}` };
-            axios.get(`http://localhost:8080/usuario/email/${datos.sub}`, { headers })
+            axios.get(`${API_URL}/usuario/email/${datos.sub}`, { headers })
             .then(res => {
                 dispatch({
                     type: "register",

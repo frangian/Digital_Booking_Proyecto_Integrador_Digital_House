@@ -8,6 +8,7 @@ import { normalizarMail } from './Utils/validaciones'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import CircularProgress from '@mui/material/CircularProgress';
+import { API_URL } from './Utils/api'
 
 const LoginForm = () => {
 
@@ -23,7 +24,7 @@ const LoginForm = () => {
         e.preventDefault();
         if (user.email && user.password) {  
             setSendLoad(true);
-            axios.post("http://localhost:8080/login", user)
+            axios.post(`${API_URL}/login`, user)
             .then(res => {
                 let jwt = res.headers.authorization.split(" ")[1];
                 localStorage.setItem("jwt", jwt);
@@ -37,7 +38,7 @@ const LoginForm = () => {
                     }
                 }) 
                 const headers = { 'Authorization': `Bearer ${jwt}` };
-                axios.get(`http://localhost:8080/usuario/email/${user.email}`, { headers })
+                axios.get(`${API_URL}/usuario/email/${user.email}`, { headers })
                 .then(res => {
                 dispatch({
                     type: "register",

@@ -1,4 +1,3 @@
-import { CircularProgress } from '@mui/material';
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton';
 import ImgDesktopCarousel from './ImgDesktopCarousel'

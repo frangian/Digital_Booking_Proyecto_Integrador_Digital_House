@@ -20,6 +20,7 @@ import PoliticasProducto from '../Components/PoliticasProducto';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { FacebookShareButton, WhatsappShareButton, TwitterShareButton } from 'react-share'
+import { API_URL } from '../Components/Utils/api'
 
 const Producto = () => {
 
@@ -54,7 +55,7 @@ const Producto = () => {
 
     useEffect(() => {
         setIsLoading(false);
-        axios.get(`http://localhost:8080/producto/${id}`)
+        axios.get(`${API_URL}/producto/${id}`)
         .then(res => {
             setData(res.data);
             setImages(res.data.imagenes);
@@ -68,11 +69,11 @@ const Producto = () => {
                 url: window.location.href
             })
         })
-        axios.get(`http://localhost:8080/caracteristica/producto/${id}`)
+        axios.get(`${API_URL}/caracteristica/producto/${id}`)
         .then(res => {
             setServices(res.data);
         })
-        axios.get(`http://localhost:8080/reserva/producto/${id}`)
+        axios.get(`${API_URL}/reserva/producto/${id}`)
         .then(res => {
             setReservas(res.data)
         }) 
