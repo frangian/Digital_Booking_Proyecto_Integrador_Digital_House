@@ -1,21 +1,60 @@
-stages:          
+stages:
   - build
-  - test
+  # - test
   - deploy
 
-build:       
+build:
   stage: build
+  image: maven:latest
   script:
-    - echo "Compiling the code..."
+    - echo "Building app..."
+    - cd back-end/
+    - mvn clean install
+    - ls
+    - cd target/
+    - ls    
+    - echo "Finished building app."
+  # artifacts:
+  #   expire_in: 1 week
+  #   paths:
+  #     - /target/consoleapp.jar
+  rules:
+    - changes:
+      - back-end/**/*
+  # only:
+  #   - desarrollo
 
-test:  
-  stage: test    
+# test:
+#   stage: test
+#   image: openjdk:11-jre-slim
+#   script:
+#     - java -jar target/tu-aplicacion.jar --tests
+
+deploy:
+  stage: deploy
+  image: ubuntu:latest
+  before_script:
+    - apt-get update && apt-get install -y openssh-client bash
+    - mkdir -p ~/.ssh
+    # - eval $(ssh-agent -s)
+    # - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    # - echo $DEPLOY_SERVER_IP
+    # - echo $SSH_PRIVATE_KEY
+    - touch ~/.ssh/config
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - ssh-keyscan 3.15.231.34 >> ~/.ssh/known_hosts
   script:
-    - echo "Running unit tests... "
-
-deploy-job:      
-  stage: deploy 
-  script:
-    - echo "Deploying application..."
-    - echo "Application successfully deployed."
-
+    - echo "Deploying started..."
+    - chmod 400 group8-keys.pem
+    - ssh -i group8-keys.pem ubuntu@3.15.231.34 "sudo systemctl stop consoleapp.service"
+    - ls
+    - cd back-end/
+    - ls
+    - scp -i group8-keys.pem back-end/target/consoleapp.jar ubuntu@3.15.231.34:~/console-app/
+    - ssh -i group8-keys.pem ubuntu@3.15.231.34 "sudo systemctl start consoleapp.service"
+    - echo "Finished deploying the app."
+  # only:
+  #   - desarrollo
+  rules:
+    - changes:
+        - back-end/**/*

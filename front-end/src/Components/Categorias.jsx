@@ -3,6 +3,7 @@ import Card from "../Components/CardCategoria";
 import axios from 'axios';
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { API_URL } from './Utils/api'
 
 const Categorias = ({  actualizarCategoriaSeleccionada }) => {
   
@@ -20,7 +21,7 @@ const Categorias = ({  actualizarCategoriaSeleccionada }) => {
 
    // Obtener las categorías desde la API cuando se monta el componente
    useEffect(() => {
-    axios.get('http://localhost:8080/categoria')
+    axios.get(`${API_URL}/categoria`)
       .then((response) => {
         setCategories(response.data);
         setIsLoading(false);
