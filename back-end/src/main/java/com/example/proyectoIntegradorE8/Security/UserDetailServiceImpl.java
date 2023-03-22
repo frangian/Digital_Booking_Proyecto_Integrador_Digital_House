@@ -14,16 +14,12 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-      Usuario usuario =  usuarioRepository
-              .findOneByEmail(email)
-              //si no se encuentra ningun usuario a partir de este correro, se lanza una excepción:
-                .orElseThrow(() -> new UsernameNotFoundException("El usuario con email" + email + "no éxiste."));
+    public Usuario loadUserByUsername(String email) throws UsernameNotFoundException {
+      Usuario usuario =  usuarioRepository.findOneByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("El usuario con email: " + email + " no éxiste."));
 
-      return new UserDetailsImpl(usuario);
-
+      return usuario;
     }
 }
 //loadUserByUsername:  busca un usuario en el repositorio a través del correo electrónico y devuelve los detalles del usuario en un objeto UserDetailsImpl.
