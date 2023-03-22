@@ -18,7 +18,7 @@ build:
     - mvn clean install
   rules:
     - changes:
-      - "/back-end/**/*"
+      - back-end/**/*
 
 # test:
 #   stage: test
@@ -35,4 +35,4 @@ deploy:
     - ssh -i group8-key.pem $EC2_USER@$EC2_IP_ADDRESS 'nohup java -jar ~/tu-aplicacion.jar &'
   rules:
     - changes:
-        - "/back-end/**/*"
+        - back-end/**/*
