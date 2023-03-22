@@ -9,20 +9,22 @@ const Recomendaciones = ({
   categoriaSeleccionada,
   ciudadSeleccionada,
   dates,
+  isLoading,
+  onLoading,
 }) => {
   const [productosRecomendados, setProductosRecomendados] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
+      onLoading(true);
       try {
         const data = await getProductosRecomendados(categoriaSeleccionada, ciudadSeleccionada, dates);
         setProductosRecomendados(data);
-        setIsLoading(false);
+        onLoading(false);
       } catch (error) {
         console.log(error);
-        setIsLoading(false);
+        onLoading(false);
       }
     };
     fetchData();
