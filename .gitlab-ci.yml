@@ -14,7 +14,7 @@ build:
   artifacts:
     expire_in: 1 week
     paths:
-      - ./target/consoleapp.jar
+      - /target/consoleapp.jar
   rules:
     - changes:
       - back-end/**/*
@@ -34,7 +34,7 @@ deploy:
     - apk update && apk add openssh-client bash
     - mkdir -p ~/.ssh
     - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    # - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - touch ~/.ssh/config
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - ssh-keyscan -H $DEPLOY_SERVER_IP >> ~/.ssh/known_hosts
