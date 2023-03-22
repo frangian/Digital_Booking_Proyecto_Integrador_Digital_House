@@ -14,10 +14,10 @@ build:
     - cd target/
     - ls    
     - echo "Finished building app."
-  # artifacts:
-  #   expire_in: 1 week
-  #   paths:
-  #     - /target/consoleapp.jar
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - back-end/target/*.jar
   rules:
     - changes:
       - back-end/**/*
