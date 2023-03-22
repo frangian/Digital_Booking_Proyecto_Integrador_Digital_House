@@ -66,7 +66,7 @@ const Reservas = () => {
             </div>
             <div className={`reserva-correcta-container ${confirmada ? "" : "oculto"}`}>
                 <div className="card-reserva-confirmada">
-                    <img src="/images/vector.png" alt="Tick reserva"/>
+                    <img src="/vector.png" alt="Tick reserva"/>
                     <div className="texto-reserva-confirmada">
                         <h3>¡Muchas gracias!</h3>
                         <h5>Su reserva se ha realizado con éxito</h5>

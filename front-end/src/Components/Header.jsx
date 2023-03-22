@@ -60,16 +60,15 @@ useEffect(() => {
             logged: true
           }
         })
-        console.log(1);
     })
   }
 }, [])
 
   return (
-    <header onClick={() => { console.log(location); }}>
+    <header>
       <div className='logo-slogan' onClick={() => mobileOpen ? "" : navigate("/")}>
         <img src="/logo.png" alt="Logo Digital Booking"/>
-        <h6 onMouseOver={() => console.log(state)}>Sentite como en tu hogar</h6>
+        <h6>Sentite como en tu hogar</h6>
       </div>
       <div className={`btns ${!state.logged ? "" : "oculto"}`}>
         {

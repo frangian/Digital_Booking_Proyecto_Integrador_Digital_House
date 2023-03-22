@@ -1368,42 +1368,41 @@ body {
 
 /* ------------------------------ Autocomplete ------------------------------ */
 
-/* :where(.css-dev-only-do-not-override-ph9edi).ant-select-single:not(
-    .ant-select-customize-input
-  )
-  .ant-select-selector {
-  height: 40px;
-  width: 100%;
+
+:is(.css-dev-only-do-not-override-ph9edi).ant-select-single:not(.ant-select-customize-input).ant-select-selector {
+  height: 40px !important;
+  width: 100% !important;
 }
 
-:where(.css-dev-only-do-not-override-ph9edi).ant-select-single
+:is(.css-dev-only-do-not-override-ph9edi).ant-select-single
   .ant-select-selector
   .ant-select-selection-search {
-  inset-inline-start: 0;
-  inset-inline-end: 0;
+  inset-inline-start: 0 !important;
+  inset-inline-end: 0 !important;
 }
 
 .ant-select.ant-select-auto-complete.css-dev-only-do-not-override-ph9edi.ant-select-single.ant-select-show-search {
-  width: 100%;
-  padding: 0;
+  width: 100% !important;
+  padding: 0 !important;
 }
 
-:where(.css-dev-only-do-not-override-ph9edi).ant-select-single:not(
-    .ant-select-customize-input
-  )
-  .ant-select-selector
-  .ant-select-selection-search-input {
-  height: 40px;
-  padding: 10px;
+:is(.css-dev-only-do-not-override-ph9edi).ant-select-single:not(.ant-select-customize-input).ant-select-selector.ant-select-selection-search-input {
+  height: 40px !important;
+  padding: 10px !important;
 }
 
 input#rc_select_1 {
-  height: 100%;
-  width: 100%;
-  padding: 10px;
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
-} */
+  height: 100% !important;
+  width: 100% !important;
+  padding: 10px !important;
+  font-family: "Roboto", sans-serif !important;
+  font-weight: 700 !important;
+}
+
+:is(.css-dev-only-do-not-override-ph9edi).ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+  padding: 0 !important;
+  height: 40px !important;
+}
 
 /* -------------------------- Calendario + llegada -------------------------- */
 

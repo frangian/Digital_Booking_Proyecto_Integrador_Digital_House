@@ -18,7 +18,6 @@ export const confirmarPassword = (password, repeat) => {
 }
 
 export const campoRequerido = (text) => {
-    console.log(text);
     if (text.length === 0) {
         return false;
     } else return true;

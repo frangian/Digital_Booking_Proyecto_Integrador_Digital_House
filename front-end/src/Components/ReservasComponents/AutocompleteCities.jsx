@@ -35,6 +35,7 @@ const AutocompleteCities = ({ ciudad, changeCiudad }) => {
             options={ciudades}
             onSearch={(text) => setCiudades(getPanelValue(text))}
             onChange={onChange}
+            className="autocomplete-cities"
             />
         </div>
     )
