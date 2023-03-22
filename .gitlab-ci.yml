@@ -12,7 +12,7 @@ variables:
 
 build:
   stage: build
-  image: maven:3-jdk-11
+  image: maven:3-jdk-19
   script:
     - cd back-end/
     - mvn clean install
