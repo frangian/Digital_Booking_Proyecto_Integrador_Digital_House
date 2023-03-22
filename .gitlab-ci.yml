@@ -1,21 +1,38 @@
-stages:          
+stages:
   - build
-  - test
+  # - test
   - deploy
 
-build:       
+variables:
+  AWS_ACCESS_KEY_ID: <tu_access_key>
+  AWS_SECRET_ACCESS_KEY: <tu_secret_access_key>
+  AWS_REGION: <tu_region>
+  EC2_IP_ADDRESS: 3.15.231.34
+  EC2_USER: ec2-user
+
+build:
   stage: build
+  image: maven:3-jdk-11
   script:
-    - echo "Compiling the code..."
+    - cd /back-end
+    - mvn clean install
+  rules:
+    - changes:
+      - backend/**/*
+  only:
+    - desarrollo
 
-test:  
-  stage: test    
-  script:
-    - echo "Running unit tests... "
+# test:
+#   stage: test
+#   image: openjdk:11-jre-slim
+#   script:
+#     - java -jar target/tu-aplicacion.jar --tests
 
-deploy-job:      
-  stage: deploy 
+deploy:
+  stage: deploy
+  image: ubuntu:latest
   script:
-    - echo "Deploying application..."
-    - echo "Application successfully deployed."
+    - apt-get update && apt-get install -y openssh-client
+    - scp -i group8-key.pem /back-end/target/tu-aplicacion.jar $EC2_USER@$EC2_IP_ADDRESS:/home/ec2-user
+    - ssh -i group8-key.pem $EC2_USER@$EC2_IP_ADDRESS 'nohup java -jar ~/tu-aplicacion.jar &'
 
