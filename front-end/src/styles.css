@@ -1368,7 +1368,7 @@ body {
 
 /* ------------------------------ Autocomplete ------------------------------ */
 
-:where(.css-dev-only-do-not-override-ph9edi).ant-select-single:not(
+/* :where(.css-dev-only-do-not-override-ph9edi).ant-select-single:not(
     .ant-select-customize-input
   )
   .ant-select-selector {
@@ -1403,7 +1403,7 @@ input#rc_select_1 {
   padding: 10px;
   font-family: "Roboto", sans-serif;
   font-weight: 700;
-}
+} */
 
 /* -------------------------- Calendario + llegada -------------------------- */
 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import { useParams, useNavigate, useLocation } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import PoliticasProducto from '../Components/PoliticasProducto';
 import ProductHeader from '../Components/ProductHeader';
 import ReservaForm from '../Components/ReservasComponents/ReservaForm';
@@ -66,7 +66,7 @@ const Reservas = () => {
             </div>
             <div className={`reserva-correcta-container ${confirmada ? "" : "oculto"}`}>
                 <div className="card-reserva-confirmada">
-                    <img src="/vector.png" alt="Tick reserva"/>
+                    <img src="/images/vector.png" alt="Tick reserva"/>
                     <div className="texto-reserva-confirmada">
                         <h3>¡Muchas gracias!</h3>
                         <h5>Su reserva se ha realizado con éxito</h5>
