@@ -3,24 +3,23 @@ stages:
   # - test
   - deploy
 
-variables:
-  AWS_ACCESS_KEY_ID: <tu_access_key>
-  AWS_SECRET_ACCESS_KEY: <tu_secret_access_key>
-  AWS_REGION: us-east-2
-  EC2_IP_ADDRESS: 3.15.231.34
-  EC2_USER: ubuntu
-  JAR: /root/.m2/repository/com/DH/proyectoIntegrador-E8/1.2.3/proyectoIntegrador-E8-1.2.3.jar
-  KEY: group8-keys.pem
-
 build:
   stage: build
   image: maven:latest
   script:
+    - echo "Building app..."
     - cd back-end/
     - mvn clean install
+    - echo "Finished building app."
+  artifacts:
+    - expire_in: 1 week
+    - paths:
+      - target/consoleapp.jar
   rules:
     - changes:
       - back-end/**/*
+  only:
+    - desarrollo
 
 # test:
 #   stage: test
@@ -31,20 +30,22 @@ build:
 deploy:
   stage: deploy
   image: alpine:latest
+  before_script:
+    - apk update && apk add openssh-client bash
+    - mkdir -p ~/.ssh
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - touch ~/.ssh/config
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - ssh-keyscan -H $DEPLOY_SERVER_IP >> ~/.ssh/known_hosts
   script:
-    - apk update
-    - ls
-    - chmod 400 group8-keys.pem
-    - scp -i group8-keys.pem back-end/target/proyectoIntegrador-E8-1.2.3.jar ubuntu@3.15.231.34:/home/ubuntu/
-    - ssh -i group8-keys.pem ubuntu@3.15.231.34 'nohup java -jar ~/proyectoIntegrador-E8-1.2.3.jar > avisos.log &'
-    # - apt-get update && apt-get install -y openssh-client
-    # - mkdir -p /root/.ssh
-    # - touch /root/.ssh/known_hosts
-    # - ls
-    # - chmod 400 group8-keys.pem
-    # - ssh-keyscan 3.15.231.34 >> ~/.ssh/known_hosts
-    # - scp -i group8-keys.pem back-end/target/proyectoIntegrador-E8-1.2.3.jar ubuntu@3.15.231.34:/home/ubuntu/
-    # - ssh -i group8-keys.pem ubuntu@3.15.231.34 'nohup java -jar ~/proyectoIntegrador-E8-1.2.3.jar > avisos.log &'
+    - echo "Deploying started..."
+    - ssh ubuntu@$DEPLOY_SERVER_IP "sudo systemctl stop consoleapp.service"
+    - scp ./target/consoleapp.jar ubuntu@$DEPLOY_SERVER_IP:~/console-app/
+    - ssh ubuntu@$DEPLOY_SERVER_IP "sudo systemctl start consoleapp.service"
+    - echo "Finished deploying the app."
+  only:
+    - desarrollo
   rules:
     - changes:
         - back-end/**/*
