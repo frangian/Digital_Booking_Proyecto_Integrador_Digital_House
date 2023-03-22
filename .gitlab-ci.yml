@@ -14,7 +14,7 @@ build:
   stage: build
   image: maven:3-jdk-11
   script:
-    - cd /back-end
+    - cd back-end/
     - mvn clean install
   rules:
     - changes:
