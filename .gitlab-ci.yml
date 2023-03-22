@@ -18,9 +18,7 @@ build:
     - mvn clean install
   rules:
     - changes:
-      - backend/**/*
-  only:
-    - desarrollo
+      - "/backend/**/*"
 
 # test:
 #   stage: test
@@ -35,4 +33,6 @@ deploy:
     - apt-get update && apt-get install -y openssh-client
     - scp -i group8-key.pem /back-end/target/tu-aplicacion.jar $EC2_USER@$EC2_IP_ADDRESS:/home/ec2-user
     - ssh -i group8-key.pem $EC2_USER@$EC2_IP_ADDRESS 'nohup java -jar ~/tu-aplicacion.jar &'
-
+  rules:
+    - changes:
+        - "/backend/**/*"
