@@ -11,10 +11,10 @@ build:
     - cd back-end/
     - mvn clean install
     - echo "Finished building app."
-  artifacts:
-    expire_in: 1 week
-    paths:
-      - /target/consoleapp.jar
+  # artifacts:
+  #   expire_in: 1 week
+  #   paths:
+  #     - /target/consoleapp.jar
   rules:
     - changes:
       - back-end/**/*
@@ -37,7 +37,7 @@ deploy:
     # - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - touch ~/.ssh/config
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-    - ssh-keyscan -H $DEPLOY_SERVER_IP >> ~/.ssh/known_hosts
+    - ssh-keyscan $DEPLOY_SERVER_IP >> ~/.ssh/known_hosts
   script:
     - echo "Deploying started..."
     - ssh ubuntu@$DEPLOY_SERVER_IP "sudo systemctl stop consoleapp.service"
