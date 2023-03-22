@@ -9,6 +9,8 @@ variables:
   AWS_REGION: us-east-2
   EC2_IP_ADDRESS: 3.15.231.34
   EC2_USER: ubuntu
+  JAR: /root/.m2/repository/com/DH/proyectoIntegrador-E8/1.2.3/proyectoIntegrador-E8-1.2.3.jar
+  KEY: group8-keys.pem
 
 build:
   stage: build
@@ -31,9 +33,11 @@ deploy:
   image: ubuntu:latest
   script:
     - apt-get update && apt-get install -y openssh-client
-    - chmod 400 group8-keys.pem
-    - scp -i "group8-keys.pem" /back-end/target/proyectoIntegrador-E8-1.2.3.jar $EC2_USER@$EC2_IP_ADDRESS:/home/ec2-user
-    - ssh -i "group8-keys.pem" ubuntu@3.15.231.34 'nohup java -jar ~/proyectoIntegrador-E8-1.2.3.jar &'
+    - ls
+    - chmod 400 $KEY
+    - nano $KEY
+    - scp -i $KEY $JAR $EC2_USER@$EC2_IP_ADDRESS:/home/ec2-user
+    - ssh -i $KEY ubuntu@3.15.231.34 'nohup java -jar ~/proyectoIntegrador-E8-1.2.3.jar &'
   rules:
     - changes:
         - back-end/**/*
