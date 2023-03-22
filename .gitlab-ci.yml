@@ -6,9 +6,9 @@ stages:
 variables:
   AWS_ACCESS_KEY_ID: <tu_access_key>
   AWS_SECRET_ACCESS_KEY: <tu_secret_access_key>
-  AWS_REGION: <tu_region>
+  AWS_REGION: us-east-2
   EC2_IP_ADDRESS: 3.15.231.34
-  EC2_USER: ec2-user
+  EC2_USER: ubuntu
 
 build:
   stage: build
@@ -31,8 +31,9 @@ deploy:
   image: ubuntu:latest
   script:
     - apt-get update && apt-get install -y openssh-client
-    - scp -i group8-key.pem /back-end/target/tu-aplicacion.jar $EC2_USER@$EC2_IP_ADDRESS:/home/ec2-user
-    - ssh -i group8-key.pem $EC2_USER@$EC2_IP_ADDRESS 'nohup java -jar ~/tu-aplicacion.jar &'
+    - chmod 400 group8-keys.pem
+    - scp -i "group8-keys.pem" /back-end/target/proyectoIntegrador-E8-1.2.3.jar $EC2_USER@$EC2_IP_ADDRESS:/home/ec2-user
+    - ssh -i "group8-keys.pem" ubuntu@3.15.231.34 'nohup java -jar ~/proyectoIntegrador-E8-1.2.3.jar &'
   rules:
     - changes:
         - back-end/**/*
