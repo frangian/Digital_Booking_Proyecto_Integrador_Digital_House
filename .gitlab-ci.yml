@@ -45,7 +45,7 @@ deploy:
     - chmod 400 group8-keys.pem
     - ssh -i group8-keys.pem ubuntu@3.15.231.34 "sudo systemctl stop consoleapp.service"
     - ls
-    - cd back-end/target/
+    - cd back-end/
     - ls
     - scp -i group8-keys.pem back-end/target/consoleapp.jar ubuntu@3.15.231.34:~/console-app/
     - ssh -i group8-keys.pem ubuntu@3.15.231.34 "sudo systemctl start consoleapp.service"
