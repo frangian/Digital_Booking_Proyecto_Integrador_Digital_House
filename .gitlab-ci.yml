@@ -36,7 +36,7 @@ deploy:
   before_script:
     - apt-get update && apt-get install -y openssh-client bash
     - mkdir -p ~/.ssh
-    # - eval $(ssh-agent -s)
+    - eval $(ssh-agent -s)
     # - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - echo $DEPLOY_SERVER_IP
     - echo $SSH_PRIVATE_KEY
