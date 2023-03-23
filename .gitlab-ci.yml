@@ -45,7 +45,7 @@ deploy:
     - ssh-keyscan 3.15.231.34 >> ~/.ssh/known_hosts
   script:
     - echo "Deploying started..."
-    - chmod 400 "$SSH_PRIVATE_KEY"
+    - chmod 400 $SSH_PRIVATE_KEY
     - ssh -i "$SSH_PRIVATE_KEY" ubuntu@3.15.231.34 "sudo systemctl stop consoleapp.service"
     - scp -i group8-keys.pem back-end/target/consoleapp.jar ubuntu@3.15.231.34:~/console-app/
     - ssh -i group8-keys.pem ubuntu@3.15.231.34 "sudo systemctl start consoleapp.service"
