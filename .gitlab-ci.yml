@@ -42,7 +42,7 @@ deploy:
     - echo $SSH_PRIVATE_KEY
     - touch ~/.ssh/config
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-    - ssh-keyscan 3.15.231.34 >> ~/.ssh/known_hosts
+    - ssh-keyscan $DEPLOY_SERVER_IP >> ~/.ssh/known_hosts
   script:
     - echo "Deploying started..."
     - chmod 400 $SSH_PRIVATE_KEY
