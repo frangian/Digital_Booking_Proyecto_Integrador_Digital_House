@@ -19,9 +19,10 @@ build:
     paths:
       - back-end/target/*.jar
   rules:
-    - changes:
-      - back-end/**/*
-      - desarrollo
+    # - if: '$CI_COMMIT_BRANCH == "desarrollo"'
+      changes:
+        - back-end/**/*
+
 
 # test:
 #   stage: test
@@ -36,21 +37,19 @@ deploy:
     - apt-get update && apt-get install -y openssh-client bash
     - mkdir -p ~/.ssh
     - eval $(ssh-agent -s)
-    # - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-    - echo $DEPLOY_SERVER_IP
-    - echo $SSH_PRIVATE_KEY
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - touch ~/.ssh/config
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - ssh-keyscan $DEPLOY_SERVER_IP >> ~/.ssh/known_hosts
   script:
     - echo "Deploying started..."
     - chmod 400 "$SSH_PRIVATE_KEY"
-    - ssh -i "$SSH_PRIVATE_KEY" ubuntu@"$DEPLOY_SERVER_IP" "sudo systemctl status consoleapp.service"
     # - ssh -i "$SSH_PRIVATE_KEY" ubuntu@"$DEPLOY_SERVER_IP" "sudo systemctl stop consoleapp.service"
-    # - scp -i group8-keys.pem back-end/target/consoleapp.jar ubuntu@3.15.231.34:~/console-app/
-    # - ssh -i group8-keys.pem ubuntu@3.15.231.34 "sudo systemctl start consoleapp.service"
+    # - scp -i "$SSH_PRIVATE_KEY" back-end/target/consoleapp.jar ubuntu@"$DEPLOY_SERVER_IP":~/console-app/
+    # - ssh -i "$SSH_PRIVATE_KEY" ubuntu@"$DEPLOY_SERVER_IP" "sudo systemctl start consoleapp.service"
+    - ssh -i "$SSH_PRIVATE_KEY" ubuntu@"$DEPLOY_SERVER_IP" "sudo systemctl status consoleapp.service"
     - echo "Finished deploying the app."
   rules:
-    - changes:
+    # - if: '$CI_COMMIT_BRANCH == "desarrollo"'
+      changes:
         - back-end/**/*
-        - desarrollo
