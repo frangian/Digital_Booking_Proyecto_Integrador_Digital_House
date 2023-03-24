@@ -41,6 +41,14 @@ public class UsuarioController {
             summary = "Agregar usuario por ID",
             description = "Este endpoint permite agregar un usuario por ID en a la BBDD"
     )
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            content = @Content(mediaType = "application/json",
+                    examples = @ExampleObject(value = "{" +
+                            "    \"nombre\": \"string\"," +
+                            "    \"apellido\": \"string\"," +
+                            "    \"email\": \"string\"," +
+                            "    \"password\": \"string\"" +
+                            "}"                    )            )    )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "El usuario se creo correctamente"),
             @ApiResponse(responseCode = "400", description = "Lamentablemente no ha podido registrarse. Inténtelo más tarde")})
@@ -76,12 +84,10 @@ public class UsuarioController {
     @Operation(summary = "Actualizar un usuario", description = "Este endpoint permite actualizar un usuario ya existente en la BBDD")
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
             content = @Content(mediaType = "application/json",
-                    examples = @ExampleObject(value = "" +
-                            "{\n" +
-                            "    \"id\": 0, \"titulo\": \"String\",\"descripcion_producto\": \"String\",\"descripcion_ubicacion\": \"String\",\n" +
-                            "    \"url_ubicacion\": \"String\", \"normas\": \"String\", \"seguridad\": \"String\", \"cancelacion\": \"String\",\n" +
-                            "    \"puntuacion\": 0, \"categoria\": { \"id\": 0 }, \"ciudad\": { \"id\": 0 }, \"caracteristicas\": [ { \"id\": 0 } ],\n" +
-                            "    \"imagenes\": [{\"id\": 0, \"titulo\": \"String\",\"url_imagen\": \"String\"}]}"
+                    examples = @ExampleObject(value = "{" +
+                            "    \"id\":0," +
+                            "    \"ciudad\": \"string\"" +
+                            "}"
                     )            )    )
 
     @ApiResponses(value = {
@@ -98,7 +104,6 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-
 
     @GetMapping
     @Operation(summary = "Listar todos los usuarios",
@@ -134,7 +139,7 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/email/{email}")
+    @GetMapping("/email/{emailId}")
     @Operation(
             summary = "Buscar un usuario por ID",
             description = "Este endpoint permite buscar un usuario por ID en a la BBDD"
@@ -143,9 +148,9 @@ public class UsuarioController {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "404", description = "El usuario no existe en la BBDD"),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta")})
-    public ResponseEntity<?> buscarUsuarioEmail (@PathVariable String email) {
+    public ResponseEntity<?> buscarUsuarioEmail (@PathVariable String emailId) {
         try {
-            Usuario usuarioBuscado = usuarioService.buscarUsuarioEmail(email);
+            Usuario usuarioBuscado = usuarioService.buscarUsuarioEmail(emailId);
             return ResponseEntity.ok(usuarioBuscado);
         } catch (ResourceNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

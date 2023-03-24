@@ -141,26 +141,26 @@ public class ProductoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-    @GetMapping("/categoria/{categoria}")
+    @GetMapping("/categoria/{categoriaId}")
     @Operation(summary = "Buscar los productos dentro de la categoria ID", description = "Este endpoint permite buscar los productos dentro de la categoria ID en la BBDD")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
-    public ResponseEntity<?> productoPorCategoria(@PathVariable Long categoria) {
+    public ResponseEntity<?> productoPorCategoria(@PathVariable Long categoriaId) {
         try {
-            return ResponseEntity.ok(productoService.productoPorCategoria(categoria));
+            return ResponseEntity.ok(productoService.productoPorCategoria(categoriaId));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-    @GetMapping("/ciudad/{ciudad}")
+    @GetMapping("/ciudad/{ciudadId}")
     @Operation(summary = "Buscar los productos dentro de la ciudad ID", description = "Este endpoint permite buscar los productos dentro de la ciudad ID en la BBDD")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
-    public ResponseEntity<?> productoPorCiudad(@PathVariable Long ciudad) {
+    public ResponseEntity<?> productoPorCiudad(@PathVariable Long ciudadId) {
         try {
-            return ResponseEntity.ok(productoService.productoPorCiudad(ciudad));
+            return ResponseEntity.ok(productoService.productoPorCiudad(ciudadId));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
