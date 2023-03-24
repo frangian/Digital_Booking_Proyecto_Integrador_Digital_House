@@ -83,7 +83,6 @@ export const deshabilitarSeleccionIntermedida = (selectedDates, disabledDates) =
     let bool = false;
     selectedDates.forEach(day => {
         if (disabledDates.includes(day.format("YYYY/M/D"))) {
-            console.log(day.format("YYYY/M/D"));
             bool = true;
         }
     })

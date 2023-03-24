@@ -81,7 +81,7 @@ const Producto = () => {
 
     const shareCard = () => {
         MySwal.fire({
-            title: <strong onClick={() => console.log(shareObj)}>Comparte este producto!</strong>,
+            title: <strong>Comparte este producto!</strong>,
             html: <div className='share-card'>
                 <FacebookShareButton url={shareObj.url} quote={shareObj.text}>
                     <FontAwesomeIcon icon={faFacebook} style={{ color: "#1877F2" }}/>

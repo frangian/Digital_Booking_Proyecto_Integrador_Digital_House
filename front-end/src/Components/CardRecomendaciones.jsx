@@ -10,6 +10,7 @@ import { ContextGlobal } from "./Utils/globalContext";
 import axios from "axios";
 import { setFavInStorage, removeFavInStorage } from "./Utils/localStorage";
 import Modal from "./Modal";
+import { API_URL } from './Utils/api'
 
 const CardRecomendaciones = ({
   id,
@@ -60,7 +61,7 @@ const CardRecomendaciones = ({
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/caracteristica/producto/${id}`)
+      .get(`${API_URL}/caracteristica/producto/${id}`)
       .then((response) => {
         setCharacteristics(response.data);
       })
@@ -110,7 +111,7 @@ const CardRecomendaciones = ({
             />
             {location}{" "}
             <a
-              href={`http://localhost:3000/product/${id}#mapa`}
+              href={`http://group8-bucket-front.s3-website.us-east-2.amazonaws.com/product/${id}#mapa`}
               className="enlace-mapa"
             >
               MOSTRAR EN EL MAPA
