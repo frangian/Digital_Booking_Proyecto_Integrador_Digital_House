@@ -1,4 +1,4 @@
-package com.example.proyectoIntegradorE8.Security;
+package com.example.proyectoIntegradorE8.Security.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

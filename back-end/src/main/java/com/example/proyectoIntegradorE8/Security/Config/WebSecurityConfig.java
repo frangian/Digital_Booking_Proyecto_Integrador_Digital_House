@@ -1,5 +1,7 @@
-package com.example.proyectoIntegradorE8.Security;
+package com.example.proyectoIntegradorE8.Security.Config;
 
+import com.example.proyectoIntegradorE8.Security.JWTAuthenticationFilter;
+import com.example.proyectoIntegradorE8.Security.JWTAuthorizationFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

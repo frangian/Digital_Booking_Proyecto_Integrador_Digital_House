@@ -14,10 +14,10 @@ build:
     - cd target/
     - ls    
     - echo "Finished building app."
-  # artifacts:
-  #   expire_in: 1 week
-  #   paths:
-  #     - /target/consoleapp.jar
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - back-end/target/*.jar
   rules:
     - changes:
       - back-end/**/*
@@ -47,9 +47,6 @@ deploy:
     - echo "Deploying started..."
     - chmod 400 group8-keys.pem
     - ssh -i group8-keys.pem ubuntu@3.15.231.34 "sudo systemctl stop consoleapp.service"
-    - ls
-    - cd back-end/
-    - ls
     - scp -i group8-keys.pem back-end/target/consoleapp.jar ubuntu@3.15.231.34:~/console-app/
     - ssh -i group8-keys.pem ubuntu@3.15.231.34 "sudo systemctl start consoleapp.service"
     - echo "Finished deploying the app."

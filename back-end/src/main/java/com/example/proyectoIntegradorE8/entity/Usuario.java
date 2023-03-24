@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 
 @Entity
@@ -14,7 +16,7 @@ import java.util.*;
 @AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "email")
 @Table(name = "usuario")
-public class Usuario  {
+public class Usuario  implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,7 +34,6 @@ public class Usuario  {
     private UsuarioRole usuarioRole;
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reserva> reservas = new ArrayList<>();
-
 
 //    public Usuario(Long id, String nombre, String apellido, String ciudad, String email, String password, UsuarioRole usuarioRole, List<Reserva> reservas) {
 //        this.id = id;
@@ -123,43 +124,49 @@ public class Usuario  {
 //        this.usuarioRole = usuarioRole;
 //    }
 
+    @Override
+    public String getUsername() {
+        return this.getEmail();
+    }
 
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(usuarioRole.name());
-//        return Collections.singletonList(grantedAuthority);
-//    }
-//
-//    //el método siempre devuelve true, lo que significa que la cuenta nunca expira.
-//    @Override
-//    public boolean isAccountNonExpired() {
-//        return true;
-//    }
-//
-//    // para que la cuenta se bloquee luego de determinado tiempo que este inactiva
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.emptyList(); //sirve por si hay roles
+    }
+
+    //el método siempre devuelve true, lo que significa que la cuenta nunca expira.
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+    // para que la cuenta se bloquee luego de determinado tiempo que este inactiva
 //    public void bloquearCuenta(int tiempoBloqueoMinutos) {
 //        Date ahora = new Date();
 //        long tiempoBloqueoMillis = tiempoBloqueoMinutos / 1000;
 //        lockedUntil = new Date(ahora.getTime() + tiempoBloqueoMillis);
 //    }
 //
-//        @Override
-//        public boolean isAccountNonLocked () {
+        @Override
+        public boolean isAccountNonLocked () {
 //            Date ahora = new Date();
 //            return lockedUntil == null || ahora.after(lockedUntil);
-//        }
-//
-//    //Indica si las credenciales (contraseña u otros datos de autenticación) de la cuenta de usuario han expirado o no.
-//    @Override
-//    public boolean isCredentialsNonExpired() {
-//        return true;
-//    }
-//
-//    //indica si la cuenta de usuario está habilitada o deshabilitada.
-//    @Override
-//    public boolean isEnabled() {
-//        return true;
-//    }
+            return true;
+        }
+    //Indica si las credenciales (contraseña u otros datos de autenticación) de la cuenta de usuario han expirado o no.
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+    //indica si la cuenta de usuario está habilitada o deshabilitada.
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 
 }
