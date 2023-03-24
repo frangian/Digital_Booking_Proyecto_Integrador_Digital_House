@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.Set;
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name = "producto")
 public class Producto {
@@ -52,8 +55,8 @@ public class Producto {
     @JsonBackReference
     private Set<Reserva> reservas = new HashSet<>();
 
-    public Producto() {
-    }
+//    public Producto() {
+//    }
 
     //constructores & getters & setters
 //    public Producto(Long id, String titulo, String descripcion_producto, String descripcion_ubicacion, String url_ubicacion, String normas, String seguridad, String cancelacion, Integer puntuacion, Categoria categoria, Ciudad ciudad) {

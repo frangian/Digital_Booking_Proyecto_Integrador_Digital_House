@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Table (name = "caracteristica")
 public class Caracteristica {
     @Id
@@ -21,8 +23,8 @@ public class Caracteristica {
     @JsonIgnore
     private List<Producto> productos = new ArrayList<>();
 
-    public Caracteristica() {
-    }
+//    public Caracteristica() {
+//    }
 
 //    public Caracteristica(Long id, String titulo) {
 //        this.id = id;
