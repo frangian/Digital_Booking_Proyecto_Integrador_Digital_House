@@ -39,7 +39,7 @@ public class CaracteristicaController {
                     mediaType = "application/json",
                     examples = @ExampleObject(value = "{ \"titulo\": \"String\" }")))
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Caracteristica.class))),
+            @ApiResponse(responseCode = "201", description = "OK", content = @Content(schema = @Schema(implementation = Caracteristica.class))),
             @ApiResponse(responseCode = "400", description = "Peticion incorrecta", content = @Content),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)})
     public ResponseEntity<?> guardarCaracteristica (@RequestBody Caracteristica caracteristica){
@@ -100,7 +100,7 @@ public class CaracteristicaController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar una caracteristica", description = "Este endpoint permite eliminar una caracteristica de la BBDD")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(example = "Se elimino la caracteristica con ID: \"+id+\" de la BBDD exitosamente"))),
+            @ApiResponse(responseCode = "204", description = "OK", content = @Content(schema = @Schema(example = "Se elimino la caracteristica con ID: \"+id+\" de la BBDD exitosamente"))),
             @ApiResponse(responseCode = "404", description = "La caracteristica no existe en la BBDD", content = @Content),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> eliminarCaracteristica (@PathVariable Long id) {

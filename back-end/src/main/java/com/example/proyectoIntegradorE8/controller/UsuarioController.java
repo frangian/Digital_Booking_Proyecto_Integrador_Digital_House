@@ -1,6 +1,5 @@
 package com.example.proyectoIntegradorE8.controller;
 
-import com.example.proyectoIntegradorE8.entity.Producto;
 import com.example.proyectoIntegradorE8.entity.Usuario;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.service.UsuarioService;
@@ -50,7 +49,7 @@ public class UsuarioController {
                             "    \"password\": \"string\"" +
                             "}"                    )            )    )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "El usuario se creo correctamente"),
+            @ApiResponse(responseCode = "201", description = "El usuario se creo correctamente"),
             @ApiResponse(responseCode = "400", description = "Lamentablemente no ha podido registrarse. Inténtelo más tarde")})
     public ResponseEntity<?> guardarUsuario (@RequestBody Usuario usuario) {
             try {
@@ -124,7 +123,7 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar usuario", description = "Este endpoint permite eliminar un usuario de la BBDD")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "204", description = "OK"),
             @ApiResponse(responseCode = "404", description = "El usuario no existe en la BBDD"),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta")})
     public ResponseEntity<?> eliminarUsuario (@PathVariable Long id) {

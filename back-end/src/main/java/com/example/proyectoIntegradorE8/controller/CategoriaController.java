@@ -36,7 +36,7 @@ public class CategoriaController {
                     mediaType = "application/json",
                     examples = @ExampleObject(value = "{ \"titulo\": \"String\", \"descripcion\": \"String\" }")))
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Categoria.class))),
+            @ApiResponse(responseCode = "201", description = "OK", content = @Content(schema = @Schema(implementation = Categoria.class))),
             @ApiResponse(responseCode = "400", description = "Peticion incorrecta", content = @Content),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)})
     public ResponseEntity<?> guardarCategoria (@RequestBody Categoria categoria){
@@ -101,7 +101,7 @@ public class CategoriaController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar una categoria", description = "Este endpoint permite eliminar una categoria de la BBDD")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(example = "Se elimino la categoria con ID: \"+id+\" de la BBDD exitosamente"))),
+            @ApiResponse(responseCode = "204", description = "OK", content = @Content(schema = @Schema(example = "Se elimino la categoria con ID: \"+id+\" de la BBDD exitosamente"))),
             @ApiResponse(responseCode = "404", description = "La categoria no existe en la BBDD", content = @Content),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> eliminarCategoria(@PathVariable Long id) {

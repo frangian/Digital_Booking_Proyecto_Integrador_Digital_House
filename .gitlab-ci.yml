@@ -1,6 +1,6 @@
 stages:
   - build
-  # - test
+  - automated-api-tests
   - deploy
 
 build:
@@ -20,11 +20,20 @@ build:
       changes:
         - back-end/**/*
 
-# test:
-#   stage: test
-#   image: openjdk:11-jre-slim
-#   script:
-#     - java -jar target/tu-aplicacion.jar --tests
+automated-api-tests:
+  stage: automated-api-tests
+  image: cimg/base:2021.04
+  before_script:
+    # Installing Postman CLI
+    - curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+  script:
+    # Login using your Postman API keys
+    - postman login --with-api-key $POSTMAN_API_KEY
+    - postman collection run "23352616-97f36139-a037-4e64-b813-0208a3cc418f" -e "23352616-58ccde2f-670f-400d-93c0-d4f1ec59f1c0"
+  rules:
+  - if: '$CI_COMMIT_BRANCH == "desarrollo"'
+    changes:
+      - back-end/**/*
 
 deploy:
   stage: deploy
