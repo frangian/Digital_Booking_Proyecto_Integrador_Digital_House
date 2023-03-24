@@ -20,6 +20,7 @@ const Reservas = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        window.scrollTo({top: 0})
         if(!localStorage.getItem("jwt")) {
             navigate("/")
         } else {
@@ -66,7 +67,7 @@ const Reservas = () => {
             </div>
             <div className={`reserva-correcta-container ${confirmada ? "" : "oculto"}`}>
                 <div className="card-reserva-confirmada">
-                    <img src="/vector.png" alt="Tick reserva"/>
+                    <img src="/Vector.png" alt="Tick reserva"/>
                     <div className="texto-reserva-confirmada">
                         <h3>¡Muchas gracias!</h3>
                         <h5>Su reserva se ha realizado con éxito</h5>

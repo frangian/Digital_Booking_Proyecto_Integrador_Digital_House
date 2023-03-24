@@ -1328,12 +1328,11 @@ body {
   margin-top: 20px;
 }
 
-.datos-reserva .datos-reserva-inputs div {
+.datos-reserva .datos-reserva-inputs .reserva-input-container {
   width: 45%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 3px;
 }
 
 .datos-reserva .datos-reserva-inputs .autocomplete-container {
@@ -1341,7 +1340,7 @@ body {
   width: 100%;
 }
 
-.datos-reserva .datos-reserva-inputs div input {
+.datos-reserva .datos-reserva-inputs .reserva-input-container input {
   height: 40px;
   border: 1px solid transparent;
   border-radius: 6px;
@@ -1368,8 +1367,57 @@ body {
 
 /* ------------------------------ Autocomplete ------------------------------ */
 
+.ant-select-selector {
+  height: 40px !important;
+}
 
-:is(.css-dev-only-do-not-override-ph9edi).ant-select-single:not(.ant-select-customize-input).ant-select-selector {
+span.ant-select-selection-search {
+  inset-inline-start: 0px !important;
+  inset-inline-end: 0px !important;
+}
+
+input[id^="rc_select"] {
+  height: 100% !important;
+  width: 100% !important;
+  padding: 10px !important;
+  font-family: "Roboto", sans-serif !important;
+  font-weight: 700 !important;
+}
+
+/* input#rc_select_1 {
+  height: 100% !important;
+  width: 100% !important;
+  padding: 10px !important;
+  font-family: "Roboto", sans-serif !important;
+  font-weight: 700 !important;
+} */
+
+/* .ant-select.ant-select-auto-complete.autocomplete-cities.css-dev-only-do-not-override-ph9edi.ant-select-single.ant-select-show-search {
+  width: 100% !important;
+  height: 40px !important;
+}
+
+.ant-select.ant-select-auto-complete.autocomplete-cities.css-dev-only-do-not-override-ph9edi.ant-select-single.ant-select-show-search .ant-select-selector {
+  padding: 10px !important;
+  height: 40px !important;
+  width: 100% !important;
+}
+
+
+
+input#rc_select_1 {
+  height: 100% !important;
+  width: 100% !important;
+  padding: 10px !important;
+  font-family: "Roboto", sans-serif !important;
+  font-weight: 700 !important;
+} */
+
+/* :is(.css-dev-only-do-not-override-ph9edi).ant-select-single:not(.ant-select-customize-input).ant-select-selector {
+  
+}
+
+.ant-select.ant-select-auto-complete.autocomplete-cities.css-ph9edi.ant-select-single.ant-select-show-search {
   height: 40px !important;
   width: 100% !important;
 }
@@ -1391,23 +1439,17 @@ body {
   padding: 10px !important;
 }
 
-input#rc_select_1 {
-  height: 100% !important;
-  width: 100% !important;
-  padding: 10px !important;
-  font-family: "Roboto", sans-serif !important;
-  font-weight: 700 !important;
-}
+
 
 :is(.css-dev-only-do-not-override-ph9edi).ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
   padding: 0 !important;
   height: 40px !important;
-}
+} */
 
 /* -------------------------- Calendario + llegada -------------------------- */
 
 .calendar-container-reserva {
-  height: 40vh;
+  height: 300px;
   margin-bottom: 100px;
 }
 
@@ -1450,7 +1492,9 @@ input#rc_select_1 {
 
 .card-reserva-container {
   width: 30%;
-  margin: 50px 0;
+  /* margin: 50px 0; */
+  display: flex;
+  align-items: center;
 }
 
 .card-reserva {
@@ -1460,6 +1504,8 @@ input#rc_select_1 {
   border-radius: 6px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  max-height: 950px;
 }
 
 .card-reserva h3 {
@@ -1468,7 +1514,7 @@ input#rc_select_1 {
 
 .card-reserva img {
   width: 100%;
-  height: 40vh;
+  height: 310px;
   margin-bottom: 20px;
 }
 
@@ -1674,7 +1720,7 @@ div.card-reserva-content {
 
   .custom-calendar.rmdp-wrapper {
     width: 93vw;
-    height: 40vh;
+    height: 300px;
     z-index: 0 !important;
     margin: 20px 0;
   }
@@ -1705,7 +1751,7 @@ div.card-reserva-content {
   .card-reserva img {
     border-radius: 6px;
     width: 100%;
-    height: 50vh;
+    height: 400px;
   }
 
   .card-reserva div {
@@ -1745,6 +1791,7 @@ div.card-reserva-content {
 }
 
 /* Para pantallas de tamaño menor a 768px (mobile) */
+
 @media (max-width: 768px) {
   .logo-slogan h6 {
     display: none;
@@ -1847,7 +1894,7 @@ div.card-reserva-content {
     flex-direction: column;
   }
 
-  .datos-reserva .datos-reserva-inputs div {
+  .datos-reserva .datos-reserva-inputs .reserva-input-container {
     width: 90%;
   }
 
@@ -1858,7 +1905,7 @@ div.card-reserva-content {
   .card-reserva img {
     border-radius: 0px;
     width: 100%;
-    height: 50vh;
+    height: 300px;
   }
 
   .card-reserva div {
