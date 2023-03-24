@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,7 +19,7 @@ public class Caracteristica {
     private String titulo;
     @ManyToMany(mappedBy = "caracteristicas")
     @JsonIgnore
-    private Set<Producto> productos = new HashSet<>();
+    private List<Producto> productos = new ArrayList<>();
 
     public Caracteristica() {
     }
