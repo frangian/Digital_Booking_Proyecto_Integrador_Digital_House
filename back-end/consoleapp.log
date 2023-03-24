@@ -434,3 +434,547 @@
 [2023-03-24 05:16:21] [ INFO ] [UsuarioService:43] buscando usuario...
 [2023-03-24 05:16:21] [ INFO ] [UsuarioService:46] Se encontró el usuario con id:5 en la BBDD exitosamente.
 [2023-03-24 05:16:21] [ WARN ] [UsuarioService:84] Se eliminó el usuario con ID: 5 de la BBDD
+[2023-03-24 13:36:30] [ INFO ] [CiudadController:48] Se inicia el proceso para guardar una ciudad en la BBDD
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:25] La informacion provista fue correcta, accediendo a CiudadRepository: Kulasmouth, Madagascar
+[2023-03-24 13:36:30] [ INFO ] [CiudadController:50] La ciudad fue guardada Kulasmouth   en la BBDD exitosamente
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:25] La informacion provista fue correcta, accediendo a CiudadRepository: Salta, Argen
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:45] Se inició una operación de listado de ciudades
+[2023-03-24 13:36:30] [ INFO ] [CiudadController:95] Mostrando todas las ciudades registradas en la BBDD
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:30] [ WARN ] [CiudadService:55] Se eliminó la ciudad con ID: 12 de la BBDD
+[2023-03-24 13:36:30] [ INFO ] [CategoriaController:44] Se inicia el proceso para guardar una categoria en la BBDD
+[2023-03-24 13:36:30] [ INFO ] [CategoriaService:25] La informacion provista fue correcta, accediendo a CategoriaRepository: Cabanas.
+[2023-03-24 13:36:30] [ INFO ] [CategoriaController:46] La categoria fue guardada Cabanas   en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:33] buscando categoria...
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:36] Se encontro la categoria con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:33] buscando categoria...
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:36] Se encontro la categoria con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:25] La informacion provista fue correcta, accediendo a CategoriaRepository: Cabañas.
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:45] Se inició una operación de listado de categorias
+[2023-03-24 13:36:31] [ INFO ] [CategoriaController:95] Mostrando todas las categorias registradas en la BBDD
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:33] buscando categoria...
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:36] Se encontro la categoria con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ WARN ] [CategoriaService:55] Se eliminó la categoria con ID: 12 de la BBDD
+[2023-03-24 13:36:31] [ INFO ] [CaracteristicaController:47] Se inicia el proceso para guardar una caracteristica en la BBDD
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:25] La informacion provista fue correcta, accediendo a CaracteristicaRepository: Desayuno Continental.
+[2023-03-24 13:36:31] [ INFO ] [CaracteristicaController:49] La caracteristica fue guardada Desayuno Continental en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:33] buscando caracteristica...
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:36] Se encontro la caracteristica con id: 11 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:33] buscando caracteristica...
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:36] Se encontro la caracteristica con id: 11 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:25] La informacion provista fue correcta, accediendo a CaracteristicaRepository: Desayuno Buffet.
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:44] Se inició una operación de listado de caracteristicas
+[2023-03-24 13:36:31] [ INFO ] [CaracteristicaController:94] Mostrando todas las caractersiticas registradas en la BBDD
+[2023-03-24 13:36:32] [ INFO ] [CaractersiticaService:33] buscando caracteristica...
+[2023-03-24 13:36:32] [ INFO ] [CaractersiticaService:36] Se encontro la caracteristica con id: 11 en la BBDD exitosamente
+[2023-03-24 13:36:32] [ WARN ] [CaractersiticaService:54] Se eliminó la caracteristica con ID: 11 de la BBDD
+[2023-03-24 13:36:32] [ INFO ] [ProductoController:63] Se inicia el proceso para guardar un producto en la BBDD
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:38] Ingresando al service de Producto
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:42] guardando imagenes: [Imagen(id=78, titulo=imagen ejemplo, url_imagen=http://ejemplo.com/imagen1.jpg, categoria=null, producto=null), Imagen(id=79, titulo=imagen ejemplo 2, url_imagen=http://ejemplo.com/imagen2.jpg, categoria=null, producto=null)]
+[2023-03-24 13:36:32] [ INFO ] [ProductoController:65] El producto fue guardado Producto de prueba   en la BBDD exitosamente
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:60] buscando producto...
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:63] Se encontró el producto con id: 17 en la BBDD exitosamente
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:79] Actualizando el producto con id: 17
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:94] Se inició una operación de listado de productos
+[2023-03-24 13:36:32] [ INFO ] [ProductoController:121] Mostrando todas los productos registrados en la BBDD
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:60] buscando producto...
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:63] Se encontró el producto con id: 17 en la BBDD exitosamente
+[2023-03-24 13:36:32] [ WARN ] [ProductoService:104] Se eliminó el producto con ID: 17 de la BBDD
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:94] Se inició una operación de listado de productos
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:112] Buscando todos los productos de la categoria con id: 1
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:121] Buscando todos los productos en la ciudad con id: 1
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:130] Buscando todos los productos por fechas
+[2023-03-24 13:36:33] [ INFO ] [ProductoController:208] Controller: buscando productos por ciudad id y fechas
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:139] Service: buscando productos por ciudad id y fechas
+[2023-03-24 13:36:33] [ INFO ] [ImagenController:46] Se inicia el proceso para guardar una imagen en la BBDD
+[2023-03-24 13:36:33] [ INFO ] [ImagenService:25] La informacion provista fue correcta, accediendo a ImagenRepository: null, imagen prueba
+[2023-03-24 13:36:33] [ INFO ] [ImagenController:48] La imagen imagen prueba fue guardada en la BBDD exitosamente
+[2023-03-24 13:36:33] [ INFO ] [ImagenService:33] buscando imagen...
+[2023-03-24 13:36:33] [ INFO ] [ImagenService:36] Se encontro la imagen con id: 80 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:33] buscando imagen...
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:36] Se encontro la imagen con id: 80 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:25] La informacion provista fue correcta, accediendo a ImagenRepository: 80, actualizacion imagen prueba
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:45] Se inició una operación de listado de imagenes
+[2023-03-24 13:36:34] [ INFO ] [ImagenController:93] Mostrando todas las imagenes registradas en la BBDD
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:33] buscando imagen...
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:36] Se encontro la imagen con id: 80 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ WARN ] [ImagenService:55] Se eliminó la imagen con ID: 80 de la BBDD
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:62] Busqueda de imagenes por producto id
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:67] Busqueda de imagenes por producto id
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:51] guardando reserva...
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:27] incia la capa de servicio, se accede a la BBDD
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:53] La reserva fue guardada null en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:35] buscando reserva...
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:38] Se encontro la reserva con id: 18 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:88] entra al controlador
+[2023-03-24 13:36:34] [ INFO ] [ProductoService:60] buscando producto...
+[2023-03-24 13:36:34] [ INFO ] [ProductoService:63] Se encontró el producto con id: 2 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:46] entra al service
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:47] busca la reserva en service
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:35] buscando reserva...
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:38] Se encontro la reserva con id: 18 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:54] entra al repositorio
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:91] exito, devuelve la reserva actualizada
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:59] Se inició una operación de listado de reservas
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:109] Mostrando todas las reservas registradas en la BBDD
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:77] Buscando todos las reservas para el producto con id: 1
+[2023-03-24 13:36:35] [ INFO ] [ReservaService:35] buscando reserva...
+[2023-03-24 13:36:35] [ INFO ] [ReservaService:38] Se encontro la reserva con id: 18 en la BBDD exitosamente
+[2023-03-24 13:36:35] [ WARN ] [ReservaService:69] Se eliminó la reserva con ID: 18 de la BBDD
+[2023-03-24 13:36:35] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:36:35] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:43] buscando usuario...
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:46] Se encontró el usuario con id:6 en la BBDD exitosamente.
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:56] Actualizando el usuario con id: 6
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:92] buscando usuario...
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:95] Se encontró el usuario con email:fran@admin.comen la BBDD exitosamente.
+[2023-03-24 13:36:36] [ INFO ] [UsuarioService:74] Se inició una operación de listado de usuarios
+[2023-03-24 13:36:36] [ INFO ] [UsuarioController:116] Mostrando todos los usuarios registradas en la BBDD
+[2023-03-24 13:36:36] [ INFO ] [UsuarioService:43] buscando usuario...
+[2023-03-24 13:36:36] [ INFO ] [UsuarioService:46] Se encontró el usuario con id:6 en la BBDD exitosamente.
+[2023-03-24 13:36:36] [ WARN ] [UsuarioService:84] Se eliminó el usuario con ID: 6 de la BBDD
+[2023-03-24 13:37:58] [ INFO ] [CategoriaService:33] buscando categoria...
+[2023-03-24 13:37:58] [ INFO ] [CategoriaService:39] La categoria con id: 9 no existe en la BBDD
+[2023-03-24 13:38:35] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:38:35] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 9 en la BBDD exitosamente
+[2023-03-24 13:38:35] [ WARN ] [CiudadService:55] Se eliminó la ciudad con ID: 9 de la BBDD
+[2023-03-24 13:38:45] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:38:45] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 7 en la BBDD exitosamente
+[2023-03-24 13:38:45] [ WARN ] [CiudadService:55] Se eliminó la ciudad con ID: 7 de la BBDD
+[2023-03-24 13:47:42] [ INFO ] [ProductoService:94] Se inició una operación de listado de productos
+[2023-03-24 13:47:43] [ INFO ] [ProductoController:121] Mostrando todas los productos registrados en la BBDD
+[2023-03-24 13:47:52] [ INFO ] [ProductoService:112] Buscando todos los productos de la categoria con id: 1
+[2023-03-24 13:52:12] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:52:13] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:52:13] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 13:52:30] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:52:30] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:52:30] [ ERROR] [UsuarioService:38] No se pudo guardar el usuario con id: null en la BBDD
+[2023-03-24 13:54:05] [ INFO ] [UsuarioService:74] Se inició una operación de listado de usuarios
+[2023-03-24 13:54:05] [ INFO ] [UsuarioController:116] Mostrando todos los usuarios registradas en la BBDD
+[2023-03-24 13:55:36] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:55:37] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:55:37] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 13:58:35] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:58:35] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:58:35] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 14:05:17] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 14:05:17] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 14:05:20] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 14:07:17] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 14:07:17] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 14:07:18] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 13:36:30] [ INFO ] [CiudadController:48] Se inicia el proceso para guardar una ciudad en la BBDD
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:25] La informacion provista fue correcta, accediendo a CiudadRepository: Kulasmouth, Madagascar
+[2023-03-24 13:36:30] [ INFO ] [CiudadController:50] La ciudad fue guardada Kulasmouth   en la BBDD exitosamente
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:25] La informacion provista fue correcta, accediendo a CiudadRepository: Salta, Argen
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:45] Se inició una operación de listado de ciudades
+[2023-03-24 13:36:30] [ INFO ] [CiudadController:95] Mostrando todas las ciudades registradas en la BBDD
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:30] [ WARN ] [CiudadService:55] Se eliminó la ciudad con ID: 12 de la BBDD
+[2023-03-24 13:36:30] [ INFO ] [CategoriaController:44] Se inicia el proceso para guardar una categoria en la BBDD
+[2023-03-24 13:36:30] [ INFO ] [CategoriaService:25] La informacion provista fue correcta, accediendo a CategoriaRepository: Cabanas.
+[2023-03-24 13:36:30] [ INFO ] [CategoriaController:46] La categoria fue guardada Cabanas   en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:33] buscando categoria...
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:36] Se encontro la categoria con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:33] buscando categoria...
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:36] Se encontro la categoria con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:25] La informacion provista fue correcta, accediendo a CategoriaRepository: Cabañas.
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:45] Se inició una operación de listado de categorias
+[2023-03-24 13:36:31] [ INFO ] [CategoriaController:95] Mostrando todas las categorias registradas en la BBDD
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:33] buscando categoria...
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:36] Se encontro la categoria con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ WARN ] [CategoriaService:55] Se eliminó la categoria con ID: 12 de la BBDD
+[2023-03-24 13:36:31] [ INFO ] [CaracteristicaController:47] Se inicia el proceso para guardar una caracteristica en la BBDD
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:25] La informacion provista fue correcta, accediendo a CaracteristicaRepository: Desayuno Continental.
+[2023-03-24 13:36:31] [ INFO ] [CaracteristicaController:49] La caracteristica fue guardada Desayuno Continental en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:33] buscando caracteristica...
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:36] Se encontro la caracteristica con id: 11 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:33] buscando caracteristica...
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:36] Se encontro la caracteristica con id: 11 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:25] La informacion provista fue correcta, accediendo a CaracteristicaRepository: Desayuno Buffet.
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:44] Se inició una operación de listado de caracteristicas
+[2023-03-24 13:36:31] [ INFO ] [CaracteristicaController:94] Mostrando todas las caractersiticas registradas en la BBDD
+[2023-03-24 13:36:32] [ INFO ] [CaractersiticaService:33] buscando caracteristica...
+[2023-03-24 13:36:32] [ INFO ] [CaractersiticaService:36] Se encontro la caracteristica con id: 11 en la BBDD exitosamente
+[2023-03-24 13:36:32] [ WARN ] [CaractersiticaService:54] Se eliminó la caracteristica con ID: 11 de la BBDD
+[2023-03-24 13:36:32] [ INFO ] [ProductoController:63] Se inicia el proceso para guardar un producto en la BBDD
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:38] Ingresando al service de Producto
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:42] guardando imagenes: [Imagen(id=78, titulo=imagen ejemplo, url_imagen=http://ejemplo.com/imagen1.jpg, categoria=null, producto=null), Imagen(id=79, titulo=imagen ejemplo 2, url_imagen=http://ejemplo.com/imagen2.jpg, categoria=null, producto=null)]
+[2023-03-24 13:36:32] [ INFO ] [ProductoController:65] El producto fue guardado Producto de prueba   en la BBDD exitosamente
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:60] buscando producto...
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:63] Se encontró el producto con id: 17 en la BBDD exitosamente
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:79] Actualizando el producto con id: 17
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:94] Se inició una operación de listado de productos
+[2023-03-24 13:36:32] [ INFO ] [ProductoController:121] Mostrando todas los productos registrados en la BBDD
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:60] buscando producto...
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:63] Se encontró el producto con id: 17 en la BBDD exitosamente
+[2023-03-24 13:36:32] [ WARN ] [ProductoService:104] Se eliminó el producto con ID: 17 de la BBDD
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:94] Se inició una operación de listado de productos
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:112] Buscando todos los productos de la categoria con id: 1
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:121] Buscando todos los productos en la ciudad con id: 1
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:130] Buscando todos los productos por fechas
+[2023-03-24 13:36:33] [ INFO ] [ProductoController:208] Controller: buscando productos por ciudad id y fechas
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:139] Service: buscando productos por ciudad id y fechas
+[2023-03-24 13:36:33] [ INFO ] [ImagenController:46] Se inicia el proceso para guardar una imagen en la BBDD
+[2023-03-24 13:36:33] [ INFO ] [ImagenService:25] La informacion provista fue correcta, accediendo a ImagenRepository: null, imagen prueba
+[2023-03-24 13:36:33] [ INFO ] [ImagenController:48] La imagen imagen prueba fue guardada en la BBDD exitosamente
+[2023-03-24 13:36:33] [ INFO ] [ImagenService:33] buscando imagen...
+[2023-03-24 13:36:33] [ INFO ] [ImagenService:36] Se encontro la imagen con id: 80 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:33] buscando imagen...
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:36] Se encontro la imagen con id: 80 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:25] La informacion provista fue correcta, accediendo a ImagenRepository: 80, actualizacion imagen prueba
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:45] Se inició una operación de listado de imagenes
+[2023-03-24 13:36:34] [ INFO ] [ImagenController:93] Mostrando todas las imagenes registradas en la BBDD
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:33] buscando imagen...
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:36] Se encontro la imagen con id: 80 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ WARN ] [ImagenService:55] Se eliminó la imagen con ID: 80 de la BBDD
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:62] Busqueda de imagenes por producto id
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:67] Busqueda de imagenes por producto id
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:51] guardando reserva...
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:27] incia la capa de servicio, se accede a la BBDD
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:53] La reserva fue guardada null en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:35] buscando reserva...
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:38] Se encontro la reserva con id: 18 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:88] entra al controlador
+[2023-03-24 13:36:34] [ INFO ] [ProductoService:60] buscando producto...
+[2023-03-24 13:36:34] [ INFO ] [ProductoService:63] Se encontró el producto con id: 2 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:46] entra al service
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:47] busca la reserva en service
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:35] buscando reserva...
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:38] Se encontro la reserva con id: 18 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:54] entra al repositorio
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:91] exito, devuelve la reserva actualizada
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:59] Se inició una operación de listado de reservas
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:109] Mostrando todas las reservas registradas en la BBDD
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:77] Buscando todos las reservas para el producto con id: 1
+[2023-03-24 13:36:35] [ INFO ] [ReservaService:35] buscando reserva...
+[2023-03-24 13:36:35] [ INFO ] [ReservaService:38] Se encontro la reserva con id: 18 en la BBDD exitosamente
+[2023-03-24 13:36:35] [ WARN ] [ReservaService:69] Se eliminó la reserva con ID: 18 de la BBDD
+[2023-03-24 13:36:35] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:36:35] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:43] buscando usuario...
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:46] Se encontró el usuario con id:6 en la BBDD exitosamente.
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:56] Actualizando el usuario con id: 6
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:92] buscando usuario...
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:95] Se encontró el usuario con email:fran@admin.comen la BBDD exitosamente.
+[2023-03-24 13:36:36] [ INFO ] [UsuarioService:74] Se inició una operación de listado de usuarios
+[2023-03-24 13:36:36] [ INFO ] [UsuarioController:116] Mostrando todos los usuarios registradas en la BBDD
+[2023-03-24 13:36:36] [ INFO ] [UsuarioService:43] buscando usuario...
+[2023-03-24 13:36:36] [ INFO ] [UsuarioService:46] Se encontró el usuario con id:6 en la BBDD exitosamente.
+[2023-03-24 13:36:36] [ WARN ] [UsuarioService:84] Se eliminó el usuario con ID: 6 de la BBDD
+[2023-03-24 13:37:58] [ INFO ] [CategoriaService:33] buscando categoria...
+[2023-03-24 13:37:58] [ INFO ] [CategoriaService:39] La categoria con id: 9 no existe en la BBDD
+[2023-03-24 13:38:35] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:38:35] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 9 en la BBDD exitosamente
+[2023-03-24 13:38:35] [ WARN ] [CiudadService:55] Se eliminó la ciudad con ID: 9 de la BBDD
+[2023-03-24 13:38:45] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:38:45] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 7 en la BBDD exitosamente
+[2023-03-24 13:38:45] [ WARN ] [CiudadService:55] Se eliminó la ciudad con ID: 7 de la BBDD
+[2023-03-24 13:47:42] [ INFO ] [ProductoService:94] Se inició una operación de listado de productos
+[2023-03-24 13:47:43] [ INFO ] [ProductoController:121] Mostrando todas los productos registrados en la BBDD
+[2023-03-24 13:47:52] [ INFO ] [ProductoService:112] Buscando todos los productos de la categoria con id: 1
+[2023-03-24 13:52:12] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:52:13] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:52:13] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 13:52:30] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:52:30] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:52:30] [ ERROR] [UsuarioService:38] No se pudo guardar el usuario con id: null en la BBDD
+[2023-03-24 13:54:05] [ INFO ] [UsuarioService:74] Se inició una operación de listado de usuarios
+[2023-03-24 13:54:05] [ INFO ] [UsuarioController:116] Mostrando todos los usuarios registradas en la BBDD
+[2023-03-24 13:55:36] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:55:37] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:55:37] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 13:58:35] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:58:35] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:58:35] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 14:05:17] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 14:05:17] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 14:05:20] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 14:07:17] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 14:07:17] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 14:07:18] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 13:36:30] [ INFO ] [CiudadController:48] Se inicia el proceso para guardar una ciudad en la BBDD
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:25] La informacion provista fue correcta, accediendo a CiudadRepository: Kulasmouth, Madagascar
+[2023-03-24 13:36:30] [ INFO ] [CiudadController:50] La ciudad fue guardada Kulasmouth   en la BBDD exitosamente
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:25] La informacion provista fue correcta, accediendo a CiudadRepository: Salta, Argen
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:45] Se inició una operación de listado de ciudades
+[2023-03-24 13:36:30] [ INFO ] [CiudadController:95] Mostrando todas las ciudades registradas en la BBDD
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:30] [ WARN ] [CiudadService:55] Se eliminó la ciudad con ID: 12 de la BBDD
+[2023-03-24 13:36:30] [ INFO ] [CategoriaController:44] Se inicia el proceso para guardar una categoria en la BBDD
+[2023-03-24 13:36:30] [ INFO ] [CategoriaService:25] La informacion provista fue correcta, accediendo a CategoriaRepository: Cabanas.
+[2023-03-24 13:36:30] [ INFO ] [CategoriaController:46] La categoria fue guardada Cabanas   en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:33] buscando categoria...
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:36] Se encontro la categoria con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:33] buscando categoria...
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:36] Se encontro la categoria con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:25] La informacion provista fue correcta, accediendo a CategoriaRepository: Cabañas.
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:45] Se inició una operación de listado de categorias
+[2023-03-24 13:36:31] [ INFO ] [CategoriaController:95] Mostrando todas las categorias registradas en la BBDD
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:33] buscando categoria...
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:36] Se encontro la categoria con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ WARN ] [CategoriaService:55] Se eliminó la categoria con ID: 12 de la BBDD
+[2023-03-24 13:36:31] [ INFO ] [CaracteristicaController:47] Se inicia el proceso para guardar una caracteristica en la BBDD
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:25] La informacion provista fue correcta, accediendo a CaracteristicaRepository: Desayuno Continental.
+[2023-03-24 13:36:31] [ INFO ] [CaracteristicaController:49] La caracteristica fue guardada Desayuno Continental en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:33] buscando caracteristica...
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:36] Se encontro la caracteristica con id: 11 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:33] buscando caracteristica...
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:36] Se encontro la caracteristica con id: 11 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:25] La informacion provista fue correcta, accediendo a CaracteristicaRepository: Desayuno Buffet.
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:44] Se inició una operación de listado de caracteristicas
+[2023-03-24 13:36:31] [ INFO ] [CaracteristicaController:94] Mostrando todas las caractersiticas registradas en la BBDD
+[2023-03-24 13:36:32] [ INFO ] [CaractersiticaService:33] buscando caracteristica...
+[2023-03-24 13:36:32] [ INFO ] [CaractersiticaService:36] Se encontro la caracteristica con id: 11 en la BBDD exitosamente
+[2023-03-24 13:36:32] [ WARN ] [CaractersiticaService:54] Se eliminó la caracteristica con ID: 11 de la BBDD
+[2023-03-24 13:36:32] [ INFO ] [ProductoController:63] Se inicia el proceso para guardar un producto en la BBDD
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:38] Ingresando al service de Producto
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:42] guardando imagenes: [Imagen(id=78, titulo=imagen ejemplo, url_imagen=http://ejemplo.com/imagen1.jpg, categoria=null, producto=null), Imagen(id=79, titulo=imagen ejemplo 2, url_imagen=http://ejemplo.com/imagen2.jpg, categoria=null, producto=null)]
+[2023-03-24 13:36:32] [ INFO ] [ProductoController:65] El producto fue guardado Producto de prueba   en la BBDD exitosamente
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:60] buscando producto...
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:63] Se encontró el producto con id: 17 en la BBDD exitosamente
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:79] Actualizando el producto con id: 17
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:94] Se inició una operación de listado de productos
+[2023-03-24 13:36:32] [ INFO ] [ProductoController:121] Mostrando todas los productos registrados en la BBDD
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:60] buscando producto...
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:63] Se encontró el producto con id: 17 en la BBDD exitosamente
+[2023-03-24 13:36:32] [ WARN ] [ProductoService:104] Se eliminó el producto con ID: 17 de la BBDD
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:94] Se inició una operación de listado de productos
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:112] Buscando todos los productos de la categoria con id: 1
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:121] Buscando todos los productos en la ciudad con id: 1
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:130] Buscando todos los productos por fechas
+[2023-03-24 13:36:33] [ INFO ] [ProductoController:208] Controller: buscando productos por ciudad id y fechas
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:139] Service: buscando productos por ciudad id y fechas
+[2023-03-24 13:36:33] [ INFO ] [ImagenController:46] Se inicia el proceso para guardar una imagen en la BBDD
+[2023-03-24 13:36:33] [ INFO ] [ImagenService:25] La informacion provista fue correcta, accediendo a ImagenRepository: null, imagen prueba
+[2023-03-24 13:36:33] [ INFO ] [ImagenController:48] La imagen imagen prueba fue guardada en la BBDD exitosamente
+[2023-03-24 13:36:33] [ INFO ] [ImagenService:33] buscando imagen...
+[2023-03-24 13:36:33] [ INFO ] [ImagenService:36] Se encontro la imagen con id: 80 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:33] buscando imagen...
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:36] Se encontro la imagen con id: 80 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:25] La informacion provista fue correcta, accediendo a ImagenRepository: 80, actualizacion imagen prueba
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:45] Se inició una operación de listado de imagenes
+[2023-03-24 13:36:34] [ INFO ] [ImagenController:93] Mostrando todas las imagenes registradas en la BBDD
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:33] buscando imagen...
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:36] Se encontro la imagen con id: 80 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ WARN ] [ImagenService:55] Se eliminó la imagen con ID: 80 de la BBDD
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:62] Busqueda de imagenes por producto id
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:67] Busqueda de imagenes por producto id
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:51] guardando reserva...
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:27] incia la capa de servicio, se accede a la BBDD
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:53] La reserva fue guardada null en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:35] buscando reserva...
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:38] Se encontro la reserva con id: 18 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:88] entra al controlador
+[2023-03-24 13:36:34] [ INFO ] [ProductoService:60] buscando producto...
+[2023-03-24 13:36:34] [ INFO ] [ProductoService:63] Se encontró el producto con id: 2 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:46] entra al service
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:47] busca la reserva en service
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:35] buscando reserva...
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:38] Se encontro la reserva con id: 18 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:54] entra al repositorio
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:91] exito, devuelve la reserva actualizada
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:59] Se inició una operación de listado de reservas
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:109] Mostrando todas las reservas registradas en la BBDD
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:77] Buscando todos las reservas para el producto con id: 1
+[2023-03-24 13:36:35] [ INFO ] [ReservaService:35] buscando reserva...
+[2023-03-24 13:36:35] [ INFO ] [ReservaService:38] Se encontro la reserva con id: 18 en la BBDD exitosamente
+[2023-03-24 13:36:35] [ WARN ] [ReservaService:69] Se eliminó la reserva con ID: 18 de la BBDD
+[2023-03-24 13:36:35] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:36:35] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:43] buscando usuario...
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:46] Se encontró el usuario con id:6 en la BBDD exitosamente.
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:56] Actualizando el usuario con id: 6
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:92] buscando usuario...
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:95] Se encontró el usuario con email:fran@admin.comen la BBDD exitosamente.
+[2023-03-24 13:36:36] [ INFO ] [UsuarioService:74] Se inició una operación de listado de usuarios
+[2023-03-24 13:36:36] [ INFO ] [UsuarioController:116] Mostrando todos los usuarios registradas en la BBDD
+[2023-03-24 13:36:36] [ INFO ] [UsuarioService:43] buscando usuario...
+[2023-03-24 13:36:36] [ INFO ] [UsuarioService:46] Se encontró el usuario con id:6 en la BBDD exitosamente.
+[2023-03-24 13:36:36] [ WARN ] [UsuarioService:84] Se eliminó el usuario con ID: 6 de la BBDD
+[2023-03-24 13:37:58] [ INFO ] [CategoriaService:33] buscando categoria...
+[2023-03-24 13:37:58] [ INFO ] [CategoriaService:39] La categoria con id: 9 no existe en la BBDD
+[2023-03-24 13:38:35] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:38:35] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 9 en la BBDD exitosamente
+[2023-03-24 13:38:35] [ WARN ] [CiudadService:55] Se eliminó la ciudad con ID: 9 de la BBDD
+[2023-03-24 13:38:45] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:38:45] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 7 en la BBDD exitosamente
+[2023-03-24 13:38:45] [ WARN ] [CiudadService:55] Se eliminó la ciudad con ID: 7 de la BBDD
+[2023-03-24 13:47:42] [ INFO ] [ProductoService:94] Se inició una operación de listado de productos
+[2023-03-24 13:47:43] [ INFO ] [ProductoController:121] Mostrando todas los productos registrados en la BBDD
+[2023-03-24 13:47:52] [ INFO ] [ProductoService:112] Buscando todos los productos de la categoria con id: 1
+[2023-03-24 13:52:12] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:52:13] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:52:13] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 13:52:30] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:52:30] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:52:30] [ ERROR] [UsuarioService:38] No se pudo guardar el usuario con id: null en la BBDD
+[2023-03-24 13:54:05] [ INFO ] [UsuarioService:74] Se inició una operación de listado de usuarios
+[2023-03-24 13:54:05] [ INFO ] [UsuarioController:116] Mostrando todos los usuarios registradas en la BBDD
+[2023-03-24 13:55:36] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:55:37] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:55:37] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 13:58:35] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:58:35] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:58:35] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 14:05:17] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 14:05:17] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 14:05:20] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 14:07:17] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 14:07:17] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 14:07:18] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 13:36:30] [ INFO ] [CiudadController:48] Se inicia el proceso para guardar una ciudad en la BBDD
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:25] La informacion provista fue correcta, accediendo a CiudadRepository: Kulasmouth, Madagascar
+[2023-03-24 13:36:30] [ INFO ] [CiudadController:50] La ciudad fue guardada Kulasmouth   en la BBDD exitosamente
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:25] La informacion provista fue correcta, accediendo a CiudadRepository: Salta, Argen
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:45] Se inició una operación de listado de ciudades
+[2023-03-24 13:36:30] [ INFO ] [CiudadController:95] Mostrando todas las ciudades registradas en la BBDD
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:36:30] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:30] [ WARN ] [CiudadService:55] Se eliminó la ciudad con ID: 12 de la BBDD
+[2023-03-24 13:36:30] [ INFO ] [CategoriaController:44] Se inicia el proceso para guardar una categoria en la BBDD
+[2023-03-24 13:36:30] [ INFO ] [CategoriaService:25] La informacion provista fue correcta, accediendo a CategoriaRepository: Cabanas.
+[2023-03-24 13:36:30] [ INFO ] [CategoriaController:46] La categoria fue guardada Cabanas   en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:33] buscando categoria...
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:36] Se encontro la categoria con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:33] buscando categoria...
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:36] Se encontro la categoria con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:25] La informacion provista fue correcta, accediendo a CategoriaRepository: Cabañas.
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:45] Se inició una operación de listado de categorias
+[2023-03-24 13:36:31] [ INFO ] [CategoriaController:95] Mostrando todas las categorias registradas en la BBDD
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:33] buscando categoria...
+[2023-03-24 13:36:31] [ INFO ] [CategoriaService:36] Se encontro la categoria con id: 12 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ WARN ] [CategoriaService:55] Se eliminó la categoria con ID: 12 de la BBDD
+[2023-03-24 13:36:31] [ INFO ] [CaracteristicaController:47] Se inicia el proceso para guardar una caracteristica en la BBDD
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:25] La informacion provista fue correcta, accediendo a CaracteristicaRepository: Desayuno Continental.
+[2023-03-24 13:36:31] [ INFO ] [CaracteristicaController:49] La caracteristica fue guardada Desayuno Continental en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:33] buscando caracteristica...
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:36] Se encontro la caracteristica con id: 11 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:33] buscando caracteristica...
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:36] Se encontro la caracteristica con id: 11 en la BBDD exitosamente
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:25] La informacion provista fue correcta, accediendo a CaracteristicaRepository: Desayuno Buffet.
+[2023-03-24 13:36:31] [ INFO ] [CaractersiticaService:44] Se inició una operación de listado de caracteristicas
+[2023-03-24 13:36:31] [ INFO ] [CaracteristicaController:94] Mostrando todas las caractersiticas registradas en la BBDD
+[2023-03-24 13:36:32] [ INFO ] [CaractersiticaService:33] buscando caracteristica...
+[2023-03-24 13:36:32] [ INFO ] [CaractersiticaService:36] Se encontro la caracteristica con id: 11 en la BBDD exitosamente
+[2023-03-24 13:36:32] [ WARN ] [CaractersiticaService:54] Se eliminó la caracteristica con ID: 11 de la BBDD
+[2023-03-24 13:36:32] [ INFO ] [ProductoController:63] Se inicia el proceso para guardar un producto en la BBDD
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:38] Ingresando al service de Producto
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:42] guardando imagenes: [Imagen(id=78, titulo=imagen ejemplo, url_imagen=http://ejemplo.com/imagen1.jpg, categoria=null, producto=null), Imagen(id=79, titulo=imagen ejemplo 2, url_imagen=http://ejemplo.com/imagen2.jpg, categoria=null, producto=null)]
+[2023-03-24 13:36:32] [ INFO ] [ProductoController:65] El producto fue guardado Producto de prueba   en la BBDD exitosamente
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:60] buscando producto...
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:63] Se encontró el producto con id: 17 en la BBDD exitosamente
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:79] Actualizando el producto con id: 17
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:94] Se inició una operación de listado de productos
+[2023-03-24 13:36:32] [ INFO ] [ProductoController:121] Mostrando todas los productos registrados en la BBDD
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:60] buscando producto...
+[2023-03-24 13:36:32] [ INFO ] [ProductoService:63] Se encontró el producto con id: 17 en la BBDD exitosamente
+[2023-03-24 13:36:32] [ WARN ] [ProductoService:104] Se eliminó el producto con ID: 17 de la BBDD
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:94] Se inició una operación de listado de productos
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:112] Buscando todos los productos de la categoria con id: 1
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:121] Buscando todos los productos en la ciudad con id: 1
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:130] Buscando todos los productos por fechas
+[2023-03-24 13:36:33] [ INFO ] [ProductoController:208] Controller: buscando productos por ciudad id y fechas
+[2023-03-24 13:36:33] [ INFO ] [ProductoService:139] Service: buscando productos por ciudad id y fechas
+[2023-03-24 13:36:33] [ INFO ] [ImagenController:46] Se inicia el proceso para guardar una imagen en la BBDD
+[2023-03-24 13:36:33] [ INFO ] [ImagenService:25] La informacion provista fue correcta, accediendo a ImagenRepository: null, imagen prueba
+[2023-03-24 13:36:33] [ INFO ] [ImagenController:48] La imagen imagen prueba fue guardada en la BBDD exitosamente
+[2023-03-24 13:36:33] [ INFO ] [ImagenService:33] buscando imagen...
+[2023-03-24 13:36:33] [ INFO ] [ImagenService:36] Se encontro la imagen con id: 80 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:33] buscando imagen...
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:36] Se encontro la imagen con id: 80 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:25] La informacion provista fue correcta, accediendo a ImagenRepository: 80, actualizacion imagen prueba
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:45] Se inició una operación de listado de imagenes
+[2023-03-24 13:36:34] [ INFO ] [ImagenController:93] Mostrando todas las imagenes registradas en la BBDD
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:33] buscando imagen...
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:36] Se encontro la imagen con id: 80 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ WARN ] [ImagenService:55] Se eliminó la imagen con ID: 80 de la BBDD
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:62] Busqueda de imagenes por producto id
+[2023-03-24 13:36:34] [ INFO ] [ImagenService:67] Busqueda de imagenes por producto id
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:51] guardando reserva...
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:27] incia la capa de servicio, se accede a la BBDD
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:53] La reserva fue guardada null en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:35] buscando reserva...
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:38] Se encontro la reserva con id: 18 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:88] entra al controlador
+[2023-03-24 13:36:34] [ INFO ] [ProductoService:60] buscando producto...
+[2023-03-24 13:36:34] [ INFO ] [ProductoService:63] Se encontró el producto con id: 2 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:46] entra al service
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:47] busca la reserva en service
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:35] buscando reserva...
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:38] Se encontro la reserva con id: 18 en la BBDD exitosamente
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:54] entra al repositorio
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:91] exito, devuelve la reserva actualizada
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:59] Se inició una operación de listado de reservas
+[2023-03-24 13:36:34] [ INFO ] [ReservaController:109] Mostrando todas las reservas registradas en la BBDD
+[2023-03-24 13:36:34] [ INFO ] [ReservaService:77] Buscando todos las reservas para el producto con id: 1
+[2023-03-24 13:36:35] [ INFO ] [ReservaService:35] buscando reserva...
+[2023-03-24 13:36:35] [ INFO ] [ReservaService:38] Se encontro la reserva con id: 18 en la BBDD exitosamente
+[2023-03-24 13:36:35] [ WARN ] [ReservaService:69] Se eliminó la reserva con ID: 18 de la BBDD
+[2023-03-24 13:36:35] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:36:35] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:43] buscando usuario...
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:46] Se encontró el usuario con id:6 en la BBDD exitosamente.
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:56] Actualizando el usuario con id: 6
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:92] buscando usuario...
+[2023-03-24 13:36:35] [ INFO ] [UsuarioService:95] Se encontró el usuario con email:fran@admin.comen la BBDD exitosamente.
+[2023-03-24 13:36:36] [ INFO ] [UsuarioService:74] Se inició una operación de listado de usuarios
+[2023-03-24 13:36:36] [ INFO ] [UsuarioController:116] Mostrando todos los usuarios registradas en la BBDD
+[2023-03-24 13:36:36] [ INFO ] [UsuarioService:43] buscando usuario...
+[2023-03-24 13:36:36] [ INFO ] [UsuarioService:46] Se encontró el usuario con id:6 en la BBDD exitosamente.
+[2023-03-24 13:36:36] [ WARN ] [UsuarioService:84] Se eliminó el usuario con ID: 6 de la BBDD
+[2023-03-24 13:37:58] [ INFO ] [CategoriaService:33] buscando categoria...
+[2023-03-24 13:37:58] [ INFO ] [CategoriaService:39] La categoria con id: 9 no existe en la BBDD
+[2023-03-24 13:38:35] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:38:35] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 9 en la BBDD exitosamente
+[2023-03-24 13:38:35] [ WARN ] [CiudadService:55] Se eliminó la ciudad con ID: 9 de la BBDD
+[2023-03-24 13:38:45] [ INFO ] [CiudadService:33] buscando ciudad...
+[2023-03-24 13:38:45] [ INFO ] [CiudadService:36] Se encontro la ciudad con id: 7 en la BBDD exitosamente
+[2023-03-24 13:38:45] [ WARN ] [CiudadService:55] Se eliminó la ciudad con ID: 7 de la BBDD
+[2023-03-24 13:47:42] [ INFO ] [ProductoService:94] Se inició una operación de listado de productos
+[2023-03-24 13:47:43] [ INFO ] [ProductoController:121] Mostrando todas los productos registrados en la BBDD
+[2023-03-24 13:47:52] [ INFO ] [ProductoService:112] Buscando todos los productos de la categoria con id: 1
+[2023-03-24 13:52:12] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:52:13] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:52:13] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 13:52:30] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:52:30] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:52:30] [ ERROR] [UsuarioService:38] No se pudo guardar el usuario con id: null en la BBDD
+[2023-03-24 13:54:05] [ INFO ] [UsuarioService:74] Se inició una operación de listado de usuarios
+[2023-03-24 13:54:05] [ INFO ] [UsuarioController:116] Mostrando todos los usuarios registradas en la BBDD
+[2023-03-24 13:55:36] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:55:37] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:55:37] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 13:58:35] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 13:58:35] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 13:58:35] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 14:05:17] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 14:05:17] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 14:05:20] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
+[2023-03-24 14:07:17] [ INFO ] [UsuarioController:56] guardando usuario...
+[2023-03-24 14:07:17] [ INFO ] [UsuarioService:35] El usuario fue guradado con éxito
+[2023-03-24 14:07:18] [ INFO ] [UsuarioController:58] El usuario fue guardada en la BBDD exitosamente
