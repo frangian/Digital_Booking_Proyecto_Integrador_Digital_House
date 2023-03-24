@@ -10,7 +10,7 @@ const Llegada = ({ values, changeHour }) => {
 
   return (
     <div className='llegada-container'>
-      <h3 onClick={() => console.log(values.horaLlegada)}>Tu horario de llegada</h3>
+      <h3>Tu horario de llegada</h3>
       <div className="llegada-card-container">
         <div className="llegada-card-content">
           <h5>

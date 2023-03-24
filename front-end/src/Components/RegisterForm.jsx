@@ -76,7 +76,6 @@ const RegisterForm = () => {
             }
             axios.post(`${API_URL}/usuario/registro`, objRegister)
             .then(res => {
-                console.log(res);
                 setSendLoad(false);
                 dispatch({
                     type: "register",
@@ -99,7 +98,7 @@ const RegisterForm = () => {
 
     return (
         <div className='register-container'>
-            <h2 onClick={() => console.log(state.user)}>Crear cuenta</h2>
+            <h2>Crear cuenta</h2>
             <form id='register-form' onSubmit={(e) => handleRegisterSubmit(e)}>
                 <fieldset>
                     <div className={`nombre ${errorNombre ? "error" : ""}`}>
