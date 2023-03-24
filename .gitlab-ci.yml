@@ -39,12 +39,10 @@ deploy:
     - ssh-keyscan $DEPLOY_SERVER_IP >> ~/.ssh/known_hosts
   script:
     - echo "Deploying started..."
-    - cd back-end/target
-    - ls
     - chmod 400 "$SSH_PRIVATE_KEY"
-    # - ssh -i "$SSH_PRIVATE_KEY" ubuntu@"$DEPLOY_SERVER_IP" "sudo systemctl stop consoleapp.service"
-    # - scp -i "$SSH_PRIVATE_KEY" back-end/target/consoleapp.jar ubuntu@"$DEPLOY_SERVER_IP":~/console-app/
-    # - ssh -i "$SSH_PRIVATE_KEY" ubuntu@"$DEPLOY_SERVER_IP" "sudo systemctl start consoleapp.service"
+    - ssh -i "$SSH_PRIVATE_KEY" ubuntu@"$DEPLOY_SERVER_IP" "sudo systemctl stop consoleapp.service"
+    - scp -i "$SSH_PRIVATE_KEY" back-end/target/consoleapp.jar ubuntu@"$DEPLOY_SERVER_IP":~/console-app/
+    - ssh -i "$SSH_PRIVATE_KEY" ubuntu@"$DEPLOY_SERVER_IP" "sudo systemctl start consoleapp.service"
     - ssh -i "$SSH_PRIVATE_KEY" ubuntu@"$DEPLOY_SERVER_IP" "sudo systemctl status consoleapp.service"
     - echo "Finished deploying the app."
   rules:
