@@ -19,8 +19,7 @@ build:
     paths:
       - back-end/target/*.jar
   rules:
-    # - if: '$CI_COMMIT_BRANCH == "desarrollo"'
-      changes:
+    - changes:
         - back-end/**/*
 
 
@@ -50,6 +49,5 @@ deploy:
     - ssh -i "$SSH_PRIVATE_KEY" ubuntu@"$DEPLOY_SERVER_IP" "sudo systemctl status consoleapp.service"
     - echo "Finished deploying the app."
   rules:
-    # - if: '$CI_COMMIT_BRANCH == "desarrollo"'
-      changes:
+    - changes:
         - back-end/**/*
