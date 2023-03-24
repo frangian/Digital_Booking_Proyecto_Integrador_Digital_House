@@ -10,9 +10,6 @@ build:
     - echo "Building app..."
     - cd back-end/
     - mvn clean install
-    - ls
-    - cd target/
-    - ls    
     - echo "Finished building app."
   artifacts:
     expire_in: 1 hour
@@ -36,7 +33,7 @@ deploy:
     - apt-get update && apt-get install -y openssh-client bash
     - mkdir -p ~/.ssh
     - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - echo $SSH_PRIVATE_KEY | tr -d '\r' | ssh-add - > /dev/null
     - touch ~/.ssh/config
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - ssh-keyscan $DEPLOY_SERVER_IP >> ~/.ssh/known_hosts
