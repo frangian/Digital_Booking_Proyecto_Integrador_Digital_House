@@ -74,16 +74,34 @@ header {
 }
 
 .header-logged-user {
-  position: relative;
-  width: 80%;
   display: flex;
-  justify-content: end;
-  gap: 20px;
+  justify-content: flex-end;
   align-items: center;
-  margin-right: 20px;
+  width: 80%;
   font-family: "Roboto", sans-serif;
   font-weight: 700;
   color: var(--main-light-gray);
+}
+
+.header-logged-user .header-extra-functions {
+  display: flex;
+  margin-right: 20px;
+  gap: 20px;
+  font-weight: 700;
+  font-size: 1.1rem
+}
+
+.header-logged-user .extra-function {
+  background-color: transparent;
+}
+
+.header-logged-user .avatar-container {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 0 20px;
+  border-left: 2px solid var(--main-green);
 }
 
 .header-logged-user .avatar {
@@ -171,10 +189,14 @@ header {
 }
 
 .mid-menu {
-  height: 62vh;
+  height: 57vh;
+}
+
+.mid-menu div {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .mid-menu button {
@@ -187,6 +209,7 @@ header {
   font-weight: 600;
   text-align: end;
   background-color: var(--main-white);
+  padding: 20px 0;
 }
 
 .mid-menu button:nth-child(2) {
@@ -200,7 +223,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: end;
-  height: 62vh;
+  /* height: 62vh; */
 }
 
 .cerrar-sesion p {
@@ -1632,7 +1655,7 @@ div.card-reserva-content {
 /* -------------------------------------------------------------------------- */
 
 .oculto {
-  display: none;
+  display: none !important; 
 }
 
 .noselect {
@@ -1849,6 +1872,43 @@ div.card-reserva-content {
   }
 }
 
+@media (max-width: 560px) {
+
+  header {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 4px 5px rgba(0, 0, 0, 0.12),
+      0px 1px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .header-logged-user {
+    display: none;
+  }
+
+  .top-menu .menu-logged-user {
+    display: flex;
+  }
+
+  .top-menu .oculto {
+    display: none;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .btns {
+    display: none;
+  }
+
+  .logged-user {
+    display: none;
+  }
+
+  footer div {
+    display: none;
+  }
+
+}
+
 @media (max-width: 550px) {
   .custom-calendar.rmdp-wrapper {
     display: none;
@@ -1946,38 +2006,7 @@ div.card-reserva-content {
 }
 
 @media (max-width: 500px) {
-  header {
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 4px 5px rgba(0, 0, 0, 0.12),
-      0px 1px 10px rgba(0, 0, 0, 0.2);
-  }
-
-  .header-logged-user {
-    display: none;
-  }
-
-  .top-menu .menu-logged-user {
-    display: flex;
-  }
-
-  .top-menu .oculto {
-    display: none;
-  }
-
-  .menu-icon {
-    display: block;
-  }
-
-  .btns {
-    display: none;
-  }
-
-  .logged-user {
-    display: none;
-  }
-
-  footer div {
-    display: none;
-  }
+  
 
   #register-form {
     /* margin: 45px 0 70px; */
