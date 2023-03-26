@@ -43,7 +43,7 @@ public class ReservaController {
                     examples = @ExampleObject(value = "{ \"horaComienzo\": \"HH:mm:ss\", \"fechaInicial\": \"AAAA-MM-DD\", \"fechaFinal\": \"AAAA-MM-DD\", \"producto\": {\"id\": 0}, \"usuario\": {\"id\": 0}}"))
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Reserva.class))),
+            @ApiResponse(responseCode = "201", description = "OK", content = @Content(schema = @Schema(implementation = Reserva.class))),
             @ApiResponse(responseCode = "400", description = "Peticion incorrecta", content = @Content),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)})
     public ResponseEntity<?> guardarReserva (@RequestBody Reserva reserva){
@@ -115,7 +115,7 @@ public class ReservaController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar una ciudad", description = "Este endpoint permite eliminar una ciudad de la BBDD")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(example = "Se elimino la reserva con ID: \"+id+\" de la BBDD exitosamente"))),
+            @ApiResponse(responseCode = "204", description = "OK", content = @Content(schema = @Schema(example = "Se elimino la reserva con ID: \"+id+\" de la BBDD exitosamente"))),
             @ApiResponse(responseCode = "404", description = "La reserva no existe en la BBDD", content = @Content),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> eliminarReserva (@PathVariable Long id) {

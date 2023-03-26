@@ -9,11 +9,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -41,13 +39,17 @@ public class WebSecurityConfig {
                 .csrf().disable()
                 //inicia la configuración de autorización para las solicitudes.
                 .authorizeHttpRequests()
-                .requestMatchers("/producto/**").permitAll()
-                .requestMatchers("/caracteristica/**").permitAll()
-                .requestMatchers("/imagen/**").permitAll()
-                .requestMatchers("/categoria/**").permitAll()
-                .requestMatchers("/ciudad/**").permitAll()
-                .requestMatchers("/usuario/registro").permitAll()
-                .requestMatchers("/reserva/producto/**").permitAll()
+                .requestMatchers("/producto/**",
+                        "/caracteristica/**",
+                        "/imagen/**",
+                        "/categoria/**",
+                        "/ciudad/**",
+                        "/usuario/registro",
+                        "/reserva/producto/**",
+                        "/v3/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html")
+                .permitAll()
 //                //indica que cualquier solicitud debe ser autorizada.
                 .anyRequest()
 ////                // indica que la solicitud debe estar autenticada para ser autorizada.

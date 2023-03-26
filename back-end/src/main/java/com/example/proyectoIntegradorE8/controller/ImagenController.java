@@ -38,7 +38,7 @@ public class ImagenController {
             content = @Content(mediaType = "application/json",
                     examples = @ExampleObject(value = "{\"titulo\": \"String\",\"url_imagen\": \"String\",\"producto_id\": 0}")))
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Imagen.class))),
+            @ApiResponse(responseCode = "201", description = "OK", content = @Content(schema = @Schema(implementation = Imagen.class))),
             @ApiResponse(responseCode = "400", description = "Peticion incorrecta", content = @Content),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)})
     public ResponseEntity<?> guardarImagen (@RequestBody Imagen imagen) {
@@ -99,7 +99,7 @@ public class ImagenController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar una imagen", description = "Este endpoint permite eliminar una imagen de la BBDD")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(example = "Se elimino la imagen con ID: \"+id+\" de la BBDD exitosamente"))),
+            @ApiResponse(responseCode = "204", description = "OK", content = @Content(schema = @Schema(example = "Se elimino la imagen con ID: \"+id+\" de la BBDD exitosamente"))),
             @ApiResponse(responseCode = "404", description = "La imagen no existe en la BBDD", content = @Content),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> eliminarImagen (@PathVariable Long id) {

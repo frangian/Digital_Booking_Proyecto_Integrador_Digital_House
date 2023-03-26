@@ -1,6 +1,6 @@
 stages:
   - build
-  # - test
+  - automated-api-tests
   - deploy
 
 build:
@@ -10,25 +10,30 @@ build:
     - echo "Building app..."
     - cd back-end/
     - mvn clean install
-    - ls
-    - cd target/
-    - ls    
     - echo "Finished building app."
   artifacts:
     expire_in: 1 hour
     paths:
       - back-end/target/*.jar
   rules:
-    - changes:
-      - back-end/**/*
-  # only:
-  #   - desarrollo
+    - if: '$CI_COMMIT_BRANCH == "desarrollo"'
+      changes:
+        - back-end/**/*
 
-# test:
-#   stage: test
-#   image: openjdk:11-jre-slim
-#   script:
-#     - java -jar target/tu-aplicacion.jar --tests
+automated-api-tests:
+  stage: automated-api-tests
+  image: cimg/base:2021.04
+  before_script:
+    # Installing Postman CLI
+    - curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
+  script:
+    # Login using your Postman API keys
+    - postman login --with-api-key $POSTMAN_API_KEY
+    - postman collection run "23352616-97f36139-a037-4e64-b813-0208a3cc418f" -e "23352616-58ccde2f-670f-400d-93c0-d4f1ec59f1c0"
+  rules:
+  - if: '$CI_COMMIT_BRANCH == "desarrollo"'
+    changes:
+      - back-end/**/*
 
 deploy:
   stage: deploy
@@ -36,22 +41,20 @@ deploy:
   before_script:
     - apt-get update && apt-get install -y openssh-client bash
     - mkdir -p ~/.ssh
-    # - eval $(ssh-agent -s)
-    # - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-    # - echo $DEPLOY_SERVER_IP
-    # - echo $SSH_PRIVATE_KEY
+    - eval $(ssh-agent -s)
+    # - echo $SSH_PRIVATE_KEY | tr -d '\r' | ssh-add - > /dev/null
     - touch ~/.ssh/config
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-    - ssh-keyscan 3.15.231.34 >> ~/.ssh/known_hosts
+    - ssh-keyscan $DEPLOY_SERVER_IP >> ~/.ssh/known_hosts
   script:
     - echo "Deploying started..."
-    - chmod 400 group8-keys.pem
-    - ssh -i group8-keys.pem ubuntu@3.15.231.34 "sudo systemctl stop consoleapp.service"
-    - scp -i group8-keys.pem back-end/target/consoleapp.jar ubuntu@3.15.231.34:~/console-app/
-    - ssh -i group8-keys.pem ubuntu@3.15.231.34 "sudo systemctl start consoleapp.service"
+    - chmod 400 "$SSH_PRIVATE_KEY"
+    - ssh -i "$SSH_PRIVATE_KEY" ubuntu@"$DEPLOY_SERVER_IP" "sudo systemctl stop consoleapp.service"
+    - scp -i "$SSH_PRIVATE_KEY" back-end/target/consoleapp.jar ubuntu@"$DEPLOY_SERVER_IP":~/console-app/
+    - ssh -i "$SSH_PRIVATE_KEY" ubuntu@"$DEPLOY_SERVER_IP" "sudo systemctl start consoleapp.service"
+    - ssh -i "$SSH_PRIVATE_KEY" ubuntu@"$DEPLOY_SERVER_IP" "sudo systemctl status consoleapp.service"
     - echo "Finished deploying the app."
-  # only:
-  #   - desarrollo
   rules:
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "desarrollo"'
+      changes:
         - back-end/**/*
