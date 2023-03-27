@@ -8,6 +8,7 @@ export const initialState = {
   logged: false,
   map: true,
   location: "",
+  admin: true
 };
 
 export const ContextGlobal = createContext();

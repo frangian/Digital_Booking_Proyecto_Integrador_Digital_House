@@ -34,35 +34,52 @@ const Header = () => {
     }
   }
 
-useEffect(() => {
-
-  dispatch({
-    type: "register",
-    payload: {
-      ...state,
-      location: ""
+  const renderExtraFunctions = () => {
+    if (!state.admin) {
+      return (
+        <div className="header-extra-functions">
+          <button className="extra-function" onClick={() => navigate("/favoritos")}>Favoritos</button>
+          <button className="extra-function" onClick={() => navigate("/reservas")}>Mis reservas</button>
+        </div>
+      )
+    } else {
+      return (
+        <div className="header-extra-functions">
+          <button className="extra-function" onClick={() => navigate("/admin")}>Administración</button>
+        </div>
+      )
     }
-  })
-
-  let jwt = localStorage.getItem("jwt");
-  if (jwt) {
-    let partes = jwt.split('.');
-    let contenido = atob(partes[1]);
-    let datos = JSON.parse(contenido);
-    const headers = { 'Authorization': `Bearer ${jwt}` };
-    axios.get(`${API_URL}/usuario/email/${datos.sub}`, { headers })
-    .then(res => {
-        dispatch({
-          type: "register",
-          payload: {
-            ...state,
-            user: res.data,
-            logged: true
-          }
-        })
-    })
   }
-}, [])
+
+  useEffect(() => {
+
+    dispatch({
+      type: "register",
+      payload: {
+        ...state,
+        location: ""
+      }
+    })
+
+    let jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      let partes = jwt.split('.');
+      let contenido = atob(partes[1]);
+      let datos = JSON.parse(contenido);
+      const headers = { 'Authorization': `Bearer ${jwt}` };
+      axios.get(`${API_URL}/usuario/email/${datos.sub}`, { headers })
+      .then(res => {
+          dispatch({
+            type: "register",
+            payload: {
+              ...state,
+              user: res.data,
+              logged: true
+            }
+          })
+      })
+    }
+  }, [])
 
   return (
     <header>
@@ -90,20 +107,23 @@ useEffect(() => {
         }
       </div>
       <div className={`header-logged-user ${!state.logged ? "oculto" : ""}`} >
-        <div className='avatar'>
-          <p>{state.user.nombre[0]}{state.user.apellido[0]}</p>
+        {renderExtraFunctions()}
+        <div className="avatar-container">
+          <div className='avatar'>
+            <p>{state.user.nombre[0]}{state.user.apellido[0]}</p>
+          </div>
+          <div className="saludo">
+            <p>Hola,</p>
+            <p className='nombres'>{state.user.nombre} {state.user.apellido}</p>
+          </div>
+          <FontAwesomeIcon icon={faX} className="x-icon" onClick={() => cerrarSesion()}/>
         </div>
-        <div className="saludo">
-          <p>Hola,</p>
-          <p className='nombres'>{state.user.nombre} {state.user.apellido}</p>
-        </div>
-        <FontAwesomeIcon icon={faX} className="x-icon" onClick={() => cerrarSesion()}/>
       </div>
       <button className='icon-button' onClick={handleDrawerToggle} style={mobileOpen ? {display: "none"} : {display: "block"}}>
         <FontAwesomeIcon icon={faBars} className="menu-icon"/>
       </button>
       <div className="drawer" onClick={handleDrawerToggle} style={mobileOpen ? {display: "block"} : {display: "none"}}>
-        <Menu open={mobileOpen} openClose={handleDrawerToggle}/>
+        <Menu open={mobileOpen} openClose={handleDrawerToggle} renderFunctions={renderExtraFunctions}/>
       </div>
     </header>
   )

@@ -3,6 +3,9 @@ import Login from "../../Rutas/Login";
 import Register from "../../Rutas/Register";
 import Producto from "../../Rutas/Producto";
 import Reservas from "../../Rutas/Reservas"
+import ReservasUsuario from "../../Rutas/ReservasUsuario"
+import Admin from "../../Rutas/Admin"
+import Favoritos from "../../Rutas/Favoritos"
 import { faFacebook, faLinkedinIn, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
 
 
@@ -13,6 +16,9 @@ export const routes = [
     { id: 3, path: "/login", Element: Login, title: "Iniciar sesión" },
     { id: 4, path: "/product/:id", Element: Producto, title: "Product detail" },
     { id: 5, path: "/product/:id/reservas", Element: Reservas, title: "Reserva producto" },
+    { id: 6, path: "/reservas", Element: ReservasUsuario, title: "Reservas usuario" },
+    { id: 7, path: "/favoritos", Element: Favoritos, title: "Favoritos" },
+    { id: 8, path: "/admin", Element: Admin, title: "Admin" },
 ]
 
 export const socialNetworks = [

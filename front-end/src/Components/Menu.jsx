@@ -7,7 +7,7 @@ import { ContextGlobal } from './Utils/globalContext'
 import axios from 'axios'
 import { API_URL } from './Utils/api'
 
-const Menu = ({ open, openClose }) => {
+const Menu = ({ open, openClose, renderFunctions }) => {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -64,24 +64,29 @@ const Menu = ({ open, openClose }) => {
                     </div>
                 </div>
             </div>
-            <div className={`mid-menu ${state.logged ? "oculto" : ""}`}>
-            {
-            routes.map(({ id, path, title }) => {
-                if (id === 2 && id !== routes.length && location.pathname !== "/register") {
-                    return (
-                    <button onClick={() => navigate(path)} key={id}>
-                        {title}
-                    </button>
-                    )
-                } else if (id === 3 && location.pathname !== "/login") {
-                    return (
-                    <button onClick={() => navigate(path)} key={id}>
-                        {title}
-                    </button>
-                    )
-                }
-            })
-            }
+            <div className={`mid-menu`}>
+                <div className={`menu-extra-functions ${!state.logged ? "oculto" : ""}`}>
+                    {renderFunctions()}
+                </div>
+                <div className={`menu-login-register ${state.logged ? "oculto" : ""}`}>
+                    {
+                    routes.map(({ id, path, title }) => {
+                        if (id === 2 && id !== routes.length && location.pathname !== "/register") {
+                            return (
+                            <button onClick={() => navigate(path)} key={id}>
+                                {title}
+                            </button>
+                            )
+                        } else if (id === 3 && location.pathname !== "/login") {
+                            return (
+                            <button onClick={() => navigate(path)} key={id}>
+                                {title}
+                            </button>
+                            )
+                        }
+                    })
+                    }
+                </div>
             </div>
             <div className={`cerrar-sesion ${state.logged ? "" : "oculto"}`}>
                 <p>¿Deseas <span onClick={() => cerrarSesion()}>cerrar sesión</span>?</p>
