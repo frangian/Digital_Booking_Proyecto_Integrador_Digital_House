@@ -1,6 +1,5 @@
 package com.example.proyectoIntegradorE8.security.Configuration;
 
-import com.example.proyectoIntegradorE8.security.JWT.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

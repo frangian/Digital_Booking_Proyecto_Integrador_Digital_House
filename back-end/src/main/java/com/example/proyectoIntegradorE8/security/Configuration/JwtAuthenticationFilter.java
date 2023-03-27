@@ -1,5 +1,6 @@
-package com.example.proyectoIntegradorE8.security.JWT;
+package com.example.proyectoIntegradorE8.security.Configuration;
 
+import com.example.proyectoIntegradorE8.security.JWT.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
