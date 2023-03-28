@@ -5,6 +5,7 @@ import com.example.proyectoIntegradorE8.exception.BadRequestException;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.repository.ImagenRepository;
 import org.apache.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.sql.SQLException;
@@ -20,13 +21,12 @@ public class ImagenService {
         this.imagenRepository = imagenRepository;
     }
 
-    public Imagen guardarImagen(Imagen imagen) throws SQLException {
+    public Imagen guardarImagen(Imagen imagen) throws ConstraintViolationException {
         try {
             logger.info("La informacion provista fue correcta, accediendo a ImagenRepository: "+imagen.getId()+", "+imagen.getTitulo());
             return imagenRepository.save(imagen);
-        } catch (Exception e){
-            logger.error("No se pudo guardar/actualizar la imagen "+imagen.getTitulo()+" en la BBDD. Exception: "+e.getMessage()+".");
-            throw new SQLException("No se pudo guardar/actualizar la imagen en la BBDD. No pueden quedar campos solicitados vacios.");
+        } catch (ConstraintViolationException e) {
+            throw e;
         }
     }
     public Imagen buscarImagen (Long id) throws ResourceNotFoundException {

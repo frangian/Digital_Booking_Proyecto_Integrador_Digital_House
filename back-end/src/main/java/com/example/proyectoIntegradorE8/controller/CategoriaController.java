@@ -1,6 +1,7 @@
 package com.example.proyectoIntegradorE8.controller;
 
 import com.example.proyectoIntegradorE8.entity.Categoria;
+import com.example.proyectoIntegradorE8.exception.GlobalException;
 import com.example.proyectoIntegradorE8.service.CategoriaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -9,26 +10,23 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
+import org.hibernate.exception.ConstraintViolationException;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.sql.SQLException;
 import java.util.List;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/categoria")
+@Log4j
 @Tag(name = "Categoria", description = "API metodos CRUD de las categorias")
 public class CategoriaController {
-    private static final Logger logger = Logger.getLogger(CategoriaController.class);
-    private CategoriaService categoriaService;
-    @Autowired
-    public CategoriaController(CategoriaService categoriaService) {
-        this.categoriaService = categoriaService;
-    }
+    private final CategoriaService categoriaService;
+
     @PostMapping
     @Operation(summary = "Agregar una categoria", description = "Este endpoint permite agregar una categoria a a la BBDD")
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
@@ -41,12 +39,12 @@ public class CategoriaController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)})
     public ResponseEntity<?> guardarCategoria (@RequestBody Categoria categoria){
         try {
-            logger.info("Se inicia el proceso para guardar una categoria en la BBDD");
+            log.info("guardarCategoria: accediendo al servicio de categoria...");
             Categoria categoriaGuardada = categoriaService.guardarCategoria(categoria);
-            logger.info("La categoria fue guardada "+categoria.getTitulo()+"   en la BBDD exitosamente");
+            log.info("La categoria fue guardada en la BBDD exitosamente");
             return ResponseEntity.ok(categoriaGuardada);
-        } catch (SQLException bre){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bre.getMessage());
+        } catch (ConstraintViolationException e) {
+            return new GlobalException().handleConstraintViolationException(e);
         }
     }
     @GetMapping("/{id}")
@@ -57,7 +55,9 @@ public class CategoriaController {
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> buscarCategoria(@PathVariable Long id) {
         try {
+            log.info("buscarCategoria: accediendo al servicio de categoria...");
             Categoria categoriaBuscada = categoriaService.buscarCategoria(id);
+            log.info("buscarCategoria: retornando la categoria encontrada...");
             return ResponseEntity.ok(categoriaBuscada);
         } catch (ResourceNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -75,13 +75,15 @@ public class CategoriaController {
            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
    public ResponseEntity<?> actualizarCategoria(@RequestBody Categoria categoria){
        try {
+           log.info("actualizarCategoria: accediendo al servicio de categoria...");
            categoriaService.buscarCategoria(categoria.getId());
            categoriaService.guardarCategoria(categoria);
+           log.info("actualizarProducto: categoria con id: "+categoria.getId()+" actualizada en la BBDD exitosamente");
            return ResponseEntity.ok(categoria);
        } catch (ResourceNotFoundException rnfe){
            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(rnfe.getMessage());
-       } catch (SQLException sqle){
-           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(sqle.getMessage());
+       } catch (ConstraintViolationException e) {
+           return new GlobalException().handleConstraintViolationException(e);
        }
    }
    @GetMapping
@@ -91,8 +93,9 @@ public class CategoriaController {
            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
    public ResponseEntity<?> listarCategorias() {
        try {
+           log.info("listarCategorias: accediendo al servicio de categoria...");
            List<Categoria> categoriaGuardadas = categoriaService.listarCategorias();
-           logger.info("Mostrando todas las categorias registradas en la BBDD");
+           log.info("listarCategorias: retornando la lista de categorias");
            return ResponseEntity.ok(categoriaGuardadas);
        } catch (Exception e){
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -106,8 +109,10 @@ public class CategoriaController {
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> eliminarCategoria(@PathVariable Long id) {
         try {
+            log.info("eliminarCategoria: accediendo al servicio de categoria...");
             categoriaService.buscarCategoria(id);
             categoriaService.eliminarCategoria(id);
+            log.info("eliminarCategoria: categoria con id: "+id+" eliminada de la BBDD exitosamente");
             return ResponseEntity.ok("Se elimino la categoria con ID: "+id+" de la BBDD exitosamente");
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

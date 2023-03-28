@@ -5,6 +5,7 @@ import com.example.proyectoIntegradorE8.exception.BadRequestException;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.repository.CaractersiticaRepository;
 import org.apache.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.sql.SQLException;
@@ -20,13 +21,12 @@ public class CaractersiticaService {
          this.caractersiticaRepository = caractersiticaRepository;
      }
 
-     public Caracteristica guardarCaracteristica (Caracteristica caracteristica) throws SQLException {
+     public Caracteristica guardarCaracteristica (Caracteristica caracteristica) throws ConstraintViolationException {
          try {
              logger.info("La informacion provista fue correcta, accediendo a CaracteristicaRepository: "+caracteristica.getTitulo()+".");
              return caractersiticaRepository.save(caracteristica);
-         } catch (Exception e){
-             logger.error("No se pudo guardar/actualizar la caracteristica "+caracteristica.getTitulo()+" en la BBDD. Exception: "+e.getMessage()+".");
-             throw new SQLException("No se pudo guardar/actualizar la caracteristica en la BBDD. No pueden quedar campos solicitados vacios.");
+         } catch (ConstraintViolationException e) {
+             throw e;
          }
      }
     public Caracteristica buscarCaracteristica (Long id) throws ResourceNotFoundException {

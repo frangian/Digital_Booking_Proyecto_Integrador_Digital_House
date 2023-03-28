@@ -5,6 +5,7 @@ import com.example.proyectoIntegradorE8.exception.BadRequestException;
 import com.example.proyectoIntegradorE8.repository.CategoriaRepository;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import org.apache.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.sql.SQLException;
@@ -20,13 +21,12 @@ public class CategoriaService {
         this.categoriaRepository = categoriaRepository;
     }
 
-    public Categoria guardarCategoria (Categoria categoria) throws SQLException {
+    public Categoria guardarCategoria (Categoria categoria) throws ConstraintViolationException {
         try {
             logger.info("La informacion provista fue correcta, accediendo a CategoriaRepository: "+categoria.getTitulo()+".");
             return categoriaRepository.save(categoria);
-        } catch (Exception e){
-            logger.error("No se pudo guardar/actualizar la categoria "+categoria.getTitulo()+" en la BBDD. Exception: "+e.getMessage()+".");
-            throw new SQLException("No se pudo guardar/actualizar la categoria en la BBDD. No pueden quedar campos solicitados vacios.");
+        } catch (ConstraintViolationException e) {
+            throw e;
         }
     }
     public Categoria buscarCategoria (Long id) throws ResourceNotFoundException {

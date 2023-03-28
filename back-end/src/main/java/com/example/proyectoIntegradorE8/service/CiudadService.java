@@ -5,6 +5,7 @@ import com.example.proyectoIntegradorE8.exception.BadRequestException;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.repository.CiudadRepository;
 import org.apache.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.sql.SQLException;
@@ -20,13 +21,12 @@ public class CiudadService {
         this.ciudadRepository = ciudadRepository;
     }
 
-    public Ciudad guardarCiudad (Ciudad ciudad) throws SQLException {
+    public Ciudad guardarCiudad (Ciudad ciudad) throws ConstraintViolationException {
         try {
             logger.info("La informacion provista fue correcta, accediendo a CiudadRepository: "+ciudad.getNombre()+", "+ciudad.getPais());
             return ciudadRepository.save(ciudad);
-        } catch (Exception e){
-            logger.error("No se pudo guardar/actualizar la ciudad "+ciudad.getNombre()+" en la BBDD. Exception: "+e.getMessage()+".");
-            throw new SQLException("No se pudo guardar/actualizar la ciudad en la BBDD. No pueden quedar campos solicitados vacios.");
+        } catch (ConstraintViolationException e) {
+            throw e;
         }
     }
     public Ciudad buscarCiudad (Long id) throws ResourceNotFoundException {

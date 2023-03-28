@@ -1,6 +1,7 @@
 package com.example.proyectoIntegradorE8.controller;
 
 import com.example.proyectoIntegradorE8.entity.Reserva;
+import com.example.proyectoIntegradorE8.exception.GlobalException;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.service.ProductoService;
 import com.example.proyectoIntegradorE8.service.ReservaService;
@@ -11,27 +12,23 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 import java.util.List;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/reserva")
 @Log4j
 @Tag(name = "Reserva", description = "API metodos CRUD de las reservas")
 public class ReservaController {
-    private ReservaService reservaService;
-    private ProductoService productoService;
-    @Autowired
-    public ReservaController(ReservaService reservaService, ProductoService productoService) {
-        this.reservaService = reservaService;
-        this.productoService = productoService;
-    }
+    private final ReservaService reservaService;
+    private final ProductoService productoService;
 
     @PostMapping
     @Operation(
@@ -48,12 +45,12 @@ public class ReservaController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)})
     public ResponseEntity<?> guardarReserva (@RequestBody Reserva reserva){
         try {
-            log.info("guardando reserva...");
+            log.info("guardarReserva: accediendo al servicio de reserva...");
             Reserva reservaGuardada = reservaService.guardarReserva(reserva);
-            log.info("La reserva fue guardada "+reserva.getCodigoReserva()+" en la BBDD exitosamente");
+            log.info("La reserva fue guardada en la BBDD exitosamente");
             return ResponseEntity.ok(reservaGuardada);
-        } catch (SQLException bre){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bre.getMessage());
+        } catch (ConstraintViolationException e) {
+            return new GlobalException().handleConstraintViolationException(e);
         }
     }
     @GetMapping("/{id}")
@@ -67,7 +64,9 @@ public class ReservaController {
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> buscarReserva (@PathVariable Long id) {
         try {
+            log.info("buscarReserva: accediendo al servicio de reserva...");
             Reserva reservaBuscada = reservaService.buscarReserva(id);
+            log.info("buscarReserva: retornando la reserva encontrada");
             return ResponseEntity.ok(reservaBuscada);
         } catch (ResourceNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -85,10 +84,10 @@ public class ReservaController {
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> actualizarReserva(@RequestBody Reserva reserva){
         try {
-            log.info("entra al controlador");
+            log.info("actualizarReserva: accediendo al servicio de reserva...");
             productoService.buscarProducto(reserva.getProducto().getId());
             reservaService.actualizarReserva(reserva);
-            log.info("exito, devuelve la reserva actualizada");
+            log.info("actualizarReserva: reserva con id: "+reserva.getId()+" actualizada en la BBDD exitosamente");
             return ResponseEntity.ok(reserva);
         } catch (ResourceNotFoundException rnfe){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(rnfe.getMessage());
@@ -103,10 +102,11 @@ public class ReservaController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Reserva.class))),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
-    public ResponseEntity<?> listarTodas(){
+    public ResponseEntity<?> listarReserva(){
         try {
+            log.info("listarReserva: accediendo al servicio de reserva...");
             List<Reserva> reservasGuardadas = reservaService.listarReserva();
-            log.info("Mostrando todas las reservas registradas en la BBDD");
+            log.info("listarReserva: retornando la lista de reservas");
             return ResponseEntity.ok(reservasGuardadas);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -120,8 +120,10 @@ public class ReservaController {
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> eliminarReserva (@PathVariable Long id) {
         try {
+            log.info("eliminarReserva: accediendo al servicio de reserva...");
             reservaService.buscarReserva(id);
             reservaService.eliminarReserva(id);
+            log.info("eliminarReserva: reserva con id: "+id+" eliminada de la BBDD exitosamente");
             return ResponseEntity.ok("Se elimino la reserva con ID: "+id+" de la BBDD exitosamente");
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -134,10 +136,12 @@ public class ReservaController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Reserva.class))),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
-
     public ResponseEntity<?> reservaPorProducto(@PathVariable Long productoId) {
         try {
-            return ResponseEntity.ok(reservaService.reservaPorProducto(productoId));
+            log.info("reservaPorProducto: accediendo al servicio de reserva");
+            List<Reserva> reservas = reservaService.reservaPorProducto(productoId);
+            log.info("reservaPorProducto: retornando las reservas encontradas");
+            return ResponseEntity.ok(reservas);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
