@@ -45,7 +45,7 @@ const Header = () => {
     } else {
       return (
         <div className="header-extra-functions">
-          <button className="extra-function" onClick={() => navigate("/admin")}>Administración</button>
+          <button className="extra-function" onClick={() => navigate("/administracion")}>Administración</button>
         </div>
       )
     }

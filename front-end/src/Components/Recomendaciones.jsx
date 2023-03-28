@@ -50,6 +50,7 @@ const Recomendaciones = ({
               location={product.descripcion_ubicacion}
               description={product.descripcion_producto}
               puntuacion={product.puntuacion}
+              reserva={false}
             />
           ))
         )}
