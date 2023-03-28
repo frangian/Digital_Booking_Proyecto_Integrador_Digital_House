@@ -12,12 +12,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -70,6 +73,8 @@ public class ReservaController {
             return ResponseEntity.ok(reservaBuscada);
         } catch (ResourceNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (MethodArgumentTypeMismatchException matme){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(matme.getMessage());
         }
     }
     @PutMapping
@@ -89,12 +94,12 @@ public class ReservaController {
             reservaService.actualizarReserva(reserva);
             log.info("actualizarReserva: reserva con id: "+reserva.getId()+" actualizada en la BBDD exitosamente");
             return ResponseEntity.ok(reserva);
-        } catch (ResourceNotFoundException rnfe){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(rnfe.getMessage());
-        } catch (SQLException sqle){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(sqle.getMessage());
+        } catch (EntityNotFoundException enfe){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(enfe.getMessage());
+        } catch (ConstraintViolationException e) {
+            return new GlobalException().handleConstraintViolationException(e);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
     @GetMapping

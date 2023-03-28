@@ -11,12 +11,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
 import java.util.List;
 
 @RestController
@@ -53,7 +56,7 @@ public class CaracteristicaController {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Caracteristica.class))),
             @ApiResponse(responseCode = "404", description = "La caracteristica no existe en la BBDD", content = @Content),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
-    public ResponseEntity<?> buscarCaracteristica (@PathVariable Long id) {
+    public ResponseEntity<?> buscarCaracteristica (@PathVariable Long id) throws Exception {
         try {
             log.info("buscarCaracteristica: accediendo al servicio de caracteristica...");
             Caracteristica caracteristicaBuscada = caractersiticaService.buscarCaracteristica(id);
@@ -61,6 +64,8 @@ public class CaracteristicaController {
             return ResponseEntity.ok(caracteristicaBuscada);
         } catch (ResourceNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (MethodArgumentTypeMismatchException matme){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(matme.getMessage());
         }
     }
     @PutMapping
@@ -73,13 +78,15 @@ public class CaracteristicaController {
         try {
             log.info("actualizarCaracteristica: accediendo al servicio de caracteristica...");
             caractersiticaService.buscarCaracteristica(caracteristica.getId());
-            caractersiticaService.guardarCaracteristica(caracteristica);
+            caractersiticaService.actualizarCaracteristica(caracteristica);
             log.info("actualizarCaracteristica: caracteristica con id: "+caracteristica.getId()+" actualizado en la BBDD exitosamente");
             return ResponseEntity.ok(caracteristica);
-        } catch (ResourceNotFoundException rnfe){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(rnfe.getMessage());
+        } catch (EntityNotFoundException enfe){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(enfe.getMessage());
         } catch (ConstraintViolationException e) {
             return new GlobalException().handleConstraintViolationException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
     @GetMapping
@@ -121,9 +128,9 @@ public class CaracteristicaController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Caracteristica.class))),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
-    public ResponseEntity<List<Caracteristica>> caracteristicaXProducto(@PathVariable Long producto){
+    public ResponseEntity<List<Caracteristica>> caracteristicaXProducto(@PathVariable Long productoId) throws Exception {
         log.info("caracteristicaXProducto: accediendo al servicio de caracteristica");
-        List<Caracteristica> caracteristicas = caractersiticaService.caracteristicasXProducto(producto);
+        List<Caracteristica> caracteristicas = caractersiticaService.caracteristicasXProducto(productoId);
         log.info("caracteristicaXProducto: retornando las caracteristicas encontradas");
         return ResponseEntity.ok(caracteristicas);
     }

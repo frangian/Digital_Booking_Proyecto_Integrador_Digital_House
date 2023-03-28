@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.hibernate.exception.ConstraintViolationException;
@@ -17,6 +18,8 @@ import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
 import java.util.List;
 
 @RestController
@@ -53,7 +56,7 @@ public class CategoriaController {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Categoria.class))),
             @ApiResponse(responseCode = "404", description = "La categoria no existe en la BBDD", content = @Content),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
-    public ResponseEntity<?> buscarCategoria(@PathVariable Long id) {
+    public ResponseEntity<?> buscarCategoria(@PathVariable Long id) throws Exception{
         try {
             log.info("buscarCategoria: accediendo al servicio de categoria...");
             Categoria categoriaBuscada = categoriaService.buscarCategoria(id);
@@ -61,6 +64,8 @@ public class CategoriaController {
             return ResponseEntity.ok(categoriaBuscada);
         } catch (ResourceNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (MethodArgumentTypeMismatchException matme){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(matme.getMessage());
         }
     }
    @PutMapping
@@ -77,13 +82,15 @@ public class CategoriaController {
        try {
            log.info("actualizarCategoria: accediendo al servicio de categoria...");
            categoriaService.buscarCategoria(categoria.getId());
-           categoriaService.guardarCategoria(categoria);
+           categoriaService.actualizarCategoria(categoria);
            log.info("actualizarProducto: categoria con id: "+categoria.getId()+" actualizada en la BBDD exitosamente");
            return ResponseEntity.ok(categoria);
-       } catch (ResourceNotFoundException rnfe){
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).body(rnfe.getMessage());
+       } catch (EntityNotFoundException enfe){
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body(enfe.getMessage());
        } catch (ConstraintViolationException e) {
            return new GlobalException().handleConstraintViolationException(e);
+       } catch (Exception e) {
+           throw new RuntimeException(e);
        }
    }
    @GetMapping

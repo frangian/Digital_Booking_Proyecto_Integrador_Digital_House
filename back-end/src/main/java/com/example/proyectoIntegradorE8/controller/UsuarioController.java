@@ -102,11 +102,12 @@ public class UsuarioController {
             return ResponseEntity.ok(usuarioExistente);
         } catch (EntityNotFoundException enfe){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(enfe.getMessage());
-        } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (ConstraintViolationException e) {
+            return new GlobalException().handleConstraintViolationException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
-
     @GetMapping
     @Operation(summary = "Listar todos los usuarios",
                description = "Este endpoint permite ver todas los usuarios registrados en la BBDD")

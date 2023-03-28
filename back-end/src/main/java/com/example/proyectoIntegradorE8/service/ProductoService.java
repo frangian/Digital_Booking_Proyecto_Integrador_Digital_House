@@ -20,18 +20,17 @@ import java.util.List;
 @Log4j
 @RequiredArgsConstructor
 public class ProductoService {
-    private static final Logger logger = Logger.getLogger(ProductoService.class);
     private final ProductoRepository productoRepository;
     private final ImagenRepository imagenRepository;
 
     public Producto guardarProducto(Producto producto) throws ConstraintViolationException {
         try {
             // Guardar primero el producto
-            logger.info("guardarProducto: accediendo al repositorio de producto...");
+            log.info("guardarProducto: accediendo al repositorio de producto...");
             Producto productoGuardado = productoRepository.save(producto);
             // Guardar las imagenes luego
             List<Imagen> imagenes = productoGuardado.getImagenes();
-            logger.info("guardando imagenes: " + productoGuardado.getImagenes());
+            log.info("guardando imagenes: " + productoGuardado.getImagenes());
             for (Imagen imagen : imagenes) {
                 imagen.setProducto(productoGuardado);
                 imagenRepository.save(imagen);
@@ -60,7 +59,7 @@ public class ProductoService {
     @Transactional
     public void actualizarProducto (Producto producto) throws Exception {
         try {
-            logger.info("actualizarProducto: accediendo al repositorio de producto...");
+            log.info("actualizarProducto: accediendo al repositorio de producto...");
             productoRepository.save(producto);
         } catch (ConstraintViolationException e) {
             throw e;
@@ -71,7 +70,7 @@ public class ProductoService {
             log.info("listarProductos: accediendo al repositorio de producto...");
             return productoRepository.findAll();
         } catch (Exception e) {
-            logger.error("Error al listar los productos: Exception "+e.getMessage());
+            log.error("Error al listar los productos: Exception "+e.getMessage());
             throw new BadRequestException("Ocurrio un error al listar todos los productos");
         }
     }
@@ -107,7 +106,7 @@ public class ProductoService {
             log.info("findByProductoPorFechas: accediendo al repositorio de productos");
             return productoRepository.findByProductoFechas(fechaInicial,fechaFinal);
         } catch (Exception e) {
-            logger.error("Error al buscar productos disponibles. Exception: "+e.getMessage());
+            log.error("Error al buscar productos disponibles. Exception: "+e.getMessage());
             throw new Exception("Error al buscar productos disponibles. Exception: "+e.getMessage());
         }
     }
