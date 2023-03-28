@@ -123,7 +123,7 @@ public class CaracteristicaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-    @GetMapping("/producto/{producto}")
+    @GetMapping("/producto/{productoId}")
     @Operation(summary = "Buscar las caracteristicas por producto ID", description = "Este endpoint permite buscar las caracteristicas por producto ID en la BBDD")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Caracteristica.class))),
