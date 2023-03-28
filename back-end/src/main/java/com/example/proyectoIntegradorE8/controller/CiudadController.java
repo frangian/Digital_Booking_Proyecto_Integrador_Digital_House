@@ -11,12 +11,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
 import java.util.List;
 
 @RestController
@@ -64,6 +67,8 @@ public class CiudadController {
             return ResponseEntity.ok(ciudadBuscada);
         } catch (ResourceNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (MethodArgumentTypeMismatchException matme){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(matme.getMessage());
         }
     }
     @PutMapping
@@ -79,10 +84,12 @@ public class CiudadController {
             ciudadService.guardarCiudad(ciudad);
             log.info("actualizarCiudad: ciudad con id: "+ciudad.getId()+" actualizado en la BBDD exitosamente");
             return ResponseEntity.ok(ciudad);
-        } catch (ResourceNotFoundException rnfe){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(rnfe.getMessage());
+        } catch (EntityNotFoundException enfe){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(enfe.getMessage());
         } catch (ConstraintViolationException e) {
             return new GlobalException().handleConstraintViolationException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
     @GetMapping
