@@ -29,28 +29,27 @@ import java.util.List;
 @Log4j
 @Tag(name = "Usuario", description = "API metodos CRUD de los usuarios")
 public class UsuarioController {
-
-    private final UsuarioService usuarioService;
+   private final UsuarioService usuarioService;
 
     @PostMapping("/registro")
     @Operation(
             summary = "Agregar usuario por ID",
             description = "Este endpoint permite agregar un usuario por ID en a la BBDD"
     )
-    @io.swagger.v3.oas.annotations.parameters.RequestBody(
-            content = @Content(mediaType = "application/json",
-                    examples = @ExampleObject(value = "{" +
-                            "    \"nombre\": \"string\"," +
-                            "    \"apellido\": \"string\"," +
-                            "    \"email\": \"string\"," +
-                            "    \"password\": \"string\"" +
-                            "}"                    )            )    )
+     @io.swagger.v3.oas.annotations.parameters.RequestBody(
+             content = @Content(mediaType = "application/json",
+                     examples = @ExampleObject(value = "{" +
+                           "    \"nombre\": \"string\"," +
+                           "    \"apellido\": \"string\"," +
+                           "    \"email\": \"string\"," +
+                           "    \"password\": \"string\"" +
+                           "}"                    )            )    )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "El usuario se creo correctamente"),
+           @ApiResponse(responseCode = "201", description = "El usuario se creo correctamente"),
             @ApiResponse(responseCode = "400", description = "Lamentablemente no ha podido registrarse. Inténtelo más tarde")})
     public ResponseEntity<?> guardarUsuario (@RequestBody Usuario usuario) {
             try {
-                log.info("guardarUsuario: accediendo al servicio de usuario...");
+                log.info("guardarUsuario: accediendo al servicio de usuario... ");
                 Usuario usuarioGuardado = usuarioService.guardarUsuario(usuario);
                 log.info("El usuario fue guardado en la BBDD exitosamente");
                 return ResponseEntity.ok(usuarioGuardado);
