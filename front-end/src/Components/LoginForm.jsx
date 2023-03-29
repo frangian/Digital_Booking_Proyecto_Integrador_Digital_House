@@ -56,6 +56,7 @@ const LoginForm = () => {
                     title: 'Oops',
                     text: 'Lamentablemente no ha podido iniciar sesión. Por favor intente más tarde',
                 })
+                setSendLoad(false);
             })
         } else {
             setError("Las credenciales ingresadas no coinciden");

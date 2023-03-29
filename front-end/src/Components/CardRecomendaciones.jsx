@@ -22,7 +22,8 @@ const CardRecomendaciones = ({
   puntuacion,
   checkIn,
   checkOut,
-  reserva
+  reserva,
+  llegada
 }) => {
   const navigate = useNavigate();
   const MAX_LENGTH = 100;
@@ -127,7 +128,10 @@ const CardRecomendaciones = ({
                 {elegirServicio(caracteristica.titulo, "#383b58")}
               </span>
             )) :
-            `Reservado desde el ${checkIn} hasta el ${checkOut}`
+            (<div style={{ marginTop: "20px" }}>
+              <p>Check in: {checkIn + " " + llegada}</p>
+              <p>Check out: {checkOut}</p>
+            </div>)
           }
         </div>
         <p>

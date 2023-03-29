@@ -69,17 +69,37 @@ const Menu = ({ open, openClose, renderFunctions }) => {
                     {renderFunctions()}
                 </div>
                 <div className={`menu-login-register ${state.logged ? "oculto" : ""}`}>
+                    <button 
+                    onClick={() => {
+                        navigate("/favoritos")
+                        openClose()
+                    }} 
+                    key={routes[6].id}>
+                        Favoritos
+                    </button>
                     {
                     routes.map(({ id, path, title }) => {
                         if (id === 2 && id !== routes.length && location.pathname !== "/register") {
                             return (
-                            <button onClick={() => navigate(path)} key={id}>
+                            <button
+                            onClick={() => {
+                                navigate(path);
+                                openClose()
+                            }} 
+                            key={id}
+                            >
                                 {title}
                             </button>
                             )
                         } else if (id === 3 && location.pathname !== "/login") {
                             return (
-                            <button onClick={() => navigate(path)} key={id}>
+                            <button
+                            onClick={() => {
+                                navigate(path);
+                                openClose()
+                            }} 
+                            key={id}
+                            >
                                 {title}
                             </button>
                             )
@@ -89,7 +109,7 @@ const Menu = ({ open, openClose, renderFunctions }) => {
                 </div>
             </div>
             <div className={`cerrar-sesion ${state.logged ? "" : "oculto"}`}>
-                <p>¿Deseas <span onClick={() => cerrarSesion()}>cerrar sesión</span>?</p>
+                <p onClick={() => console.log(faX)}>¿Deseas <span onClick={() => cerrarSesion()}>cerrar sesión</span>?</p>
             </div>
             <div className="bottom-menu">
                 {

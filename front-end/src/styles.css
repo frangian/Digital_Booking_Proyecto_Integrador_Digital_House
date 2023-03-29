@@ -51,8 +51,20 @@ header {
   width: 80%;
   display: flex;
   justify-content: end;
-  gap: 10px;
   align-items: center;
+}
+
+.not-logged-container {
+  display: flex;
+  gap: 10px;
+  border-left: 2px solid var(--main-green);
+  align-items: center;
+  padding-left: 20px;
+  border-left: 2px solid var(--main-green);
+}
+
+.btns .header-extra-functions {
+  margin-right: 10px;
 }
 
 .small-button {
@@ -83,7 +95,7 @@ header {
   color: var(--main-light-gray);
 }
 
-.header-logged-user .header-extra-functions {
+.header-extra-functions {
   display: flex;
   margin-right: 20px;
   gap: 20px;
@@ -91,8 +103,13 @@ header {
   font-size: 1.1rem
 }
 
-.header-logged-user .extra-function {
+.extra-function {
   background-color: transparent;
+}
+
+.menu-extra-functions .header-extra-functions {
+  margin: 0;
+  gap: 0;
 }
 
 .header-logged-user .avatar-container {
@@ -138,6 +155,7 @@ header {
 }
 
 .drawer {
+  display: none;
   position: absolute;
   top: 0;
   right: 0;
@@ -146,6 +164,10 @@ header {
   background-color: var(--main-white);
   text-align: end;
   box-shadow: -200px 0px 0px 0px rgba(0, 0, 0, 0.3);
+}
+
+.drawer.open {
+  display: none;
 }
 
 .top-menu {
@@ -213,6 +235,10 @@ header {
 }
 
 .mid-menu button:nth-child(2) {
+  border-top: 1px solid var(--main-dark-gray);
+}
+
+.mid-menu button:nth-child(3) {
   border-top: 1px solid var(--main-dark-gray);
 }
 
@@ -816,7 +842,7 @@ body {
 /*                               Pagina producto                              */
 /* -------------------------------------------------------------------------- */
 
-.product-page {
+.product-page, .reservas-usuario-page {
   margin: 12vh 0 10vh;
 }
 
@@ -1305,10 +1331,6 @@ body {
 /*                                Reservas Form                               */
 /* -------------------------------------------------------------------------- */
 
-/* .reservas-page {
-  margin: 12vh 0 10vh;
-} */
-
 .reservas-page-container {
   margin: 12vh 0 10vh;
 }
@@ -1735,6 +1757,11 @@ div.card-reserva-content {
 }
 
 @media (max-width: 900px) {
+
+  .logo-slogan h6 {
+    display: none;
+  }
+
   .fechas-container {
     flex-direction: column;
     justify-content: center;
@@ -1747,6 +1774,7 @@ div.card-reserva-content {
     z-index: 0 !important;
     margin: 20px 0;
   }
+
 
   .submit-container {
     width: 100%;
@@ -1809,18 +1837,15 @@ div.card-reserva-content {
   }
 
   .calendar-container-reserva {
-    margin-bottom: 120px;
+    margin-bottom: 80px;
   }
 }
 
 /* Para pantallas de tamaño menor a 768px (mobile) */
 
 @media (max-width: 768px) {
-  .logo-slogan h6 {
-    display: none;
-  }
-
-  .btns button {
+  
+  .btns .small-button {
     width: 164px;
   }
 
@@ -1907,9 +1932,14 @@ div.card-reserva-content {
     display: none;
   }
 
+  .drawer.open {
+    display: block;
+  }
 }
 
 @media (max-width: 550px) {
+
+
   .custom-calendar.rmdp-wrapper {
     display: none;
   }
@@ -1936,13 +1966,22 @@ div.card-reserva-content {
 
   .reserva-form-container {
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #reserva-form {
+    width: 100%;
+    align-items: center;
   }
 
   .datos-reserva,
   .llegada-container,
-  .card-reserva-container {
-    width: 93vw;
-    margin: 0 auto;
+  .card-reserva-container,
+  .calendar-container-reserva,
+  .custom-calendar.rmdp-wrapper {
+    width: 90vw;
+    /* margin: 0 auto; */
   }
 
   .llegada-card-container,
@@ -2000,13 +2039,15 @@ div.card-reserva-content {
     padding: 20px 0;
   }
 
-  .calendar-container-reserva {
-    margin-bottom: 120px;
-  }
 }
 
 @media (max-width: 500px) {
   
+
+  .reservas-usuario-page {
+    background-color: var(--main-dark-gray);
+    min-height: 100vh;
+  }
 
   #register-form {
     /* margin: 45px 0 70px; */
@@ -2050,11 +2091,10 @@ div.card-reserva-content {
 
   .recomendaciones-container {
     background-color: var(--main-dark-gray);
-    margin-bottom: 65px;
   }
 
   .info-container h3 {
-    color: var(--main-dark-white);
+    color: var(--main-dark-gray);
   }
 
   .card-grid-recomendaciones {

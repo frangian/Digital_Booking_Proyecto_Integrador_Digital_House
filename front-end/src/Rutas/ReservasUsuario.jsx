@@ -40,9 +40,8 @@ const ReservasUsuario = () => {
     }
   }, [])
 
-
   return (
-    <div className='product-page' style={{ marginBottom: "0" }}>
+    <div className='reservas-usuario-page' style={{ marginBottom: "0" }}>
       <ProductHeader tituloCategoria={`${state.user.nombre} ${state.user.apellido}`} tituloProducto={"Mis reservas"}/>
       <div className="recomendaciones-container" style={{ minHeight: "70vh" }}>
         <div className="card-grid-recomendaciones">
@@ -53,22 +52,23 @@ const ReservasUsuario = () => {
               <Skeleton height={250} count={4} />
             </>) :
             (
-              <p onClick={() => {console.log(state.user.reservas)}}>Hola</p>
-              // state.user?.reservas?.map(reserva => (
-              //   <CardRecomendaciones
-              //   key={reserva.id}
-              //   id={reserva.producto.id}
-              //   title={reserva.producto.titulo}
-              //   imagen={reserva.producto.imagenes[0].url_imagen}
-              //   category={reserva.producto.categoria}
-              //   location={reserva.producto.descripcion_ubicacion}
-              //   description={reserva.producto.descripcion_producto}
-              //   puntuacion={reserva.producto.puntuacion}
-              //   reserva={true}
-              //   checkIn={reserva.fechaInicial}
-              //   checkOut={reserva.fechaFinal}
-              //   />
-              // ))
+              // <p onClick={() => {console.log(state.user.reservas)}}>Hola</p>
+              state.user?.reservas?.map(reserva => (
+                <CardRecomendaciones
+                key={reserva.id}
+                id={reserva.producto.id}
+                title={reserva.producto.titulo}
+                imagen={reserva.producto.imagenes[0].url_imagen}
+                category={reserva.producto.categoria}
+                location={reserva.producto.descripcion_ubicacion}
+                description={reserva.producto.descripcion_producto}
+                puntuacion={reserva.producto.puntuacion}
+                reserva={true}
+                checkIn={reserva.fechaInicial}
+                checkOut={reserva.fechaFinal}
+                llegada={reserva.horaComienzo}
+                />
+              ))
             )
           }
         </div>

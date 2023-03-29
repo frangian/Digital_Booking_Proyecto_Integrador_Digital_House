@@ -65,7 +65,7 @@ const Producto = () => {
             setShareObj({
                 ...shareObj,
                 title: `Digital Booking ${res.data.titulo}`,
-                text: `Reserva ${res.data.titulo} en Digital Booking`,
+                text: `Reservá ${res.data.titulo} en Digital Booking`,
                 url: window.location.href
             })
         })
