@@ -53,6 +53,7 @@ const CardRecomendaciones = ({
       category,
       location,
       description,
+      puntuacion,
     });
     setFavorite(favoritedProduct);
     localStorage.setItem(`favorite-${id}`, JSON.stringify(true));

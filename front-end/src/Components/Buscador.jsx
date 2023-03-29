@@ -17,6 +17,12 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
   const [selectedDates, setSelectedDates] = useState(null);
   const [ciudades, setCiudades] = useState([]);
   const [ciudadId, setCiudadId] = useState(null);
+  // const useStyles = makeStyles((theme) => ({
+  //   select: {
+  //     width: "100%"
+  //   }
+  // }))
+  // const classes = useStyles();
 
   const handleChange = (event) => {
     setCiudad(event.target.value);
@@ -81,6 +87,7 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
           <FormControl fullWidth>
             <Select
               value={ciudad}
+              // className={classes.select}
               onChange={handleChange}
               displayEmpty
               sx={{
@@ -89,6 +96,7 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
                 },
                 height: "42px",
               }}
+              
             >
               <MenuItem value="" sx={{ display: "none" }}>
                 <FontAwesomeIcon icon={faMapMarkerAlt} className="icono" />{" "}

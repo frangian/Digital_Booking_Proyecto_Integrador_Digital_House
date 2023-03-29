@@ -42,7 +42,7 @@ const ReservasUsuario = () => {
 
   return (
     <div className='reservas-usuario-page' style={{ marginBottom: "0" }}>
-      <ProductHeader tituloCategoria={`${state.user.nombre} ${state.user.apellido}`} tituloProducto={"Mis reservas"}/>
+      <ProductHeader tituloCategoria={`Cantidad de reservas: ${state.user?.reservas.length}`} tituloProducto={"Mis reservas"}/>
       <div className="recomendaciones-container" style={{ minHeight: "70vh" }}>
         <div className="card-grid-recomendaciones">
           {
