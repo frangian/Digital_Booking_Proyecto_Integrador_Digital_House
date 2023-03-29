@@ -5,11 +5,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
@@ -26,39 +23,4 @@ public class Caracteristica {
     @JsonIgnore
     private List<Producto> productos = new ArrayList<>();
 
-//    public Caracteristica() {
-//    }
-//
-//    public Caracteristica(Long id, String titulo) {
-//        this.id = id;
-//        this.titulo = titulo;
-//    }
-//
-//    public Caracteristica(String titulo) {
-//        this.titulo = titulo;
-//    }
-//
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    public String getTitulo() {
-//        return titulo;
-//    }
-//
-//    public void setTitulo(String titulo) {
-//        this.titulo = titulo;
-//    }
-//
-//    public Set<Producto> getProductos() {
-//        return productos;
-//    }
-//
-//    public void setProductos(Set<Producto> productos) {
-//        this.productos = productos;
-//    }
 }

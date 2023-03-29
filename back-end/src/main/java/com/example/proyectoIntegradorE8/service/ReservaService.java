@@ -6,6 +6,7 @@ import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.repository.ReservaRepository;
 import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.sql.SQLException;
@@ -22,13 +23,12 @@ public class ReservaService {
         this.reservaRepository = reservaRepository;
     }
 
-    public Reserva guardarReserva (Reserva reserva) throws SQLException {
+    public Reserva guardarReserva (Reserva reserva) throws ConstraintViolationException {
         try {
             logger.info("incia la capa de servicio, se accede a la BBDD");
             return reservaRepository.save(reserva);
-        } catch (Exception e){
-            logger.error("No se pudo guardar/actualizar la reserva "+reserva.getId()+" en la BBDD. Exception: "+e.getMessage()+".");
-            throw new SQLException("No se pudo guardar/actualizar la reserva en la BBDD. No pueden quedar campos solicitados vacios.");
+        } catch (ConstraintViolationException e) {
+            throw e;
         }
     }
     public Reserva buscarReserva (Long id) throws ResourceNotFoundException {
