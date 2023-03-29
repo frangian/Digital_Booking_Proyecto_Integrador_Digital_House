@@ -442,6 +442,131 @@ input[type="password"] {
   font-size: 1.1rem;
 }
 
+/* ---------------------------------- Form Producto--------------------------------- */
+
+.admin-page {
+  margin:12vh 0 8vh;
+}
+
+.crear-producto-container{
+  height: 100%;
+  width: 100%;
+  background-color: var(--main-dark-white);
+  padding: 5vh 2vw;
+}
+
+.crear-producto-container h2 {
+  margin-left: 2vw;
+}
+
+#producto-form{
+  width: 100%;
+}
+
+.producto-form-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 3vh;
+  background-color: var(--main-white);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.info-producto-container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 2vh 2vw;
+  border: none;
+}
+
+.info-producto-container > label, .descripcion-section > label, .atributo-container label, .politicas-producto > label{
+  display: flex;
+  flex-direction: column;
+}
+
+.info-producto-container span, .descripcion-section span, .atributos span, .politicas-producto span {
+  padding:5px;
+  color: var(--main-dark-gray);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.info-producto-container  input, .info-producto-container select, .atributos input, .atributo-container select {
+  height: 50px;
+  border-color: var(--main-dark-white);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  font-size: 1rem;  
+}
+
+.descripcion-section{
+  padding:2vh 2vw;
+}
+
+.descripcion-section textarea, .politicas-producto textarea {
+  height:15vh;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.atributos{
+  background-color: var(--main-dark-white);
+  margin: 1vh 2vw;
+  padding: 3vh 2vw;
+  border: none;
+  border-radius: 10px;
+}
+
+.atributo-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.input1{
+  width: 80vw;
+}
+.input2{
+  width: 15vw;
+}
+
+.politicas-producto{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 2vw;
+  padding: 3vh 2vw ;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.politicas-producto p{
+  padding:5px;
+}
+
+.btn-crear-producto{
+  width:25%;
+  margin: 3vh;
+  border: 1px solid var(--main-green);
+  height: 50px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--main-white);
+  background-color: var(--main-green);
+}
+
+.icono-agregar{ 
+  font-size: 50px;
+}
+
+
 /* ------------------------------ Errores Input ----------------------------- */
 
 div.error input {
