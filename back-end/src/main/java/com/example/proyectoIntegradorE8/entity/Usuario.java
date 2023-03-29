@@ -36,6 +36,8 @@ public class Usuario  implements UserDetails  {
     private UsuarioRole usuarioRole;
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reserva> reservas = new ArrayList<>();
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Favorito> favoritos = new ArrayList<>();
 
     @Override
     public String getUsername() {

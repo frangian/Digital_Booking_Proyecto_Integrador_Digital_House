@@ -51,6 +51,8 @@ public class Producto {
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonBackReference
     private List<Reserva> reservas = new ArrayList<>();
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Favorito> favoritos = new ArrayList<>();
 
     public void agregarImagen(Imagen imagen) {
         imagenes.add(imagen);

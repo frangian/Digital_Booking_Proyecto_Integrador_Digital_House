@@ -144,7 +144,6 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-
     @GetMapping("/email/{email}")
     @Operation(
             summary = "Buscar un usuario por email",
