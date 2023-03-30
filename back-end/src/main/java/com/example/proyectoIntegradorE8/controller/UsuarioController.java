@@ -43,7 +43,8 @@ public class UsuarioController {
                            "    \"apellido\": \"string\"," +
                            "    \"email\": \"string\"," +
                            "    \"password\": \"string\"" +
-                           "}"                    )            )    )
+                           "}"
+                     )            )    )
     @ApiResponses(value = {
            @ApiResponse(responseCode = "201", description = "El usuario se creo correctamente"),
             @ApiResponse(responseCode = "400", description = "Lamentablemente no ha podido registrarse. Inténtelo más tarde")})
