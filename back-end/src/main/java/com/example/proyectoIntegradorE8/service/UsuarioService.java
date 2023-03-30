@@ -46,12 +46,16 @@ public class UsuarioService {
         }
     }
     @Transactional
-    public void actualizarUsuario (Usuario usuario) throws ConstraintViolationException {
+    public void actualizarUsuario (Usuario usuario) throws Exception {
         try {
             log.info("actualizarUsuario: accediendo al repositorio de usuario...");
-            usuario.setCiudad(usuario.getCiudad());
-            usuarioRepository.save(usuario);
+            Usuario usuarioExistente = buscarUsuario(usuario.getId());
+            usuarioExistente.setCiudad(usuario.getCiudad());
+            usuarioExistente.setValidado(usuario.isValidado());
+            usuarioRepository.save(usuarioExistente);
         } catch (ConstraintViolationException e) {
+            throw e;
+        } catch (Exception e) {
             throw e;
         }
     }

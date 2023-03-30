@@ -21,6 +21,8 @@ public class Producto {
     @Column
     private String titulo;
     @Column
+    private String direccion;
+    @Column
     private String descripcion_producto;
     @Column
     private String descripcion_ubicacion;
@@ -52,8 +54,8 @@ public class Producto {
     @JsonBackReference
     private List<Reserva> reservas = new ArrayList<>();
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Favorito> favoritos = new ArrayList<>();
-
     public void agregarImagen(Imagen imagen) {
         imagenes.add(imagen);
         imagen.setProducto(this);

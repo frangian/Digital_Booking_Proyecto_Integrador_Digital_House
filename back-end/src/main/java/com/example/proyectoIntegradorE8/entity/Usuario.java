@@ -32,6 +32,8 @@ public class Usuario  implements UserDetails  {
     private String email;
     @Column
     private String password;
+    @Column
+    private boolean validado = false;
     @Column(name = "usuario_role")
     private UsuarioRole usuarioRole;
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -143,3 +143,86 @@ alter table reserva add constraint FKnh6tntdsfc76618c8sxxrxn7t foreign key (prod
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "RESERVA" no encontrada
 Table "RESERVA" not found; SQL statement:
 alter table reserva add constraint FKiad9w96t12u3ms2ul93l97mel foreign key (usuario_id) references usuario (id) [42102-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table caracteristica (id bigint not null auto_increment, titulo varchar(255), primary key (id)) engine[*]=InnoDB"; se esperaba "identifier"
+Syntax error in SQL statement "create table caracteristica (id bigint not null auto_increment, titulo varchar(255), primary key (id)) engine[*]=InnoDB"; expected "identifier"; SQL statement:
+create table caracteristica (id bigint not null auto_increment, titulo varchar(255), primary key (id)) engine=InnoDB [42001-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table categoria (id bigint not null auto_increment, descripcion varchar(255), titulo varchar(255), primary key (id)) engine[*]=InnoDB"; se esperaba "identifier"
+Syntax error in SQL statement "create table categoria (id bigint not null auto_increment, descripcion varchar(255), titulo varchar(255), primary key (id)) engine[*]=InnoDB"; expected "identifier"; SQL statement:
+create table categoria (id bigint not null auto_increment, descripcion varchar(255), titulo varchar(255), primary key (id)) engine=InnoDB [42001-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table ciudad (id bigint not null auto_increment, nombre varchar(255), pais varchar(255), provincia varchar(255), primary key (id)) engine[*]=InnoDB"; se esperaba "identifier"
+Syntax error in SQL statement "create table ciudad (id bigint not null auto_increment, nombre varchar(255), pais varchar(255), provincia varchar(255), primary key (id)) engine[*]=InnoDB"; expected "identifier"; SQL statement:
+create table ciudad (id bigint not null auto_increment, nombre varchar(255), pais varchar(255), provincia varchar(255), primary key (id)) engine=InnoDB [42001-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table favorito (id bigint not null auto_increment, producto_id bigint, usuario_id bigint, primary key (id)) engine[*]=InnoDB"; se esperaba "identifier"
+Syntax error in SQL statement "create table favorito (id bigint not null auto_increment, producto_id bigint, usuario_id bigint, primary key (id)) engine[*]=InnoDB"; expected "identifier"; SQL statement:
+create table favorito (id bigint not null auto_increment, producto_id bigint, usuario_id bigint, primary key (id)) engine=InnoDB [42001-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table imagen (id bigint not null auto_increment, titulo varchar(255), url_imagen varchar(255), categoria_id bigint, producto_id bigint, primary key (id)) engine[*]=InnoDB"; se esperaba "identifier"
+Syntax error in SQL statement "create table imagen (id bigint not null auto_increment, titulo varchar(255), url_imagen varchar(255), categoria_id bigint, producto_id bigint, primary key (id)) engine[*]=InnoDB"; expected "identifier"; SQL statement:
+create table imagen (id bigint not null auto_increment, titulo varchar(255), url_imagen varchar(255), categoria_id bigint, producto_id bigint, primary key (id)) engine=InnoDB [42001-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table producto (id bigint not null auto_increment, cancelacion varchar(255), descripcion_producto varchar(255), descripcion_ubicacion varchar(255), direccion varchar(255), normas varchar(255), puntuacion integer, seguridad varchar(255), titulo varchar(255), url_ubicacion varchar(255), categoria_id bigint not null, ciudad_id bigint not null, primary key (id)) engine[*]=InnoDB"; se esperaba "identifier"
+Syntax error in SQL statement "create table producto (id bigint not null auto_increment, cancelacion varchar(255), descripcion_producto varchar(255), descripcion_ubicacion varchar(255), direccion varchar(255), normas varchar(255), puntuacion integer, seguridad varchar(255), titulo varchar(255), url_ubicacion varchar(255), categoria_id bigint not null, ciudad_id bigint not null, primary key (id)) engine[*]=InnoDB"; expected "identifier"; SQL statement:
+create table producto (id bigint not null auto_increment, cancelacion varchar(255), descripcion_producto varchar(255), descripcion_ubicacion varchar(255), direccion varchar(255), normas varchar(255), puntuacion integer, seguridad varchar(255), titulo varchar(255), url_ubicacion varchar(255), categoria_id bigint not null, ciudad_id bigint not null, primary key (id)) engine=InnoDB [42001-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table producto_x_caracteristica (producto_id bigint not null, caracteristica_id bigint not null) engine[*]=InnoDB"; se esperaba "identifier"
+Syntax error in SQL statement "create table producto_x_caracteristica (producto_id bigint not null, caracteristica_id bigint not null) engine[*]=InnoDB"; expected "identifier"; SQL statement:
+create table producto_x_caracteristica (producto_id bigint not null, caracteristica_id bigint not null) engine=InnoDB [42001-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table reserva (id bigint not null auto_increment, codigo_reserva varchar(255), fecha_final date not null, fecha_inicial date not null, hora_comienzo time not null, producto_id bigint, usuario_id bigint, primary key (id)) engine[*]=InnoDB"; se esperaba "identifier"
+Syntax error in SQL statement "create table reserva (id bigint not null auto_increment, codigo_reserva varchar(255), fecha_final date not null, fecha_inicial date not null, hora_comienzo time not null, producto_id bigint, usuario_id bigint, primary key (id)) engine[*]=InnoDB"; expected "identifier"; SQL statement:
+create table reserva (id bigint not null auto_increment, codigo_reserva varchar(255), fecha_final date not null, fecha_inicial date not null, hora_comienzo time not null, producto_id bigint, usuario_id bigint, primary key (id)) engine=InnoDB [42001-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table usuario (id bigint not null auto_increment, apellido varchar(255), ciudad varchar(255), email varchar(255), nombre varchar(255), password varchar(255), usuario_role smallint, primary key (id)) engine[*]=InnoDB"; se esperaba "identifier"
+Syntax error in SQL statement "create table usuario (id bigint not null auto_increment, apellido varchar(255), ciudad varchar(255), email varchar(255), nombre varchar(255), password varchar(255), usuario_role smallint, primary key (id)) engine[*]=InnoDB"; expected "identifier"; SQL statement:
+create table usuario (id bigint not null auto_increment, apellido varchar(255), ciudad varchar(255), email varchar(255), nombre varchar(255), password varchar(255), usuario_role smallint, primary key (id)) engine=InnoDB [42001-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "RESERVA" not found (this database is empty); SQL statement:
+alter table reserva drop index UK_gr2yb090l8qhl5klmidqnu49g [42104-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "RESERVA" no encontrada
+Table "RESERVA" not found; SQL statement:
+alter table reserva add constraint UK_gr2yb090l8qhl5klmidqnu49g unique (codigo_reserva) [42102-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "FAVORITO" no encontrada
+Table "FAVORITO" not found; SQL statement:
+alter table favorito add constraint FKam2d6jb3e39532amsnb3m65wk foreign key (producto_id) references producto (id) [42102-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "FAVORITO" no encontrada
+Table "FAVORITO" not found; SQL statement:
+alter table favorito add constraint FKtexs274tw5tyvj5uowwooa1fw foreign key (usuario_id) references usuario (id) [42102-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "IMAGEN" no encontrada
+Table "IMAGEN" not found; SQL statement:
+alter table imagen add constraint FKdqljiivm0bv2caafbjejy1nug foreign key (categoria_id) references categoria (id) [42102-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "IMAGEN" no encontrada
+Table "IMAGEN" not found; SQL statement:
+alter table imagen add constraint FKckk7k36sck5o201icob6wkc2u foreign key (producto_id) references producto (id) [42102-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "PRODUCTO" no encontrada
+Table "PRODUCTO" not found; SQL statement:
+alter table producto add constraint FKodqr7965ok9rwquj1utiamt0m foreign key (categoria_id) references categoria (id) [42102-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "PRODUCTO" no encontrada
+Table "PRODUCTO" not found; SQL statement:
+alter table producto add constraint FKl5u48oo6p0ip3a6y4uv1mts4l foreign key (ciudad_id) references ciudad (id) [42102-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "PRODUCTO_X_CARACTERISTICA" no encontrada
+Table "PRODUCTO_X_CARACTERISTICA" not found; SQL statement:
+alter table producto_x_caracteristica add constraint FKegg1mpy2pyn4odi0dkf985jo9 foreign key (caracteristica_id) references caracteristica (id) [42102-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "PRODUCTO_X_CARACTERISTICA" no encontrada
+Table "PRODUCTO_X_CARACTERISTICA" not found; SQL statement:
+alter table producto_x_caracteristica add constraint FKedw0o4cy5s75r5gsos4tibrg8 foreign key (producto_id) references producto (id) [42102-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "RESERVA" no encontrada
+Table "RESERVA" not found; SQL statement:
+alter table reserva add constraint FKnh6tntdsfc76618c8sxxrxn7t foreign key (producto_id) references producto (id) [42102-214]
+2023-03-30 14:46:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "RESERVA" no encontrada
+Table "RESERVA" not found; SQL statement:
+alter table reserva add constraint FKiad9w96t12u3ms2ul93l97mel foreign key (usuario_id) references usuario (id) [42102-214]
