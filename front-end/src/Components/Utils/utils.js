@@ -1,4 +1,6 @@
 import { DirectionsCarFilled, CountertopsOutlined, AcUnitOutlined, TvOutlined, PetsOutlined, PoolOutlined, WifiOutlined } from '@mui/icons-material';
+import axios from 'axios';
+import { API_URL } from './api';
 
 export const elegirServicio = (titulo, color) => {
     if (titulo === "Cocina") {
@@ -77,4 +79,26 @@ export const deshabilitarSeleccionIntermedida = (selectedDates, disabledDates) =
         }
     })
     return bool;
+}
+
+export const guardarFavUsuario = (user, product) => {
+    let jwt = localStorage.getItem("jwt");
+    const headers = { 'Authorization': `Bearer ${jwt}` };
+    let objPost = {
+        producto: {
+            id: product
+        },
+        usuario: {
+            id: user
+        }
+    }
+
+    axios.post(`${API_URL}/favorito`, objPost, { headers })
+    .then(res => {
+
+    })
+}
+
+export const eliminarFavorito = () => {
+    
 }

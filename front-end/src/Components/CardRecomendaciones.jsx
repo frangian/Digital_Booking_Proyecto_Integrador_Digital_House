@@ -11,6 +11,7 @@ import axios from "axios";
 import { setFavInStorage, removeFavInStorage } from "./Utils/localStorage";
 import Modal from "./Modal";
 import { API_URL } from './Utils/api'
+import Swal from 'sweetalert2'
 
 const CardRecomendaciones = ({
   id,
@@ -35,6 +36,7 @@ const CardRecomendaciones = ({
     const storedValue = localStorage.getItem(`favorite-${id}`);
     return storedValue ? JSON.parse(storedValue) : false;
   });
+  const [favoriteId, setFavoriteId] = useState(0);
 
   const shortDescription =
     description.length > MAX_LENGTH
@@ -45,34 +47,88 @@ const CardRecomendaciones = ({
     setShowModal(!showModal);
   };
 
+  const encontrarFav = (array) => {
+    array.forEach(fav => {
+      if (fav.producto.id === id) {
+        setFavorite(true);
+        setFavoriteId(fav.id)
+      }
+    })
+  }
+
   const addFav = () => {
-    const favoritedProduct = setFavInStorage({
-      id,
-      title,
-      imagen,
-      category,
-      location,
-      description,
-      puntuacion,
-    });
-    setFavorite(favoritedProduct);
-    localStorage.setItem(`favorite-${id}`, JSON.stringify(true));
+    let jwt = localStorage.getItem("jwt");
+    if(jwt) {
+      const headers = { 'Authorization': `Bearer ${jwt}` };
+      let objPostFav = {
+        producto: {
+          id: id
+        },
+        usuario: {
+            id: state.user.id
+        }
+      }
+      axios.post(`${API_URL}/favorito`, objPostFav, { headers })
+      .then(setFavorite(true))
+      .catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops',
+          text: 'El prdocuto no pudo ser agregado a favoritos intentalo de nuevo más tarde!',
+        })
+      })
+    } else {
+      setFavInStorage({
+        id,
+        title,
+        imagen,
+        category,
+        location,
+        description,
+        puntuacion,
+      });
+      localStorage.setItem(`favorite-${id}`, JSON.stringify(true));
+      setFavorite(true);
+    }
   };
+
   const removeFav = () => {
-    removeFavInStorage(id);
-    setFavorite(false);
-    localStorage.setItem(`favorite-${id}`, JSON.stringify(false));
+    let jwt = localStorage.getItem("jwt");
+    if(jwt) {
+      const headers = { 'Authorization': `Bearer ${jwt}` };
+      console.log(favoriteId);
+      axios.delete(`${API_URL}/favorito/${favoriteId}`, { headers })
+      .then(setFavorite(false))
+      .catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops',
+          text: 'El prdocuto no pudo ser eliminado de favoritos intentalo de nuevo más tarde!',
+        })
+      })
+    } else {
+      removeFavInStorage(id);
+      localStorage.setItem(`favorite-${id}`, JSON.stringify(false));
+      setFavorite(false);
+    }
   };
 
   useEffect(() => {
+
     axios
-      .get(`${API_URL}/caracteristica/producto/${id}`)
-      .then((response) => {
-        setCharacteristics(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .get(`${API_URL}/caracteristica/producto/${id}`)
+    .then((response) => {
+      setCharacteristics(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+    let jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      encontrarFav(state.user.favoritos)
+    }
+
   }, [id]);
 
   return (

@@ -4,6 +4,8 @@ export const initialState = {
   user: {
     nombre: "Juan",
     apellido: "Gomez",
+    reservas: [],
+    favoritos: []
   },
   logged: false,
   map: true,

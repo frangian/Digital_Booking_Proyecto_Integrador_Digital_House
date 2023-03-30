@@ -9,14 +9,14 @@ export const setFavInStorage = async (alojamiento) => {
         return fav.id === alojamiento.id
     });
     if (isFavOnList.length === 0) {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // await new Promise(resolve => setTimeout(resolve, 1000));
         storageFavs.push(alojamiento)
         localStorage.setItem("favs", JSON.stringify(storageFavs));
-        alert("Alojamiento added successfully");
+        // alert("Alojamiento added successfully");
         return true;
     }
     else {
-        alert("Alojamiento already on the list");
+        // alert("Alojamiento already on the list");
         removeFavInStorage(alojamiento.id);
         return false;
     }
@@ -26,12 +26,12 @@ export const removeFavInStorage = async (identifier) => {
     const storageFavs = getFavFromStorage();
     const index = storageFavs.findIndex(fav => fav.id === identifier);
     if (index !== -1) {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // await new Promise(resolve => setTimeout(resolve, 1000));
         storageFavs.splice(index, 1);
         localStorage.setItem("favs", JSON.stringify(storageFavs));
-        alert("Alojamiento removed successfully");
+        // alert("Alojamiento removed successfully");
     }
     else {
-        alert("An Error has ocurred");
+        // alert("An Error has ocurred");
     }
 }

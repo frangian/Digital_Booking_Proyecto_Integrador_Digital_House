@@ -21,6 +21,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { FacebookShareButton, WhatsappShareButton, TwitterShareButton } from 'react-share'
 import { API_URL } from '../Components/Utils/api'
+import { setFavInStorage, removeFavInStorage } from "../Components/Utils/localStorage";
 
 const Producto = () => {
 
@@ -32,10 +33,52 @@ const Producto = () => {
     const [seguridad, setSeguridad] = useState([]);
     const [services, setServices] = useState([]);
     const [reservas, setReservas] = useState([]);
-    const [like, setLike] = useState(false);
+    const [like, setLike] = useState(() => {
+        const storedValue = localStorage.getItem(`favorite-${id}`);
+        return storedValue ? JSON.parse(storedValue) : false;
+    });
     const [isLoading, setIsLoading] = useState(false);
     const [shareObj, setShareObj] = useState({title: "", text: "", url: ""});
     const MySwal = withReactContent(Swal);
+
+    const addFav = () => {
+        let jwt = localStorage.getItem("jwt");
+        if(jwt) {
+          const headers = { 'Authorization': `Bearer ${jwt}` };
+          let objPostFav = {
+            producto: {
+              id: id
+            },
+            usuario: {
+                id: state.user.id
+            }
+          }
+        } else {
+          setFavInStorage({
+            id: id,
+            title: data?.titulo,
+            imagen: images[0].url_imagen,
+            category: data?.categoria,
+            location: data?.descripcion_ubicacion,
+            description: data?.descripcion_producto,
+            puntuacion: data?.puntuacion,
+          });
+          localStorage.setItem(`favorite-${id}`, JSON.stringify(true));
+        }
+        setLike(true);
+      };
+    
+      const removeFav = () => {
+        let jwt = localStorage.getItem("jwt");
+        if(jwt) {
+          const headers = { 'Authorization': `Bearer ${jwt}` };
+    
+        } else {
+          removeFavInStorage(id);
+          localStorage.setItem(`favorite-${id}`, JSON.stringify(false));
+        }
+        setLike(false);
+      };
 
     useEffect(() => {
         const seccion = document.getElementById('mapa');
@@ -145,7 +188,7 @@ const Producto = () => {
                 <IconButton onClick={() => shareAcross(shareObj)}>
                     <ShareOutlinedIcon />
                 </IconButton>
-                <IconButton onClick={() => {setLike(!like)}}>
+                <IconButton onClick={like ? removeFav : addFav}>
                     {like ? <FavoriteIcon sx={{color: "red"}}/> : <FavoriteBorderOutlinedIcon />}
                 </IconButton>
             </div>
