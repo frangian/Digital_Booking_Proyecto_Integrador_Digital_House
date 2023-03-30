@@ -2,6 +2,7 @@ package com.example.proyectoIntegradorE8.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,11 +21,10 @@ public class Favorito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIgnore
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
     @ManyToOne
-    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "producto_id", referencedColumnName = "id")
     private Producto producto;
 
