@@ -1,6 +1,7 @@
 package com.example.proyectoIntegradorE8.controller;
 
 import com.example.proyectoIntegradorE8.entity.Favorito;
+import com.example.proyectoIntegradorE8.entity.Producto;
 import com.example.proyectoIntegradorE8.exception.GlobalException;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.service.FavoritoService;
@@ -97,7 +98,7 @@ public class FavoritoController {
     }
 
     @PutMapping
-    @Operation(summary = "Actualizar una reserva", description = "Este endpoint permite actualizar una reserva ya existente en la BBDD")
+    @Operation(summary = "Actualizar favoritos", description = "Este endpoint permite actualizar favoritos ya existente en la BBDD")
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
             content = @Content(mediaType = "application/json",
                     examples = @ExampleObject(value = "{\"producto\": {\"id\": 0}, \"usuario\": {\"id\": 0}}"))
@@ -142,17 +143,32 @@ public class FavoritoController {
         }
     }
 
+//    @GetMapping("/usuario/{usuarioId}")
+//    @Operation(summary = "Listar todos los favoritos asignadas al usuario buscado", description = "Este endpoint permite ver todos los usuarios asignadas al usuario buscado registrados en la BBDD")
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Favorito.class))),
+//            @ApiResponse(responseCode = "400", description = "Petición Incorrecta", content = @Content)})
+//    public ResponseEntity<?> favoritoPorUsuario(@PathVariable Long usuarioId) {
+//        try {
+//            log.info("favoritoPorUsuario: accediendo al servicio de favorito");
+//            List<Favorito> favoritos = favoritoService.favoritoPorUsuario(usuarioId);
+//            log.info("favoritoPorUsuario: retornando los favoritos encontrados");
+//            return ResponseEntity.ok(favoritos);
+//        }catch (Exception e){
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+//        }
+//    }
     @GetMapping("/usuario/{usuarioId}")
     @Operation(summary = "Listar todos los favoritos asignadas al usuario buscado", description = "Este endpoint permite ver todos los usuarios asignadas al usuario buscado registrados en la BBDD")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Favorito.class))),
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
             @ApiResponse(responseCode = "400", description = "Petición Incorrecta", content = @Content)})
     public ResponseEntity<?> favoritoPorUsuario(@PathVariable Long usuarioId) {
         try {
             log.info("favoritoPorUsuario: accediendo al servicio de favorito");
-            List<Favorito> favoritos = favoritoService.favoritoPorUsuario(usuarioId);
-            log.info("favoritoPorUsuario: retornando los favoritos encontrados");
-            return ResponseEntity.ok(favoritos);
+            List<Producto> productos = favoritoService.productoPorUsuario(usuarioId);
+            log.info("favoritoPorUsuario: retornando los productos encontrados");
+            return ResponseEntity.ok(productos);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

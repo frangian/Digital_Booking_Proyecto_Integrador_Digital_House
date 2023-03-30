@@ -1,5 +1,6 @@
 package com.example.proyectoIntegradorE8.service;
 import com.example.proyectoIntegradorE8.entity.Favorito;
+import com.example.proyectoIntegradorE8.entity.Producto;
 import com.example.proyectoIntegradorE8.exception.BadRequestException;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.repository.FavoritoRepository;
@@ -70,7 +71,7 @@ public class FavoritoService {
             throw new Exception("Ocurrió un error al eliminar el producto de favoritos");
         }
     }
-    public List<Favorito> favoritoPorUsuario (Long id) throws Exception {
+    public List<Producto> productoPorUsuario (Long id) throws Exception {
         try {
             log.info("Buscando todos los favoritos por usuario con id: "+id);
             return favoritoRepository.findByUsuarioId(id);
