@@ -143,6 +143,8 @@ public class FavoritoController {
         }
     }
 
+//trae el id del prodcuto
+
 //    @GetMapping("/usuario/{usuarioId}")
 //    @Operation(summary = "Listar todos los favoritos asignadas al usuario buscado", description = "Este endpoint permite ver todos los usuarios asignadas al usuario buscado registrados en la BBDD")
 //    @ApiResponses(value = {
@@ -158,6 +160,7 @@ public class FavoritoController {
 //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 //        }
 //    }
+
     @GetMapping("/usuario/{usuarioId}")
     @Operation(summary = "Listar todos los favoritos asignadas al usuario buscado", description = "Este endpoint permite ver todos los usuarios asignadas al usuario buscado registrados en la BBDD")
     @ApiResponses(value = {
