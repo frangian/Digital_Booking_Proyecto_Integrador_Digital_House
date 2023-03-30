@@ -50,7 +50,7 @@ public class Producto {
     private List<Caracteristica> caracteristicas = new ArrayList<>();
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Imagen> imagenes = new ArrayList<>();
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     private List<Reserva> reservas = new ArrayList<>();
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
