@@ -51,6 +51,7 @@ public class UsuarioService {
             log.info("actualizarUsuario: accediendo al repositorio de usuario...");
             Usuario usuarioExistente = buscarUsuario(usuario.getId());
             usuarioExistente.setCiudad(usuario.getCiudad());
+            usuarioExistente.setValidado(usuario.isValidado());
             usuarioRepository.save(usuarioExistente);
         } catch (ConstraintViolationException e) {
             throw e;
