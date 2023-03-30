@@ -39,7 +39,9 @@ public class FavoritoController {
     )
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
             content = @Content(mediaType = "application/json",
-                    examples = @ExampleObject(value = "{\"producto\": {\"id\": 0}, \"usuario\": {\"id\": 0}}"))
+                    examples = @ExampleObject(value =
+                            "{\"producto\": {\"id\": 0}, " +
+                             "\"usuario\": {\"id\": 0}}"))
     )
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "OK", content = @Content(schema = @Schema(implementation = Favorito.class))),
