@@ -21,6 +21,8 @@ public class Producto {
     @Column
     private String titulo;
     @Column
+    private String direccion;
+    @Column
     private String descripcion_producto;
     @Column
     private String descripcion_ubicacion;
