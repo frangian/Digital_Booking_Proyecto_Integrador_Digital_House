@@ -21,7 +21,8 @@ public class Favorito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JsonIgnore
+//    @JsonIgnore
+//    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
     @ManyToOne

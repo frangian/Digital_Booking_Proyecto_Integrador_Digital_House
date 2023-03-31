@@ -12,7 +12,7 @@ const ProductHeader = ({ tituloCategoria, tituloProducto }) => {
         <div className="product-header">
             <div className="left-product-header skeleton-header">
                 <SkeletonTheme baseColor="#545776" highlightColor="#fff">
-                    <p>{tituloCategoria || <Skeleton style={{width: "150px"}}/>}</p>
+                    <p className={tituloCategoria}>{tituloCategoria || <Skeleton style={{width: "150px"}}/>}</p>
                     <h3>{tituloProducto || <Skeleton style={{width: "200px"}}/>}</h3>
                 </SkeletonTheme>
             </div>

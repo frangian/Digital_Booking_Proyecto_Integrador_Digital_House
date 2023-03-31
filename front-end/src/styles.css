@@ -468,6 +468,229 @@ input[type="password"] {
   font-size: 1.1rem;
 }
 
+/* ---------------------------------- Form Producto--------------------------------- */
+
+
+
+.admin-page {
+  margin:12vh 0 8vh;
+  
+}
+
+.crear-producto-container{
+  height: 100%;
+  width: 100%;
+  background-color: var(--main-dark-white);
+  padding: 5vh 2vw;
+  
+}
+
+.link-demo{
+  font-size: 1rem;
+  color: var(--main-green);
+  cursor: pointer;
+}
+.link-demo:hover{
+  font-size: 1.01rem;
+}
+
+.crear-producto-container input, .crear-producto-container select, .crear-producto-container textarea{
+  padding: 10px;
+}
+
+.crear-producto-container h2 {
+  margin: 2vh 2vw;
+  
+}
+
+#producto-form{
+  width: 100%;
+}
+
+.producto-form-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 3vh;
+  background-color: var(--main-white);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  
+}
+
+.info-producto-container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 2vh 2vw;
+  border: none;
+}
+
+.info-producto-container > label, .descripcion-section > label, .atributo-container label, .politicas-producto > label{
+  display: flex;
+  flex-direction: column;
+}
+
+.info-producto-container span, .descripcion-section span, .atributos span, .politicas-producto span {
+  padding:5px;
+  color: var(--main-dark-gray);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.info-producto-container  input, .info-producto-container select, .atributos input, .atributo-container select {
+  height: 50px;
+  border-color: var(--main-dark-white);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  font-size: 1rem;  
+}
+
+#crear-ciudad{
+  font-size: 0.8rem;
+  color: var(--main-green);
+  cursor: pointer;
+}
+#crear-ciudad:hover{
+  font-size: 0.85rem;
+}
+
+
+
+.form-crear-ciudad{
+  height: 40vh;
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-crear-ciudad label{
+  display: flex;
+  flex-direction: column;
+  margin: 2vh 5vw;
+}
+
+.form-crear-ciudad span{
+  margin-bottom: 5px;
+  font-size: 1rem;
+  font-family: "Roboto", sans-serif;
+  color: var(--main-dark-gray);
+  font-weight: 700;
+}
+
+.form-crear-ciudad input{
+  width: 20vw;
+  height: 40px;
+  border-color: var(--main-dark-white);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.ciudad-button {
+  height: 50px;
+  width: 10vw;
+  border: 1px solid var(--main-green);
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--main-white);
+  background-color: var(--main-green);
+}
+
+.close-btn { 
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--main-dark-gray);
+}
+
+.inputs-delete{
+  margin-bottom: 20px;
+}
+
+.descripcion-section{
+  padding:2vh 2vw;
+}
+
+.descripcion-section textarea, .politicas-producto textarea {
+  height:15vh;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.atributos{
+  background-color: var(--main-dark-white);
+  margin: 1vh 2vw;
+  padding: 3vh 2vw;
+  border: none;
+  border-radius: 10px;
+  
+}
+
+.atributo-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+}
+
+.atributo-container-select{
+  width: 80vw;
+  height: 50px;
+  border: 1px solid var(--main-dark-black);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-color: var(--main-white);
+}
+
+
+
+.politicas-producto{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 2vw;
+  padding: 3vh 2vw ;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.politicas-producto p{
+  padding:5px;
+}
+
+.politicas-producto textarea{
+  width: 25vw;
+}
+
+.btn-crear-producto{
+  width:25%;
+  margin: 3vh;
+  border: 1px solid var(--main-green);
+  height: 50px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--main-white);
+  background-color: var(--main-green);
+}
+
+.icono-agregar{ 
+  font-size: 50px;
+}
+
+
 /* ------------------------------ Errores Input ----------------------------- */
 
 div.error input {
@@ -490,6 +713,23 @@ div.error p {
   margin-bottom: 20px;
 }
 
+/* ------------------------------ Errores Producto ----------------------------- */
+
+label.error input, label.error select, label.error textarea, div.atributo-container div.error, label.error textarea {
+  background-color: #ffe1e1;
+  border: 1px solid #ff0000;
+}
+label.error input:focus , label.error select:focus, label.error textarea:focus, div.atributo-container div.error:focus, label.error textarea:focus{
+  border: 1px solid #ff0000;
+  outline: none;
+}
+label.error p, div.error p{
+  color: #ff0000;
+  text-align: right;
+}
+.politicas-parrafo{
+  margin-right: 4vw;
+}
 /*******************************************************************************************************************/
 
 body {
