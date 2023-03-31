@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
+import Paper from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,12 +18,6 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
   const [selectedDates, setSelectedDates] = useState(null);
   const [ciudades, setCiudades] = useState([]);
   const [ciudadId, setCiudadId] = useState(null);
-  // const useStyles = makeStyles((theme) => ({
-  //   select: {
-  //     width: "100%"
-  //   }
-  // }))
-  // const classes = useStyles();
 
   const handleChange = (event) => {
     setCiudad(event.target.value);
@@ -88,7 +83,6 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
           <FormControl fullWidth>
             <Select
               value={ciudad}
-              // className={classes.select}
               onChange={handleChange}
               displayEmpty
               sx={{
@@ -96,8 +90,7 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
                   borderColor: "transparent",
                 },
                 height: "42px",
-              }}
-              
+              }}          
             >
               <MenuItem value="" sx={{ display: "none" }}>
                 <FontAwesomeIcon icon={faMapMarkerAlt} className="icono" />{" "}

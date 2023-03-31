@@ -16,7 +16,7 @@ const LoginForm = () => {
     const [eye, setEye] = useState(false);
     const [error, setError] = useState("");
     const [user, setUser] = useState({email: "", password: ""});
-    const [reserva, setReserva] = useState(false);
+    const [reserva, setReserva] = useState("");
     const [sendLoad, setSendLoad] = useState(false);
     const { state, dispatch } = useContext(ContextGlobal);
 
@@ -29,7 +29,11 @@ const LoginForm = () => {
                 let jwt = res.headers.authorization.split(" ")[1];
                 localStorage.setItem("jwt", jwt);
                 setSendLoad(false);
-                navigate("/");
+                if (reserva) {
+                    navigate(reserva);
+                } else {
+                    navigate("/")
+                }
                 dispatch({
                     type: "register",
                     payload: {
@@ -65,9 +69,9 @@ const LoginForm = () => {
     }
 
     useEffect(() => {
-        setReserva(false);
-        if(state.location === "reserva") {
-            setReserva(true);
+        setReserva("");
+        if(state.location) {
+            setReserva(state.location);
             dispatch({
                 type: "register",
                 payload: {

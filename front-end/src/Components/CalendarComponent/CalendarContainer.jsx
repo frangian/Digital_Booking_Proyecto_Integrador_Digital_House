@@ -4,6 +4,7 @@ import { Calendar } from "react-multi-date-picker"
 import { getDaysArray } from '../Utils/utils';
 import { ContextGlobal } from '../Utils/globalContext';
 
+
 const CalendarContainer = ({ productId, reservas }) => {
 
     const Navigate = useNavigate();
@@ -16,6 +17,7 @@ const CalendarContainer = ({ productId, reservas }) => {
         setDisabledDays(dayArr)
     }, [reservas])
 
+
     const hanldeClickReserva = () => {
         if(!localStorage.getItem("jwt")) {
             Navigate("/login");
@@ -23,7 +25,7 @@ const CalendarContainer = ({ productId, reservas }) => {
                 type: "register",
                 payload: {
                   ...state,
-                  location: "reserva"
+                  location: `/product/${productId}`
                 }
             })   
         } else {

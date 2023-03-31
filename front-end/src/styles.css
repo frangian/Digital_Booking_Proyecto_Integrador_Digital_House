@@ -763,6 +763,10 @@ body {
   height: 5vh;
 }
 
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+  height: 300px !important;
+}
+
 .date-picker {
   width: 30%;
 }
@@ -1905,11 +1909,11 @@ div.card-reserva-content {
 }
 
 .swal2-styled.swal2-confirm {
-  background-color: var(--main-green);
+  background-color: var(--main-green) !important;
 }
 
 .swal2-styled.swal2-confirm:focus {
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
 /* -------------------------------------------------------------------------- */

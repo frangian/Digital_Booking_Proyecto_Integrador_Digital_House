@@ -25,6 +25,8 @@ const ReservaForm = ({
     const [checks, setChecks] = useState([]);
     const [allDates, setAllDates] = useState([]);
     const [sendLoad, setSendLoad] = useState(false);
+    const [codigoCambio, setCodigoCambio] = useState(false);
+    const [reservaId, setReservaId] = useState(0);
     const [values, setValues] = useState({
         usuarioId: "",
         nombre: "", 
@@ -34,6 +36,8 @@ const ReservaForm = ({
         horaLlegada: "",
     })
 
+
+    //Enviar un mail con un link que al darle click haga un put de usuario y cambie la validacion a true y ademas te envie a la pagina de reserva
     
     const handleChangeCiudad = (value) => {
         setValues({...values, ciudad: value})
@@ -62,14 +66,7 @@ const ReservaForm = ({
             id: values.usuarioId,
             ciudad: values.ciudad
         }
-        let templateParams = {
-            nombre: `${values.nombre} ${values.apellido}`,
-            user_email: values.mail,
-            producto: tituloProducto,
-            checkIn: `${objPostReserva.fechaInicial} ${objPostReserva.horaComienzo}`,
-            checkOut: objPostReserva.fechaFinal,
-            empresa: "Digital Booking"
-        } 
+         
 
         if (!objPostReserva.horaComienzo || !objPostReserva.fechaFinal || !objPostReserva.fechaInicial || !values.ciudad || !values.usuarioId) {
             mostrarAlerta()
@@ -79,13 +76,8 @@ const ReservaForm = ({
             .then(res => {
                 handleConfirmacion()
                 setSendLoad(false);
-                emailjs.send("service_nc0296c", "template_b5rk35n", templateParams, "8EQLpJMNLWle12z9B")
-                .then(res => {
-                    console.log(res.text);
-                })
-                .catch(err => {
-                    console.log(err);
-                })
+                setCodigoCambio(true);
+                setReservaId(res.data.id)                
             })
             .catch(err => {
                 Swal.fire({
@@ -121,6 +113,34 @@ const ReservaForm = ({
             setAllDates([]);
         }
     }, [allDates])
+
+    useEffect(() => {
+        if (codigoCambio) {
+            let jwt = localStorage.getItem("jwt");
+            const headers = { 'Authorization': `Bearer ${jwt}` };
+            
+            axios.get(`${API_URL}/reserva/${reservaId}`, { headers })
+            .then(res => {
+                let templateParams = {
+                    nombre: `${values.nombre} ${values.apellido}`,
+                    user_email: values.mail,
+                    producto: tituloProducto,
+                    checkIn: `${res.data.fechaInicial} ${res.data.horaComienzo}`,
+                    checkOut: res.data.fechaFinal,
+                    codigo: res.data.codigoReserva
+                }
+                emailjs.send("service_nc0296c", "template_b5rk35n", templateParams, "8EQLpJMNLWle12z9B")
+                .then(res => {
+                    console.log(res.text);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+                setCodigoCambio(false)
+            })
+            
+        }
+    }, [codigoCambio])
 
     useEffect(() => {
         let jwt = localStorage.getItem("jwt");

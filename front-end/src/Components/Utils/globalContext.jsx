@@ -5,13 +5,15 @@ export const initialState = {
     nombre: "Juan",
     apellido: "Gomez",
     reservas: [],
-    favoritos: []
+    favoritos: [],
   },
   logged: false,
   map: true,
   location: "",
   admin: false
 };
+
+
 
 export const ContextGlobal = createContext();
 
@@ -47,7 +49,7 @@ const reducerFunction = (state, action) => {
 
 export const ContextProvider = ({ children }) => {
 
-    const [state, dispatch] = useReducer(reducerFunction, initialState)
+    const [state, dispatch] = useReducer(reducerFunction, initialState);
   
     const store = {
       state, 
