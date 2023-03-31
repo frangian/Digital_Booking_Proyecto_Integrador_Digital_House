@@ -24,7 +24,7 @@ const Header = () => {
       type: "register",
       payload: {
         ...state,
-        user: {nombre: "Juan", apellido: "Gomez"},
+        user: {nombre: "Juan", apellido: "Gomez", reservas: [], favoritos: []},
         logged: false
       }
     })
@@ -145,7 +145,7 @@ const Header = () => {
             <p>{state.user.nombre[0]}{state.user.apellido[0]}</p>
           </div>
           <div className="saludo">
-            <p>Hola,</p>
+            <p onClick={() => console.log(state.user)}>Hola,</p>
             <p className='nombres'>{state.user.nombre} {state.user.apellido}</p>
           </div>
           <FontAwesomeIcon icon={faX} className="x-icon" onClick={() => cerrarSesion()}/>

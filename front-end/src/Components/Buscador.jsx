@@ -54,7 +54,7 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
       .then((response) => {
         const data = response.data;
         setCiudades(data);
-        console.log(data);
+        // console.log(data);
       })
       .catch((error) => {
         console.log(error);

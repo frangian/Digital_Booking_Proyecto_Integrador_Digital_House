@@ -43,19 +43,11 @@ const Producto = () => {
     const MySwal = withReactContent(Swal);
 
     const encontrarFav = (array) => {
-        console.log(array);
         array.forEach(fav => {
-            console.log(fav);
-            if (fav.producto.id === id) {
+            if (fav.producto.id === Number(id)) {
                 setLike(true);
-                setLikeId(fav.id)
-                console.log(fav.producto.id);
-                console.log(fav.id);
-            } else {
-                console.log(fav.producto.id);
-                console.log(fav.id);
-                console.log(id);
-            }
+                setLikeId(fav.id);  
+            } 
         })
       }
 
@@ -72,7 +64,13 @@ const Producto = () => {
                 }
             }
             axios.post(`${API_URL}/favorito`, objPostFav, { headers })
-            .then(setLike(true))
+            .then(res => {
+                setLike(true)
+                dispatch({
+                    type: "ADD_FAVORITE",
+                    payload: res.data
+                })
+            })
             .catch(err => {
                 Swal.fire({
                 icon: 'error',
@@ -100,7 +98,13 @@ const Producto = () => {
         if(jwt) {
             const headers = { 'Authorization': `Bearer ${jwt}` };
             axios.delete(`${API_URL}/favorito/${likeId}`, { headers })
-            .then(setLike(false))
+            .then(res => {
+                setLike(false)
+                dispatch({
+                    type: "REMOVE_FAVORITE",
+                    payload: likeId
+                })
+            })
             .catch(err => {
                 Swal.fire({
                 icon: 'error',
@@ -156,12 +160,14 @@ const Producto = () => {
         .then(res => {
             setReservas(res.data)
         })
+    }, [id])
+
+    useEffect(() => {
         let jwt = localStorage.getItem("jwt");
         if (jwt) {
-            console.log(state.user);
-            // encontrarFav(state.user.favoritos)
+            encontrarFav(state.user.favoritos)
         } 
-    }, [id])
+    }, [state.user])
 
     const shareCard = () => {
         MySwal.fire({
@@ -211,7 +217,7 @@ const Producto = () => {
                     </div>
                     <div className="puntuacion">
                         <div className="left-puntuacion">
-                            <p>Muy bueno</p>
+                            <p onClick={() => console.log(like, likeId)}>Muy bueno</p>
                             <div className="stars">
                                 <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
                                 <FontAwesomeIcon icon={faStar} className="icono icono-verde" />

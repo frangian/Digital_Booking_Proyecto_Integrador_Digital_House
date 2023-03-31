@@ -19,6 +19,27 @@ const reducerFunction = (state, action) => {
   switch (action.type) {
     case "register":
       return action.payload;
+    case "ADD_FAVORITE":
+      const newUser = {
+        ...state.user,
+        favoritos: [...state.user.favoritos, action.payload]
+      }
+      return {
+        ...state,
+        user: newUser
+      };
+    case "REMOVE_FAVORITE":
+      const newFavorites = state.user.favoritos.filter(
+        fav => fav.id !== action.payload
+      )
+      const updatedUser = {
+        ...state.user,
+        favoritos: newFavorites
+      }
+      return {
+        ...state,
+        user: updatedUser
+      }
     default:
       return state;
   }

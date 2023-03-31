@@ -34,7 +34,7 @@ const Favoritos = () => {
           })
           setIsLoading(false);
       })  
-    } else {
+    } else if (!jwt) {
       setIsLoading(false);
       setFavs(JSON.parse(localStorage.getItem("favs")));
     }

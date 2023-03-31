@@ -49,6 +49,7 @@ const CardRecomendaciones = ({
 
   const encontrarFav = (array) => {
     array.forEach(fav => {
+      console.log(fav.producto.id, id);
       if (fav.producto.id === id) {
         setFavorite(true);
         setFavoriteId(fav.id)
@@ -69,7 +70,13 @@ const CardRecomendaciones = ({
         }
       }
       axios.post(`${API_URL}/favorito`, objPostFav, { headers })
-      .then(setFavorite(true))
+      .then(res => {
+        setFavorite(true);
+        dispatch({
+          type: "ADD_FAVORITE",
+          payload: res.data
+        })
+      })
       .catch(err => {
         Swal.fire({
           icon: 'error',
@@ -97,7 +104,13 @@ const CardRecomendaciones = ({
     if(jwt) {
       const headers = { 'Authorization': `Bearer ${jwt}` };
       axios.delete(`${API_URL}/favorito/${favoriteId}`, { headers })
-      .then(setFavorite(false))
+      .then(res => {
+        setFavorite(false);
+        dispatch({
+          type: "REMOVE_FAVORITE",
+          payload: favoriteId
+        })
+      })
       .catch(err => {
         Swal.fire({
           icon: 'error',
