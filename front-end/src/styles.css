@@ -471,10 +471,8 @@ input[type="password"] {
 /* ---------------------------------- Form Producto--------------------------------- */
 
 
-
-.admin-page {
-  margin:12vh 0 8vh;
-  
+.producto-page-container{
+  margin: 12vh 0 8vh;
 }
 
 .crear-producto-container{
@@ -2139,6 +2137,59 @@ div.card-reserva-content {
   .card-reserva-confirmada {
     width: 93%;
   }
+
+  /* Form creacion de producto mobile */
+
+.crear-producto-container h1{
+  font-size: 1.7rem;
+}
+
+.link-demo{
+  font-size: 0.8rem;
+}
+
+.crear-producto-container h2 {
+  font-size: 1.5rem;
+}
+
+.info-producto-container{
+  grid-template-columns: repeat(1, 1fr);
+}
+
+
+.form-crear-ciudad{
+  width: 70vw;
+}
+
+.form-crear-ciudad label{
+  align-items: center;
+}
+
+.form-crear-ciudad input{
+  width: 50vw;
+}
+
+.ciudad-button {
+  width: 30vw;
+}
+
+.close-btn { 
+  width: 30px;
+  height: 30px;
+  padding: 0;
+}
+
+.atributo-container-select{
+  width: 75vw;
+}
+
+.politicas-producto{
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.politicas-producto textarea{
+  width: 90vw;
+}
 }
 
 @media (max-width: 560px) {
