@@ -96,7 +96,6 @@ const CardRecomendaciones = ({
     let jwt = localStorage.getItem("jwt");
     if(jwt) {
       const headers = { 'Authorization': `Bearer ${jwt}` };
-      console.log(favoriteId);
       axios.delete(`${API_URL}/favorito/${favoriteId}`, { headers })
       .then(setFavorite(false))
       .catch(err => {

@@ -16,8 +16,8 @@ const ReservasUsuario = () => {
 
   useEffect(() => {
     let jwt = localStorage.getItem("jwt");
-    setIsLoading(true)
     if (jwt) {
+      setIsLoading(true)
       let partes = jwt.split('.');
       let contenido = atob(partes[1]);
       let datos = JSON.parse(contenido);
@@ -32,9 +32,8 @@ const ReservasUsuario = () => {
               logged: true
             }
           })
+          setIsLoading(false);
       })
-      .catch(setIsLoading(false))    
-      setIsLoading(false);
     } else {
       navigation("/")
     }

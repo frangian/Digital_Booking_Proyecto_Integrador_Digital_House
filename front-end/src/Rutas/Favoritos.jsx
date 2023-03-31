@@ -16,8 +16,8 @@ const Favoritos = () => {
 
   useEffect(() => {
     let jwt = localStorage.getItem("jwt");
-    setIsLoading(true)
     if (jwt) {
+      setIsLoading(true)
       let partes = jwt.split('.');
       let contenido = atob(partes[1]);
       let datos = JSON.parse(contenido);
@@ -32,9 +32,8 @@ const Favoritos = () => {
               logged: true
             }
           })
-      })
-      .catch(setIsLoading(false))    
-      setIsLoading(false);
+          setIsLoading(false);
+      })  
     } else {
       setIsLoading(false);
       setFavs(JSON.parse(localStorage.getItem("favs")));

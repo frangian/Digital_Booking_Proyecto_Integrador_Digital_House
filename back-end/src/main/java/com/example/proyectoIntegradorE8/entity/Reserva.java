@@ -32,7 +32,7 @@ public class Reserva {
     @Column (name = "fecha_final", nullable = false)
     private LocalDate fechaFinal;
     @ManyToOne
-    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIdentityReference(alwaysAsId = false)
     @JoinColumn(name = "producto_id", referencedColumnName = "id")
     private Producto producto;
     @ManyToOne
