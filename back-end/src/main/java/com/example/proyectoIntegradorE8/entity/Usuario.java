@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 
@@ -35,6 +36,7 @@ public class Usuario  implements UserDetails  {
     @Column
     private boolean validado = false;
     @Column(name = "usuario_role")
+    @Enumerated(EnumType.STRING)
     private UsuarioRole usuarioRole;
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reserva> reservas = new ArrayList<>();
@@ -50,9 +52,9 @@ public class Usuario  implements UserDetails  {
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-      return Collections.emptyList();
-    }
-    @Override
+        SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(usuarioRole.name());
+        return Collections.singletonList(grantedAuthority);
+    }    @Override
     public boolean isAccountNonExpired() {
           return true;
     }
