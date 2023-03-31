@@ -91,7 +91,8 @@ const RegisterForm = () => {
                     navigate("/")
                 })
             }).catch(err => {
-                setErrorMail("Este correo ya esta registrado")
+                setErrorMail("Este correo ya esta registrado");
+                setSendLoad(false);
             })
         }
     }

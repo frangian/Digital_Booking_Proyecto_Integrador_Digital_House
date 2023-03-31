@@ -2,63 +2,81 @@ package com.example.proyectoIntegradorE8.service;
 
 import com.example.proyectoIntegradorE8.entity.Caracteristica;
 import com.example.proyectoIntegradorE8.exception.BadRequestException;
-import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.repository.CaractersiticaRepository;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-import java.sql.SQLException;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Log4j
+@RequiredArgsConstructor
 public class CaractersiticaService {
-    private static final Logger logger = Logger.getLogger(CaractersiticaService.class);
-    CaractersiticaRepository caractersiticaRepository;
-     @Autowired
-    public CaractersiticaService (CaractersiticaRepository caractersiticaRepository){
-         this.caractersiticaRepository = caractersiticaRepository;
-     }
+    private final CaractersiticaRepository caractersiticaRepository;
 
-     public Caracteristica guardarCaracteristica (Caracteristica caracteristica) throws SQLException {
+     public Caracteristica guardarCaracteristica (Caracteristica caracteristica) throws ConstraintViolationException {
          try {
-             logger.info("La informacion provista fue correcta, accediendo a CaracteristicaRepository: "+caracteristica.getTitulo()+".");
+             log.info("guardarCaracteristica: accediendo al repositorio de producto...");
              return caractersiticaRepository.save(caracteristica);
-         } catch (Exception e){
-             logger.error("No se pudo guardar/actualizar la caracteristica "+caracteristica.getTitulo()+" en la BBDD. Exception: "+e.getMessage()+".");
-             throw new SQLException("No se pudo guardar/actualizar la caracteristica en la BBDD. No pueden quedar campos solicitados vacios.");
+         } catch (ConstraintViolationException e) {
+             throw e;
          }
      }
-    public Caracteristica buscarCaracteristica (Long id) throws ResourceNotFoundException {
-        logger.info("buscando caracteristica...");
-        Optional<Caracteristica> caracteristicaBuscada = caractersiticaRepository.findById(id);
-        if (caracteristicaBuscada.isPresent()) {
-            logger.info("Se encontro la caracteristica con id: " + id + " en la BBDD exitosamente");
-            return caracteristicaBuscada.get();
-        } else {
-            logger.info("La caracteristica con id: "+id+" no existe en la BBDD");
-            throw new ResourceNotFoundException("La caracteristica con id: "+id+" no existe en la BBDD");
-        }
-    }    public List<Caracteristica> listarCaracteristicas() throws BadRequestException {
+    public Caracteristica buscarCaracteristica (Long id) throws Exception {
         try {
-            logger.info("Se inició una operación de listado de caracteristicas");
+            log.info("buscarCaracteristica: accediendo al repositorio de caracteristica...");
+            Caracteristica caracteristicaBuscado = caractersiticaRepository.findById(id)
+                    .orElseThrow(() -> new EntityNotFoundException("La caracteristica con id: " + id + " no existe en la BBDD"));
+            log.info("Se encontró la caracteristica con id: " + id + " en la BBDD exitosamente");
+            return caracteristicaBuscado;
+        } catch (EntityNotFoundException enfe){
+            log.info(enfe.getMessage());
+            throw new EntityNotFoundException(enfe.getMessage());
+        } catch (DataAccessException dae) {
+            throw new Exception("Error al acceder a la base de datos. Mensaje:"+ dae.getMessage());
+        }
+    }
+    @Transactional
+    public void actualizarCaracteristica (Caracteristica caracteristica) throws Exception {
+        try {
+            log.info("actualizarCaracteristica: accediendo al repositorio de caracteristica...");
+            caractersiticaRepository.save(caracteristica);
+        } catch (ConstraintViolationException e) {
+            throw e;
+        }
+    }
+    public List<Caracteristica> listarCaracteristicas() throws BadRequestException {
+        try {
+            log.info("listarCaracteristicas: accediendo al repositorio de caracteristica...");
             return caractersiticaRepository.findAll();
         } catch (Exception e) {
-            logger.error("Error al listar las caracteristicas: Exception "+e.getMessage());
+            log.error("Error al listar las caracteristicas: Exception "+e.getMessage());
             throw new BadRequestException("Ocurrio un error al listar todas las caracteristicas");
         }
     }
     public void eliminarCaracteristica (Long id) throws Exception {
         try {
+            log.info("eliminarCaracteristica: accediendo al repositorio de caracteristica...");
             caractersiticaRepository.deleteById(id);
-            logger.warn("Se eliminó la caracteristica con ID: "+id+" de la BBDD");
         } catch (Exception e){
-            logger.error("Error al eliminar la caracteristica: Exception "+e.getMessage());
-            throw new Exception("Ocurrio un error al eliminar la caracteristica");
+            log.error("Error al eliminar la caracteristica: Exception "+e.getMessage());
+            throw new Exception("Ocurrio un error al eliminar la caracteristica. Mensaje: "+ e.getMessage());
         }
     }
-    public List<Caracteristica> caracteristicasXProducto (Long id){
-         return caractersiticaRepository.findAllByProductoId(id);
+    public List<Caracteristica> caracteristicasXProducto (Long id) throws Exception {
+        try {
+            log.info("caracteristicasXProducto: accediendo al repositorio de caracteristica");
+            return caractersiticaRepository.findAllByProductoId(id);
+        } catch (Exception e) {
+            log.error("Error al buscar caracteristicas disponibles. Exception: "+e.getMessage());
+            throw new Exception("Error al buscar caracteristica disponibles. Exception: "+e.getMessage());
+        }
     }
 
 }

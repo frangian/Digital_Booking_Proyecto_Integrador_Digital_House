@@ -1,6 +1,7 @@
 package com.example.proyectoIntegradorE8.controller;
 
 import com.example.proyectoIntegradorE8.entity.Producto;
+import com.example.proyectoIntegradorE8.exception.GlobalException;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.service.ProductoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,26 +12,24 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import org.hibernate.exception.ConstraintViolationException;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import java.time.LocalDate;
 import java.util.*;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/producto")
 @Log4j
 @Tag(name = "Producto", description = "API metodos CRUD de los productos")
 public class ProductoController {
-    private ProductoService productoService;
-    @Autowired
-    public ProductoController(ProductoService productoService) {
-        this.productoService = productoService;
-    }
+    private final ProductoService productoService;
 
     @PostMapping
     @Operation(
@@ -60,12 +59,12 @@ public class ProductoController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)})
     public ResponseEntity<?> guardarProducto(@RequestBody Producto producto) {
         try {
-            log.info("Se inicia el proceso para guardar un producto en la BBDD");
+            log.info("guardarProducto: accediendo al servicio de producto...");
             Producto productoGuardado = productoService.guardarProducto(producto);
-            log.info("El producto fue guardado "+producto.getTitulo()+"   en la BBDD exitosamente");
+            log.info("El producto fue guardado en la BBDD exitosamente");
             return ResponseEntity.ok(productoGuardado);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (ConstraintViolationException e) {
+            return new GlobalException().handleConstraintViolationException(e);
         }
     }
     @GetMapping("/{id}")
@@ -74,14 +73,16 @@ public class ProductoController {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
             @ApiResponse(responseCode = "404", description = "Not Found: El producto no existe en la BBDD", content = @Content),
             @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)})
-    public ResponseEntity<?> buscarProducto(@PathVariable Long id) {
+    public ResponseEntity<?> buscarProducto(@PathVariable Long id) throws Exception {
         try {
+            log.info("buscarProducto: accediendo al servicio de producto...");
             Producto productoBuscado = productoService.buscarProducto(id);
+            log.info("buscarProducto: retornando el producto encontrado");
             return ResponseEntity.ok(productoBuscado);
         } catch (ResourceNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (MethodArgumentTypeMismatchException matme){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(matme.getMessage());
         }
     }
     @PutMapping
@@ -102,12 +103,17 @@ public class ProductoController {
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> actualizarProducto(@RequestBody @NotNull Producto producto){
         try {
+            log.info("actualizarProducto: accediendo al servicio de producto...");
+            productoService.buscarProducto(producto.getId());
             productoService.actualizarProducto(producto);
+            log.info("actualizarProducto: producto con id: "+producto.getId()+" actualizado en la BBDD exitosamente");
             return ResponseEntity.ok(producto);
         } catch (EntityNotFoundException enfe){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(enfe.getMessage());
-        } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (ConstraintViolationException e) {
+            return new GlobalException().handleConstraintViolationException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
     @GetMapping
@@ -117,8 +123,9 @@ public class ProductoController {
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> listarProductos() {
         try {
+            log.info("listarProductos: accediendo al servicio de producto...");
             List<Producto> productosGuardados = productoService.listarProductos();
-            log.info("Mostrando todas los productos registrados en la BBDD");
+            log.info("listarProductos: retornando la lista de productos");
             return ResponseEntity.ok(productosGuardados);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -132,8 +139,10 @@ public class ProductoController {
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> eliminarProductos (@PathVariable Long id) {
         try {
+            log.info("eliminarProductos: accediendo al servicio de producto...");
             productoService.buscarProducto(id);
             productoService.eliminarProducto(id);
+            log.info("eliminarProductos: producto con id: "+id+" eliminado de la BBDD exitosamente");
             return ResponseEntity.ok("Se elimino el producto con ID: "+id+" de la BBDD exitosamente");
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -146,9 +155,12 @@ public class ProductoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
-    public ResponseEntity<?> productoPorCategoria(@PathVariable Long categoriaId) {
+    public ResponseEntity<?> findByProductoPorCategoria(@PathVariable Long categoriaId) {
         try {
-            return ResponseEntity.ok(productoService.productoPorCategoria(categoriaId));
+            log.info("findByProductoPorCategoria: accediendo al servicio de producto");
+            List<Producto> productos = productoService.findByProductoPorCategoria(categoriaId);
+            log.info("findByProductoPorCategoria: retornando los productos encontrados");
+            return ResponseEntity.ok(productos);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
@@ -158,9 +170,12 @@ public class ProductoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
-    public ResponseEntity<?> productoPorCiudad(@PathVariable Long ciudadId) {
+    public ResponseEntity<?> findByProductoPorCiudad(@PathVariable Long ciudadId) {
         try {
-            return ResponseEntity.ok(productoService.productoPorCiudad(ciudadId));
+            log.info("findByProductoPorCiudad: accediendo al servicio de producto");
+            List<Producto> productos = productoService.findByProductoPorCiudad(ciudadId);
+            log.info("findByProductoPorCiudad: retornando los productos encontrados");
+            return ResponseEntity.ok(productos);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
@@ -172,6 +187,7 @@ public class ProductoController {
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> getProductosRandom() {
         try {
+            log.info("getProductosRandom: accediendo al servicio de producto");
             // Obtener todos los productos desde la base de datos
             List<Producto> productos = productoService.listarProductos();
             // Seleccionar aleatoriamente 8 productos
@@ -181,6 +197,7 @@ public class ProductoController {
                 productosRandom.add(productos.get(i));
             }
             // Devolver los 8 productos seleccionados
+            log.info("getProductosRandom: retornando los productos encontrados");
             return ResponseEntity.ok(productosRandom);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -191,9 +208,12 @@ public class ProductoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
-    public ResponseEntity<?> getProductosDisponiblesFecha (@RequestParam LocalDate fechaInicial, @RequestParam LocalDate fechaFinal) throws Exception {
+    public ResponseEntity<?> findByProductoPorFechas (@RequestParam LocalDate fechaInicial, @RequestParam LocalDate fechaFinal) throws Exception {
         try {
-            return ResponseEntity.ok(productoService.findByProductoFechas(fechaInicial,fechaFinal));
+            log.info("findByProductoPorFechas: accediendo al servicio de producto");
+            List<Producto> productos = productoService.findByProductoPorFechas(fechaInicial,fechaFinal);
+            log.info("findByProductoPorFechas: retornando los productos encontrados");
+            return ResponseEntity.ok(productos);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
@@ -203,10 +223,12 @@ public class ProductoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
-    public ResponseEntity<?> getProductosDisponiblesFechaCiudad (@RequestParam Long ciudadId, @RequestParam LocalDate fechaInicial, @RequestParam LocalDate fechaFinal) {
+    public ResponseEntity<?> findByProductoPorCiudadIdAndFechas (@RequestParam Long ciudadId, @RequestParam LocalDate fechaInicial, @RequestParam LocalDate fechaFinal) {
         try {
-            log.info("Controller: buscando productos por ciudad id y fechas");
-            return ResponseEntity.ok(productoService.findByCiudadIdAndProductoFechas(ciudadId,fechaInicial,fechaFinal));
+            log.info("findByProductoPorCiudadIdAndFechas: accediendo al servicio de producto");
+            List<Producto> productos = productoService.findByProductoPorCiudadIdAndFechas(ciudadId,fechaInicial,fechaFinal);
+            log.info("findByProductoPorCiudadIdAndFechas: retornando los productos encontrados");
+            return ResponseEntity.ok(productos);
         } catch (Exception e){
             log.info(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

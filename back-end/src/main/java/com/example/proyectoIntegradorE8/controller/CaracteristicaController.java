@@ -1,6 +1,7 @@
 package com.example.proyectoIntegradorE8.controller;
 
 import com.example.proyectoIntegradorE8.entity.Caracteristica;
+import com.example.proyectoIntegradorE8.exception.GlobalException;
 import com.example.proyectoIntegradorE8.exception.ResourceNotFoundException;
 import com.example.proyectoIntegradorE8.service.CaractersiticaService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,27 +11,24 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.sql.SQLException;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
 import java.util.List;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/caracteristica")
 @Log4j
 @Tag(name = "Caracteristica", description = "API metodos CRUD de las caracteristicas")
 public class CaracteristicaController {
-    private CaractersiticaService caractersiticaService;
-
-    @Autowired
-    public CaracteristicaController (CaractersiticaService caractersiticaService){
-        this.caractersiticaService = caractersiticaService;
-    }
+    private final CaractersiticaService caractersiticaService;
 
     @PostMapping
     @Operation(summary = "Agregar una caracteristica", description = "Este endpoint permite agregar una caracteristica a a la BBDD")
@@ -44,12 +42,12 @@ public class CaracteristicaController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)})
     public ResponseEntity<?> guardarCaracteristica (@RequestBody Caracteristica caracteristica){
         try {
-            log.info("Se inicia el proceso para guardar una caracteristica en la BBDD");
+            log.info("guardarCaracteristica: accediendo al servicio de caracteristica...");
             Caracteristica caracteristicaGuardada = caractersiticaService.guardarCaracteristica(caracteristica);
-            log.info("La caracteristica fue guardada "+caracteristica.getTitulo()+" en la BBDD exitosamente");
+            log.info("La caracteristica fue guardada en la BBDD exitosamente");
             return ResponseEntity.ok(caracteristicaGuardada);
-        } catch (SQLException bre){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bre.getMessage());
+        } catch (ConstraintViolationException e) {
+            return new GlobalException().handleConstraintViolationException(e);
         }
     }
     @GetMapping("/{id}")
@@ -58,12 +56,16 @@ public class CaracteristicaController {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Caracteristica.class))),
             @ApiResponse(responseCode = "404", description = "La caracteristica no existe en la BBDD", content = @Content),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
-    public ResponseEntity<?> buscarCaracteristica (@PathVariable Long id) {
+    public ResponseEntity<?> buscarCaracteristica (@PathVariable Long id) throws Exception {
         try {
+            log.info("buscarCaracteristica: accediendo al servicio de caracteristica...");
             Caracteristica caracteristicaBuscada = caractersiticaService.buscarCaracteristica(id);
+            log.info("buscarCaracteristica: retornando la caracteristica encontrada");
             return ResponseEntity.ok(caracteristicaBuscada);
         } catch (ResourceNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (MethodArgumentTypeMismatchException matme){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(matme.getMessage());
         }
     }
     @PutMapping
@@ -74,13 +76,17 @@ public class CaracteristicaController {
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> actualizarCaracteristica(@RequestBody Caracteristica caracteristica){
         try {
+            log.info("actualizarCaracteristica: accediendo al servicio de caracteristica...");
             caractersiticaService.buscarCaracteristica(caracteristica.getId());
-            caractersiticaService.guardarCaracteristica(caracteristica);
+            caractersiticaService.actualizarCaracteristica(caracteristica);
+            log.info("actualizarCaracteristica: caracteristica con id: "+caracteristica.getId()+" actualizado en la BBDD exitosamente");
             return ResponseEntity.ok(caracteristica);
-        } catch (ResourceNotFoundException rnfe){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(rnfe.getMessage());
-        } catch (SQLException sqle){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(sqle.getMessage());
+        } catch (EntityNotFoundException enfe){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(enfe.getMessage());
+        } catch (ConstraintViolationException e) {
+            return new GlobalException().handleConstraintViolationException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
     @GetMapping
@@ -90,8 +96,9 @@ public class CaracteristicaController {
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> listarCaracteristicas() {
         try {
+            log.info("listarCaracteristicas: accediendo al servicio de caracteristica...");
             List<Caracteristica> caractersiticasGuardadas = caractersiticaService.listarCaracteristicas();
-            log.info("Mostrando todas las caractersiticas registradas en la BBDD");
+            log.info("listarCaracteristicas: retornando la lista de caracteristicas");
             return ResponseEntity.ok(caractersiticasGuardadas);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -105,8 +112,10 @@ public class CaracteristicaController {
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
     public ResponseEntity<?> eliminarCaracteristica (@PathVariable Long id) {
         try {
+            log.info("eliminarCaracteristica: accediendo al servicio de caracteristica...");
             caractersiticaService.buscarCaracteristica(id);
             caractersiticaService.eliminarCaracteristica(id);
+            log.info("eliminarCaracteristica: caracteristica con id: "+id+" eliminada de la BBDD exitosamente");
             return ResponseEntity.ok("Se elimino la caracteristica con ID: "+id+" de la BBDD exitosamente");
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -114,13 +123,16 @@ public class CaracteristicaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-    @GetMapping("/producto/{producto}")
+    @GetMapping("/producto/{productoId}")
     @Operation(summary = "Buscar las caracteristicas por producto ID", description = "Este endpoint permite buscar las caracteristicas por producto ID en la BBDD")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Caracteristica.class))),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
-    public ResponseEntity<List<Caracteristica>> caracteristicaXProducto(@PathVariable Long producto){
-        return ResponseEntity.ok(caractersiticaService.caracteristicasXProducto(producto));
+    public ResponseEntity<List<Caracteristica>> caracteristicaXProducto(@PathVariable Long productoId) throws Exception {
+        log.info("caracteristicaXProducto: accediendo al servicio de caracteristica");
+        List<Caracteristica> caracteristicas = caractersiticaService.caracteristicasXProducto(productoId);
+        log.info("caracteristicaXProducto: retornando las caracteristicas encontradas");
+        return ResponseEntity.ok(caracteristicas);
     }
 
 }

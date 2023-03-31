@@ -38,14 +38,26 @@ const Header = () => {
     if (!state.admin) {
       return (
         <div className="header-extra-functions">
-          <button className="extra-function" onClick={() => navigate("/favoritos")}>Favoritos</button>
-          <button className="extra-function" onClick={() => navigate("/reservas")}>Mis reservas</button>
+          <button className="extra-function" 
+          onClick={() => {
+            navigate("/favoritos")
+            setMobileOpen(false)
+          }}>Favoritos</button>
+          <button className="extra-function" 
+          onClick={() => {
+            navigate("/reservas")
+            setMobileOpen(false)
+          }}>Mis reservas</button>
         </div>
       )
     } else {
       return (
         <div className="header-extra-functions">
-          <button className="extra-function" onClick={() => navigate("/admin")}>Administración</button>
+          <button className="extra-function" 
+          onClick={() => {
+            navigate("/administracion")
+            setMobileOpen(false)
+          }}>Administración</button>
         </div>
       )
     }
@@ -88,23 +100,43 @@ const Header = () => {
         <h6>Sentite como en tu hogar</h6>
       </div>
       <div className={`btns ${!state.logged ? "" : "oculto"}`}>
-        {
-          routes.map(({ id, path, title }) => {
-              if (id === 2 && id !== routes.length && location.pathname !== "/register" ) {
-                return (
-                  <button className='small-button' onClick={() => navigate(path)} key={id}>
-                    {title}
-                  </button>
-                )
-              } else if (id === 3 && location.pathname !== "/login") {
-                return (
-                  <button className='small-button' onClick={() => navigate(path)} key={id}>
-                    {title}
-                  </button>
-                )
-              }
-          })
-        }
+        <div className="header-extra-functions">
+          <button className="extra-function" 
+          onClick={() => {
+            navigate("/favoritos");
+            setMobileOpen(false)
+          }}
+          >Favoritos</button>
+        </div>
+        <div className="not-logged-container">
+          {
+            routes.map(({ id, path, title }) => {
+                if (id === 2 && id !== routes.length && location.pathname !== "/register" ) {
+                  return (
+                    <button className='small-button' 
+                    onClick={() => {
+                      navigate(path);
+                      setMobileOpen(false)
+                    }} 
+                    key={id}>
+                      {title}
+                    </button>
+                  )
+                } else if (id === 3 && location.pathname !== "/login") {
+                  return (
+                    <button className='small-button' 
+                    onClick={() => {
+                      navigate(path);
+                      setMobileOpen(false)
+                    }} 
+                    key={id}>
+                      {title}
+                    </button>
+                  )
+                }
+            })
+          }
+        </div>
       </div>
       <div className={`header-logged-user ${!state.logged ? "oculto" : ""}`} >
         {renderExtraFunctions()}
@@ -119,10 +151,10 @@ const Header = () => {
           <FontAwesomeIcon icon={faX} className="x-icon" onClick={() => cerrarSesion()}/>
         </div>
       </div>
-      <button className='icon-button' onClick={handleDrawerToggle} style={mobileOpen ? {display: "none"} : {display: "block"}}>
+      <button className='icon-button' onClick={handleDrawerToggle}>
         <FontAwesomeIcon icon={faBars} className="menu-icon"/>
       </button>
-      <div className="drawer" onClick={handleDrawerToggle} style={mobileOpen ? {display: "block"} : {display: "none"}}>
+      <div className={`drawer ${mobileOpen ? "open" : ""}`} >
         <Menu open={mobileOpen} openClose={handleDrawerToggle} renderFunctions={renderExtraFunctions}/>
       </div>
     </header>

@@ -8,6 +8,7 @@ import Llegada from './Llegada'
 import { getDaysArray, normalizarFecha, deshabilitarSeleccionIntermedida } from '../Utils/utils'
 import axios from 'axios'
 import { API_URL } from '../Utils/api'
+import emailjs from '@emailjs/browser'
 
 const ReservaForm = ({ 
     tituloCategoria, 
@@ -32,6 +33,7 @@ const ReservaForm = ({
         ciudad: "",
         horaLlegada: "",
     })
+
     
     const handleChangeCiudad = (value) => {
         setValues({...values, ciudad: value})
@@ -60,6 +62,14 @@ const ReservaForm = ({
             id: values.usuarioId,
             ciudad: values.ciudad
         }
+        let templateParams = {
+            nombre: `${values.nombre} ${values.apellido}`,
+            user_email: values.mail,
+            producto: tituloProducto,
+            checkIn: `${objPostReserva.fechaInicial} ${objPostReserva.horaComienzo}`,
+            checkOut: objPostReserva.fechaFinal,
+            empresa: "Digital Booking"
+        } 
 
         if (!objPostReserva.horaComienzo || !objPostReserva.fechaFinal || !objPostReserva.fechaInicial || !values.ciudad || !values.usuarioId) {
             mostrarAlerta()
@@ -69,6 +79,13 @@ const ReservaForm = ({
             .then(res => {
                 handleConfirmacion()
                 setSendLoad(false);
+                emailjs.send("service_nc0296c", "template_b5rk35n", templateParams, "8EQLpJMNLWle12z9B")
+                .then(res => {
+                    console.log(res.text);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
             })
             .catch(err => {
                 Swal.fire({
@@ -76,15 +93,17 @@ const ReservaForm = ({
                     title: 'Oops',
                     text: 'La reserva no pudo ser realizada intentalo de nuevo más tarde!',
                 })
+                setSendLoad(false);
             })
             axios.put(`${API_URL}/usuario`, objPutUsuario, { headers })
-            .then()
+            .then(setSendLoad(false))
             .catch(err => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops',
                     text: 'La reserva no pudo ser realizada intentalo de nuevo más tarde!',
                 })
+                setSendLoad(false);
             })
         }
 

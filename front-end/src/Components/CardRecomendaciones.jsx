@@ -20,6 +20,10 @@ const CardRecomendaciones = ({
   location,
   description,
   puntuacion,
+  checkIn,
+  checkOut,
+  reserva,
+  llegada
 }) => {
   const navigate = useNavigate();
   const MAX_LENGTH = 100;
@@ -118,11 +122,17 @@ const CardRecomendaciones = ({
             </a>
           </p>
 
-          {characteristics.map((caracteristica) => (
-            <span key={caracteristica.id} className="icono-servicio">
-              {elegirServicio(caracteristica.titulo, "#383b58")}
-            </span>
-          ))}
+          {
+            !reserva ? characteristics.map((caracteristica) => (
+              <span key={caracteristica.id} className="icono-servicio">
+                {elegirServicio(caracteristica.titulo, "#383b58")}
+              </span>
+            )) :
+            (<div style={{ marginTop: "20px" }}>
+              <p>Check in: {checkIn + " " + llegada}</p>
+              <p>Check out: {checkOut}</p>
+            </div>)
+          }
         </div>
         <p>
           {shortDescription}

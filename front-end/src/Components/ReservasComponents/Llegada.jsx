@@ -4,9 +4,7 @@ import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
-const Llegada = ({ values, changeHour }) => {
-
-  const [idValue, setIdValue] = useState(9);
+const Llegada = ({ changeHour }) => {
 
   return (
     <div className='llegada-container'>
@@ -15,7 +13,7 @@ const Llegada = ({ values, changeHour }) => {
         <div className="llegada-card-content">
           <h5>
             <span><FontAwesomeIcon icon={faCheck} className="icon-check"/></span>
-            Tu habitación va a estar lista para el check-in entre las {horas[idValue].label} y las {idValue !== 23 ? horas[idValue + 1].label : horas[0].label}
+            Tu habitación va a estar lista para el check-in entre las 10:00 AM y las 11:00 PM
           </h5>
           <p>Indicá tu horario estimado de llegada</p>
           <Select
@@ -26,7 +24,6 @@ const Llegada = ({ values, changeHour }) => {
             options={horas}
             onChange={(e) => {
               changeHour(e.value)
-              setIdValue(e.i)
             }}
             menuPlacement="top"
           />

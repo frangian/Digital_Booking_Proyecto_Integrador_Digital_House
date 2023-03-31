@@ -33,12 +33,12 @@ const CardReserva = ({ tituloCategoria, tituloProducto, ubicacion, img, checks, 
             <div className="checkin-checkout">
               <div className="checkin">
                 <p>Check in</p>
-                <p className="fecha">{checks[0]?.day ? `${checks[0]?.day}/${checks[0]?.month}/${checks[0]?.year}` : " / / "}</p>
+                <p className="fecha">{checks[0]?.day ? `${checks[0]?.day}/${checks[0]?.month}/${checks[0]?.year}` : "_ _ /_ _ /_ _"}</p>
               </div>
               <div className="checkout">
                 <p>Check out</p>
                 <p className="fecha">
-                  {checks[1]?.day ? `${checks[1]?.day}/${checks[1]?.month}/${checks[1]?.year}` : " / / "}
+                  {checks[1]?.day ? `${checks[1]?.day}/${checks[1]?.month}/${checks[1]?.year}` : "_ _ /_ _ /_ _"}
                 </p>
               </div>
             </div>
