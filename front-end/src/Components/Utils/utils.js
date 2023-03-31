@@ -24,6 +24,30 @@ export const elegirServicio = (titulo, color) => {
     }
 }
 
+export const tituloXIdServicio = (titulo) => { 
+    if (titulo === "Cocina") {
+        return {"id": 1};
+    }
+    if (titulo === "Televisor") {
+        return {"id": 2};
+    }
+    if (titulo === "Aire acondicionado") {
+        return {"id": 2};
+    }
+    if (titulo === "Apto mascotas") {
+        return {"id": 3};
+    }
+    if (titulo === "Estacionamiento gratuito") {
+        return {"id": 5};
+    }
+    if (titulo === "Pileta") {
+        return {"id": 6};
+    }
+    if (titulo === "Wifi") {
+        return {"id": 7};
+    }
+}
+
 export const horas = [
     {i: 1, value: "10:00:00", label: "10:00 AM"},
     {i: 2, value: "11:00:00", label: "11:00 AM"},

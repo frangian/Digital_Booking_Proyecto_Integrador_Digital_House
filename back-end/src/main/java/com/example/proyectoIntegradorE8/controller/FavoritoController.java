@@ -22,14 +22,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/favorito")
 @Log4j
 @Tag(name = "Favorito", description = "API metodos CRUD de los favoritos")
 public class FavoritoController {
-
     private final FavoritoService favoritoService;
     private final ProductoService productoService;
 
@@ -143,6 +141,22 @@ public class FavoritoController {
         }
     }
 
+    @GetMapping("/usuario/{usuarioId}")
+    @Operation(summary = "Listar todos los favoritos asignadas al usuario buscado", description = "Este endpoint permite ver todos los usuarios asignadas al usuario buscado registrados en la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
+            @ApiResponse(responseCode = "400", description = "Petición Incorrecta", content = @Content)})
+    public ResponseEntity<?> favoritoPorUsuario(@PathVariable Long usuarioId) {
+        try {
+            log.info("favoritoPorUsuario: accediendo al servicio de favorito");
+            List<Producto> productos = favoritoService.productoPorUsuario(usuarioId);
+            log.info("favoritoPorUsuario: retornando los productos encontrados");
+            return ResponseEntity.ok(productos);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
 //trae el id del prodcuto
 
 //    @GetMapping("/usuario/{usuarioId}")
@@ -160,21 +174,5 @@ public class FavoritoController {
 //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 //        }
 //    }
-
-    @GetMapping("/usuario/{usuarioId}")
-    @Operation(summary = "Listar todos los favoritos asignadas al usuario buscado", description = "Este endpoint permite ver todos los usuarios asignadas al usuario buscado registrados en la BBDD")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
-            @ApiResponse(responseCode = "400", description = "Petición Incorrecta", content = @Content)})
-    public ResponseEntity<?> favoritoPorUsuario(@PathVariable Long usuarioId) {
-        try {
-            log.info("favoritoPorUsuario: accediendo al servicio de favorito");
-            List<Producto> productos = favoritoService.productoPorUsuario(usuarioId);
-            log.info("favoritoPorUsuario: retornando los productos encontrados");
-            return ResponseEntity.ok(productos);
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
 
 }

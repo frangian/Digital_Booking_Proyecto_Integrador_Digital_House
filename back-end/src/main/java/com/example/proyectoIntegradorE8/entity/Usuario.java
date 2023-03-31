@@ -42,7 +42,6 @@ public class Usuario  implements UserDetails  {
     private List<Reserva> reservas = new ArrayList<>();
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Favorito> favoritos = new ArrayList<>();
-
     @Override
     public String getUsername() {
      return this.getEmail();
@@ -61,8 +60,6 @@ public class Usuario  implements UserDetails  {
     }
     @Override
     public boolean isAccountNonLocked () {
-    //  Date ahora = new Date();
-    //  return lockedUntil == null || ahora.after(lockedUntil);
            return true;
     }
     @Override
