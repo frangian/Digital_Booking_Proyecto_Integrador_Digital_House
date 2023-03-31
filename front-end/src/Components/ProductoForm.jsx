@@ -5,7 +5,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus, faSquareXmark } from "@fortawesome/free-solid-svg-icons";
 import { tituloXIdServicio } from "./Utils/utils";
-import { campoRequerido } from "./Utils/validaciones";
+import { campoRequerido, validarUrl } from "./Utils/validaciones";
 import CiudadForm from "./CiudadForm";
 import Modal from "./Modal";
 
@@ -71,6 +71,24 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
     setErrorDesUbicacion("");
   };
 
+  const camposRequeridos = [
+    { campo: titulo, mensaje: "Este campo es obligatorio", error: setErrorTitulo },
+    { campo: direccion, mensaje: "Este campo es obligatorio", error: setErrorDireccion },
+    { campo: categoria.id, mensaje: "Este campo es obligatorio", error: setErrorCategoria },
+    { campo: ciudad.id, mensaje: "Este campo es obligatorio", error: setErrorCiudad },
+    { campo: descripcion, mensaje: "Este campo es obligatorio", error: setErrorDescripcion },
+    { campo: puntuacion, mensaje: "Este campo es obligatorio", error: setErrorPuntuacion },
+    { campo: attributes, mensaje: "Este campo es obligatorio", error: setErrorCaracteristica },
+    { campo: normas, mensaje: "Este campo es obligatorio", error: setErrorNormas },
+    { campo: seguridad, mensaje: "Este campo es obligatorio", error: setErrorSeguridad },
+    { campo: cancelacion, mensaje: "Este campo es obligatorio", error: setErrorCancelacion },
+    { campo: imagenes, mensaje: "Este campo es obligatorio", error: setErrorImagen },
+    { campo: urlMapa, mensaje: "Este campo es obligatorio", error: setErrorUrlMapa },
+    { campo: desUbicacion, mensaje: "Este campo es obligatorio", error: setErrorDesUbicacion },
+  ];
+  
+  
+
   useEffect(() => {
     fetchCategories();
     fetchCities();
@@ -119,68 +137,26 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
     event.preventDefault();
     resetErrors();
     let envio = true;
-    if (!campoRequerido(titulo)) {
+  
+    camposRequeridos.forEach(({ campo, mensaje, error }) => {
+      if (!campoRequerido(campo)) {
+        envio = false;
+        error(mensaje);
+      }
+    });
+  
+    if (!validarUrl(urlMapa, "https://www.google.com/maps/embed") && campoRequerido(urlMapa)) {
       envio = false;
-      setErrorTitulo("Este campo es obligatorio");
+      setErrorUrlMapa("El formato de la url no es correcto");
     }
-    if (!campoRequerido(direccion)) {
-      envio = false;
-      setErrorDireccion("Este campo es obligatorio");
-    }
-    if (!campoRequerido(categoria.id)) {
-      envio = false;
-      setErrorCategoria("Este campo es obligatorio");
-    }
-    if (!campoRequerido(ciudad.id)) {
-      envio = false;
-      setErrorCiudad("Este campo es obligatorio");
-    }
-    if (!campoRequerido(descripcion)) {
-      envio = false;
-      setErrorDescripcion("Este campo es obligatorio");
-    }
-    if (!campoRequerido(puntuacion)) {
-      envio = false;
-      setErrorPuntuacion("Este campo es obligatorio");
-    }
-    if (!campoRequerido(attributes)) {
-      envio = false;
-      setErrorCaracteristica("Este campo es obligatorio");
-    }
-    if (!campoRequerido(normas)) {
-      envio = false;
-      setErrorNormas("Este campo es obligatorio");
-    }
-    if (!campoRequerido(seguridad)) {
-      envio = false;
-      setErrorSeguridad("Este campo es obligatorio");
-    }
-    if (!campoRequerido(cancelacion)) {
-      envio = false;
-      setErrorCancelacion("Este campo es obligatorio");
-    }
-    if (!campoRequerido(imagenes)) {
-      envio = false;
-      setErrorImagen("Este campo es obligatorio");
-    }
-    if (!campoRequerido(urlMapa)) {
-      envio = false;
-      setErrorUrlMapa("Este campo es obligatorio");
-    }
-    if (!campoRequerido(desUbicacion)) {
-      envio = false;
-      setErrorDesUbicacion("Este campo es obligatorio");
-    }
-
+  
     if (envio) {
       setSendLoad(true);
-      const caracteristicas = attributes.map((atribute) =>
-        tituloXIdServicio(atribute.id)
-      );
+      const caracteristicas = attributes.map((atribute) => tituloXIdServicio(atribute.id));
       const descripcion_producto = descripcion;
       const descripcion_ubicacion = desUbicacion;
       const url_ubicacion = urlMapa;
-
+  
       const data = {
         titulo,
         descripcion_producto,
@@ -202,19 +178,20 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
           headers: { "Content-Type": "application/json" },
         })
         .then((response) => {
-          
-            setSendLoad(false);
-            handleConfirmacion();
-          
+          setSendLoad(false);
+          handleConfirmacion();
+          console.log(response.data);
         })
         .catch((error) => {
           console.error(error);
+          setSendLoad(false);
           setError(
             "Lamentablemente el producto no ha podido crearse. Por favor intente más tarde."
           );
         });
     }
   }
+  
 
   const handleChangeCaracteristica = (event) => {
     setCaracteristica(event.target.value);
@@ -226,7 +203,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
 
   function handleAddAttribute(event) {
     event.preventDefault();
-    if (newAttribute.id !== "") {
+    if (newAttribute.id !== "" && !attributes.some(obj => obj.id === newAttribute.id)) {
       setAttributes((prevAttributes) => [...prevAttributes, newAttribute]);
       setNewAttribute({ id: "" });
       setCaracteristica("");
@@ -256,10 +233,11 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
   }
   function handleAddImg(event) {
     event.preventDefault();
-    if (newImg.url !== "") {
+    if (newImg.url_imagen !== "" && validarUrl(newImg.url_imagen, "https")) {
       setImagenes((prevImg) => [...prevImg, newImg]);
       setNewImg({ titulo: "", url_imagen: "" });
-    }
+    }else{ 
+      setErrorImagen("El formato no es valido")}
   }
   function handleImgChange(index, event) {
     const { name, value } = event.target;

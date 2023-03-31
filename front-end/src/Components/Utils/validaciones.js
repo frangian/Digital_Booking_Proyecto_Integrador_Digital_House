@@ -31,3 +31,7 @@ export const normalizarNombre = (nombre) => {
     const nombreNormalizado = nombre.charAt(0).toUpperCase() + nombre.slice(1)
     return nombreNormalizado.trim();
 }
+
+export const validarUrl = (url, texto) => {
+    return url.includes(texto);
+}
