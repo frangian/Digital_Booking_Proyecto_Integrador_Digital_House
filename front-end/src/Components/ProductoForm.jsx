@@ -2,31 +2,80 @@ import React, { useState, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { API_URL } from "./Utils/api";
 import axios from "axios";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faSquarePlus,faSquareXmark} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquarePlus, faSquareXmark } from "@fortawesome/free-solid-svg-icons";
+import { tituloXIdServicio } from "./Utils/utils";
+import { campoRequerido } from "./Utils/validaciones";
+import CiudadForm from "./CiudadForm";
+import Modal from "./Modal";
 
 const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
-  const [productName, setProductName] = useState("");
-  const [category, setCategory] = useState("");
-  const [city, setCity] = useState("");
-  const [description, setDescription] = useState("");
-  const [address, setAddress] = useState("");
+  const [sendLoad, setSendLoad] = useState(false);
+
+  const [titulo, setTitulo] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [categoria, setCategoria] = useState({ id: "" });
+  const [ciudad, setCiudad] = useState({ id: "" });
+  const [direccion, setDireccion] = useState("");
+  const [puntuacion, setPuntuacion] = useState("");
+  const [urlMapa, setUrlMapa] = useState("");
+  const [desUbicacion, setDesUbicacion] = useState("");
+
   const [attributes, setAttributes] = useState([]);
-  const [newAttribute, setNewAttribute] = useState({ name: "", iconClass: "" });
-  const [images, setImages] = useState([]);
-  const [houseRules, setHouseRules] = useState("");
-  const [healthAndSafety, setHealthAndSafety] = useState("");
-  const [cancellationPolicy, setCancellationPolicy] = useState("");
+  const [newAttribute, setNewAttribute] = useState({ id: "" });
+
+  const [imagenes, setImagenes] = useState([]);
+  const [newImg, setNewImg] = useState({ titulo: "", url_imagen: "" });
+
+  const [normas, setNormas] = useState("");
+  const [seguridad, setSeguridad] = useState("");
+  const [cancelacion, setCancelacion] = useState("");
+
   const [categories, setCategories] = useState([]);
   const [cities, setCities] = useState([]);
-  const [caracteristicas, setCaracteristicas] = useState("");
+
+  const [caracteristica, setCaracteristica] = useState("");
+  const [caracteristicasArray, setCaracteristicasArray] = useState([]);
+
   const [error, setError] = useState("");
+  const [errorTitulo, setErrorTitulo] = useState("");
+  const [errorDescripcion, setErrorDescripcion] = useState("");
+  const [errorCategoria, setErrorCategoria] = useState("");
+  const [errorCiudad, setErrorCiudad] = useState("");
+  const [errorDireccion, setErrorDireccion] = useState("");
+  const [errorPuntuacion, setErrorPuntuacion] = useState("");
+  const [errorCaracteristica, setErrorCaracteristica] = useState("");
+  const [errorNormas, setErrorNormas] = useState("");
+  const [errorSeguridad, setErrorSeguridad] = useState("");
+  const [errorCancelacion, setErrorCancelacion] = useState("");
+  const [errorImagen, setErrorImagen] = useState("");
+  const [errorUrlMapa, setErrorUrlMapa] = useState("");
+  const [errorDesUbicacion, setErrorDesUbicacion] = useState("");
+
+  const [ciudadCreada, setCiudadCreada] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const resetErrors = () => {
+    setErrorTitulo("");
+    setErrorDescripcion("");
+    setErrorCategoria("");
+    setErrorCiudad("");
+    setErrorDireccion("");
+    setErrorPuntuacion("");
+    setErrorCaracteristica("");
+    setErrorNormas("");
+    setErrorSeguridad("");
+    setErrorCancelacion("");
+    setErrorImagen("");
+    setErrorUrlMapa("");
+    setErrorDesUbicacion("");
+  };
 
   useEffect(() => {
     fetchCategories();
     fetchCities();
-    fetchCaracteristicas()
-  }, []);
+    fetchCaracteristicas();
+  }, [ciudadCreada]);
 
   function fetchCategories() {
     axios
@@ -44,7 +93,8 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
     axios
       .get(`${API_URL}/caracteristica`)
       .then((response) => {
-        setCaracteristicas(response.data);
+        setCaracteristicasArray(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -58,8 +108,6 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
       .then((response) => {
         const data = response.data;
         setCities(data);
-
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -69,46 +117,120 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const data = {
-      productName,
-      category,
-      city,
-      description,
-      address,
-      attributes,
-      images,
-      houseRules,
-      healthAndSafety,
-      cancellationPolicy,
-    };
-    axios
-      .post("api/post", data, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((response) => {
-        if (response.ok) {
-          handleConfirmacion();
-        } else {
-          throw new Error("Error al crear producto");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        setError(
-          "Lamentablemente el producto no ha podido crearse. Por favor intente más tarde."
-        );
-      });
+    resetErrors();
+    let envio = true;
+    if (!campoRequerido(titulo)) {
+      envio = false;
+      setErrorTitulo("Este campo es obligatorio");
+    }
+    if (!campoRequerido(direccion)) {
+      envio = false;
+      setErrorDireccion("Este campo es obligatorio");
+    }
+    if (!campoRequerido(categoria.id)) {
+      envio = false;
+      setErrorCategoria("Este campo es obligatorio");
+    }
+    if (!campoRequerido(ciudad.id)) {
+      envio = false;
+      setErrorCiudad("Este campo es obligatorio");
+    }
+    if (!campoRequerido(descripcion)) {
+      envio = false;
+      setErrorDescripcion("Este campo es obligatorio");
+    }
+    if (!campoRequerido(puntuacion)) {
+      envio = false;
+      setErrorPuntuacion("Este campo es obligatorio");
+    }
+    if (!campoRequerido(attributes)) {
+      envio = false;
+      setErrorCaracteristica("Este campo es obligatorio");
+    }
+    if (!campoRequerido(normas)) {
+      envio = false;
+      setErrorNormas("Este campo es obligatorio");
+    }
+    if (!campoRequerido(seguridad)) {
+      envio = false;
+      setErrorSeguridad("Este campo es obligatorio");
+    }
+    if (!campoRequerido(cancelacion)) {
+      envio = false;
+      setErrorCancelacion("Este campo es obligatorio");
+    }
+    if (!campoRequerido(imagenes)) {
+      envio = false;
+      setErrorImagen("Este campo es obligatorio");
+    }
+    if (!campoRequerido(urlMapa)) {
+      envio = false;
+      setErrorUrlMapa("Este campo es obligatorio");
+    }
+    if (!campoRequerido(desUbicacion)) {
+      envio = false;
+      setErrorDesUbicacion("Este campo es obligatorio");
+    }
+
+    if (envio) {
+      setSendLoad(true);
+      const caracteristicas = attributes.map((atribute) =>
+        tituloXIdServicio(atribute.id)
+      );
+      const descripcion_producto = descripcion;
+      const descripcion_ubicacion = desUbicacion;
+      const url_ubicacion = urlMapa;
+
+      const data = {
+        titulo,
+        descripcion_producto,
+        descripcion_ubicacion,
+        url_ubicacion,
+        normas,
+        seguridad,
+        cancelacion,
+        puntuacion,
+        categoria,
+        direccion,
+        ciudad,
+        caracteristicas,
+        imagenes,
+      };
+      console.log(data);
+      axios
+        .post(`${API_URL}/producto`, data, {
+          headers: { "Content-Type": "application/json" },
+        })
+        .then((response) => {
+          
+            setSendLoad(false);
+            handleConfirmacion();
+          
+        })
+        .catch((error) => {
+          console.error(error);
+          setError(
+            "Lamentablemente el producto no ha podido crearse. Por favor intente más tarde."
+          );
+        });
+    }
   }
 
-  function handleNewAttributeChange(event) {
-    const { name, value } = event.target;
-    setNewAttribute((prevAttribute) => ({ ...prevAttribute, [name]: value }));
-  }
+  const handleChangeCaracteristica = (event) => {
+    setCaracteristica(event.target.value);
+    setNewAttribute((prevAttribute) => ({
+      ...prevAttribute,
+      id: event.target.value,
+    }));
+  };
 
   function handleAddAttribute(event) {
     event.preventDefault();
-    setAttributes((prevAttributes) => [...prevAttributes, newAttribute]);
-    setNewAttribute({ name: "", iconClass: "" });
+    if (newAttribute.id !== "") {
+      setAttributes((prevAttributes) => [...prevAttributes, newAttribute]);
+      setNewAttribute({ id: "" });
+      setCaracteristica("");
+    }
   }
 
   function handleAttributeChange(index, event) {
@@ -128,29 +250,72 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
     });
   }
 
-  function handleImageChange(event) {
-    setImages(Array.from(event.target.files));
+  function handleNewImgChange(event) {
+    const { name, value } = event.target;
+    setNewImg((prevImg) => ({ ...prevImg, [name]: value }));
   }
+  function handleAddImg(event) {
+    event.preventDefault();
+    if (newImg.url !== "") {
+      setImagenes((prevImg) => [...prevImg, newImg]);
+      setNewImg({ titulo: "", url_imagen: "" });
+    }
+  }
+  function handleImgChange(index, event) {
+    const { name, value } = event.target;
+    setImagenes((prevImg) => {
+      const newImg = [...prevImg];
+      newImg[index][name] = value;
+      return newImg;
+    });
+  }
+  function handleDeleteImg(index) {
+    setImagenes((prevImg) => {
+      const newImg = [...prevImg];
+      newImg.splice(index, 1);
+      return newImg;
+    });
+  }
+
+  const handleCiudadCreada = (bool) => {
+    setCiudadCreada(bool);
+    setShowModal(false);
+  }
+
+  const handleToggleDescription = () => {
+    setShowModal(!showModal);
+    setCiudadCreada(false);
+  };
 
   return (
     <div className="crear-producto-container">
-      <h1>Crear un producto</h1>
+      <h1>Crear un producto <span className="link-demo"> (Link video demo)</span></h1>
+      
       <div className="producto-form-container">
         <form id="producto-form" onSubmit={(event) => handleSubmit(event)}>
           <fieldset className="info-producto-container">
-            <label>
+            <label className={` ${errorTitulo ? "error" : ""}`}>
               <span>Nombre del producto:</span>
               <input
                 type="text"
-                value={productName}
-                onChange={(event) => setProductName(event.target.value)}
+                value={titulo}
+                onChange={(event) => {
+                  event.target.parentElement.classList.remove("error");
+                  setErrorTitulo("");
+                  setTitulo(event.target.value);
+                }}
               />
+              <p>{errorTitulo}</p>
             </label>
-            <label>
+            <label className={` ${errorCategoria ? "error" : ""}`}>
               <span>Categoría:</span>
               <select
-                value={category}
-                onChange={(event) => setCategory(event.target.value)}
+                value={categoria.titulo}
+                onChange={(event) => {
+                  event.target.parentElement.classList.remove("error");
+                  setErrorCategoria("");
+                  setCategoria({ id: parseInt(event.target.value) });
+                }}
               >
                 <option value="">Selecciona una categoría</option>
                 {categories.map((category) => (
@@ -159,20 +324,35 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
                   </option>
                 ))}
               </select>
+              <p>{errorCategoria}</p>
             </label>
-            <label>
+            <label className={` ${errorDireccion ? "error" : ""}`}>
               <span>Dirección:</span>
               <input
                 type="text"
-                value={address}
-                onChange={(event) => setAddress(event.target.value)}
+                value={direccion}
+                onChange={(event) => {
+                  event.target.parentElement.classList.remove("error");
+                  setErrorDireccion("");
+                  setDireccion(event.target.value);
+                }}
               />
+              <p>{errorDireccion}</p>
             </label>
-            <label>
-              <span>Ciudad:</span>
+            <label className={` ${errorCiudad ? "error" : ""}`}>
+              <span>Ciudad:
+                <span onClick={handleToggleDescription}
+            id="crear-ciudad"
+            >
+              (Crear nueva ciudad)
+            </span></span>
               <select
-                value={city}
-                onChange={(event) => setCity(event.target.value)}
+                value={ciudad.name}
+                onChange={(event) => {
+                  event.target.parentElement.classList.remove("error");
+                  setErrorCiudad("");
+                  setCiudad({ id: parseInt(event.target.value) });
+                }}
               >
                 <option value="">Selecciona una ciudad</option>
                 {cities.map((city) => (
@@ -181,96 +361,219 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
                   </option>
                 ))}
               </select>
+              <p>{errorCiudad}</p>
+            </label>
+            <label className={` ${errorUrlMapa ? "error" : ""}`}>
+              <span>Url mapa:</span>
+              <input
+                type="text"
+                value={urlMapa}
+                onChange={(event) => {
+                  event.target.parentElement.classList.remove("error");
+                  setErrorUrlMapa("");
+                  setUrlMapa(event.target.value);
+                }}
+              />
+              <p>{errorUrlMapa}</p>
+            </label>
+            <label className={` ${errorDesUbicacion ? "error" : ""}`}>
+              <span>Descripcion ubicacion:</span>
+              <input
+                type="text"
+                value={desUbicacion}
+                maxLength={70}
+                onChange={(event) => {
+                  event.target.parentElement.classList.remove("error");
+                  setErrorDesUbicacion("");
+                  setDesUbicacion(event.target.value);
+                }}
+              />
+              <p>{errorDesUbicacion}</p>
             </label>
           </fieldset>
+          
           <div className="descripcion-section">
-            <label>
+            <label className={` ${errorDescripcion ? "error" : ""}`}>
               <span>Descripción:</span>
               <textarea
-                value={description}
-                onChange={(event) => setDescription(event.target.value)}
+                value={descripcion}
+                onChange={(event) => {
+                  event.target.parentElement.classList.remove("error");
+                  setErrorDescripcion("");
+                  setDescripcion(event.target.value);
+                }}
               />
+              <p>{errorDescripcion}</p>
+            </label>
+            <label className={` ${errorPuntuacion ? "error" : ""}`}>
+              <span>Puntuacion: {puntuacion}</span>
+              <input
+                type="range"
+                name="puntuacion"
+                min="1"
+                max="10"
+                step="1"
+                value={puntuacion}
+                onChange={(event) => {
+                  event.target.parentElement.classList.remove("error");
+                  setPuntuacion(parseInt(event.target.value));
+                }}
+              ></input>
+              <p>{errorPuntuacion}</p>
             </label>
           </div>
           <h2>Agregar atributos</h2>
-          <fieldset className=" atributos"> 
+
+          <fieldset className=" atributos">
             {attributes.map((attribute, index) => (
-              <div key={index} className="atributo-container">
+              <div key={index} className="atributo-container inputs-delete">
                 <label>
-                  <span>Nombre:</span>
                   <input
                     type="text"
-                    value={attribute.name}
+                    value={attribute.id}
                     onChange={(event) => handleAttributeChange(index, event)}
                     name="name"
-                    className="input1"
+                    className="atributo-container-select"
                   />
                 </label>
-                <label>
-                  <span>Clase de icono:</span>
-                  <input
-                    type="text"
-                    value={attribute.iconClass}
-                    onChange={(event) => handleAttributeChange(index, event)}
-                    name="iconClass"
-                    className="input2"
-                  />
-                </label>
-                <FontAwesomeIcon icon={faSquareXmark}  style={{color: "#545776",}} onClick={() => handleDeleteAttribute(index)}/>
+
+                <FontAwesomeIcon
+                  icon={faSquareXmark}
+                  style={{ color: "#545776" }}
+                  className="icono-agregar"
+                  onClick={() => handleDeleteAttribute(index)}
+                />
               </div>
             ))}
             <div className="atributo-container">
-              <label>
-                <span>Nombre:</span>
-                <input
-                  type="text"
-                  value={newAttribute.name}
-                  onChange={handleNewAttributeChange}
-                  name="name"
-                  className="input1"
-                />
-              </label>
-              <label>
-                <span>Clase de icono:</span>
-                <input
-                  type="text"
-                  value={newAttribute.iconClass}
-                  onChange={handleNewAttributeChange}
-                  name="iconClass"
-                  className="input2"
-                />
-              </label>
-              <FontAwesomeIcon icon={faSquarePlus} className="icono-agregar" style={{color: "#1dbeb4",}} onClick={handleAddAttribute} />
+              <div
+                className={`atributo-container-select ${
+                  errorCaracteristica ? "error" : ""
+                }`}
+              >
+                <select
+                  value={caracteristica}
+                  onChange={(event) => {
+                    handleChangeCaracteristica(event);
+                  }}
+                  className={"atributo-container-select "}
+                >
+                  <option value="">Selecciona una caracteristica</option>
+                  {caracteristicasArray.map((caracteristica, index) => (
+                    <option
+                      key={caracteristica.id}
+                      value={caracteristica.titulo}
+                    >
+                      {caracteristica.titulo}
+                    </option>
+                  ))}
+                </select>
+                <p>{errorCaracteristica}</p>
+              </div>
+
+              <FontAwesomeIcon
+                icon={faSquarePlus}
+                className="icono-agregar"
+                style={{ color: "#1dbeb4" }}
+                onClick={(event) => {
+                  event.target.parentElement.classList.remove("error");
+                  setErrorCaracteristica("");
+                  handleAddAttribute(event);
+                }}
+              />
             </div>
           </fieldset>
 
           <h2>Politicas del producto</h2>
           <fieldset className="politicas-producto">
-            
-            <label>
-              <span>Normas de la casa:</span>
-              <p>Descripcion</p>
+            <label className={`${errorNormas ? "error" : ""}`}>
+              <h5>Normas de la casa:</h5>
+              <span>Descripcion</span>
               <textarea
-                value={houseRules}
-                onChange={(event) => setHouseRules(event.target.value)}
+                value={normas}
+                onChange={(event) => {
+                  event.target.parentElement.classList.remove("error");
+                  setErrorNormas("");
+                  setNormas(event.target.value);
+                }}
               />
+              <p className="politicas-parrafo">{errorNormas}</p>
             </label>
-            <label>
-              <span>Salud y seguridad:</span>
-              <p>Descripcion</p>
+            <label className={`${errorSeguridad ? "error" : ""}`}>
+              <h5>Salud y seguridad:</h5>
+              <span>Descripcion</span>
               <textarea
-                value={healthAndSafety}
-                onChange={(event) => setHealthAndSafety(event.target.value)}
+                value={seguridad}
+                onChange={(event) => {
+                  event.target.parentElement.classList.remove("error");
+                  setErrorSeguridad("");
+                  setSeguridad(event.target.value);
+                }}
               />
+              <p className="politicas-parrafo">{errorSeguridad}</p>
             </label>
-            <label>
-              <span>Política de cancelación:</span>
-              <p>Descripcion</p>
+            <label className={`${errorCancelacion ? "error" : ""}`}>
+              <h5>Política de cancelación:</h5>
+              <span>Descripcion</span>
               <textarea
-                value={cancellationPolicy}
-                onChange={(event) => setCancellationPolicy(event.target.value)}
+                value={cancelacion}
+                onChange={(event) => {
+                  event.target.parentElement.classList.remove("error");
+                  setErrorCancelacion("");
+                  setCancelacion(event.target.value);
+                }}
               />
+              <p className="politicas-parrafo">{errorCancelacion}</p>
             </label>
+          </fieldset>
+          <h2>Agregar Imagenes</h2>
+          <fieldset className=" atributos">
+            {imagenes.map((img, index) => (
+              <div key={index} className="atributo-container inputs-delete">
+                <label>
+                  <input
+                    type="text"
+                    value={img.url_imagen}
+                    onChange={(event) => handleImgChange(index, event)}
+                    name="url_imagen"
+                    className="atributo-container-select"
+                  />
+                </label>
+
+                <FontAwesomeIcon
+                  icon={faSquareXmark}
+                  style={{ color: "#545776" }}
+                  className="icono-agregar"
+                  onClick={() => handleDeleteImg(index)}
+                />
+              </div>
+            ))}
+            <div className="atributo-container">
+              <label className={`${errorImagen ? "error" : ""}`}>
+                <input
+                  type="text"
+                  value={newImg.url_imagen}
+                  placeholder="Instertar https://..."
+                  onChange={(event) => {
+                    handleNewImgChange(event);
+                  }}
+                  name="url_imagen"
+                  className="atributo-container-select"
+                />
+                <p>{errorImagen}</p>
+              </label>
+
+              <FontAwesomeIcon
+                icon={faSquarePlus}
+                className="icono-agregar"
+                style={{ color: "#1dbeb4" }}
+                onClick={(event) => {
+                  event.target.parentElement.classList.remove("error");
+                  setErrorImagen("");
+                  handleAddImg(event);
+                }}
+              />
+            </div>
           </fieldset>
         </form>
         <button
@@ -278,9 +581,9 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
           form="producto-form"
           className="btn-crear-producto"
           id="submit-product"
-          disabled={loading}
+          disabled={sendLoad}
         >
-          {loading ? (
+          {sendLoad ? (
             <CircularProgress
               sx={{ color: "#fff", marginTop: "5px" }}
               size="1.4rem"
@@ -290,6 +593,12 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
           )}
         </button>
       </div>
+      {showModal && (
+        <Modal 
+        onClose={handleToggleDescription}>
+          <CiudadForm handleCiudadCreada={e => handleCiudadCreada(e)} />
+        </Modal>
+      )}
     </div>
   );
 };

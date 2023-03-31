@@ -20,7 +20,7 @@ const Admin = () => {
     <div className="admin-page">
       <div className={`producto-page-container ${!confirmada ? "" : "oculto"}`}>
         <ProductHeader tituloProducto={"Administracion"} tituloCategoria={"oculto"} isLoading={loading} handleLoading={()=>handleLoading()}/>
-        <ProductoForm />
+        <ProductoForm handleConfirmacion={handleConfirmacion}/>
       </div>
       <div
         className={`reserva-correcta-container ${confirmada ? "" : "oculto"}`}
