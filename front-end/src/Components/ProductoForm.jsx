@@ -8,6 +8,7 @@ import { tituloXIdServicio } from "./Utils/utils";
 import { campoRequerido, validarUrl } from "./Utils/validaciones";
 import CiudadForm from "./CiudadForm";
 import Modal from "./Modal";
+import Slider from 'rsuite/Slider';
 
 const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
   const [sendLoad, setSendLoad] = useState(false);
@@ -444,6 +445,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
               />
               <p>{errorDescripcion}</p>
             </label>
+            
             <label className={` ${errorPuntuacion ? "error" : ""}`}>
               <span>Puntuacion: {puntuacion}</span>
               <input

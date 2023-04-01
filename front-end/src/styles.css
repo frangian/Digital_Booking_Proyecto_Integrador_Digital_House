@@ -610,6 +610,47 @@ input[type="password"] {
   color: var(--main-dark-gray);
 }
 
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 50%;
+  height: 15px;
+  background: var(--main-dark-white);
+  border-radius: 10px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 35px;
+  height: 35px;
+  background: var(--main-green);
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out,
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: var(--main-green);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out,
+}
+
+
+
 .inputs-delete{
   margin-bottom: 20px;
 }
@@ -2475,7 +2516,7 @@ div.card-reserva-content {
 
   .recomendaciones-container h2 {
     color: var(--main-white);
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
 
   .image-container {
@@ -2570,6 +2611,10 @@ div.card-reserva-content {
   .calendar-container-reserva {
     margin-bottom: 60px;
   }
+
+  .recomendaciones-container h2 {
+    font-size: 1.2rem;
+  }
 }
 
 @media (max-width: 400px) {
@@ -2598,5 +2643,22 @@ div.card-reserva-content {
 
   .calendar-container-reserva {
     margin-bottom: 140px;
+  }
+
+  .info-categoria-container h3  {
+    font-size: 0.8rem;
+  }
+}
+
+@media(max-width:310px){
+  .info-categoria-container h3  {
+    font-size: 0.7rem;
+  }
+  .puntuacion-container p{
+    font-size: 0.6rem;
+  }
+
+  .categorias-container h2{
+    font-size: 1rem;
   }
 }
