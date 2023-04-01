@@ -10,7 +10,7 @@ export const initialState = {
   logged: false,
   map: true,
   location: "",
-  admin: true
+  admin: false
 };
 
 
