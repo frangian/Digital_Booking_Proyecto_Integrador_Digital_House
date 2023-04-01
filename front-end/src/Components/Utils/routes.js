@@ -18,7 +18,7 @@ export const routes = [
     { id: 5, path: "/product/:id/reservas", Element: Reservas, title: "Reserva producto" },
     { id: 6, path: "/reservas", Element: ReservasUsuario, title: "Reservas usuario" },
     { id: 7, path: "/favoritos", Element: Favoritos, title: "Favoritos" },
-    { id: 8, path: "/administracion", Element: Admin, title: "Admin" },
+    { id: 8, path: "/admin", Element: Admin, title: "Admin" },
     { id: 9, path: "/adminTable", Element: Admin, title: "Admin Table" },
 ]
 

@@ -67,7 +67,6 @@ const ReservaForm = ({
             ciudad: values.ciudad
         }
          
-
         if (!objPostReserva.horaComienzo || !objPostReserva.fechaFinal || !objPostReserva.fechaInicial || !values.ciudad || !values.usuarioId) {
             mostrarAlerta()
         } else {
@@ -76,25 +75,28 @@ const ReservaForm = ({
             .then(res => {
                 handleConfirmacion()
                 setSendLoad(false);
+                setReservaId(res.data.id);                
                 setCodigoCambio(true);
-                setReservaId(res.data.id)                
             })
             .catch(err => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops',
                     text: 'La reserva no pudo ser realizada intentalo de nuevo más tarde!',
+                    confirmButtonColor: "#1dbeb4"
                 })
                 setSendLoad(false);
+                // console.log(err, 1);
             })
             axios.put(`${API_URL}/usuario`, objPutUsuario, { headers })
             .then(setSendLoad(false))
             .catch(err => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops',
-                    text: 'La reserva no pudo ser realizada intentalo de nuevo más tarde!',
-                })
+                // Swal.fire({
+                //     icon: 'error',
+                //     title: 'Oops',
+                //     text: 'La reserva no pudo ser realizada intentalo de nuevo más tarde!',
+                // })
+                // console.log(err, 2);
                 setSendLoad(false);
             })
         }
@@ -177,6 +179,7 @@ const ReservaForm = ({
             icon: 'error',
             title: 'La reserva no se realizo',
             text: 'Asegurate de haber elegido un rango de fechas, un horario de llegada y una ciudad!',
+            confirmButtonColor: "#1dbeb4"
         })
     }
 

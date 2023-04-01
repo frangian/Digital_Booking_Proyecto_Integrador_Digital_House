@@ -716,6 +716,10 @@ input[type="password"] {
   margin: 0 5px;
 }
 
+.busqueda-tabla .inputs-tabla-busqueda input:focus, .busqueda-tabla .inputs-tabla-busqueda select:focus {
+  outline: none;
+}
+
 .busqueda-tabla .small-button {
   height: 44px;
   color: var(--main-white);
@@ -727,13 +731,13 @@ input[type="password"] {
   grid-template-columns: 100%;
   margin-top: 20px;
   margin-bottom: 20px;
-  width: 60%;
+  width: 70%;
   /* background-color: blue; */
 }
 
 .tabla-celda {
   display: grid;
-  grid-template-columns: 10% 60% 15% 15%;
+  grid-template-columns: 5% 25% 25% 25% 10% 10%;
   border: 1px solid var(--main-dark-gray);
   border-top: none;
   padding: 10px;
@@ -753,6 +757,9 @@ input[type="password"] {
   border-bottom-left-radius: 6px;
 }
 
+.tabla-celda .editar-borrar {
+  margin: 0 auto;
+}
 
 /* ------------------------------ Errores Input ----------------------------- */
 

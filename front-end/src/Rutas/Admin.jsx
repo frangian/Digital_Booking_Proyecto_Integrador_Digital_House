@@ -20,7 +20,7 @@ const Admin = () => {
   }
 
   const renderPage = () => {
-    if (location.pathname === "/administracion") {
+    if (location.pathname === "/admin") {
       return (<ProductoForm handleConfirmacion={handleConfirmacion}/>)
     } else if (location.pathname === "/adminTable") {
       return (<AdminTable />)
