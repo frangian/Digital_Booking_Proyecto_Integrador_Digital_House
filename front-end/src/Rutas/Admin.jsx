@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import ProductoForm from "../Components/ProductoForm";
 import ProductHeader from "../Components/ProductHeader";
-import { useParams, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import AdminTable from "../Components/AdminTable";
 
 const Admin = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [confirmada, setConfirmada] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -16,11 +18,20 @@ const Admin = () => {
   const handleLoading = (bool) => {
     setLoading(bool);
   }
+
+  const renderPage = () => {
+    if (location.pathname === "/administracion") {
+      return (<ProductoForm handleConfirmacion={handleConfirmacion}/>)
+    } else if (location.pathname === "/adminTable") {
+      return (<AdminTable />)
+    }
+  }
+
   return (
     <div className="admin-page">
       <div className={`producto-page-container ${!confirmada ? "" : "oculto"}`}>
         <ProductHeader tituloProducto={"Administracion"} tituloCategoria={"oculto"} isLoading={loading} handleLoading={()=>handleLoading()}/>
-        <ProductoForm handleConfirmacion={handleConfirmacion}/>
+        {renderPage()}
       </div>
       <div
         className={`reserva-correcta-container ${confirmada ? "" : "oculto"}`}

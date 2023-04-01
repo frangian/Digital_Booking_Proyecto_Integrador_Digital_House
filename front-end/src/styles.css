@@ -539,7 +539,7 @@ input[type="password"] {
   font-size: 1rem;
 }
 
-.info-producto-container  input, .info-producto-container select, .atributos input, .atributo-container select {
+.info-producto-container  input, .info-producto-container select, .atributos input, .atributo-container select, .busqueda-tabla select, .busqueda-tabla input {
   height: 50px;
   border-color: var(--main-dark-white);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -688,6 +688,71 @@ input[type="password"] {
 
 .icono-agregar{ 
   font-size: 50px;
+}
+
+/* --------------------------- Tabla Administracio -------------------------- */
+
+.table-page {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.busqueda-tabla {
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+  align-items: center;
+}
+
+.busqueda-tabla .inputs-tabla-busqueda {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.busqueda-tabla .inputs-tabla-busqueda > * {
+  width: 300px;
+  margin: 0 5px;
+}
+
+.busqueda-tabla .small-button {
+  height: 44px;
+  color: var(--main-white);
+  background-color: var(--main-green);
+}
+
+.tabla-productos {
+  display: grid;
+  grid-template-columns: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 60%;
+  /* background-color: blue; */
+}
+
+.tabla-celda {
+  display: grid;
+  grid-template-columns: 10% 60% 15% 15%;
+  border: 1px solid var(--main-dark-gray);
+  border-top: none;
+  padding: 10px;
+}
+
+.tabla-celda:nth-child(1) {
+  border-top: 1px solid var(--main-dark-gray);
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+  background-color: var(--main-green);
+  color: var(--main-white);
+  font-size: 1.1rem;
+}
+
+.tabla-celda:last-child {
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
 }
 
 
