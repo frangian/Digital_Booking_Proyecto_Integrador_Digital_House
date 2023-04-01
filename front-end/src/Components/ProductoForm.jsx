@@ -203,7 +203,6 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
       envio = false;
       setErrorUrlMapa("El formato de la url no es correcto");
     }
-
     if (envio) {
       setSendLoad(true);
       const caracteristicas = attributes.map((atribute) =>
