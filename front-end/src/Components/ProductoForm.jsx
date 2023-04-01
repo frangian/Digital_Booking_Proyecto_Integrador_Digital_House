@@ -72,22 +72,72 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
   };
 
   const camposRequeridos = [
-    { campo: titulo, mensaje: "Este campo es obligatorio", error: setErrorTitulo },
-    { campo: direccion, mensaje: "Este campo es obligatorio", error: setErrorDireccion },
-    { campo: categoria.id, mensaje: "Este campo es obligatorio", error: setErrorCategoria },
-    { campo: ciudad.id, mensaje: "Este campo es obligatorio", error: setErrorCiudad },
-    { campo: descripcion, mensaje: "Este campo es obligatorio", error: setErrorDescripcion },
-    { campo: puntuacion, mensaje: "Este campo es obligatorio", error: setErrorPuntuacion },
-    { campo: attributes, mensaje: "Este campo es obligatorio", error: setErrorCaracteristica },
-    { campo: normas, mensaje: "Este campo es obligatorio", error: setErrorNormas },
-    { campo: seguridad, mensaje: "Este campo es obligatorio", error: setErrorSeguridad },
-    { campo: cancelacion, mensaje: "Este campo es obligatorio", error: setErrorCancelacion },
-    { campo: imagenes, mensaje: "Este campo es obligatorio", error: setErrorImagen },
-    { campo: urlMapa, mensaje: "Este campo es obligatorio", error: setErrorUrlMapa },
-    { campo: desUbicacion, mensaje: "Este campo es obligatorio", error: setErrorDesUbicacion },
+    {
+      campo: titulo,
+      mensaje: "Este campo es obligatorio",
+      error: setErrorTitulo,
+    },
+    {
+      campo: direccion,
+      mensaje: "Este campo es obligatorio",
+      error: setErrorDireccion,
+    },
+    {
+      campo: categoria.id,
+      mensaje: "Este campo es obligatorio",
+      error: setErrorCategoria,
+    },
+    {
+      campo: ciudad.id,
+      mensaje: "Este campo es obligatorio",
+      error: setErrorCiudad,
+    },
+    {
+      campo: descripcion,
+      mensaje: "Este campo es obligatorio",
+      error: setErrorDescripcion,
+    },
+    {
+      campo: puntuacion,
+      mensaje: "Este campo es obligatorio",
+      error: setErrorPuntuacion,
+    },
+    {
+      campo: attributes,
+      mensaje: "Este campo es obligatorio",
+      error: setErrorCaracteristica,
+    },
+    {
+      campo: normas,
+      mensaje: "Este campo es obligatorio",
+      error: setErrorNormas,
+    },
+    {
+      campo: seguridad,
+      mensaje: "Este campo es obligatorio",
+      error: setErrorSeguridad,
+    },
+    {
+      campo: cancelacion,
+      mensaje: "Este campo es obligatorio",
+      error: setErrorCancelacion,
+    },
+    {
+      campo: imagenes,
+      mensaje: "Este campo es obligatorio",
+      error: setErrorImagen,
+    },
+    {
+      campo: urlMapa,
+      mensaje: "Este campo es obligatorio",
+      error: setErrorUrlMapa,
+    },
+    {
+      campo: desUbicacion,
+      mensaje: "Este campo es obligatorio",
+      error: setErrorDesUbicacion,
+    },
   ];
-  
-  
 
   useEffect(() => {
     fetchCategories();
@@ -137,26 +187,31 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
     event.preventDefault();
     resetErrors();
     let envio = true;
-  
+
     camposRequeridos.forEach(({ campo, mensaje, error }) => {
       if (!campoRequerido(campo)) {
         envio = false;
         error(mensaje);
       }
     });
-  
-    if (!validarUrl(urlMapa, "https://www.google.com/maps/embed") && campoRequerido(urlMapa)) {
+
+    if (
+      !validarUrl(urlMapa, "https://www.google.com/maps/embed") &&
+      campoRequerido(urlMapa)
+    ) {
       envio = false;
       setErrorUrlMapa("El formato de la url no es correcto");
     }
-  
+
     if (envio) {
       setSendLoad(true);
-      const caracteristicas = attributes.map((atribute) => tituloXIdServicio(atribute.id));
+      const caracteristicas = attributes.map((atribute) =>
+        tituloXIdServicio(atribute.id)
+      );
       const descripcion_producto = descripcion;
       const descripcion_ubicacion = desUbicacion;
       const url_ubicacion = urlMapa;
-  
+
       const data = {
         titulo,
         descripcion_producto,
@@ -191,7 +246,6 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
         });
     }
   }
-  
 
   const handleChangeCaracteristica = (event) => {
     setCaracteristica(event.target.value);
@@ -203,7 +257,10 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
 
   function handleAddAttribute(event) {
     event.preventDefault();
-    if (newAttribute.id !== "" && !attributes.some(obj => obj.id === newAttribute.id)) {
+    if (
+      newAttribute.id !== "" &&
+      !attributes.some((obj) => obj.id === newAttribute.id)
+    ) {
       setAttributes((prevAttributes) => [...prevAttributes, newAttribute]);
       setNewAttribute({ id: "" });
       setCaracteristica("");
@@ -236,8 +293,9 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
     if (newImg.url_imagen !== "" && validarUrl(newImg.url_imagen, "https")) {
       setImagenes((prevImg) => [...prevImg, newImg]);
       setNewImg({ titulo: "", url_imagen: "" });
-    }else{ 
-      setErrorImagen("El formato no es valido")}
+    } else {
+      setErrorImagen("El formato no es valido");
+    }
   }
   function handleImgChange(index, event) {
     const { name, value } = event.target;
@@ -258,7 +316,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
   const handleCiudadCreada = (bool) => {
     setCiudadCreada(bool);
     setShowModal(false);
-  }
+  };
 
   const handleToggleDescription = () => {
     setShowModal(!showModal);
@@ -267,8 +325,10 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
 
   return (
     <div className="crear-producto-container">
-      <h1>Crear un producto <span className="link-demo"> (Link video demo)</span></h1>
-      
+      <h1>
+        Crear un producto <span className="link-demo"> (Link video demo)</span>
+      </h1>
+
       <div className="producto-form-container">
         <form id="producto-form" onSubmit={(event) => handleSubmit(event)}>
           <fieldset className="info-producto-container">
@@ -318,12 +378,12 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
               <p>{errorDireccion}</p>
             </label>
             <label className={` ${errorCiudad ? "error" : ""}`}>
-              <span>Ciudad:
-                <span onClick={handleToggleDescription}
-            id="crear-ciudad"
-            >
-              (Crear nueva ciudad)
-            </span></span>
+              <span>
+                Ciudad:
+                <span onClick={handleToggleDescription} id="crear-ciudad">
+                  (Crear nueva ciudad)
+                </span>
+              </span>
               <select
                 value={ciudad.name}
                 onChange={(event) => {
@@ -346,6 +406,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
               <input
                 type="text"
                 value={urlMapa}
+                placeholder={"https://www.google.com/maps/..."}
                 onChange={(event) => {
                   event.target.parentElement.classList.remove("error");
                   setErrorUrlMapa("");
@@ -369,7 +430,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
               <p>{errorDesUbicacion}</p>
             </label>
           </fieldset>
-          
+
           <div className="descripcion-section">
             <label className={` ${errorDescripcion ? "error" : ""}`}>
               <span>Descripción:</span>
@@ -572,9 +633,8 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
         </button>
       </div>
       {showModal && (
-        <Modal 
-        onClose={handleToggleDescription}>
-          <CiudadForm handleCiudadCreada={e => handleCiudadCreada(e)} />
+        <Modal onClose={handleToggleDescription}>
+          <CiudadForm handleCiudadCreada={(e) => handleCiudadCreada(e)} />
         </Modal>
       )}
     </div>
