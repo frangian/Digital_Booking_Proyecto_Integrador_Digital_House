@@ -38,7 +38,7 @@ const servicios = {
   
   export const tituloXIdServicio = (tituloOId) => {
     if (typeof tituloOId === "string") {
-      return servicios[tituloOId].id;
+      return servicios[tituloOId];
     } else {
       return Object.keys(servicios).find(key => servicios[key].id === tituloOId);
     }
