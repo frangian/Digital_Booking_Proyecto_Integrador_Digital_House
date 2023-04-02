@@ -10,7 +10,7 @@ import CiudadForm from "./CiudadForm";
 import Modal from "./Modal";
 import Slider from 'rsuite/Slider';
 
-const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
+const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) => {
   const [sendLoad, setSendLoad] = useState(false);
 
   const [titulo, setTitulo] = useState("");
@@ -141,6 +141,24 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
   ];
 
   useEffect(() => {
+    if (producto) {
+      console.log(producto);
+      setTitulo(producto.titulo);
+      setDescripcion(producto.descripcion_producto);
+      setCategoria("");
+      setCiudad({id: `${producto.ciudad.id}`});
+      setDireccion(producto.direccion);
+      setPuntuacion(producto.puntuacion);
+      setUrlMapa(producto.url_ubicacion);
+      setDesUbicacion(producto.descripcion_ubicacion);
+      setNormas(producto.normas);
+      setSeguridad(producto.seguridad);
+      setCancelacion(producto.cancelacion);
+      setImagenes(producto.imagenes);
+    }
+  }, [])
+
+  useEffect(() => {
     fetchCategories();
     fetchCities();
     fetchCaracteristicas();
@@ -212,38 +230,78 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
       const descripcion_ubicacion = desUbicacion;
       const url_ubicacion = urlMapa;
 
-      const data = {
-        titulo,
-        descripcion_producto,
-        descripcion_ubicacion,
-        url_ubicacion,
-        normas,
-        seguridad,
-        cancelacion,
-        puntuacion,
-        categoria,
-        direccion,
-        ciudad,
-        caracteristicas,
-        imagenes,
-      };
-      console.log(data);
-      axios
-        .post(`${API_URL}/producto`, data, {
-          headers: { "Content-Type": "application/json" },
-        })
-        .then((response) => {
-          setSendLoad(false);
-          handleConfirmacion();
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-          setSendLoad(false);
-          setError(
-            "Lamentablemente el producto no ha podido crearse. Por favor intente más tarde."
-          );
-        });
+      if (producto) {
+        const data = {
+          titulo,
+          descripcion_producto,
+          descripcion_ubicacion,
+          url_ubicacion,
+          normas,
+          seguridad,
+          cancelacion,
+          puntuacion,
+          categoria,
+          direccion,
+          ciudad,
+          caracteristicas,
+          imagenes,
+        };
+  
+        console.log(data);
+        axios
+          .post(`${API_URL}/producto`, data, {
+            headers: { "Content-Type": "application/json" },
+          })
+          .then((response) => {
+            setSendLoad(false);
+            handleConfirmacion();
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+            setSendLoad(false);
+            setError(
+              "Lamentablemente el producto no ha podido crearse. Por favor intente más tarde."
+            );
+          });
+        
+      } else {
+        const data = {
+          id: producto.id,
+          titulo,
+          descripcion_producto,
+          descripcion_ubicacion,
+          url_ubicacion,
+          normas,
+          seguridad,
+          cancelacion,
+          puntuacion,
+          categoria,
+          direccion,
+          ciudad,
+          caracteristicas,
+          imagenes,
+        };
+  
+        console.log(data);
+        axios
+          .put(`${API_URL}/producto`, data, {
+            headers: { "Content-Type": "application/json" },
+          })
+          .then((response) => {
+            setSendLoad(false);
+            handleConfirmacion();
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error(error);
+            setSendLoad(false);
+            setError(
+              "Lamentablemente el producto no ha podido crearse. Por favor intente más tarde."
+            );
+          });
+      }
+
     }
   }
 
@@ -326,7 +384,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
   return (
     <div className="crear-producto-container">
       <h1>
-        Crear un producto <span className="link-demo"> (Link video demo)</span>
+        {producto ? `Actualizar el producto con id: ${producto.id}` : "Crear un producto"} <span className="link-demo"> (Link video demo)</span>
       </h1>
 
       <div className="producto-form-container">

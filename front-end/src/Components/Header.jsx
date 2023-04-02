@@ -58,6 +58,11 @@ const Header = () => {
             navigate("/admin")
             setMobileOpen(false)
           }}>Administración</button>
+          <button className="extra-function" 
+          onClick={() => {
+            navigate("/adminTable")
+            setMobileOpen(false)
+          }}>Tabla</button>
         </div>
       )
     }
