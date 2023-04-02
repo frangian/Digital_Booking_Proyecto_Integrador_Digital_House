@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import { API_URL } from "./Utils/api";
+import { API_URL } from "../Utils/api";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus, faSquareXmark } from "@fortawesome/free-solid-svg-icons";
-import { tituloXIdServicio } from "./Utils/utils";
-import { campoRequerido, validarUrl } from "./Utils/validaciones";
-import CiudadForm from "./CiudadForm";
-import Modal from "./Modal";
-import Slider from 'rsuite/Slider';
+import { tituloXIdServicio } from "../Utils/utils";
+import { campoRequerido, validarUrl } from "../Utils/validaciones";
+import CiudadForm from "../CiudadForm";
+import Modal from "../Modal";
+import AtributoForm from "./AtributoForm";
+import AddImagenForm from "./AddImagenForm";
 
 const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) => {
   const [sendLoad, setSendLoad] = useState(false);
@@ -502,7 +503,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
               />
               <p>{errorDescripcion}</p>
             </label>
-            
+
             <label className={` ${errorPuntuacion ? "error" : ""}`}>
               <span>Puntuacion: {puntuacion}</span>
               <input
@@ -521,67 +522,17 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
             </label>
           </div>
           <h2>Agregar atributos</h2>
-
-          <fieldset className=" atributos">
-            {attributes.map((attribute, index) => (
-              <div key={index} className="atributo-container inputs-delete">
-                <label>
-                  <input
-                    type="text"
-                    value={attribute.id}
-                    onChange={(event) => handleAttributeChange(index, event)}
-                    name="name"
-                    className="atributo-container-select"
-                  />
-                </label>
-
-                <FontAwesomeIcon
-                  icon={faSquareXmark}
-                  style={{ color: "#545776" }}
-                  className="icono-agregar"
-                  onClick={() => handleDeleteAttribute(index)}
-                />
-              </div>
-            ))}
-            <div className="atributo-container">
-              <div
-                className={`atributo-container-select ${
-                  errorCaracteristica ? "error" : ""
-                }`}
-              >
-                <select
-                  value={caracteristica}
-                  onChange={(event) => {
-                    handleChangeCaracteristica(event);
-                  }}
-                  className={"atributo-container-select "}
-                >
-                  <option value="">Selecciona una caracteristica</option>
-                  {caracteristicasArray.map((caracteristica, index) => (
-                    <option
-                      key={caracteristica.id}
-                      value={caracteristica.titulo}
-                    >
-                      {caracteristica.titulo}
-                    </option>
-                  ))}
-                </select>
-                <p>{errorCaracteristica}</p>
-              </div>
-
-              <FontAwesomeIcon
-                icon={faSquarePlus}
-                className="icono-agregar"
-                style={{ color: "#1dbeb4" }}
-                onClick={(event) => {
-                  event.target.parentElement.classList.remove("error");
-                  setErrorCaracteristica("");
-                  handleAddAttribute(event);
-                }}
-              />
-            </div>
-          </fieldset>
-
+          <AtributoForm
+            attributes={attributes}
+            handleAttributeChange={handleAttributeChange}
+            handleDeleteAttribute={handleDeleteAttribute}
+            errorCaracteristica={errorCaracteristica}
+            caracteristica={caracteristica}
+            caracteristicasArray={caracteristicasArray}
+            handleChangeCaracteristica={handleChangeCaracteristica}
+            setErrorCaracteristica={setErrorCaracteristica}
+            handleAddAttribute={handleAddAttribute}
+          />
           <h2>Politicas del producto</h2>
           <fieldset className="politicas-producto">
             <label className={`${errorNormas ? "error" : ""}`}>
@@ -625,54 +576,16 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
             </label>
           </fieldset>
           <h2>Agregar Imagenes</h2>
-          <fieldset className=" atributos">
-            {imagenes.map((img, index) => (
-              <div key={index} className="atributo-container inputs-delete">
-                <label>
-                  <input
-                    type="text"
-                    value={img.url_imagen}
-                    onChange={(event) => handleImgChange(index, event)}
-                    name="url_imagen"
-                    className="atributo-container-select"
-                  />
-                </label>
-
-                <FontAwesomeIcon
-                  icon={faSquareXmark}
-                  style={{ color: "#545776" }}
-                  className="icono-agregar"
-                  onClick={() => handleDeleteImg(index)}
-                />
-              </div>
-            ))}
-            <div className="atributo-container">
-              <label className={`${errorImagen ? "error" : ""}`}>
-                <input
-                  type="text"
-                  value={newImg.url_imagen}
-                  placeholder="Instertar https://..."
-                  onChange={(event) => {
-                    handleNewImgChange(event);
-                  }}
-                  name="url_imagen"
-                  className="atributo-container-select"
-                />
-                <p>{errorImagen}</p>
-              </label>
-
-              <FontAwesomeIcon
-                icon={faSquarePlus}
-                className="icono-agregar"
-                style={{ color: "#1dbeb4" }}
-                onClick={(event) => {
-                  event.target.parentElement.classList.remove("error");
-                  setErrorImagen("");
-                  handleAddImg(event);
-                }}
-              />
-            </div>
-          </fieldset>
+          <AddImagenForm
+            imagenes={imagenes}
+            handleImgChange={handleImgChange}
+            handleDeleteImg={handleDeleteImg}
+            errorImagen={errorImagen}
+            newImg={newImg}
+            handleNewImgChange={handleNewImgChange}
+            setErrorImagen={setErrorImagen}
+            handleAddImg={handleAddImg}
+          />
         </form>
         <button
           type="submit"
