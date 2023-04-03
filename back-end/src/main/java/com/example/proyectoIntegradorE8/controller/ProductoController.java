@@ -105,7 +105,7 @@ public class ProductoController {
         try {
             log.info("actualizarProducto: accediendo al servicio de producto...");
             productoService.buscarProducto(producto.getId());
-            productoService.actualizarProducto(producto);
+            productoService.guardarProducto(producto);
             log.info("actualizarProducto: producto con id: "+producto.getId()+" actualizado en la BBDD exitosamente");
             return ResponseEntity.ok(producto);
         } catch (EntityNotFoundException enfe){
