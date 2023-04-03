@@ -422,6 +422,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading }) => {
                 type="text"
                 value={desUbicacion}
                 maxLength={70}
+                
                 onChange={(event) => {
                   event.target.parentElement.classList.remove("error");
                   setErrorDesUbicacion("");
