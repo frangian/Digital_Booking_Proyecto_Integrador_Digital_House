@@ -52,8 +52,8 @@ public class Usuario  implements UserDetails  {
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(usuarioRole.name());
-        return Collections.singletonList(grantedAuthority);
+        //SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(usuarioRole.name());
+        return Collections.emptyList();
     }    @Override
     public boolean isAccountNonExpired() {
           return true;
