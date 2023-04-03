@@ -4,14 +4,16 @@ import { API_URL } from "../Utils/api";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus, faSquareXmark } from "@fortawesome/free-solid-svg-icons";
-import { tituloXIdServicio } from "../Utils/utils";
+import { tituloXIdServicio, findCategoria } from "../Utils/utils";
 import { campoRequerido, validarUrl } from "../Utils/validaciones";
 import CiudadForm from "../CiudadForm";
 import Modal from "../Modal";
 import AtributoForm from "./AtributoForm";
 import AddImagenForm from "./AddImagenForm";
 
+
 const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) => {
+
   const [sendLoad, setSendLoad] = useState(false);
 
   const [titulo, setTitulo] = useState("");
@@ -142,12 +144,12 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
   ];
 
   useEffect(() => {
+    
     if (producto) {
       console.log(producto);
       setTitulo(producto.titulo);
       setDescripcion(producto.descripcion_producto);
-      setCategoria("");
-      setCiudad({id: `${producto.ciudad.id}`});
+      setCiudad({id: producto.ciudad.id});
       setDireccion(producto.direccion);
       setPuntuacion(producto.puntuacion);
       setUrlMapa(producto.url_ubicacion);
@@ -156,6 +158,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
       setSeguridad(producto.seguridad);
       setCancelacion(producto.cancelacion);
       setImagenes(producto.imagenes);
+      setAttributes(producto.caracteristicas.map(res => ({id: res.titulo})))
     }
   }, [])
 
@@ -165,11 +168,20 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
     fetchCaracteristicas();
   }, [ciudadCreada]);
 
+  useEffect(() => {
+    if (producto) {
+      setCategoria({id: findCategoria(categories, producto.categoria)})
+    }
+  }, [categories])
+
   function fetchCategories() {
     axios
       .get(`${API_URL}/categoria`)
       .then((response) => {
         setCategories(response.data);
+        // console.log(response.data, producto.categoria);
+        
+        // console.log(findCategoria(response.data, producto.categoria));
       })
       .catch((error) => {
         console.log(error);
@@ -231,7 +243,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
       const descripcion_ubicacion = desUbicacion;
       const url_ubicacion = urlMapa;
 
-      if (producto) {
+      if (!producto) {
         const data = {
           titulo,
           descripcion_producto,
@@ -384,7 +396,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
 
   return (
     <div className="crear-producto-container">
-      <h1>
+      <h1 onClick={() => {console.log(imagenes);}}>
         {producto ? `Actualizar el producto con id: ${producto.id}` : "Crear un producto"} <span className="link-demo"> (Link video demo)</span>
       </h1>
 
@@ -407,7 +419,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
             <label className={` ${errorCategoria ? "error" : ""}`}>
               <span>Categoría:</span>
               <select
-                value={categoria.titulo}
+                value={categoria.id}
                 onChange={(event) => {
                   event.target.parentElement.classList.remove("error");
                   setErrorCategoria("");
@@ -444,10 +456,11 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
                 </span>
               </span>
               <select
-                value={ciudad.name}
+                value={ciudad.id}
                 onChange={(event) => {
                   event.target.parentElement.classList.remove("error");
                   setErrorCiudad("");
+                  console.log(event.target.value);
                   setCiudad({ id: parseInt(event.target.value) });
                 }}
               >

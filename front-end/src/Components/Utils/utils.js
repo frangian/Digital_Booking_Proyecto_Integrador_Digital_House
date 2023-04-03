@@ -44,6 +44,17 @@ const servicios = {
     }
   };
 
+export const findCategoria = (array, nombreCategoria) => {
+    let respuesta;
+    array.forEach(categoria => {
+        if (categoria.titulo === nombreCategoria) {
+            console.log(categoria.id);
+            respuesta = categoria.id;
+        }
+    })
+    return respuesta;
+}
+
 export const horas = [
     {i: 1, value: "10:00:00", label: "10:00 AM"},
     {i: 2, value: "11:00:00", label: "11:00 AM"},

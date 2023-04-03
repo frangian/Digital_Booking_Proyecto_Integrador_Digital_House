@@ -89,14 +89,17 @@ const ReservaForm = ({
                 // console.log(err, 1);
             })
             axios.put(`${API_URL}/usuario`, objPutUsuario, { headers })
-            .then(setSendLoad(false))
+            .then(res => {
+                setSendLoad(false)
+                console.log(1);
+            })
             .catch(err => {
                 // Swal.fire({
                 //     icon: 'error',
                 //     title: 'Oops',
                 //     text: 'La reserva no pudo ser realizada intentalo de nuevo más tarde!',
                 // })
-                // console.log(err, 2);
+                console.log(2);
                 setSendLoad(false);
             })
         }

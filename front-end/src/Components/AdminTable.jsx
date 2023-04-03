@@ -4,7 +4,7 @@ import { API_URL } from './Utils/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons'
 import Swal from 'sweetalert2'
-import ProductoForm from './ProductoForm';
+import ProductoForm from './ProductoComponents/ProductoForm';
 
 const AdminTable = ({ handleConfirmacion }) => {
 
@@ -32,6 +32,12 @@ const AdminTable = ({ handleConfirmacion }) => {
             axios.get(`${API_URL}/producto/${valorBusqueda}`)
             .then(res => {
                 setProductos([res.data])
+            })
+        }
+        if (metodoBusqueda === "producto") {
+            axios.get(`${API_URL}/producto/titulo/${valorBusqueda}`)
+            .then(res => {
+                setProductos(res.data)
             })
         }
     }

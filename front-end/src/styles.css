@@ -2194,6 +2194,14 @@ div.card-reserva-content {
   .calendar-container-reserva {
     margin-bottom: 80px;
   }
+
+  .tabla-productos {
+    width: 95%;
+  }
+
+  .tabla-celda {
+    grid-template-columns: 5% 25% 20% 20% 15% 15%;
+  }
 }
 
 /* Para pantallas de tamaño menor a 768px (mobile) */
@@ -2303,6 +2311,26 @@ div.card-reserva-content {
 .politicas-producto textarea{
   width: 90vw;
 }
+
+.busqueda-tabla {
+  width: 90%;
+}
+
+.busqueda-tabla .inputs-tabla-busqueda {
+  width: 100%;
+  flex-direction: column;
+}
+
+.busqueda-tabla .inputs-tabla-busqueda input, 
+.busqueda-tabla .inputs-tabla-busqueda select {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.btn-busqueda, .btn-busqueda .small-button {
+  width: 100%;
+}
+
 }
 
 @media (max-width: 560px) {
@@ -2342,6 +2370,14 @@ div.card-reserva-content {
 
   .drawer.open {
     display: block;
+  }
+
+  .tabla-celda {
+    grid-template-columns: 5% 55% 20% 20%;
+  }
+
+  .categoria-celda, .ciudad-celda {
+    display: none;
   }
 }
 

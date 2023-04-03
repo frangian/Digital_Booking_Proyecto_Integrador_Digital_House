@@ -29,7 +29,7 @@ const Header = () => {
       }
     })
     localStorage.removeItem("jwt");
-    if (location.pathname.includes("reservas")) {
+    if (location.pathname.includes("reservas") || location.pathname.includes("admin") || location.pathname.includes("favoritos")) {
       navigate("/")
     }
   }
