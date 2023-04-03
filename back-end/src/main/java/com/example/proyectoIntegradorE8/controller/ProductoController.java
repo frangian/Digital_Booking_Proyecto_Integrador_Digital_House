@@ -105,7 +105,7 @@ public class ProductoController {
         try {
             log.info("actualizarProducto: accediendo al servicio de producto...");
             productoService.buscarProducto(producto.getId());
-            productoService.actualizarProducto(producto);
+            productoService.guardarProducto(producto);
             log.info("actualizarProducto: producto con id: "+producto.getId()+" actualizado en la BBDD exitosamente");
             return ResponseEntity.ok(producto);
         } catch (EntityNotFoundException enfe){
@@ -228,6 +228,23 @@ public class ProductoController {
             log.info("findByProductoPorCiudadIdAndFechas: accediendo al servicio de producto");
             List<Producto> productos = productoService.findByProductoPorCiudadIdAndFechas(ciudadId,fechaInicial,fechaFinal);
             log.info("findByProductoPorCiudadIdAndFechas: retornando los productos encontrados");
+            return ResponseEntity.ok(productos);
+        } catch (Exception e){
+            log.info(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    @GetMapping("/titulo/{productoTitulo}")
+    @Operation(summary = "Buscar los productos disponibles por titulo", description = "Este endpoint permite buscar los productos disponibles por el titulo en la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
+    public ResponseEntity<?> findByProductoXTitulo (@PathVariable String productoTitulo) {
+        try {
+            log.info("findByProductoXTitulo: accediendo al servicio de producto");
+            List<Producto> productos = productoService.findByProductoXTitulo(productoTitulo);
+            log.info("findByProductoXTitulo: retornando los productos encontrados");
             return ResponseEntity.ok(productos);
         } catch (Exception e){
             log.info(e.getMessage());

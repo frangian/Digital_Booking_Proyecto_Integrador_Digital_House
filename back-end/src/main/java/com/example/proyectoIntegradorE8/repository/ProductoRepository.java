@@ -38,4 +38,7 @@ public interface ProductoRepository extends JpaRepository <Producto, Long> {
           "OR (r.fechaInicial < :fechaInicio AND r.fechaFinal > :fechaFin)))")
   List<Producto> findByCiudadIdAndProductoFechas(@Param("ciudadId") Long ciudadId, @Param("fechaInicio") LocalDate fechaInicial, @Param("fechaFin") LocalDate fechaFinal);
 
+  @Query("SELECT p FROM Producto p WHERE p.titulo LIKE :productoTitulo%")
+  List<Producto> findByProductoXTitulo(@Param("productoTitulo") String productoTitulo);
+
 }

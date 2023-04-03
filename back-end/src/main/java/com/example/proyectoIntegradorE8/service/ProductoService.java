@@ -118,5 +118,14 @@ public class ProductoService {
             throw new Exception("Error al buscar productos disponibles. Exception: "+e.getMessage());
         }
     }
+    public List<Producto> findByProductoXTitulo (String titulo) throws Exception {
+        try {
+            log.info("findByProductoXTitulo: accediendo al repositorio de productos");
+            return productoRepository.findByProductoXTitulo(titulo);
+        } catch (Exception e){
+            log.error("Error al buscar el producto por titulo. Exception: "+e.getMessage());
+            throw new Exception("Error al buscar productos disponibles. Exception: "+e.getMessage());
+        }
+    }
 
 }

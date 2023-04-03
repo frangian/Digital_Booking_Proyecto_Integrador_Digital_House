@@ -663,6 +663,7 @@ input[type="range"]::-moz-range-thumb {
   height:15vh;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
+  resize: none;
 }
 
 .atributos{
