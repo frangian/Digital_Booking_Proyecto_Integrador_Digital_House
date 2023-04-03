@@ -537,7 +537,7 @@ input[type="password"] {
   font-size: 1rem;
 }
 
-.info-producto-container  input, .info-producto-container select, .atributos input, .atributo-container select {
+.info-producto-container  input, .info-producto-container select, .atributos input, .atributo-container select, .busqueda-tabla select, .busqueda-tabla input {
   height: 50px;
   border-color: var(--main-dark-white);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -730,6 +730,78 @@ input[type="range"]::-moz-range-thumb {
   font-size: 50px;
 }
 
+/* --------------------------- Tabla Administracio -------------------------- */
+
+.table-page {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.busqueda-tabla {
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+  align-items: center;
+}
+
+.busqueda-tabla .inputs-tabla-busqueda {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.busqueda-tabla .inputs-tabla-busqueda > * {
+  width: 300px;
+  margin: 0 5px;
+}
+
+.busqueda-tabla .inputs-tabla-busqueda input:focus, .busqueda-tabla .inputs-tabla-busqueda select:focus {
+  outline: none;
+}
+
+.busqueda-tabla .small-button {
+  height: 44px;
+  color: var(--main-white);
+  background-color: var(--main-green);
+}
+
+.tabla-productos {
+  display: grid;
+  grid-template-columns: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 70%;
+  /* background-color: blue; */
+}
+
+.tabla-celda {
+  display: grid;
+  grid-template-columns: 5% 25% 25% 25% 10% 10%;
+  border: 1px solid var(--main-dark-gray);
+  border-top: none;
+  padding: 10px;
+}
+
+.tabla-celda:nth-child(1) {
+  border-top: 1px solid var(--main-dark-gray);
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+  background-color: var(--main-green);
+  color: var(--main-white);
+  font-size: 1.1rem;
+}
+
+.tabla-celda:last-child {
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.tabla-celda .editar-borrar {
+  margin: 0 auto;
+}
 
 /* ------------------------------ Errores Input ----------------------------- */
 
@@ -2123,6 +2195,14 @@ div.card-reserva-content {
   .calendar-container-reserva {
     margin-bottom: 80px;
   }
+
+  .tabla-productos {
+    width: 95%;
+  }
+
+  .tabla-celda {
+    grid-template-columns: 5% 25% 20% 20% 15% 15%;
+  }
 }
 
 /* Para pantallas de tamaño menor a 768px (mobile) */
@@ -2232,6 +2312,26 @@ div.card-reserva-content {
 .politicas-producto textarea{
   width: 90vw;
 }
+
+.busqueda-tabla {
+  width: 90%;
+}
+
+.busqueda-tabla .inputs-tabla-busqueda {
+  width: 100%;
+  flex-direction: column;
+}
+
+.busqueda-tabla .inputs-tabla-busqueda input, 
+.busqueda-tabla .inputs-tabla-busqueda select {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.btn-busqueda, .btn-busqueda .small-button {
+  width: 100%;
+}
+
 }
 
 @media (max-width: 560px) {
@@ -2271,6 +2371,14 @@ div.card-reserva-content {
 
   .drawer.open {
     display: block;
+  }
+
+  .tabla-celda {
+    grid-template-columns: 5% 55% 20% 20%;
+  }
+
+  .categoria-celda, .ciudad-celda {
+    display: none;
   }
 }
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ProductoForm from "../Components/ProductoComponents/ProductoForm";
 import ProductHeader from "../Components/ProductHeader";
-import { useParams, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -16,11 +16,12 @@ const Admin = () => {
   const handleLoading = (bool) => {
     setLoading(bool);
   }
+
   return (
     <div className="admin-page">
       <div className={`producto-page-container ${!confirmada ? "" : "oculto"}`}>
         <ProductHeader tituloProducto={"Administracion"} tituloCategoria={"oculto"} isLoading={loading} handleLoading={()=>handleLoading()}/>
-        <ProductoForm handleConfirmacion={handleConfirmacion}/>
+        <ProductoForm handleConfirmacion={handleConfirmacion} producto={false}/>
       </div>
       <div
         className={`reserva-correcta-container ${confirmada ? "" : "oculto"}`}
