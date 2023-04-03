@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ProductoForm from "../Components/ProductoForm";
+import ProductoForm from "../Components/ProductoComponents/ProductoForm";
 import ProductHeader from "../Components/ProductHeader";
 import { useParams, useNavigate } from "react-router-dom";
 
