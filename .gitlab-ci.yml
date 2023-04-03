@@ -1,9 +1,9 @@
 stages:
   - build
-  # - automated-api-tests
+  # - test
   - deploy
 
-build:
+build -back:
   stage: build
   image: maven:latest
   script:
@@ -20,8 +20,23 @@ build:
       changes:
         - back-end/**/*
 
-# automated-api-tests:
-#   stage: automated-api-tests
+build -front:
+  stage: build
+  image: node:16.5.0
+  script:
+    - cd front-end/
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - front-end/dist
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "desarrollo"'
+      changes:
+        - front-end/**/*
+
+# automated-api-tests -back:
+#   stage: test
 #   image: cimg/base:2021.04
 #   before_script:
 #     # Installing Postman CLI
@@ -35,7 +50,20 @@ build:
 #     changes:
 #       - back-end/**/*
 
-deploy:
+# test project:
+#   stage: test
+#   image: node:16.5.0
+#   script:
+#     - cd front-end/
+#     - npm install
+#     - npm run test
+#   rules:
+#   - if: '$CI_COMMIT_BRANCH == "desarrollo"'
+#     changes:
+#       - front-end/**/*
+
+
+deploy -back:
   stage: deploy
   image: ubuntu:latest
   before_script:
@@ -58,3 +86,17 @@ deploy:
     - if: '$CI_COMMIT_BRANCH == "desarrollo"'
       changes:
         - back-end/**/*
+
+
+deploy -front:
+  stage: deploy
+  image: 
+    name: amazon/aws-cli:2.11.3
+    entrypoint: ['']
+  script:
+    - aws --version
+    - aws s3 sync front-end/dist s3://$AWS_S3_BUCKET --delete
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "desarrollo"'
+      changes:
+        - front-end/**/*
