@@ -471,10 +471,8 @@ input[type="password"] {
 /* ---------------------------------- Form Producto--------------------------------- */
 
 
-
-.admin-page {
-  margin:12vh 0 8vh;
-  
+.producto-page-container{
+  margin: 12vh 0 8vh;
 }
 
 .crear-producto-container{
@@ -539,7 +537,7 @@ input[type="password"] {
   font-size: 1rem;
 }
 
-.info-producto-container  input, .info-producto-container select, .atributos input, .atributo-container select {
+.info-producto-container  input, .info-producto-container select, .atributos input, .atributo-container select, .busqueda-tabla select, .busqueda-tabla input {
   height: 50px;
   border-color: var(--main-dark-white);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -612,6 +610,47 @@ input[type="password"] {
   color: var(--main-dark-gray);
 }
 
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 50%;
+  height: 15px;
+  background: var(--main-dark-white);
+  border-radius: 10px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 35px;
+  height: 35px;
+  background: var(--main-green);
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out,
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: var(--main-green);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out,
+}
+
+
+
 .inputs-delete{
   margin-bottom: 20px;
 }
@@ -624,6 +663,7 @@ input[type="password"] {
   height:15vh;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
+  resize: none;
 }
 
 .atributos{
@@ -690,6 +730,78 @@ input[type="password"] {
   font-size: 50px;
 }
 
+/* --------------------------- Tabla Administracio -------------------------- */
+
+.table-page {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.busqueda-tabla {
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+  align-items: center;
+}
+
+.busqueda-tabla .inputs-tabla-busqueda {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.busqueda-tabla .inputs-tabla-busqueda > * {
+  width: 300px;
+  margin: 0 5px;
+}
+
+.busqueda-tabla .inputs-tabla-busqueda input:focus, .busqueda-tabla .inputs-tabla-busqueda select:focus {
+  outline: none;
+}
+
+.busqueda-tabla .small-button {
+  height: 44px;
+  color: var(--main-white);
+  background-color: var(--main-green);
+}
+
+.tabla-productos {
+  display: grid;
+  grid-template-columns: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 70%;
+  /* background-color: blue; */
+}
+
+.tabla-celda {
+  display: grid;
+  grid-template-columns: 5% 25% 25% 25% 10% 10%;
+  border: 1px solid var(--main-dark-gray);
+  border-top: none;
+  padding: 10px;
+}
+
+.tabla-celda:nth-child(1) {
+  border-top: 1px solid var(--main-dark-gray);
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+  background-color: var(--main-green);
+  color: var(--main-white);
+  font-size: 1.1rem;
+}
+
+.tabla-celda:last-child {
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.tabla-celda .editar-borrar {
+  margin: 0 auto;
+}
 
 /* ------------------------------ Errores Input ----------------------------- */
 
@@ -771,6 +883,12 @@ body {
   width: 30%;
 }
 
+.fechas-input{
+  font-family:"Roboto", sans-serif ; 
+  font-weight: 600;
+  color: var(--main-dark-gray);
+}
+
 #btn-buscar {
   padding: 10px 10%;
   margin-left: 1vw;
@@ -816,7 +934,8 @@ body {
 }
 
 .card.selected {
-  border: 2px solid #ffcc00;
+  border: 2px solid var(--main-green);
+  border-radius: 15px;
 }
 
 .card > div {
@@ -2083,6 +2202,14 @@ div.card-reserva-content {
   .calendar-container-reserva {
     margin-bottom: 80px;
   }
+
+  .tabla-productos {
+    width: 95%;
+  }
+
+  .tabla-celda {
+    grid-template-columns: 5% 25% 20% 20% 15% 15%;
+  }
 }
 
 /* Para pantallas de tamaño menor a 768px (mobile) */
@@ -2139,6 +2266,79 @@ div.card-reserva-content {
   .card-reserva-confirmada {
     width: 93%;
   }
+
+  /* Form creacion de producto mobile */
+
+.crear-producto-container h1{
+  font-size: 1.7rem;
+}
+
+.link-demo{
+  font-size: 0.8rem;
+}
+
+.crear-producto-container h2 {
+  font-size: 1.5rem;
+}
+
+.info-producto-container{
+  grid-template-columns: repeat(1, 1fr);
+}
+
+
+.form-crear-ciudad{
+  width: 70vw;
+}
+
+.form-crear-ciudad label{
+  align-items: center;
+}
+
+.form-crear-ciudad input{
+  width: 50vw;
+}
+
+.ciudad-button {
+  width: 30vw;
+}
+
+.close-btn { 
+  width: 30px;
+  height: 30px;
+  padding: 0;
+}
+
+.atributo-container-select{
+  width: 75vw;
+}
+
+.politicas-producto{
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.politicas-producto textarea{
+  width: 90vw;
+}
+
+.busqueda-tabla {
+  width: 90%;
+}
+
+.busqueda-tabla .inputs-tabla-busqueda {
+  width: 100%;
+  flex-direction: column;
+}
+
+.busqueda-tabla .inputs-tabla-busqueda input, 
+.busqueda-tabla .inputs-tabla-busqueda select {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.btn-busqueda, .btn-busqueda .small-button {
+  width: 100%;
+}
+
 }
 
 @media (max-width: 560px) {
@@ -2178,6 +2378,14 @@ div.card-reserva-content {
 
   .drawer.open {
     display: block;
+  }
+
+  .tabla-celda {
+    grid-template-columns: 5% 55% 20% 20%;
+  }
+
+  .categoria-celda, .ciudad-celda {
+    display: none;
   }
 }
 
@@ -2352,7 +2560,7 @@ div.card-reserva-content {
 
   .recomendaciones-container h2 {
     color: var(--main-white);
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
 
   .image-container {
@@ -2447,6 +2655,10 @@ div.card-reserva-content {
   .calendar-container-reserva {
     margin-bottom: 60px;
   }
+
+  .recomendaciones-container h2 {
+    font-size: 1.2rem;
+  }
 }
 
 @media (max-width: 400px) {
@@ -2475,5 +2687,22 @@ div.card-reserva-content {
 
   .calendar-container-reserva {
     margin-bottom: 140px;
+  }
+
+  .info-categoria-container h3  {
+    font-size: 0.8rem;
+  }
+}
+
+@media(max-width:310px){
+  .info-categoria-container h3  {
+    font-size: 0.7rem;
+  }
+  .puntuacion-container p{
+    font-size: 0.6rem;
+  }
+
+  .categorias-container h2{
+    font-size: 1rem;
   }
 }

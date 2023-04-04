@@ -59,6 +59,7 @@ const LoginForm = () => {
                     icon: 'error',
                     title: 'Oops',
                     text: 'Lamentablemente no ha podido iniciar sesión. Por favor intente más tarde',
+                    confirmButtonColor: "#1dbeb4"
                 })
                 setSendLoad(false);
             })

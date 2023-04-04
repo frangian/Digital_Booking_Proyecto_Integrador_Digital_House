@@ -26,28 +26,33 @@ export const elegirServicio = (titulo, color) => {
     }
 }
 
-export const tituloXIdServicio = (titulo) => { 
-    if (titulo === "Cocina") {
-        return {"id": 1};
+const servicios = {
+    "Cocina": { id: 1 },
+    "Televisor": { id: 2 },
+    "Aire acondicionado": { id: 3 },
+    "Apto mascotas": { id: 4 },
+    "Estacionamiento gratuito": { id: 5 },
+    "Pileta": { id: 6 },
+    "Wifi": { id: 7 }
+  };
+  
+  export const tituloXIdServicio = (tituloOId) => {
+    if (typeof tituloOId === "string") {
+      return servicios[tituloOId];
+    } else {
+      return Object.keys(servicios).find(key => servicios[key].id === tituloOId);
     }
-    if (titulo === "Televisor") {
-        return {"id": 2};
-    }
-    if (titulo === "Aire acondicionado") {
-        return {"id": 2};
-    }
-    if (titulo === "Apto mascotas") {
-        return {"id": 3};
-    }
-    if (titulo === "Estacionamiento gratuito") {
-        return {"id": 5};
-    }
-    if (titulo === "Pileta") {
-        return {"id": 6};
-    }
-    if (titulo === "Wifi") {
-        return {"id": 7};
-    }
+  };
+
+export const findCategoria = (array, nombreCategoria) => {
+    let respuesta;
+    array.forEach(categoria => {
+        if (categoria.titulo === nombreCategoria) {
+            console.log(categoria.id);
+            respuesta = categoria.id;
+        }
+    })
+    return respuesta;
 }
 
 export const horas = [

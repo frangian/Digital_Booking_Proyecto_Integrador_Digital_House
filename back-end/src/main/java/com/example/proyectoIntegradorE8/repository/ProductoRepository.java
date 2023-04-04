@@ -38,4 +38,32 @@ public interface ProductoRepository extends JpaRepository <Producto, Long> {
           "OR (r.fechaInicial < :fechaInicio AND r.fechaFinal > :fechaFin)))")
   List<Producto> findByCiudadIdAndProductoFechas(@Param("ciudadId") Long ciudadId, @Param("fechaInicio") LocalDate fechaInicial, @Param("fechaFin") LocalDate fechaFinal);
 
+  @Query("SELECT p FROM Producto p " +
+          "WHERE p.categoria.id = :categoriaId " +
+          "AND NOT EXISTS " +
+          "(SELECT r FROM Reserva r " +
+          "WHERE r.producto = p " +
+          "AND ((r.fechaInicial >= :fechaInicio AND r.fechaInicial <= :fechaFin) " +
+          "OR (r.fechaFinal >= :fechaInicio AND r.fechaFinal <= :fechaFin) " +
+          "OR (r.fechaInicial < :fechaInicio AND r.fechaFinal > :fechaFin)))")
+  List<Producto> findByCategoriaIdAndProductoFechas(@Param("categoriaId") Long categoriaId, @Param("fechaInicio") LocalDate fechaInicial, @Param("fechaFin") LocalDate fechaFinal);
+
+  @Query("SELECT p FROM Producto p WHERE p.ciudad.id = :ciudadId AND p.categoria.id = :categoriaId")
+  List<Producto> findByCategoriaIdAndCiudadId(@Param("ciudadId") Long ciudadId, @Param("categoriaId") Long categoriaId);
+
+  @Query("SELECT p FROM Producto p WHERE p.titulo LIKE :productoTitulo%")
+  List<Producto> findByProductoXTitulo(@Param("productoTitulo") String productoTitulo);
+
+  @Query("SELECT p FROM Producto p " +
+          "WHERE p.ciudad.id = :ciudadId AND p.categoria.id = :categoriaId " +
+          "AND NOT EXISTS " +
+          "(SELECT r FROM Reserva r " +
+          "WHERE r.producto = p " +
+          "AND ((r.fechaInicial >= :fechaInicio AND r.fechaInicial <= :fechaFin) " +
+          "OR (r.fechaFinal >= :fechaInicio AND r.fechaFinal <= :fechaFin) " +
+          "OR (r.fechaInicial < :fechaInicio AND r.fechaFinal > :fechaFin)))")
+  List<Producto> findByCiudadIdAndCategoriaIdAndFechas(@Param("ciudadId") Long ciudadId,@Param("categoriaId") Long categoriaId ,@Param("fechaInicio") LocalDate fechaInicial, @Param("fechaFin") LocalDate fechaFinal);
+
+
+
 }

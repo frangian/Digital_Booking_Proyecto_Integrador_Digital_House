@@ -29,7 +29,7 @@ const Header = () => {
       }
     })
     localStorage.removeItem("jwt");
-    if (location.pathname.includes("reservas")) {
+    if (location.pathname.includes("reservas") || location.pathname.includes("admin") || location.pathname.includes("favoritos")) {
       navigate("/")
     }
   }
@@ -55,9 +55,14 @@ const Header = () => {
         <div className="header-extra-functions">
           <button className="extra-function" 
           onClick={() => {
-            navigate("/administracion")
+            navigate("/admin")
             setMobileOpen(false)
           }}>Administración</button>
+          <button className="extra-function" 
+          onClick={() => {
+            navigate("/adminTable")
+            setMobileOpen(false)
+          }}>Tabla</button>
         </div>
       )
     }

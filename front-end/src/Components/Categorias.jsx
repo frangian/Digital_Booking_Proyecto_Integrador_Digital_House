@@ -5,7 +5,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { API_URL } from './Utils/api'
 
-const Categorias = ({  actualizarCategoriaSeleccionada }) => {
+const Categorias = ({  actualizarCategoriaSeleccionada, categoriaSeleccionada }) => {
   
   const [isLoading, setIsLoading] = useState(true);
    // Estado para almacenar las categorías
@@ -15,8 +15,15 @@ const Categorias = ({  actualizarCategoriaSeleccionada }) => {
 
   //manejo el click de la categoria y llamo a la funcion que setea la categoria seleccionada
   const handleClick = (id) => {
-    actualizarCategoriaSeleccionada(id);
-    handleProductSelect(id);
+    if(!categoriaSeleccionada){
+      actualizarCategoriaSeleccionada(id);
+      setSelectedCategorieId(id);
+    }else{ 
+      actualizarCategoriaSeleccionada(null)
+      setSelectedCategorieId(null)
+    }
+    
+    
   };
 
    // Obtener las categorías desde la API cuando se monta el componente
@@ -31,10 +38,7 @@ const Categorias = ({  actualizarCategoriaSeleccionada }) => {
       });
   }, []);
 
-  const handleProductSelect = (id) => {
-    setSelectedCategorieId(id);
-    
-    }
+ 
 
   return (
     <div className="categorias-container">
