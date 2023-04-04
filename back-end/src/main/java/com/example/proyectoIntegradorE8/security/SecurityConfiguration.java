@@ -22,11 +22,11 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
         http
-                .csrf()
-                .disable()
+                .csrf().disable()
                 .authorizeHttpRequests()
+                .requestMatchers("/ciudad").hasAuthority("ADMIN")
+                .requestMatchers("/categoria").hasAuthority("USER")
                 .requestMatchers("/auth/**","/producto").permitAll()
-                .requestMatchers("/ciudad").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
