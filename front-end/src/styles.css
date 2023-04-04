@@ -875,7 +875,7 @@ body {
   height: 5vh;
 }
 
-.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiPaper-root.MuiMenu-paper.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.css-177ic5c {
   height: 300px !important;
 }
 
@@ -2487,10 +2487,6 @@ div.card-reserva-content {
 }
 
 @media (max-width: 500px) {
-  
-  .MuiMenu-paper.MuiPopover-paper {
-    margin-left: -8px;
-  }
 
   .reservas-usuario-page {
     background-color: var(--main-dark-gray);

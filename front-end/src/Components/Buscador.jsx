@@ -18,7 +18,7 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
   const [selectedDates, setSelectedDates] = useState(null);
   const [ciudades, setCiudades] = useState([]);
   const [ciudadId, setCiudadId] = useState(null);
-
+  
   const handleChange = (event) => {
     setCiudad(event.target.value);
   };
@@ -44,6 +44,7 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
 
   /* ----------------------------------- COMPLETAR CON URL DE LA API PARA OBTENER LISTADO DE CIUDADES ---------------------------------- */
   useEffect(() => {
+    
     axios
       .get(`${API_URL}/ciudad`)
       .then((response) => {
@@ -120,7 +121,6 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
             </Select>
           </FormControl>
         </Box>
-
         <DateRangePicker
           value={dateRange}
           onChange={handleDateChange}

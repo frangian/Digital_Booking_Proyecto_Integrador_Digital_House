@@ -397,7 +397,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
   return (
     <div className="crear-producto-container">
       <h1 onClick={() => {console.log(imagenes);}}>
-        {producto ? `Actualizar el producto con id: ${producto.id}` : "Crear un producto"} <span className="link-demo"> (Link video demo)</span>
+        {producto ? `Actualizar el producto con id: ${producto.id}` : "Crear un producto"} <a className="link-demo" href="https://youtu.be/kfvH1oHYTLE" target="e_blank"> (Link video demo)</a>
       </h1>
 
       <div className="producto-form-container">

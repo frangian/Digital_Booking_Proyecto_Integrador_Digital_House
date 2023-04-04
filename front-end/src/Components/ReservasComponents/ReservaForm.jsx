@@ -86,20 +86,17 @@ const ReservaForm = ({
                     confirmButtonColor: "#1dbeb4"
                 })
                 setSendLoad(false);
-                // console.log(err, 1);
             })
             axios.put(`${API_URL}/usuario`, objPutUsuario, { headers })
             .then(res => {
                 setSendLoad(false)
-                console.log(1);
             })
             .catch(err => {
-                // Swal.fire({
-                //     icon: 'error',
-                //     title: 'Oops',
-                //     text: 'La reserva no pudo ser realizada intentalo de nuevo más tarde!',
-                // })
-                console.log(2);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops',
+                    text: 'La reserva no pudo ser realizada intentalo de nuevo más tarde!',
+                })
                 setSendLoad(false);
             })
         }
