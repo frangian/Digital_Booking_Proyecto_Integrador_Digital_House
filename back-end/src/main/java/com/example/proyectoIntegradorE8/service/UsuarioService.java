@@ -8,8 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataAccessException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -22,8 +20,8 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
     public Usuario guardarUsuario (Usuario usuario) throws ConstraintViolationException {
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+//        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         try{
             log.info("guardarUsuario: accediendo al repositorio de usuario..");
             return usuarioRepository.save(usuario);

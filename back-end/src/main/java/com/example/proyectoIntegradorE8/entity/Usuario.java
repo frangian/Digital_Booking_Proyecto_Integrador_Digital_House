@@ -4,21 +4,24 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.*;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "email")
 @Table(name = "usuario")
 
-public class Usuario  implements UserDetails  {
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,8 +55,9 @@ public class Usuario  implements UserDetails  {
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        //SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(usuarioRole.name());
-        return Collections.emptyList();
+//        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(usuarioRole.name());
+//        return Collections.singletonList(authority);
+        return List.of(new SimpleGrantedAuthority(usuarioRole.name())) ;
     }    @Override
     public boolean isAccountNonExpired() {
           return true;
