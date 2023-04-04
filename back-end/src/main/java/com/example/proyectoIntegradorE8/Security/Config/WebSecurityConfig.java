@@ -5,6 +5,7 @@ import com.example.proyectoIntegradorE8.Security.JWTAuthorizationFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -34,6 +35,7 @@ public class WebSecurityConfig {
                 .and()
                 .csrf().disable()
                 .authorizeHttpRequests()
+                .requestMatchers(HttpMethod.GET,"/usuario/**").hasAuthority("ROLE_ADMIN")
                 .requestMatchers("/producto/**",
                         "/caracteristica/**",
                         "/imagen/**",

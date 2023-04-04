@@ -35,11 +35,15 @@ public class Usuario  implements UserDetails  {
     private String password;
     @Column
     private boolean validado = false;
+
     @Column(name = "usuario_role")
     @Enumerated(EnumType.STRING)
     private UsuarioRole usuarioRole;
+
+
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reserva> reservas = new ArrayList<>();
+
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Favorito> favoritos = new ArrayList<>();
     @Override

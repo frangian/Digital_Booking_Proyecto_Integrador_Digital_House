@@ -5,24 +5,31 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class TokenUtils {
     private final static String ACCESS_TOKEN_SECRET = "4qhq8LrEBfYcaRHxhdb9zURb2rf8e7Ud";
     private final static Long ACCESS_TOKEN_VALIDITY = 2_592_000L;
 
-    public static String crearToken(String nombre, String email){
+    public static String crearToken(String nombre, String email, Collection<? extends GrantedAuthority> authorities){
         long expirationTime= ACCESS_TOKEN_VALIDITY * 1_000;
         Date expirationDate = new Date(System.currentTimeMillis() + expirationTime);
 
         Map<String, Object> adicional = new HashMap<>();
         adicional.put("nombre", nombre);
+//lista de roles
+        List<String> authorityList = authorities.stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+
         return Jwts.builder()
                 .setSubject(email)
                 .setExpiration(expirationDate)
+                .claim("authorities", authorityList)
                 .addClaims(adicional)
                 .signWith(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes()))
                 .compact();
@@ -37,7 +44,14 @@ public class TokenUtils {
                     .getBody();
 
             String email = claims.getSubject();
-            return new UsernamePasswordAuthenticationToken(email, null, Collections.emptyList());
+
+            List<String> authorityNames = Optional.ofNullable(claims.get("authorities", List.class)).orElse(Collections.emptyList());
+            Collection<GrantedAuthority> authorities = new HashSet<>();
+            for (String authorityName : authorityNames) {
+                authorities.add(new SimpleGrantedAuthority(authorityName));
+            }
+
+            return new UsernamePasswordAuthenticationToken(email, null, authorities);
         } catch (JwtException e){
             return null;
         }
