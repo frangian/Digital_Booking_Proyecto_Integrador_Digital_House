@@ -4,21 +4,24 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.*;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "email")
 @Table(name = "usuario")
 
-public class Usuario  implements UserDetails  {
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,32 +47,31 @@ public class Usuario  implements UserDetails  {
     private List<Favorito> favoritos = new ArrayList<>();
     @Override
     public String getUsername() {
-     return this.getEmail();
+        return this.getEmail();
     }
     @Override
     public String getPassword() {
-      return this.password;
+        return this.password;
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(usuarioRole.name());
-        return Collections.singletonList(grantedAuthority);
+//        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(usuarioRole.name());
+//        return Collections.singletonList(authority);
+        return List.of(new SimpleGrantedAuthority(usuarioRole.name())) ;
     }    @Override
     public boolean isAccountNonExpired() {
-          return true;
+        return true;
     }
     @Override
     public boolean isAccountNonLocked () {
-           return true;
+        return true;
     }
     @Override
     public boolean isCredentialsNonExpired() {
-            return true;
+        return true;
     }
     @Override
     public boolean isEnabled() {
-          return true;
+        return true;
     }
 }
-
-

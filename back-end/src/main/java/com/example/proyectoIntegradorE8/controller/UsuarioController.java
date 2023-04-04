@@ -2,6 +2,10 @@ package com.example.proyectoIntegradorE8.controller;
 
 import com.example.proyectoIntegradorE8.entity.Usuario;
 import com.example.proyectoIntegradorE8.exception.GlobalException;
+import com.example.proyectoIntegradorE8.security.auth.AuthenticationRequest;
+import com.example.proyectoIntegradorE8.security.auth.AuthenticationResponse;
+import com.example.proyectoIntegradorE8.security.auth.AuthenticationService;
+import com.example.proyectoIntegradorE8.security.auth.RegisterRequest;
 import com.example.proyectoIntegradorE8.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -29,34 +33,59 @@ import java.util.List;
 @Log4j
 @Tag(name = "Usuario", description = "API metodos CRUD de los usuarios")
 public class UsuarioController {
-   private final UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
 
-    @PostMapping("/registro")
+    private final AuthenticationService authenticationService;
+
+    @PostMapping("/auth/registro")
     @Operation(
             summary = "Agregar usuario por ID",
             description = "Este endpoint permite agregar un usuario por ID en a la BBDD"
     )
-     @io.swagger.v3.oas.annotations.parameters.RequestBody(
-             content = @Content(mediaType = "application/json",
-                     examples = @ExampleObject(value = "{" +
-                           "    \"nombre\": \"string\"," +
-                           "    \"apellido\": \"string\"," +
-                           "    \"email\": \"string\"," +
-                           "    \"password\": \"string\"" +
-                           "}"
-                     )            )    )
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            content = @Content(mediaType = "application/json",
+                    examples = @ExampleObject(value = "{" +
+                            "    \"nombre\": \"string\"," +
+                            "    \"apellido\": \"string\"," +
+                            "    \"email\": \"string\"," +
+                            "    \"password\": \"string\"" +
+                            "}"
+                    )            )    )
     @ApiResponses(value = {
-           @ApiResponse(responseCode = "201", description = "El usuario se creo correctamente"),
+            @ApiResponse(responseCode = "201", description = "El usuario se creo correctamente"),
             @ApiResponse(responseCode = "400", description = "Lamentablemente no ha podido registrarse. Inténtelo más tarde")})
-    public ResponseEntity<?> guardarUsuario (@RequestBody Usuario usuario) {
-            try {
-                log.info("guardarUsuario: accediendo al servicio de usuario... ");
-                Usuario usuarioGuardado = usuarioService.guardarUsuario(usuario);
-                log.info("El usuario fue guardado en la BBDD exitosamente");
-                return ResponseEntity.ok(usuarioGuardado);
-            } catch (ConstraintViolationException e) {
-                return new GlobalException().handleConstraintViolationException(e);
-            }
+    public ResponseEntity<?> guardarUsuario (@RequestBody RegisterRequest request) {
+        try {
+            log.info("guardarUsuario: accediendo al servicio de usuario... ");
+            AuthenticationResponse usuarioGuardado = authenticationService.register(request);
+            log.info("El usuario fue guardado en la BBDD exitosamente");
+            return ResponseEntity.ok(usuarioGuardado);
+        } catch (ConstraintViolationException e) {
+            return new GlobalException().handleConstraintViolationException(e);
+        }
+    }
+
+    @PostMapping("/auth/login")
+    @Operation(
+            summary = "Realizar un login a la aplicacon",
+            description = "Este endpoint permite realizar un login"
+    )
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            content = @Content(mediaType = "application/json",
+                    examples = @ExampleObject(value = "{" +
+                            "    \"email\": \"string\"," +
+                            "    \"password\": \"string\"" +
+                            "}"
+                    )            )    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "El usuario se creo correctamente"),
+            @ApiResponse(responseCode = "400", description = "Lamentablemente no ha podido registrarse. Inténtelo más tarde")})
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
+        try {
+            return ResponseEntity.ok(authenticationService.authenticate(request));
+        } catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     @GetMapping("/{id}")
@@ -110,7 +139,7 @@ public class UsuarioController {
     }
     @GetMapping
     @Operation(summary = "Listar todos los usuarios",
-               description = "Este endpoint permite ver todas los usuarios registrados en la BBDD")
+            description = "Este endpoint permite ver todas los usuarios registrados en la BBDD")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "400", description = "Peticion Incorrecta")})
@@ -169,6 +198,3 @@ public class UsuarioController {
     }
 
 }
-
-
-
