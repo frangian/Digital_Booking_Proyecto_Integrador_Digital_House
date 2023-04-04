@@ -31,7 +31,7 @@ const Home = () => {
   return (
     <div className="container">
       <Buscador onCiudadSeleccionada={handleCiudadSeleccionada} isLoading={isLoading} />
-      <Categorias  actualizarCategoriaSeleccionada={actualizarCategoriaSeleccionada}/>
+      <Categorias  actualizarCategoriaSeleccionada={actualizarCategoriaSeleccionada} categoriaSeleccionada={categoriaSeleccionada}/>
       <Recomendaciones categoriaSeleccionada={categoriaSeleccionada} ciudadSeleccionada={ciudadSeleccionada} dates={dates} isLoading={isLoading} onLoading={handleIsLoading}/>
     </div>
   )

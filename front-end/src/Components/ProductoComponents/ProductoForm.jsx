@@ -242,7 +242,8 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
       const descripcion_producto = descripcion;
       const descripcion_ubicacion = desUbicacion;
       const url_ubicacion = urlMapa;
-
+      let jwt = localStorage.getItem('jwt');
+      
       if (!producto) {
         const data = {
           titulo,
@@ -261,9 +262,10 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
         };
   
         console.log(data);
+        
         axios
           .post(`${API_URL}/producto`, data, {
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${jwt}` },
           })
           .then((response) => {
             setSendLoad(false);
@@ -299,7 +301,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
         console.log(data);
         axios
           .put(`${API_URL}/producto`, data, {
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${jwt}` },
           })
           .then((response) => {
             setSendLoad(false);

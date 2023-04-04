@@ -6,11 +6,11 @@ export const initialState = {
     apellido: "Gomez",
     reservas: [],
     favoritos: [],
+    usuarioRole: false
   },
   logged: false,
   map: true,
   location: "",
-  admin: true
 };
 
 

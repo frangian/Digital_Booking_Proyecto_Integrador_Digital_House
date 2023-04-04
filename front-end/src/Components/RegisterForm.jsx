@@ -74,22 +74,41 @@ const RegisterForm = () => {
                 email: user.mail,
                 password: user.pass
             }
-            axios.post(`${API_URL}/usuario/registro`, objRegister)
+            axios.post(`${API_URL}/usuario/auth/registro`, objRegister)
             .then(res => {
                 setSendLoad(false);
-                dispatch({
-                    type: "register",
-                    payload: {
-                        ...state, 
-                        user: res.data,
-                        logged: true
-                    }
-                })
-                axios.post(`${API_URL}/login`, objLogin)
-                .then(res => {
-                    localStorage.setItem("jwt", res.headers.authorization.split(" ")[1])
-                    navigate("/")
-                })
+                // dispatch({
+                //     type: "register",
+                //     payload: {
+                //         ...state, 
+                //         user: res.data,
+                //         logged: true
+                //     }
+                // })
+                let jwt = res.data.token;
+                localStorage.setItem("jwt", jwt);
+                let partes = jwt.split('.');
+                let contenido = atob(partes[1]);
+                let datos = JSON.parse(contenido);
+                const headers = { 'Authorization': `Bearer ${jwt}` };
+                axios.get(`${API_URL}/usuario/email/${datos.sub}`, { headers })
+                    .then(res => {
+                        console.log(res.data);
+                        console.log("1");
+                        dispatch({
+                            type: "register",
+                            payload: {
+                            ...state,
+                            user: res.data,
+                            logged: true
+                            }
+                        })
+                        navigate("/");
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+                
             }).catch(err => {
                 setErrorMail("Este correo ya esta registrado");
                 setSendLoad(false);

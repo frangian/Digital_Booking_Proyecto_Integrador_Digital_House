@@ -14,6 +14,7 @@ const AdminTable = ({ handleConfirmacion }) => {
     const [ciudades, setCiudades] = useState([]);
     const [categorias, setCategorias] = useState([]);
     const [productoSeleccionado, setProductoSeleccionado] = useState(false);
+    let jwt = localStorage.getItem('jwt');
 
     const handleSubmit = () => {
         if (metodoBusqueda === "categoria") {
@@ -54,7 +55,8 @@ const AdminTable = ({ handleConfirmacion }) => {
             cancelButtonText: "Cancelar"
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`${API_URL}/producto/${productoId}`)
+                axios.delete(`${API_URL}/producto/${productoId}`,
+                {headers: { 'Authorization': `Bearer ${jwt}` }})
                 .then(res => {
                     handleSubmit()
                     Swal.fire({

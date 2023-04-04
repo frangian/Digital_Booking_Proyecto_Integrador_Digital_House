@@ -883,6 +883,12 @@ body {
   width: 30%;
 }
 
+.fechas-input{
+  font-family:"Roboto", sans-serif ; 
+  font-weight: 600;
+  color: var(--main-dark-gray);
+}
+
 #btn-buscar {
   padding: 10px 10%;
   margin-left: 1vw;
@@ -928,7 +934,8 @@ body {
 }
 
 .card.selected {
-  border: 2px solid #ffcc00;
+  border: 2px solid var(--main-green);
+  border-radius: 15px;
 }
 
 .card > div {

@@ -66,7 +66,9 @@ const CardRecomendaciones = ({
           id: id
         },
         usuario: {
-            id: state.user.id
+            id: state.user.id,
+            validado: true,
+            usuarioRole: "USER"
         }
       }
       axios.post(`${API_URL}/favorito`, objPostFav, { headers })

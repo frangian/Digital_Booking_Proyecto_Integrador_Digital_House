@@ -11,6 +11,8 @@ import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { DateRangePicker } from "rsuite";
 import { CircularProgress } from "@mui/material";
 import { API_URL } from "./Utils/api";
+import moment from 'moment';
+import 'moment/locale/es';
 
 const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
   const [ciudad, setCiudad] = useState("");
@@ -18,7 +20,10 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
   const [selectedDates, setSelectedDates] = useState(null);
   const [ciudades, setCiudades] = useState([]);
   const [ciudadId, setCiudadId] = useState(null);
-  
+  const [width, setWidth] = useState(window.innerWidth);
+
+  moment.locale('es');
+
   const handleChange = (event) => {
     setCiudad(event.target.value);
   };
@@ -29,7 +34,12 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
 
   const handleDateChange = (value) => {
     setDateRange(value);
-    const fechaInicial = value[0]
+    setSelectedDates(null);
+    console.log(value);
+    if(value !== null) {
+      
+      const fechaInicial = value[0]
+    
       .toLocaleDateString("en-CA")
       .split("/")
       .reverse()
@@ -40,11 +50,14 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
       .reverse()
       .join("-");
     setSelectedDates([fechaInicial, fechaFinal]);
+    }
+    
+    
   };
 
   /* ----------------------------------- COMPLETAR CON URL DE LA API PARA OBTENER LISTADO DE CIUDADES ---------------------------------- */
   useEffect(() => {
-    
+    window.addEventListener("resize", resize);
     axios
       .get(`${API_URL}/ciudad`)
       .then((response) => {
@@ -60,6 +73,80 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
   const disabledDate = (date) => {
     return date < new Date();
   };
+
+
+  const resize = () => {
+    setWidth(window.innerWidth);
+  }
+
+  const renderCalendar = () => {
+    if (width <= 960 && width > 790) {
+      return (
+        <DateRangePicker
+          value={dateRange}
+          onClean={()=> setDateRange([])}
+          onChange={(e)=> handleDateChange(e.target.value)}
+          placeholder="Check-in Check-out"
+          className="date-picker"
+          size="lg"
+          disabledDate={disabledDate}
+          placement="bottomEnd"
+          ranges={[]}
+          locale="es"
+          renderValue={(value, format) => {
+            return (
+              <div className="fechas-input">
+                {`${moment(value[0]).format("D [de] MMMM [de] YYYY")} - ${moment(value[1]).format("D [de] MMMM [de] YYYY")}`}
+              </div>
+            );
+          }}
+        />
+      )
+    } else if (width <= 790) {
+      return (
+        <DateRangePicker
+          value={dateRange}
+          onClean={()=> setDateRange([])}
+          onChange={(e)=> handleDateChange(e.target.value)}
+          placeholder="Check-in Check-out"
+          className="date-picker"
+          size="lg"
+          disabledDate={disabledDate}
+          showOneCalendar
+          ranges={[]}
+          locale="es"
+          renderValue={(value, format) => {
+            return (
+              <div className="fechas-input">
+                {`${moment(value[0]).format("D [de] MMMM [de] YYYY")} - ${moment(value[1]).format("D [de] MMMM [de] YYYY")}`}
+              </div>
+            );
+          }}
+        />
+      )
+    } else {
+      return (
+        <DateRangePicker
+          value={dateRange}
+          onClean={()=> setDateRange([])}
+          onChange={(e)=> handleDateChange(e)}
+          placeholder="Check-in Check-out"
+          className="date-picker"
+          size="lg"
+          disabledDate={disabledDate}
+          ranges={[]}
+          locale="es"
+          renderValue={(value, format) => {
+            return (
+              <div className="fechas-input">
+                {`${moment(value[0]).format("D [de] MMMM [de] YYYY")} - ${moment(value[1]).format("D [de] MMMM [de] YYYY")}`}
+              </div>
+            );
+          }}
+        />
+      )
+    }
+  }
 
   return (
     <div className="buscador-container">
@@ -93,7 +180,7 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
                 height: "42px",
               }}          
             >
-              <MenuItem value="" sx={{ display: "none" }}>
+              <MenuItem value=""  onClick={() => setCiudadId(0)}>
                 <FontAwesomeIcon icon={faMapMarkerAlt} className="icono" />{" "}
                 <span>¿A donde vamos?</span>
               </MenuItem>
@@ -121,14 +208,10 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
             </Select>
           </FormControl>
         </Box>
-        <DateRangePicker
-          value={dateRange}
-          onChange={handleDateChange}
-          placeholder="Check-in Check-out"
-          className="date-picker"
-          size="lg"
-          disabledDate={disabledDate}
-        />
+        
+
+        
+       {renderCalendar()}
         <button
           className="ver-mas-btn"
           id="btn-buscar"
