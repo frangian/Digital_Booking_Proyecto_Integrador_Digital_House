@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductoForm from "../Components/ProductoComponents/ProductoForm";
 import ProductHeader from "../Components/ProductHeader";
 import {  useNavigate } from "react-router-dom";
@@ -8,6 +8,20 @@ const Admin = () => {
 
   const [confirmada, setConfirmada] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let jwt = localStorage.getItem('jwt');
+    if(!jwt) {
+        navigate("/")
+    } else { 
+      let partes = jwt.split('.');
+      let contenido = atob(partes[1]);
+      let datos = JSON.parse(contenido);
+      if(datos.authorities[0].authority !== "ADMIN") {
+        navigate("/")
+      }
+    }
+}, [])
 
   const handleConfirmacion = () => {
     setConfirmada(true);

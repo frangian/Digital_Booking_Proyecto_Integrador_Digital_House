@@ -15,7 +15,7 @@ const Categorias = ({  actualizarCategoriaSeleccionada, categoriaSeleccionada })
 
   //manejo el click de la categoria y llamo a la funcion que setea la categoria seleccionada
   const handleClick = (id) => {
-    if(!categoriaSeleccionada){
+    if(!categoriaSeleccionada || selectedCategorietId !== id){
       actualizarCategoriaSeleccionada(id);
       setSelectedCategorieId(id);
     }else{ 

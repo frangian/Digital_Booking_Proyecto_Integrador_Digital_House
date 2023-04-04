@@ -24,9 +24,9 @@ const LoginForm = () => {
         e.preventDefault();
         if (user.email && user.password) {  
             setSendLoad(true);
-            axios.post(`${API_URL}/login`, user)
+            axios.post(`${API_URL}/usuario/auth/login`, user)
             .then(res => {
-                let jwt = res.headers.authorization.split(" ")[1];
+                let jwt = res.data.token;
                 localStorage.setItem("jwt", jwt);
                 setSendLoad(false);
                 if (reserva) {

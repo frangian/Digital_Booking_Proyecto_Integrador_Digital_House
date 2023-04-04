@@ -64,7 +64,9 @@ const ReservaForm = ({
         }
         let objPutUsuario = {
             id: values.usuarioId,
-            ciudad: values.ciudad
+            ciudad: values.ciudad,
+            validado: true,
+            usuarioRole: "USER"
         }
          
         if (!objPostReserva.horaComienzo || !objPostReserva.fechaFinal || !objPostReserva.fechaInicial || !values.ciudad || !values.usuarioId) {

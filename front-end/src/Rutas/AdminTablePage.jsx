@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ProductHeader from '../Components/ProductHeader';
 import AdminTable from '../Components/AdminTable';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,20 @@ const AdminTablePage = () => {
 
     const [confirmada, setConfirmada] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        let jwt = localStorage.getItem('jwt');
+        if(!jwt) {
+            navigate("/")
+        } else { 
+          let partes = jwt.split('.');
+          let contenido = atob(partes[1]);
+          let datos = JSON.parse(contenido);
+          if(datos.authorities[0].authority !== "ADMIN") {
+            navigate("/")
+          }
+        }
+    }, [])
 
     const handleConfirmacion = () => {
         setConfirmada(true);

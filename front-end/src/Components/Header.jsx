@@ -35,7 +35,8 @@ const Header = () => {
   }
 
   const renderExtraFunctions = () => {
-    if (!state.admin) {
+   if(state.user.usuarioRole){
+    if (state.user.usuarioRole === "USER") {
       return (
         <div className="header-extra-functions">
           <button className="extra-function" 
@@ -50,7 +51,7 @@ const Header = () => {
           }}>Mis reservas</button>
         </div>
       )
-    } else {
+    } else if(state.user.usuarioRole === "ADMIN") {
       return (
         <div className="header-extra-functions">
           <button className="extra-function" 
@@ -66,6 +67,9 @@ const Header = () => {
         </div>
       )
     }
+   }else{
+    return ""
+   }
   }
 
   useEffect(() => {
