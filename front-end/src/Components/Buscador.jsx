@@ -11,6 +11,8 @@ import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { DateRangePicker } from "rsuite";
 import { CircularProgress } from "@mui/material";
 import { API_URL } from "./Utils/api";
+import moment from 'moment';
+import 'moment/locale/es';
 
 const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
   const [ciudad, setCiudad] = useState("");
@@ -18,6 +20,8 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
   const [selectedDates, setSelectedDates] = useState(null);
   const [ciudades, setCiudades] = useState([]);
   const [ciudadId, setCiudadId] = useState(null);
+
+  moment.locale('es');
 
   const handleChange = (event) => {
     setCiudad(event.target.value);
@@ -30,6 +34,7 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
   const handleDateChange = (value) => {
     setDateRange(value);
     const fechaInicial = value[0]
+    
       .toLocaleDateString("en-CA")
       .split("/")
       .reverse()
@@ -40,6 +45,7 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
       .reverse()
       .join("-");
     setSelectedDates([fechaInicial, fechaFinal]);
+    
   };
 
   /* ----------------------------------- COMPLETAR CON URL DE LA API PARA OBTENER LISTADO DE CIUDADES ---------------------------------- */
@@ -92,7 +98,7 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
                 height: "42px",
               }}          
             >
-              <MenuItem value="" sx={{ display: "none" }}>
+              <MenuItem value=""  onClick={() => setCiudadId(0)}>
                 <FontAwesomeIcon icon={faMapMarkerAlt} className="icono" />{" "}
                 <span>¿A donde vamos?</span>
               </MenuItem>
@@ -125,9 +131,18 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
           value={dateRange}
           onChange={handleDateChange}
           placeholder="Check-in Check-out"
+          onClean={() => setDateRange([])}
           className="date-picker"
           size="lg"
           disabledDate={disabledDate}
+          locale="es"
+          renderValue={(value, format) => {
+            return (
+              <div className="fechas-input">
+                {`${moment(value[0]).format("D [de] MMMM [de] YYYY")} - ${moment(value[1]).format("D [de] MMMM [de] YYYY")}`}
+              </div>
+            );
+          }}
         />
         <button
           className="ver-mas-btn"
