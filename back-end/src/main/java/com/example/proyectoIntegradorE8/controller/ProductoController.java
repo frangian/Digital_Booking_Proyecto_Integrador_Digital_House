@@ -234,6 +234,54 @@ public class ProductoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
+    @GetMapping("/disponibles/fechacategoria")
+    @Operation(summary = "Buscar los productos disponibles por fechas en ciudad ID", description = "Este endpoint permite buscar los productos disponibles dentro de un rango de fechcas en ciudad ID en la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
+    public ResponseEntity<?> findByCategoriaIdAndProductoFechas (@RequestParam Long categoriaId, @RequestParam LocalDate fechaInicial, @RequestParam LocalDate fechaFinal) {
+        try {
+            log.info("findByCategoriaIdAndProductoFechas: accediendo al servicio de producto");
+            List<Producto> productos = productoService.findByCategoriaIdAndProductoFechas(categoriaId,fechaInicial,fechaFinal);
+            log.info("findByCategoriaIdAndProductoFechas: retornando los productos encontrados");
+            return ResponseEntity.ok(productos);
+        } catch (Exception e){
+            log.info(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+    @GetMapping("/disponibles/categoriaciudad")
+    @Operation(summary = "Buscar los productos disponibles por Id de ciudad y categoria", description = "Este endpoint permite buscar los productos disponibles con ID especifico de ciduad y categoria en la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
+    public ResponseEntity<?> findByCategoriaIdAndCiudadId (@RequestParam Long ciudadId, @RequestParam Long categoriaId) {
+        try {
+            log.info("findByCategoriaIdAndCiudadId: accediendo al servicio de producto");
+            List<Producto> productos = productoService.findByCategoriaIdAndCiudadId(ciudadId,categoriaId);
+            log.info("findByCategoriaIdAndCiudadId: retornando los productos encontrados");
+            return ResponseEntity.ok(productos);
+        } catch (Exception e){
+            log.info(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+    @GetMapping("/disponibles/categoriaciudadfecha")
+    @Operation(summary = "Buscar los productos disponibles por Id de ciudad y categoria y fechas", description = "Este endpoint permite buscar los productos disponibles dentro de un rango de fechcas en ciudad ID y categoria ID en la BBDD")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Producto.class))),
+            @ApiResponse(responseCode = "400", description = "Peticion Incorrecta", content = @Content)})
+    public ResponseEntity<?> findByCiudadIdAndCategoriaIdAndFechas (@RequestParam Long ciudadId, @RequestParam Long categoriaId, @RequestParam LocalDate fechaInicial, @RequestParam LocalDate fechaFinal) {
+        try {
+            log.info("findByCategoriaIdAndCiudadId: accediendo al servicio de producto");
+            List<Producto> productos = productoService.findByCiudadIdAndCategoriaIdAndFechas(ciudadId,categoriaId, fechaInicial, fechaFinal);
+            log.info("findByCategoriaIdAndCiudadId: retornando los productos encontrados");
+            return ResponseEntity.ok(productos);
+        } catch (Exception e){
+            log.info(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
 
     @GetMapping("/titulo/{productoTitulo}")
     @Operation(summary = "Buscar los productos disponibles por titulo", description = "Este endpoint permite buscar los productos disponibles por el titulo en la BBDD")
