@@ -138,7 +138,6 @@ const AdminTable = ({ handleConfirmacion }) => {
                                 value={valorBusqueda}
                                 onChange={(e) => {
                                     setValorBusqueda(e.target.value);
-                                    console.log(e.target.value);
                                 }}
                                 placeholder='Buscar por...'
                                 style={{ padding: "10px" }}

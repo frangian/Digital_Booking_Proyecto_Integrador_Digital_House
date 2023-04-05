@@ -48,7 +48,6 @@ export const findCategoria = (array, nombreCategoria) => {
     let respuesta;
     array.forEach(categoria => {
         if (categoria.titulo === nombreCategoria) {
-            console.log(categoria.id);
             respuesta = categoria.id;
         }
     })

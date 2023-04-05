@@ -35,7 +35,6 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
   const handleDateChange = (value) => {
     setDateRange(value);
     setSelectedDates(null);
-    console.log(value);
     if(value !== null) {
       
       const fechaInicial = value[0]
@@ -63,7 +62,6 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
       .then((response) => {
         const data = response.data;
         setCiudades(data);
-        // console.log(data);
       })
       .catch((error) => {
         console.log(error);

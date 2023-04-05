@@ -146,7 +146,6 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
   useEffect(() => {
     
     if (producto) {
-      console.log(producto);
       setTitulo(producto.titulo);
       setDescripcion(producto.descripcion_producto);
       setCiudad({id: producto.ciudad.id});
@@ -179,12 +178,9 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
       .get(`${API_URL}/categoria`)
       .then((response) => {
         setCategories(response.data);
-        // console.log(response.data, producto.categoria);
         
-        // console.log(findCategoria(response.data, producto.categoria));
       })
       .catch((error) => {
-        console.log(error);
         setError("Error al obtener categorías");
       });
   }
@@ -194,10 +190,8 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
       .get(`${API_URL}/caracteristica`)
       .then((response) => {
         setCaracteristicasArray(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
-        console.log(error);
         setError("Error al obtener caracteristicas");
       });
   }
@@ -210,7 +204,6 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
         setCities(data);
       })
       .catch((error) => {
-        console.log(error);
         setError("Error al obtener ciudades");
       });
   }
@@ -261,7 +254,6 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
           imagenes,
         };
   
-        console.log(data);
         
         axios
           .post(`${API_URL}/producto`, data, {
@@ -270,7 +262,6 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
           .then((response) => {
             setSendLoad(false);
             handleConfirmacion();
-            console.log(response.data);
           })
           .catch((error) => {
             console.error(error);
@@ -298,7 +289,6 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
           imagenes,
         };
   
-        console.log(data);
         axios
           .put(`${API_URL}/producto`, data, {
             headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${jwt}` },
@@ -306,7 +296,6 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
           .then((response) => {
             setSendLoad(false);
             handleConfirmacion();
-            console.log(response.data);
           })
           .catch((error) => {
             console.error(error);
@@ -398,7 +387,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
 
   return (
     <div className="crear-producto-container">
-      <h1 onClick={() => {console.log(imagenes);}}>
+      <h1>
         {producto ? `Actualizar el producto con id: ${producto.id}` : "Crear un producto"} <a className="link-demo" href="https://youtu.be/kfvH1oHYTLE" target="e_blank"> (Link video demo)</a>
       </h1>
 
@@ -462,7 +451,6 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
                 onChange={(event) => {
                   event.target.parentElement.classList.remove("error");
                   setErrorCiudad("");
-                  console.log(event.target.value);
                   setCiudad({ id: parseInt(event.target.value) });
                 }}
               >
@@ -616,7 +604,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
               size="1.4rem"
             />
           ) : (
-            "Crear"
+            producto ? "Actualizar" : "Crear"
           )}
         </button>
       </div>
