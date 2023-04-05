@@ -14,6 +14,7 @@ const Favoritos = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [favs, setFavs] = useState([]);
 
+
   useEffect(() => {
     let jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -42,7 +43,7 @@ const Favoritos = () => {
 
   return (
     <div className='reservas-usuario-page' style={{ marginBottom: "0" }}>
-      <ProductHeader tituloCategoria={`Cantidad de favoritos: ${localStorage.getItem("jwt") ? state.user?.favoritos.length : favs.length}`} tituloProducto={"Favoritos"}/>
+      <ProductHeader tituloCategoria={`Cantidad de favoritos: ${localStorage.getItem("jwt") ? state.user?.favoritos.length : (favs?.length !== undefined ? favs.length : "0")}`} tituloProducto={"Favoritos"}/>
       <div className="recomendaciones-container" style={{ minHeight: "70vh" }}>
         <div className="card-grid-recomendaciones">
           {
