@@ -94,7 +94,8 @@ deploy -front:
     entrypoint: ['']
   script:
     - aws --version
-    - aws s3 sync front-end/ s3://$AWS_S3_BUCKET --delete
+    - aws s3 sync --acl public-read front-end/build s3://$AWS_S3_BUCKET --delete
+    # - aws s3 sync --acl public-read --delete ./front-end/build s3://$AWS_S3_BUCKET --region us-east-2 --exclude '.git/*'
   rules:
     - if: '$CI_COMMIT_BRANCH == "desarrollo"'
       changes:
