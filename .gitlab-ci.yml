@@ -61,7 +61,7 @@ deploy -back:
 
 build -front:
   stage: build
-  image: node:16.5.0
+  image: node:latest
   script:
     - cd front-end/
     - export NODE_OPTIONS=--max_old_space_size=4096
