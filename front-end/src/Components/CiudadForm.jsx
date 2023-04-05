@@ -7,6 +7,8 @@ const CiudadForm = ({ handleCiudadCreada }) => {
   const [pais, setPais] = useState("");
   const [provincia, setProvincia] = useState("");
 
+  let jwt = localStorage.getItem('jwt');
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
@@ -15,7 +17,7 @@ const CiudadForm = ({ handleCiudadCreada }) => {
       provincia,
     };
     axios
-      .post(`${API_URL}/ciudad`, data)
+      .post(`${API_URL}/ciudad`, data, { headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${jwt}`}})
       .then((response) => {
         handleCiudadCreada(true);
       })
