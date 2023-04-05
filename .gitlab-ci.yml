@@ -30,7 +30,7 @@ build -front:
     - npm run build
   artifacts:
     paths:
-      - front-end/dist
+      - front-end/
   rules:
     - if: '$CI_COMMIT_BRANCH == "desarrollo"'
       changes:
