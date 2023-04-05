@@ -24,7 +24,7 @@ const CardRecomendaciones = ({
   checkIn,
   checkOut,
   reserva,
-  llegada
+  llegada,
 }) => {
   const navigate = useNavigate();
   const MAX_LENGTH = 100;
