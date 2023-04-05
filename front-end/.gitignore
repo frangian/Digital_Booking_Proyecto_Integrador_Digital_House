@@ -25,4 +25,5 @@ yarn-error.log*
 # zip files
 .zip
 
-*.rar
+# rar files
+.rar
