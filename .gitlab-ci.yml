@@ -20,22 +20,6 @@ build -back:
       changes:
         - back-end/**/*
 
-build -front:
-  stage: build
-  image: node:16.5.0
-  script:
-    - cd front-end/
-    - export NODE_OPTIONS=--max_old_space_size=4096
-    - npm install
-    - npm run build
-  artifacts:
-    paths:
-      - front-end/
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "desarrollo"'
-      changes:
-        - front-end/**/*
-
 # automated-api-tests -back:
 #   stage: test
 #   image: cimg/base:2021.04
@@ -50,19 +34,6 @@ build -front:
 #   - if: '$CI_COMMIT_BRANCH == "desarrollo"'
 #     changes:
 #       - back-end/**/*
-
-# test project:
-#   stage: test
-#   image: node:16.5.0
-#   script:
-#     - cd front-end/
-#     - npm install
-#     - npm run test
-#   rules:
-#   - if: '$CI_COMMIT_BRANCH == "desarrollo"'
-#     changes:
-#       - front-end/**/*
-
 
 deploy -back:
   stage: deploy
@@ -88,6 +59,33 @@ deploy -back:
       changes:
         - back-end/**/*
 
+build -front:
+  stage: build
+  image: node:16.5.0
+  script:
+    - cd front-end/
+    - export NODE_OPTIONS=--max_old_space_size=4096
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - front-end/
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "desarrollo"'
+      changes:
+        - front-end/**/*
+
+# test -front:
+#   stage: test
+#   image: node:16.5.0
+#   script:
+#     - cd front-end/
+#     - npm install
+#     - npm run test
+#   rules:
+#   - if: '$CI_COMMIT_BRANCH == "desarrollo"'
+#     changes:
+#       - front-end/**/*
 
 deploy -front:
   stage: deploy
@@ -96,7 +94,7 @@ deploy -front:
     entrypoint: ['']
   script:
     - aws --version
-    - aws s3 sync front-end/dist s3://$AWS_S3_BUCKET --delete
+    - aws s3 sync front-end/ s3://$AWS_S3_BUCKET --delete
   rules:
     - if: '$CI_COMMIT_BRANCH == "desarrollo"'
       changes:
