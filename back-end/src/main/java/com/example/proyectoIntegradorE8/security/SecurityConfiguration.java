@@ -23,16 +23,17 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
         http
+                .cors().and()
                 .csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/usuario/auth/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/reserva/**").hasAnyAuthority("USER","ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/reserva/**").hasAnyAuthority("USER","ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/usuario/**").hasAnyAuthority("USER","ADMIN")
-                .requestMatchers(HttpMethod.POST).hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/favorito/**").hasAnyAuthority("USER","ADMIN")
                 .requestMatchers(HttpMethod.PUT).hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.DELETE).hasAuthority("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/reserva/**").hasAnyAuthority("USER","ADMIN")
+                .requestMatchers(HttpMethod.GET, "/reserva/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/usuario/**").hasAnyAuthority("USER","ADMIN")
                 .requestMatchers(HttpMethod.GET, "/favorito/**").hasAnyAuthority("USER","ADMIN")
                 .requestMatchers(HttpMethod.GET).permitAll()
