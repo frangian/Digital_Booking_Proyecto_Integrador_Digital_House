@@ -121,7 +121,7 @@ public class ProductoService {
     public List<Producto> findByCategoriaIdAndProductoFechas (Long categoriaId, LocalDate fechaInicial, LocalDate fechaFinal) throws Exception {
         try {
             log.info("findByCategoriaIdAndProductoFechas: accediendo al repositorio de productos");
-            return productoRepository.findByCiudadIdAndProductoFechas(categoriaId,fechaInicial,fechaFinal);
+            return productoRepository.findByCategoriaIdAndProductoFechas(categoriaId,fechaInicial,fechaFinal);
         } catch (Exception e) {
             log.error("Error al buscar productos disponibles. Exception: "+e.getMessage());
             throw new Exception("Error al buscar productos disponibles. Exception: "+e.getMessage());
