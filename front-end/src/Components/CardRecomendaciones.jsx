@@ -73,6 +73,7 @@ const CardRecomendaciones = ({
       }
       axios.post(`${API_URL}/favorito`, objPostFav, { headers })
       .then(res => {
+        console.log(res);
         setFavorite(true);
         dispatch({
           type: "ADD_FAVORITE",
@@ -107,6 +108,7 @@ const CardRecomendaciones = ({
       const headers = { 'Authorization': `Bearer ${jwt}` };
       axios.delete(`${API_URL}/favorito/${favoriteId}`, { headers })
       .then(res => {
+        console.log("elimina");
         setFavorite(false);
         dispatch({
           type: "REMOVE_FAVORITE",
@@ -138,12 +140,16 @@ const CardRecomendaciones = ({
       console.log(error);
     });
 
-    let jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      encontrarFav(state.user.favoritos)
-    }
+    
 
   }, [id]);
+
+  useEffect(() => {
+    let jwt = localStorage.getItem("jwt");
+    if (jwt) { 
+      encontrarFav(state.user.favoritos)
+    }
+  }, [encontrarFav])
 
   return (
     <div className="card-recomendaciones">
