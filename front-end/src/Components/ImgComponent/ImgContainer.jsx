@@ -18,13 +18,13 @@ const ImgContainer = ({ imgList, isLoading, shareObj, shareAcross }) => {
                 isLoading ? (imgList?.map((imagen, i) => {
                     if (i < 4) {
                         return (
-                            <div className="imagenes" key={imagen.titulo}>
+                            <div className="imagenes" key={imagen.url_imagen + i}>
                                 <img src={imagen.url_imagen} alt={imagen.titulo} />
                             </div>
                         )
                     } else if (i === 4) {
                         return (
-                            <div className="imagenes" key={imagen.titulo}>
+                            <div className="imagenes" key={imagen.url_imagen + i}>
                                 <img src={imagen.url_imagen} alt={imagen.titulo} />
                                 <p onClick={() => setOpenCarousel(true)}>Ver más</p>
                             </div>

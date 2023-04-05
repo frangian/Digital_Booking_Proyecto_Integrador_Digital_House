@@ -193,10 +193,8 @@ const Producto = () => {
         if(window.innerWidth < 900) {
             if (navigator.share) {
                 navigator.share(obj)
-                .then(() => console.log("Objeto compartido"))
+                .then()
                 .catch(err => console.log(err))
-            } else {
-                console.log("no soportado");
             }
         } else {
             shareCard()
@@ -219,7 +217,7 @@ const Producto = () => {
                     </div>
                     <div className="puntuacion">
                         <div className="left-puntuacion">
-                            <p onClick={() => console.log(like, likeId)}>Muy bueno</p>
+                            <p>Muy bueno</p>
                             <div className="stars">
                                 <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
                                 <FontAwesomeIcon icon={faStar} className="icono icono-verde" />

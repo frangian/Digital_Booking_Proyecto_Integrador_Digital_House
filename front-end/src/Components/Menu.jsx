@@ -109,7 +109,7 @@ const Menu = ({ open, openClose, renderFunctions }) => {
                 </div>
             </div>
             <div className={`cerrar-sesion ${state.logged ? "" : "oculto"}`}>
-                <p onClick={() => console.log(faX)}>¿Deseas <span onClick={() => cerrarSesion()}>cerrar sesión</span>?</p>
+                <p>¿Deseas <span onClick={() => cerrarSesion()}>cerrar sesión</span>?</p>
             </div>
             <div className="bottom-menu">
                 {

@@ -14,7 +14,6 @@ const CiudadForm = ({ handleCiudadCreada }) => {
       pais,
       provincia,
     };
-    console.log(data);
     axios
       .post(`${API_URL}/ciudad`, data)
       .then((response) => {

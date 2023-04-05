@@ -135,7 +135,6 @@ const ReservaForm = ({
                 }
                 emailjs.send("service_nc0296c", "template_b5rk35n", templateParams, "8EQLpJMNLWle12z9B")
                 .then(res => {
-                    console.log(res.text);
                 })
                 .catch(err => {
                     console.log(err);

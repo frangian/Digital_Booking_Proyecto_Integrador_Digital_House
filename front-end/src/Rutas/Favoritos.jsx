@@ -55,7 +55,6 @@ const Favoritos = () => {
               localStorage.getItem("jwt") ? 
               (
                 state.user?.favoritos.map(fav => (
-                  // <p onClick={() => console.log(fav)}>Hola</p>
                   <CardRecomendaciones
                   key={fav.producto.id}
                   id={fav.producto.id}

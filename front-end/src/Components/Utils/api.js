@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_URL = "http://18.223.215.148:8080";
+export const API_URL = "http://localhost:8080";
 
 export const getProductosRecomendados = async (categoriaSeleccionada, ciudadSeleccionada, dates) => {
   let url = API_URL + "/producto/random";
@@ -33,11 +33,11 @@ export const getProductosRecomendados = async (categoriaSeleccionada, ciudadSele
     // Filtro por categoría y fechas
     const checkIn = dates[0];
     const checkOut = dates[1];
-    console.log("busco por categoria y fechas");
-    console.log(dates[0]);
+    console.log("busco por categoria y fechas   " );
+    console.log(checkIn, checkOut, categoriaSeleccionada);
     url = API_URL + `/producto/disponibles/fechacategoria`;
     params = {
-      categoriaId: ciudadSeleccionada,
+      categoriaId: categoriaSeleccionada,
       fechaInicial: checkIn,
       fechaFinal: checkOut,
     };
@@ -77,6 +77,7 @@ export const getProductosRecomendados = async (categoriaSeleccionada, ciudadSele
 
   try {
     const response = await axios.get(finalUrl);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);

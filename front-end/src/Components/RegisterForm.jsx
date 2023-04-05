@@ -93,8 +93,6 @@ const RegisterForm = () => {
                 const headers = { 'Authorization': `Bearer ${jwt}` };
                 axios.get(`${API_URL}/usuario/email/${datos.sub}`, { headers })
                     .then(res => {
-                        console.log(res.data);
-                        console.log("1");
                         dispatch({
                             type: "register",
                             payload: {
