@@ -668,7 +668,7 @@ input[type="range"]::-moz-range-thumb {
 
 .atributos{
   background-color: var(--main-dark-white);
-  margin: 1vh 2vw;
+  margin:1vh 2vw;
   padding: 3vh 2vw;
   border: none;
   border-radius: 10px;
@@ -681,7 +681,10 @@ input[type="range"]::-moz-range-thumb {
   justify-content: space-between;
   align-items: center;
   height: 50px;
+  padding: 5vh 3vw
 }
+
+
 
 .atributo-container-select{
   width: 80vw;
@@ -692,6 +695,15 @@ input[type="range"]::-moz-range-thumb {
   background-color: var(--main-white);
 }
 
+.atributo-container-input{
+  width: 38.5vw;
+  height: 50px;
+  border: 1px solid var(--main-dark-black);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-color: var(--main-white);
+  
+}
 
 
 .politicas-producto{
@@ -728,6 +740,19 @@ input[type="range"]::-moz-range-thumb {
 
 .icono-agregar{ 
   font-size: 50px;
+}
+
+.seccion-imagenes-crear-producto{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  margin: 5vh 5vw;
+}
+
+.seccion-imagenes-crear-producto img{
+  height: 20vh;
+  width: 15vw;
+  border-radius: 10px;
 }
 
 /* --------------------------- Tabla Administracio -------------------------- */
@@ -1200,6 +1225,36 @@ body {
   right: 10px;
   padding: 0 10px;
 }
+
+.verde{
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--main-green);
+  background-color: transparent;
+  position: absolute;
+  right: 5px;
+  padding: 0 10px;
+  
+}
+
+.seccion-imagenes-crear-producto{
+  background-color: var(--main-dark-white);
+  padding: 50px;
+  border-radius:50px;
+}
+.seccion-imagenes-crear-producto-imagen{
+  position: relative;
+}
+
+.nombre-imagen{
+  font-family: "Roboto", sans-serif !important;
+  font-weight: 700 !important;
+  text-align: center;
+  padding:10px;
+}
+
+
 
 /* -------------------------------------------------------------------------- */
 /*                               Pagina producto                              */
@@ -2307,11 +2362,6 @@ div.card-reserva-content {
   height: 30px;
   padding: 0;
 }
-
-.atributo-container-select{
-  width: 75vw;
-}
-
 .politicas-producto{
   grid-template-columns: repeat(1, 1fr);
 }

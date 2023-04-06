@@ -11,6 +11,8 @@ import Modal from "../Modal";
 import AtributoForm from "./AtributoForm";
 import AddImagenForm from "./AddImagenForm";
 
+import { elegirServicio } from "../Utils/utils.js";
+
 
 const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) => {
 
@@ -385,6 +387,8 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
     setCiudadCreada(false);
   };
 
+ 
+
   return (
     <div className="crear-producto-container">
       <h1>
@@ -525,7 +529,13 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
               <p>{errorPuntuacion}</p>
             </label>
           </div>
-          <h2>Agregar atributos</h2>
+
+          {/* AGREGUE LOS ICONOS AL LADO DEL H2 */}
+          <h2>Agregar atributos <span>{attributes.map(attribute => ( 
+            <span className="icono-servicio">{elegirServicio(attribute.id , "#1dbeb4")}</span>
+          ))}</span></h2>
+          
+          
           <AtributoForm
             attributes={attributes}
             handleAttributeChange={handleAttributeChange}
@@ -590,6 +600,25 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
             setErrorImagen={setErrorImagen}
             handleAddImg={handleAddImg}
           />
+
+          {/* AGREGUE IMAGENES VISTAS */}
+          {imagenes.length !== 0 ? 
+            <div className="seccion-imagenes-crear-producto">
+            {imagenes.map(img => ( 
+              <div className="seccion-imagenes-crear-producto-imagen">
+              <h4 className="nombre-imagen">{img.titulo}</h4>
+              <img src={img.url_imagen} alt="imagen" />
+              <button className="verde" onClick={handleDeleteImg}>
+                X
+              </button>
+              </div>
+            ))}
+          </div>
+          : <></>
+          }
+          
+          
+          
         </form>
         <button
           type="submit"
