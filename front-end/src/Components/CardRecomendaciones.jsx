@@ -39,7 +39,7 @@ const CardRecomendaciones = ({
   const [favoriteId, setFavoriteId] = useState(0);
 
   const shortDescription =
-    description.length > MAX_LENGTH
+    description?.length > MAX_LENGTH
       ? description.substring(0, MAX_LENGTH) + "..."
       : description;
 
@@ -210,7 +210,7 @@ const CardRecomendaciones = ({
         </div>
         <p>
           {shortDescription}
-          {description.length > MAX_LENGTH && (
+          {description?.length > MAX_LENGTH && (
             <button
               onClick={handleToggleDescription}
               className="btn-vermas-vermenos"

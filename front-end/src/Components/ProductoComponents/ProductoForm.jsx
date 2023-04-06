@@ -12,7 +12,7 @@ import AtributoForm from "./AtributoForm";
 import AddImagenForm from "./AddImagenForm";
 
 import { elegirServicio } from "../Utils/utils.js";
-
+import CardRecomendaciones from "../CardRecomendaciones"
 
 const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) => {
 
@@ -620,6 +620,25 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
           
           
         </form>
+        {/* {imagenes.length !== 0 ?
+        <CardRecomendaciones 
+        titulo={titulo}
+        descripcion={descripcion}
+        desUbicacion={desUbicacion}
+        urlMapa={urlMapa}
+        normas={normas}
+        seguridad={seguridad}
+        cancelacion={cancelacion}
+        puntuacion={puntuacion}
+        categoria={categoria}
+        direccion={direccion}
+        ciudad={ciudad}
+        caracteristicas={attributes}
+        imagenes={imagenes}
+        />
+        : ""} */}
+        
+        
         <button
           type="submit"
           form="producto-form"
