@@ -11,11 +11,15 @@ import Modal from "../Modal";
 import AtributoForm from "./AtributoForm";
 import AddImagenForm from "./AddImagenForm";
 
-import { elegirServicio } from "../Utils/utils.js";
-import CardRecomendaciones from "../CardRecomendaciones"
+import { elegirServicio, findCategoriaNombre } from "../Utils/utils.js";
+import CardReco from "../CardReco";
 
-const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) => {
-
+const ProductoForm = ({
+  handleConfirmacion,
+  loading,
+  handleLoading,
+  producto,
+}) => {
   const [sendLoad, setSendLoad] = useState(false);
 
   const [titulo, setTitulo] = useState("");
@@ -60,6 +64,16 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
 
   const [ciudadCreada, setCiudadCreada] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [datos, setDatos] = useState({
+    title: "",
+    shortDescription: "",
+    puntuacion: "",
+    category: "",
+    caracteristicasArray: "",
+    url_imagen: "",
+    characteristics: "",
+    desUbicacion: "",
+  });
 
   const resetErrors = () => {
     setErrorTitulo("");
@@ -146,11 +160,10 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
   ];
 
   useEffect(() => {
-    
     if (producto) {
       setTitulo(producto.titulo);
       setDescripcion(producto.descripcion_producto);
-      setCiudad({id: producto.ciudad.id});
+      setCiudad({ id: producto.ciudad.id });
       setDireccion(producto.direccion);
       setPuntuacion(producto.puntuacion);
       setUrlMapa(producto.url_ubicacion);
@@ -159,9 +172,11 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
       setSeguridad(producto.seguridad);
       setCancelacion(producto.cancelacion);
       setImagenes(producto.imagenes);
-      setAttributes(producto.caracteristicas.map(res => ({id: res.titulo})))
+      setAttributes(
+        producto.caracteristicas.map((res) => ({ id: res.titulo }))
+      );
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     fetchCategories();
@@ -171,16 +186,15 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
 
   useEffect(() => {
     if (producto) {
-      setCategoria({id: findCategoria(categories, producto.categoria)})
+      setCategoria({ id: findCategoria(categories, producto.categoria) });
     }
-  }, [categories])
+  }, [categories]);
 
   function fetchCategories() {
     axios
       .get(`${API_URL}/categoria`)
       .then((response) => {
         setCategories(response.data);
-        
       })
       .catch((error) => {
         setError("Error al obtener categorías");
@@ -237,8 +251,8 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
       const descripcion_producto = descripcion;
       const descripcion_ubicacion = desUbicacion;
       const url_ubicacion = urlMapa;
-      let jwt = localStorage.getItem('jwt');
-      
+      let jwt = localStorage.getItem("jwt");
+
       if (!producto) {
         const data = {
           titulo,
@@ -255,11 +269,13 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
           caracteristicas,
           imagenes,
         };
-  
-        
+
         axios
           .post(`${API_URL}/producto`, data, {
-            headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${jwt}` },
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${jwt}`,
+            },
           })
           .then((response) => {
             setSendLoad(false);
@@ -272,7 +288,6 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
               "Lamentablemente el producto no ha podido crearse. Por favor intente más tarde."
             );
           });
-        
       } else {
         const data = {
           id: producto.id,
@@ -290,10 +305,13 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
           caracteristicas,
           imagenes,
         };
-  
+
         axios
           .put(`${API_URL}/producto`, data, {
-            headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${jwt}` },
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${jwt}`,
+            },
           })
           .then((response) => {
             setSendLoad(false);
@@ -307,12 +325,12 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
             );
           });
       }
-
     }
   }
-
+  // MANEJO DE CAMBIOS EN EL COMPONENTE
   const handleChangeCaracteristica = (event) => {
     setCaracteristica(event.target.value);
+
     setNewAttribute((prevAttribute) => ({
       ...prevAttribute,
       id: event.target.value,
@@ -387,12 +405,28 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
     setCiudadCreada(false);
   };
 
- 
+  const manejarCambios = (event) => {
+    const { name, value } = event.target;
+    setDatos({
+      ...datos,
+      [name]: value,
+    });
+  };
 
   return (
     <div className="crear-producto-container">
       <h1>
-        {producto ? `Actualizar el producto con id: ${producto.id}` : "Crear un producto"} <a className="link-demo" href="https://youtu.be/kfvH1oHYTLE" target="e_blank"> (Link video demo)</a>
+        {producto
+          ? `Actualizar el producto con id: ${producto.id}`
+          : "Crear un producto"}{" "}
+        <a
+          className="link-demo"
+          href="https://youtu.be/kfvH1oHYTLE"
+          target="e_blank"
+        >
+          {" "}
+          (Link video demo)
+        </a>
       </h1>
 
       <div className="producto-form-container">
@@ -403,10 +437,12 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
               <input
                 type="text"
                 value={titulo}
+                name="title"
                 onChange={(event) => {
                   event.target.parentElement.classList.remove("error");
                   setErrorTitulo("");
                   setTitulo(event.target.value);
+                  manejarCambios(event);
                 }}
               />
               <p>{errorTitulo}</p>
@@ -415,10 +451,12 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
               <span>Categoría:</span>
               <select
                 value={categoria.id}
+                name="category"
                 onChange={(event) => {
                   event.target.parentElement.classList.remove("error");
                   setErrorCategoria("");
                   setCategoria({ id: parseInt(event.target.value) });
+                  manejarCambios(event);
                 }}
               >
                 <option value="">Selecciona una categoría</option>
@@ -439,6 +477,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
                   event.target.parentElement.classList.remove("error");
                   setErrorDireccion("");
                   setDireccion(event.target.value);
+                  manejarCambios(event);
                 }}
               />
               <p>{errorDireccion}</p>
@@ -456,6 +495,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
                   event.target.parentElement.classList.remove("error");
                   setErrorCiudad("");
                   setCiudad({ id: parseInt(event.target.value) });
+                  manejarCambios(event);
                 }}
               >
                 <option value="">Selecciona una ciudad</option>
@@ -487,11 +527,12 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
                 type="text"
                 value={desUbicacion}
                 maxLength={70}
-                
+                name="desUbicacion"
                 onChange={(event) => {
                   event.target.parentElement.classList.remove("error");
                   setErrorDesUbicacion("");
                   setDesUbicacion(event.target.value);
+                  manejarCambios(event);
                 }}
               />
               <p>{errorDesUbicacion}</p>
@@ -503,10 +544,12 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
               <span>Descripción:</span>
               <textarea
                 value={descripcion}
+                name="shortDescription"
                 onChange={(event) => {
                   event.target.parentElement.classList.remove("error");
                   setErrorDescripcion("");
                   setDescripcion(event.target.value);
+                  manejarCambios(event);
                 }}
               />
               <p>{errorDescripcion}</p>
@@ -524,6 +567,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
                 onChange={(event) => {
                   event.target.parentElement.classList.remove("error");
                   setPuntuacion(parseInt(event.target.value));
+                  manejarCambios(event);
                 }}
               ></input>
               <p>{errorPuntuacion}</p>
@@ -531,11 +575,17 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
           </div>
 
           {/* AGREGUE LOS ICONOS AL LADO DEL H2 */}
-          <h2>Agregar atributos <span>{attributes.map(attribute => ( 
-            <span className="icono-servicio">{elegirServicio(attribute.id , "#1dbeb4")}</span>
-          ))}</span></h2>
-          
-          
+          <h2>
+            Agregar atributos{" "}
+            <span>
+              {attributes.map((attribute) => (
+                <span className="icono-servicio">
+                  {elegirServicio(attribute.id, "#1dbeb4")}
+                </span>
+              ))}
+            </span>
+          </h2>
+
           <AtributoForm
             attributes={attributes}
             handleAttributeChange={handleAttributeChange}
@@ -546,6 +596,7 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
             handleChangeCaracteristica={handleChangeCaracteristica}
             setErrorCaracteristica={setErrorCaracteristica}
             handleAddAttribute={handleAddAttribute}
+            manejarCambios={manejarCambios}
           />
           <h2>Politicas del producto</h2>
           <fieldset className="politicas-producto">
@@ -599,46 +650,49 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
             handleNewImgChange={handleNewImgChange}
             setErrorImagen={setErrorImagen}
             handleAddImg={handleAddImg}
+            manejarCambios={manejarCambios}
           />
 
           {/* AGREGUE IMAGENES VISTAS */}
-          {imagenes.length !== 0 ? 
+          {imagenes.length !== 0 ? (
             <div className="seccion-imagenes-crear-producto">
-            {imagenes.map(img => ( 
-              <div className="seccion-imagenes-crear-producto-imagen">
-              <h4 className="nombre-imagen">{img.titulo}</h4>
-              <img src={img.url_imagen} alt="imagen" />
-              <button className="verde" onClick={handleDeleteImg}>
-                X
-              </button>
-              </div>
-            ))}
-          </div>
-          : <></>
-          }
-          
-          
-          
+              {imagenes.map((img) => (
+                <div className="seccion-imagenes-crear-producto-imagen">
+                  {/* <h4 className="nombre-imagen">{img.titulo}</h4> */}
+                  <img src={img.url_imagen} alt="imagen" />
+                  <button className="verde" onClick={handleDeleteImg}>
+                    X
+                  </button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <></>
+          )}
         </form>
-        {/* {imagenes.length !== 0 ?
-        <CardRecomendaciones 
-        titulo={titulo}
-        descripcion={descripcion}
-        desUbicacion={desUbicacion}
-        urlMapa={urlMapa}
-        normas={normas}
-        seguridad={seguridad}
-        cancelacion={cancelacion}
-        puntuacion={puntuacion}
-        categoria={categoria}
-        direccion={direccion}
-        ciudad={ciudad}
-        caracteristicas={attributes}
-        imagenes={imagenes}
-        />
-        : ""} */}
-        
-        
+        <div className="card-producto-creado">
+          {!producto && Object.values(datos).some(valor => !!valor) ? (
+            <CardReco
+              title={datos.title}
+              shortDescription={datos.shortDescription}
+              puntuacion={datos.puntuacion}
+              category={findCategoriaNombre(categories, datos.category)}
+              imagen={datos.url_imagen}
+              characteristics={attributes.map((item, index) => {
+                return {
+                  id: index + 1,
+                  titulo: item.id,
+                };
+              })}
+              reserva={false}
+              location={datos.desUbicacion}
+              cardPrueba={true}
+            />
+          ) : (
+            <></>
+          )}
+        </div>
+
         <button
           type="submit"
           form="producto-form"
@@ -651,8 +705,10 @@ const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) 
               sx={{ color: "#fff", marginTop: "5px" }}
               size="1.4rem"
             />
+          ) : producto ? (
+            "Actualizar"
           ) : (
-            producto ? "Actualizar" : "Crear"
+            "Crear"
           )}
         </button>
       </div>

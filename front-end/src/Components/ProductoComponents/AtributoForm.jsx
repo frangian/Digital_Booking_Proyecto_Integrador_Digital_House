@@ -12,6 +12,7 @@ const AtributoForm = ({
   handleChangeCaracteristica,
   setErrorCaracteristica,
   handleAddAttribute,
+  manejarCambios
 }) => {
   return (
     <div>
@@ -48,6 +49,7 @@ const AtributoForm = ({
             value={caracteristica}
             onChange={(event) => {
               handleChangeCaracteristica(event);
+              
             }}
             className={"atributo-container-select "}
           >

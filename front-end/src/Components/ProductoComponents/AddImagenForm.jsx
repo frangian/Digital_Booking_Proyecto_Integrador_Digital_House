@@ -11,6 +11,7 @@ const AddImagenForm = ({
   handleNewImgChange,
   setErrorImagen,
   handleAddImg,
+  manejarCambios
 }) => {
   return (
     <div>
@@ -43,6 +44,7 @@ const AddImagenForm = ({
             placeholder="Instertar https://..."
             onChange={(event) => {
               handleNewImgChange(event);
+              manejarCambios(event)
             }}
             name="url_imagen"
             className="atributo-container-input"

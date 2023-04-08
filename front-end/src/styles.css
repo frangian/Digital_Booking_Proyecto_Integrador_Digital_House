@@ -755,6 +755,10 @@ input[type="range"]::-moz-range-thumb {
   border-radius: 10px;
 }
 
+.card-producto-creado{
+  width: 60%;
+}
+
 /* --------------------------- Tabla Administracio -------------------------- */
 
 .table-page {

@@ -54,6 +54,17 @@ export const findCategoria = (array, nombreCategoria) => {
     return respuesta;
 }
 
+export const findCategoriaNombre = (array, idCategoria) => {
+    let respuesta;
+    array.forEach(categoria => {
+        if (categoria.id === parseInt(idCategoria)) {
+            respuesta = categoria.titulo;
+        }
+    })
+    
+    return respuesta;
+}
+
 export const horas = [
     {i: 1, value: "10:00:00", label: "10:00 AM"},
     {i: 2, value: "11:00:00", label: "11:00 AM"},
