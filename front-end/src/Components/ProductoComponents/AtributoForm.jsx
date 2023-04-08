@@ -12,30 +12,34 @@ const AtributoForm = ({
   handleChangeCaracteristica,
   setErrorCaracteristica,
   handleAddAttribute,
+  manejarCambios
 }) => {
   return (
-    <div className=" atributos">
-      {attributes.map((attribute, index) => (
-        <div key={index} className="atributo-container inputs-delete">
-          <label>
-            <input
-              type="text"
-              value={attribute.id}
-              onChange={(event) => handleAttributeChange(index, event)}
-              name="name"
-              className="atributo-container-select"
-            />
-          </label>
+    <div>
+        {attributes.map((attribute, index) => (
+          <div key={index} className="atributo-container inputs-delete atributos">
+            
+            <label>
+              <input
+                type="text"
+                value={attribute.id}
+                onChange={(event) => handleAttributeChange(index, event)}
+                name="name"
+                className="atributo-container-select"
+              />
+            </label>
 
-          <FontAwesomeIcon
-            icon={faSquareXmark}
-            style={{ color: "#545776" }}
-            className="icono-agregar"
-            onClick={() => handleDeleteAttribute(index)}
-          />
-        </div>
-      ))}
-      <div className="atributo-container">
+            <FontAwesomeIcon
+              icon={faSquareXmark}
+              style={{ color: "#545776" }}
+              className="icono-agregar"
+              onClick={() => handleDeleteAttribute(index)}
+            />
+          </div>
+        ))}
+      
+      
+      <div className="atributo-container atributos">
         <div
           className={`atributo-container-select ${
             errorCaracteristica ? "error" : ""
@@ -45,6 +49,7 @@ const AtributoForm = ({
             value={caracteristica}
             onChange={(event) => {
               handleChangeCaracteristica(event);
+              
             }}
             className={"atributo-container-select "}
           >
