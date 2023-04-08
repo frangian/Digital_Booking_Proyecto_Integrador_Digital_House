@@ -32,6 +32,7 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.PUT, "/usuario/**").hasAnyAuthority("USER","ADMIN")
                 .requestMatchers(HttpMethod.POST, "/favorito/**").hasAnyAuthority("USER","ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/favorito/**").hasAnyAuthority("USER","ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/reserva/**").hasAnyAuthority("USER","ADMIN")
                 .requestMatchers(HttpMethod.POST).hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.PUT).hasAuthority("ADMIN")
                 .requestMatchers(HttpMethod.DELETE).hasAuthority("ADMIN")

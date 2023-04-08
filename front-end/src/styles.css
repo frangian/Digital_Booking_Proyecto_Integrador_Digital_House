@@ -1115,6 +1115,13 @@ body {
   padding-left: 10px;
   color: var(--main-green);
 }
+
+p.cancelar-reserva {
+  text-align: center;
+  color: #ff0000;
+  cursor: pointer;
+}
+
 /***********EXTRAS*********/
 
 .square8 {

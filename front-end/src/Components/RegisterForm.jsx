@@ -7,6 +7,7 @@ import { validarMail, validarPassword, confirmarPassword, campoRequerido, normal
 import axios from 'axios'
 import CircularProgress from '@mui/material/CircularProgress';
 import { API_URL } from './Utils/api'
+import emailjs from '@emailjs/browser'
 
 const RegisterForm = () => {
 
@@ -27,6 +28,30 @@ const RegisterForm = () => {
         setErrorMail("");
         setErrorPass("");
         setErrorConfirmPass("");
+    }
+
+    const enviarMail = () => {
+        let templateParams = {
+            to_name: `${user.nombre} ${user.apellido}`,
+            to_email: user.mail,
+            html: `
+            <p>Para activar su cuenta haga click en el botón.</p>
+            <br/>
+            <a href="http://localhost:3000/validado?source=gmail" target="e_blank">
+              <button 
+                style="border: 1px solid #1dbeb4; height: 40px; width: 207px; border-radius: 5px; cursor: pointer; font-size: 1rem; font-weight: 600; color: #ffffff; background-color: #1dbeb4"
+              >
+                    Activa tu cuenta
+              </button>
+            </a> 
+            `
+        }
+        emailjs.send("service_nc0296c", "template_efd615c", templateParams, "8EQLpJMNLWle12z9B")
+        .then(res => {
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
 
     const handleRegisterSubmit = (e) => {
@@ -70,21 +95,9 @@ const RegisterForm = () => {
                 email: user.mail,
                 password: user.pass
             }
-            let objLogin = {
-                email: user.mail,
-                password: user.pass
-            }
             axios.post(`${API_URL}/usuario/auth/registro`, objRegister)
             .then(res => {
                 setSendLoad(false);
-                // dispatch({
-                //     type: "register",
-                //     payload: {
-                //         ...state, 
-                //         user: res.data,
-                //         logged: true
-                //     }
-                // })
                 let jwt = res.data.token;
                 localStorage.setItem("jwt", jwt);
                 let partes = jwt.split('.');
@@ -101,6 +114,7 @@ const RegisterForm = () => {
                             logged: true
                             }
                         })
+                        enviarMail()
                         navigate("/");
                     })
                     .catch(err => {

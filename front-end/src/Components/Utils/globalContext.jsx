@@ -42,6 +42,12 @@ const reducerFunction = (state, action) => {
         ...state,
         user: updatedUser
       }
+    case "REMOVE_RESERVA":
+      const id = action.payload.id;
+      console.log(id);
+      const newReservas = state.user.reservas.filter(reserva => reserva.id !== id);
+      console.log(newReservas);
+      return { ...state, user: { ...state.user, reservas: newReservas } }
     default:
       return state;
   }
@@ -50,10 +56,15 @@ const reducerFunction = (state, action) => {
 export const ContextProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducerFunction, initialState);
+
+    const removeReserva = (id) => {
+      dispatch({ type: "REMOVE_RESERVA", payload: { id } });
+    }
   
     const store = {
       state, 
       dispatch, 
+      removeReserva
     }
   
     return (

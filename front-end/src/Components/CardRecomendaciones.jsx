@@ -25,10 +25,12 @@ const CardRecomendaciones = ({
   checkOut,
   reserva,
   llegada,
+  idReserva,
+  codigoReserva
 }) => {
   const navigate = useNavigate();
   const MAX_LENGTH = 100;
-  const { state, dispatch } = useContext(ContextGlobal);
+  const { state, dispatch, removeReserva } = useContext(ContextGlobal);
 
   const [showModal, setShowModal] = useState(false);
   const [characteristics, setCharacteristics] = useState([]);
@@ -46,6 +48,58 @@ const CardRecomendaciones = ({
   const handleToggleDescription = () => {
     setShowModal(!showModal);
   };
+
+  const cancelarReserva = () => {
+    Swal.fire({
+      title: "Cancelar reserva",
+      text: `Para cancelar su reserva en ${title} ingrese el codigo de reserva que le fue enviado a su correo cuando la realizó.`,
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      input: 'text',
+      showCancelButton: true,
+      confirmButtonText: 'Cancelar reserva',
+      showLoaderOnConfirm: true,
+      confirmButtonColor: "#1dbeb4",
+      cancelButtonText: "Cancelar acción",
+      cancelButtonColor: "#ff0000",
+      footer: "<b style='text-align: center;'>Asegurese de haber leído atentamente las políticas de cancelación</b>",
+      preConfirm: (codigo) => {
+        let jwt = localStorage.getItem("jwt");
+        if (codigo === codigoReserva) {
+          const config = {
+            method: 'DELETE',
+            headers: {
+              'Authorization': `Bearer ${jwt}`,
+              'Content-Type': 'application/json'
+            }
+          }
+          return fetch(`${API_URL}/reserva/${idReserva}`, config)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(response.statusText)
+            }
+            return response.text()
+          })
+          .catch(error => {
+            Swal.showValidationMessage(`El procedimiento fallo. Intentelo de nuevo más tarde.`)
+          })
+        } else {
+          Swal.showValidationMessage(`El codigo de reserva es incorrecto.`)
+        }
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.isConfirmed) {
+        removeReserva(idReserva);
+        Swal.fire({
+          icon: 'success',
+          title: 'Su reserva fue cancelada con exito.',
+          confirmButtonColor: "#1dbeb4",
+        })
+      }
+    })
+  }
 
   const encontrarFav = (array) => {
     array.forEach(fav => {
@@ -151,7 +205,7 @@ const CardRecomendaciones = ({
   return (
     <div className="card-recomendaciones">
       <div className="image-container">
-        <img src={imagen} alt={title} />
+        <img src={imagen} alt={title} onClick={() => console.log(state.user)}/>
         <FontAwesomeIcon
           icon={faHeart}
           className={
@@ -182,7 +236,7 @@ const CardRecomendaciones = ({
           </div>
         </div>
         <div className="extras-container">
-          <p>
+          {reserva ? "" : <p>
             <FontAwesomeIcon
               icon={faMapMarkerAlt}
               className="icono ubicacion"
@@ -194,7 +248,7 @@ const CardRecomendaciones = ({
             >
               MOSTRAR EN EL MAPA
             </a>
-          </p>
+          </p>}
 
           {
             !reserva ? characteristics.map((caracteristica) => (
@@ -234,6 +288,7 @@ const CardRecomendaciones = ({
         >
           ver más
         </button>
+        {reserva ? <p className="cancelar-reserva" onClick={() => cancelarReserva()}>Cancelar reserva</p> : ""}
       </div>
       {showModal && (
         <Modal onClose={handleToggleDescription}>

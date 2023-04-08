@@ -66,6 +66,8 @@ const ReservasUsuario = () => {
                 checkIn={reserva.fechaInicial}
                 checkOut={reserva.fechaFinal}
                 llegada={reserva.horaComienzo}
+                idReserva={reserva.id}
+                codigoReserva={reserva.codigoReserva}
                 />
               ))
             )

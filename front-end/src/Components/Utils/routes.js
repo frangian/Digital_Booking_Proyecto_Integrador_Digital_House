@@ -7,6 +7,7 @@ import ReservasUsuario from "../../Rutas/ReservasUsuario";
 import Admin from "../../Rutas/Admin";
 import AdminTablePage from "../../Rutas/AdminTablePage";
 import Favoritos from "../../Rutas/Favoritos"
+import Validado from "../../Rutas/Validado";
 import { faFacebook, faLinkedinIn, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
 
 
@@ -21,6 +22,7 @@ export const routes = [
     { id: 7, path: "/favoritos", Element: Favoritos, title: "Favoritos" },
     { id: 8, path: "/admin", Element: Admin, title: "Admin" },
     { id: 9, path: "/adminTable", Element: AdminTablePage, title: "Admin Table" },
+    { id: 10, path: "/validado", Element: Validado, title: "validado" },
 ]
 
 export const socialNetworks = [

@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { Calendar } from "react-multi-date-picker"
 import { getDaysArray } from '../Utils/utils';
 import { ContextGlobal } from '../Utils/globalContext';
-
+import Swal from 'sweetalert2'
+import emailjs from '@emailjs/browser'
+import { API_URL } from '../Utils/api';
+import axios from 'axios';
 
 const CalendarContainer = ({ productId, reservas }) => {
 
@@ -17,6 +20,45 @@ const CalendarContainer = ({ productId, reservas }) => {
         setDisabledDays(dayArr)
     }, [reservas])
 
+    const actualizarUserState = () => {
+        let jwt = localStorage.getItem("jwt");
+        const headers = { 'Authorization': `Bearer ${jwt}` };
+        axios.get(`${API_URL}/usuario/${state.user.id}`, { headers })
+        .then(res => {
+            dispatch({
+                type: "register",
+                payload: {
+                    ...state,
+                    user: res.data,
+                    logged: true
+                }
+            })
+        })
+    }
+
+    const enviarMail = () => {
+        let templateParams = {
+            to_name: `${state.user.nombre} ${state.user.apellido}`,
+            to_email: state.user.email,
+            html: `
+            <p>Para activar su cuenta haga click en el botón.</p>
+            <br/>
+            <a href="http://localhost:3000/validado?source=gmail" target="e_blank">
+              <button 
+                style="border: 1px solid #1dbeb4; height: 40px; width: 207px; border-radius: 5px; cursor: pointer; font-size: 1rem; font-weight: 600; color: #ffffff; background-color: #1dbeb4"
+              >
+                    Activa tu cuenta
+              </button>
+            </a> 
+            `
+        }
+        emailjs.send("service_nc0296c", "template_efd615c", templateParams, "8EQLpJMNLWle12z9B")
+        .then(res => {
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
 
     const hanldeClickReserva = () => {
         if(!localStorage.getItem("jwt")) {
@@ -29,7 +71,18 @@ const CalendarContainer = ({ productId, reservas }) => {
                 }
             })   
         } else {
-            Navigate(`/product/${productId}/reservas`)
+            if (state.user.validado) {
+                Navigate(`/product/${productId}/reservas`)
+            } else {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Activa tu cuenta',
+                    willClose: () => actualizarUserState(),
+                    text: "Debes activar tu cuenta para realizar una reserva.",
+                    confirmButtonColor: "#1dbeb4",
+                    footer: `<b style='cursor: pointer; color: #1dbeb4;' onclick="${enviarMail()}">Si no le llego un correo de activación al registrarse haga click aquí</b>`
+                })
+            }
         }
     }
 
