@@ -387,10 +387,12 @@ const ProductoForm = ({
       return newImg;
     });
   }
-  function handleDeleteImg(index) {
+  function handleDeleteImg(event, index) {
+    event.preventDefault()
     setImagenes((prevImg) => {
       const newImg = [...prevImg];
       newImg.splice(index, 1);
+      console.log(index);
       return newImg;
     });
   }
@@ -656,11 +658,11 @@ const ProductoForm = ({
           {/* AGREGUE IMAGENES VISTAS */}
           {imagenes.length !== 0 ? (
             <div className="seccion-imagenes-crear-producto">
-              {imagenes.map((img) => (
+              {imagenes.map((img, i) => (
                 <div className="seccion-imagenes-crear-producto-imagen">
                   {/* <h4 className="nombre-imagen">{img.titulo}</h4> */}
                   <img src={img.url_imagen} alt="imagen" />
-                  <button className="verde" onClick={handleDeleteImg}>
+                  <button className="verde" onClick={(event) => handleDeleteImg(event, i)}>
                     X
                   </button>
                 </div>
