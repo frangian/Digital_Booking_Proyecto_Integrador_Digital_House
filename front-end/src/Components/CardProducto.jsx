@@ -12,6 +12,7 @@ import axios from "axios";
 import { API_URL } from "./Utils/api";
 
 import useToggleState from "./customHooks/useToggleState";
+import Estrellas from "./Estrellas";
 
 const CardReco = ({
   id,
@@ -40,7 +41,6 @@ const CardReco = ({
 
   const MAX_LENGTH = 100;
 
-  console.log(location);
 
   return (
     <div className="card-recomendaciones">
@@ -58,13 +58,18 @@ const CardReco = ({
       </div>
       <div className="info-container">
         <div className="info-container-header">
-          <div>
+          <div className="info-container-header-titulos">
             <div className="info-categoria-container">
               <h3>{category}</h3>
+              <Estrellas 
+              stars={puntuacion/2}
+              colorStar={"#1dbeb4"}
+              sizeStar={11}
+              />
+              {/* <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
               <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
               <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
-              <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
-              <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
+              <FontAwesomeIcon icon={faStar} className="icono icono-verde" /> */}
             </div>
             <h2>{title}</h2>
           </div>

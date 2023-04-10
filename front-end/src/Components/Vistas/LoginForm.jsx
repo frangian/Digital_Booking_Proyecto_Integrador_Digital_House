@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEyeSlash, faEye } from '@fortawesome/free-regular-svg-icons'
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
-import { ContextGlobal } from './Utils/globalContext'
-import { normalizarMail } from './Utils/validaciones'
+import { ContextGlobal } from '../Utils/globalContext'
+import { normalizarMail } from '../Utils/validaciones'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import CircularProgress from '@mui/material/CircularProgress';
-import { API_URL } from './Utils/api'
+import { API_URL } from '../Utils/api'
 
 const LoginForm = () => {
 

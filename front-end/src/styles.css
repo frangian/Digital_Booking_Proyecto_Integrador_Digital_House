@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Roboto:ital,wght@0,100;0,300;1,100&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500;0,700;1,100&display=swap');
 :root {
   --main-green: #1dbeb4;
   --main-dark-gray: #383b58;
@@ -900,8 +900,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70%;
+  width: 80%;
   height: 5vh;
+}
+
+.form-buscador-box{
+  background-color: var(--main-white);
+  height: 42px;
+  width: 50vw;
+  margin-right: 1vw;
+  border-radius: 5px;
 }
 
 .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiPaper-root.MuiMenu-paper.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.css-177ic5c {
@@ -922,6 +930,7 @@ body {
   padding: 10px 10%;
   margin-left: 1vw;
 }
+
 
 .blanco {
   color: var(--main-white);
@@ -1070,6 +1079,7 @@ body {
   padding: 1vw;
   width: 50%;
   height: 100%;
+  font-family: "Roboto", sans-serif;
 }
 
 .info-container h3 {
@@ -1077,19 +1087,21 @@ body {
   opacity: 50%;
   padding-right: 0.4vw;
   margin: 0;
-  font-size: 0.875rem;
+  font-size: 0.9vw;
+  font-weight:300;
+  
 }
 
 .info-container p {
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 1vw;
+  font-weight: 500;
   line-height: 1rem;
   margin: 0.5vw;
   color: var(--main-dark-gray);
 }
 
 .info-container h2 {
-  font-size: 1vw;
+  font-size: 1.05vw;
   font-weight: 700;
   line-height: 1;
   padding: 0;
@@ -1107,6 +1119,7 @@ body {
   align-items: center;
   flex-direction: row;
   margin-left: 0.5vw;
+  min-width: 5vw;
 }
 
 .ubicacion-container p {
@@ -1133,7 +1146,7 @@ body {
 
 .puntuacion-container p {
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.68rem;
 }
 
 .enlace-mapa {
@@ -1151,22 +1164,24 @@ p.cancelar-reserva {
   cursor: pointer;
 }
 
+
+
 /***********EXTRAS*********/
 
 .square8 {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   background-color: var(--main-dark-gray);
-  border-radius: 0.4vw;
+  border-radius: 0.5vw;
   margin-right: 8%;
 }
 
 #square8-number {
   color: var(--main-white);
-  font-size: 1.7vh;
+  font-size: 1.4vw;
 }
 
 .icono {
@@ -1264,6 +1279,11 @@ p.cancelar-reserva {
   text-align: center;
   padding:10px;
 }
+
+
+
+
+
 
 
 
@@ -2146,7 +2166,7 @@ div.card-reserva-content {
   }
 
   .info-container h2 {
-    font-size: 3vw;
+    font-size: 1.3rem;
   }
 
   .info-container p {
@@ -2156,6 +2176,8 @@ div.card-reserva-content {
   .ver-mas-btn {
     padding: 2vw;
   }
+
+  
 
   /***********BUSCADOR*********/
 
@@ -2179,9 +2201,8 @@ div.card-reserva-content {
     height: 4vw;
     border-radius: 1vw;
   }
-
-  #square8-number {
-    font-size: 2vh;
+  #square8-number{
+    font-size: 2.2vw;
   }
 }
 
@@ -2275,6 +2296,14 @@ div.card-reserva-content {
 
   .tabla-celda {
     grid-template-columns: 5% 25% 20% 20% 15% 15%;
+  }
+
+  .info-container h3 {
+    font-size: 0.7rem;
+  }
+
+  .info-container h2 {
+    font-size: 1.05rem;
   }
 }
 
@@ -2400,6 +2429,17 @@ div.card-reserva-content {
   width: 100%;
 }
 
+.puntuacion-container{
+  height: 11vh;
+}
+
+.puntuacion-container p{
+  font-size: 0.8rem;
+}
+.info-container-header-titulos{
+  justify-content: space-evenly;
+}
+
 }
 
 @media (max-width: 560px) {
@@ -2447,6 +2487,10 @@ div.card-reserva-content {
 
   .categoria-celda, .ciudad-celda {
     display: none;
+  }
+
+  .info-container p{
+    font-size: 0.8rem;
   }
 }
 
@@ -2550,6 +2594,13 @@ div.card-reserva-content {
 
   .checkin-checkout {
     padding: 20px 0;
+  }
+
+  .info-container-header h2{
+    font-size: 0.9rem;
+  }
+  .puntuacion-container p {
+    font-size: 0.7rem;
   }
 
 }
@@ -2701,6 +2752,10 @@ div.card-reserva-content {
 
   .btn-vermas-vermenos {
     background-color: var(--main-white);
+  }
+
+  #square8-number{
+    font-size: 4vw;
   }
 }
 

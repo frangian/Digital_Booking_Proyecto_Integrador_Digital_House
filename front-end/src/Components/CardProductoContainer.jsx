@@ -12,7 +12,7 @@ import { setFavInStorage, removeFavInStorage } from "./Utils/localStorage";
 import Modal from "./Modal";
 import { API_URL } from './Utils/api'
 import Swal from 'sweetalert2'
-import CardReco from "./CardReco";
+import CardProducto from "./CardProducto";
 
 const CardRecomendaciones = ({
   id,
@@ -206,7 +206,7 @@ const CardRecomendaciones = ({
   return (
 
     
-      <CardReco 
+      <CardProducto
       id={id}
       imagen={imagen}
       title={title}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { API_URL } from "./Utils/api";
+import { API_URL } from "../Utils/api"
 
 const CiudadForm = ({ handleCiudadCreada }) => {
   const [nombre, setNombre] = useState("");

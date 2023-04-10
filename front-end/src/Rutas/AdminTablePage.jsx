@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ProductHeader from '../Components/ProductHeader';
-import AdminTable from '../Components/AdminTable';
+import AdminTable from '../Components/Vistas/AdminTable';
 import { useNavigate } from 'react-router-dom';
 
 const AdminTablePage = () => {

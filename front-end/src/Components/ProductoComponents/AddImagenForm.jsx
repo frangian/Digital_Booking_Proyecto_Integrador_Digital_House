@@ -31,7 +31,7 @@ const AddImagenForm = ({
             icon={faSquareXmark}
             style={{ color: "#545776" }}
             className="icono-agregar"
-            onClick={() => handleDeleteImg(index)}
+            onClick={(event) => handleDeleteImg(event,index)}
           />
         </div>
       ))}

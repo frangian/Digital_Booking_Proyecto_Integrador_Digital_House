@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Card from "../Components/CardRecomendaciones";
+import Card from "./CardProductoContainer";
 import { getProductosRecomendados } from "./Utils/api";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -11,6 +11,7 @@ const Recomendaciones = ({
   dates,
   isLoading,
   onLoading,
+  recomendadosRef
 }) => {
   const [productosRecomendados, setProductosRecomendados] = useState([]);
   
@@ -21,7 +22,8 @@ const Recomendaciones = ({
       try {
         const data = await getProductosRecomendados(categoriaSeleccionada, ciudadSeleccionada, dates);
         setProductosRecomendados(data);
-        onLoading(false);
+        recomendadosRef.current.scrollIntoView({ behavior: 'smooth' }) 
+        onLoading(false)
       } catch (error) {
         console.log(error);
         onLoading(false);

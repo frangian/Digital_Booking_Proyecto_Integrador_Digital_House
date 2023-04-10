@@ -14,7 +14,7 @@ import { API_URL } from "./Utils/api";
 import moment from 'moment';
 import 'moment/locale/es';
 
-const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
+const Buscador = ({ onCiudadSeleccionada, isLoading, recomendadosRef }) => {
   const [ciudad, setCiudad] = useState("");
   const [dateRange, setDateRange] = useState([]);
   const [selectedDates, setSelectedDates] = useState(null);
@@ -30,6 +30,7 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
 
   const handleBuscarClick = () => {
     onCiudadSeleccionada(ciudadId, selectedDates);
+    //recomendadosRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleDateChange = (value) => {
@@ -157,14 +158,8 @@ const Buscador = ({ onCiudadSeleccionada, isLoading }) => {
         }}
       >
         <Box
-          sx={{
-            bgcolor: "white",
-            minWidth: 200,
-            width: { xs: "100%", sm: 200, md: 400, lg: 500, xl: 500 },
-            height: "41px",
-            marginRight: "1vw",
-            borderRadius: "5px",
-          }}
+        className="form-buscador-box"
+          
         >
           <FormControl fullWidth>
             <Select

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import CardRecomendaciones from '../Components/CardRecomendaciones'
+import CardProducto from '../Components/CardProductoContainer'
 import ProductHeader from '../Components/ProductHeader'
 import { API_URL } from '../Components/Utils/api'
 import { ContextGlobal } from '../Components/Utils/globalContext'
@@ -56,7 +56,7 @@ const Favoritos = () => {
               localStorage.getItem("jwt") ? 
               (
                 state.user?.favoritos.map(fav => (
-                  <CardRecomendaciones
+                  <CardProducto
                   key={fav.producto.id}
                   id={fav.producto.id}
                   category={fav.producto.categoria}
@@ -70,7 +70,7 @@ const Favoritos = () => {
                 ))
               ) : (
                 favs?.map(fav => (
-                  <CardRecomendaciones
+                  <CardProducto
                   key={fav.id}
                   id={fav.id}
                   category={fav.category}

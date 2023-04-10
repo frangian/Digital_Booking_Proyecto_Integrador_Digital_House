@@ -6,13 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus, faSquareXmark } from "@fortawesome/free-solid-svg-icons";
 import { tituloXIdServicio, findCategoria } from "../Utils/utils";
 import { campoRequerido, validarUrl } from "../Utils/validaciones";
-import CiudadForm from "../CiudadForm";
+import CiudadForm from "../Vistas/CiudadForm";
 import Modal from "../Modal";
 import AtributoForm from "./AtributoForm";
 import AddImagenForm from "./AddImagenForm";
 
 import { elegirServicio, findCategoriaNombre } from "../Utils/utils.js";
-import CardReco from "../CardReco";
+import CardProducto from "../CardProducto";
 
 const ProductoForm = ({
   handleConfirmacion,
@@ -674,12 +674,12 @@ const ProductoForm = ({
         </form>
         <div className="card-producto-creado">
           {!producto && Object.values(datos).some(valor => !!valor) ? (
-            <CardReco
+            <CardProducto
               title={datos.title}
               shortDescription={datos.shortDescription}
               puntuacion={datos.puntuacion}
               category={findCategoriaNombre(categories, datos.category)}
-              imagen={datos.url_imagen}
+              imagen={imagenes[0]?.url_imagen}
               characteristics={attributes.map((item, index) => {
                 return {
                   id: index + 1,

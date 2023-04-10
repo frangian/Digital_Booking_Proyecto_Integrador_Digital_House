@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import { API_URL } from "./Utils/api";
+import { API_URL } from "../Utils/api";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus, faSquareXmark } from "@fortawesome/free-solid-svg-icons";
-import { tituloXIdServicio } from "./Utils/utils";
-import { campoRequerido, validarUrl } from "./Utils/validaciones";
-import CiudadForm from "./CiudadForm";
-import Modal from "./Modal";
+import { tituloXIdServicio } from "../Utils/utils";
+import { campoRequerido, validarUrl } from "../Utils/validaciones";
+import CiudadForm from "../CiudadForm";
+import Modal from "../Modal";
 import Slider from 'rsuite/Slider';
 
 const ProductoForm = ({ handleConfirmacion, loading, handleLoading, producto }) => {

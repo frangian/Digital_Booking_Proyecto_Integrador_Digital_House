@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import ProductHeader from '../Components/ProductHeader'
 import { ContextGlobal } from '../Components/Utils/globalContext';
 import { API_URL } from '../Components/Utils/api';
-import CardRecomendaciones from '../Components/CardRecomendaciones';
+import CardProducto from '../Components/CardProductoContainer';
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useNavigate } from 'react-router-dom';
@@ -53,7 +53,7 @@ const ReservasUsuario = () => {
             (
               // <p onClick={() => {console.log(state.user.reservas)}}>Hola</p>
               state.user?.reservas?.map(reserva => (
-                <CardRecomendaciones
+                <CardProducto
                 key={reserva.id}
                 id={reserva.producto.id}
                 title={reserva.producto.titulo}
