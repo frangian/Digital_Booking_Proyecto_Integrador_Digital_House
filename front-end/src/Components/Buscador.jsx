@@ -30,7 +30,6 @@ const Buscador = ({ onCiudadSeleccionada, isLoading, recomendadosRef }) => {
 
   const handleBuscarClick = () => {
     onCiudadSeleccionada(ciudadId, selectedDates);
-    //recomendadosRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleDateChange = (value) => {

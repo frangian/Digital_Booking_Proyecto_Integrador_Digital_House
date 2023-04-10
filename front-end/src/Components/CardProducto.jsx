@@ -66,10 +66,7 @@ const CardReco = ({
               colorStar={"#1dbeb4"}
               sizeStar={11}
               />
-              {/* <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
-              <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
-              <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
-              <FontAwesomeIcon icon={faStar} className="icono icono-verde" /> */}
+              
             </div>
             <h2>{title}</h2>
           </div>

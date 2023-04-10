@@ -22,7 +22,9 @@ const Recomendaciones = ({
       try {
         const data = await getProductosRecomendados(categoriaSeleccionada, ciudadSeleccionada, dates);
         setProductosRecomendados(data);
-        recomendadosRef.current.scrollIntoView({ behavior: 'smooth' }) 
+        if(categoriaSeleccionada || ciudadSeleccionada || dates) {
+          recomendadosRef.current.scrollIntoView({ behavior: 'smooth' })
+        }
         onLoading(false)
       } catch (error) {
         console.log(error);

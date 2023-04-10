@@ -2818,3 +2818,24 @@ div.card-reserva-content {
     font-size: 1rem;
   }
 }
+@media (min-width:1400px){
+  .categorias-container h2 {
+    font-size: 1.3rem;
+  }
+
+  .info-categoria-container h3  {
+    font-size: 0.8rem;
+  }
+
+  .puntuacion-container p{
+    font-size: 0.6rem;
+  }
+
+  .info-container p{
+    font-size: 0.8rem;
+  }
+  #square8-number{
+    font-size: 1rem;
+    padding-top: 3px;
+  }
+}

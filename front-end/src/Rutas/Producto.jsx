@@ -22,6 +22,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import { FacebookShareButton, WhatsappShareButton, TwitterShareButton } from 'react-share'
 import { API_URL } from '../Components/Utils/api'
 import { setFavInStorage, removeFavInStorage } from "../Components/Utils/localStorage";
+import Estrellas from '../Components/Estrellas'
 
 const Producto = () => {
 
@@ -219,11 +220,11 @@ const Producto = () => {
                         <div className="left-puntuacion">
                             <p>Muy bueno</p>
                             <div className="stars">
-                                <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
-                                <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
-                                <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
-                                <FontAwesomeIcon icon={faStar} className="icono icono-verde" />
-                                <FontAwesomeIcon icon={faStar} className="icono" />
+                            <Estrellas 
+                                stars={data?.puntuacion/2}
+                                colorStar={"#1dbeb4"}
+                                sizeStar={15}
+                                />
                             </div>
                         </div>
                         <div className="number"><p>{data?.puntuacion}</p></div>
