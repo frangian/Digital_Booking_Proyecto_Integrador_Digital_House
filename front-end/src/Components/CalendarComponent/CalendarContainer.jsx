@@ -43,7 +43,7 @@ const CalendarContainer = ({ productId, reservas }) => {
             html: `
             <p>Para activar su cuenta haga click en el botón.</p>
             <br/>
-            <a href="http://localhost:3000/validado?source=gmail" target="e_blank">
+            <a href="http://group8-bucket-front.s3-website.us-east-2.amazonaws.com/validado?source=gmail" target="e_blank">
               <button 
                 style="border: 1px solid #1dbeb4; height: 40px; width: 207px; border-radius: 5px; cursor: pointer; font-size: 1rem; font-weight: 600; color: #ffffff; background-color: #1dbeb4"
               >
