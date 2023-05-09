@@ -1,5 +1,7 @@
 # Digital_Booking_Proyecto_Integrador_Digital_House
+
 ----------ENGLISH------------
+
 Complete project carried out during the Certified Tech Developer program at Digital House, taken from May 2022 to April 2021.
 
 The project is complete in the 'development' branch, not in the Main branch.
